@@ -1,0 +1,11 @@
+<svg id="Composant_169_72" data-name="Composant 169 – 72" xmlns="http://www.w3.org/2000/svg" width="101" height="101" viewBox="0 0 101 101">
+  <circle id="Ellipse_49" data-name="Ellipse 49" cx="50.5" cy="50.5" r="50.5" fill="#fff" opacity="0.7"/>
+  <g id="Ellipse_50" data-name="Ellipse 50" transform="translate(11 11)" fill="none" stroke="#0013b1" stroke-width="1">
+    <circle cx="40" cy="40" r="40" stroke="none"/>
+    <circle cx="40" cy="40" r="39.5" fill="none"/>
+  </g>
+  <g id="Polygone_1" data-name="Polygone 1" transform="translate(65 38) rotate(90)" fill="#fff">
+    <path d="M 25.14305114746094 22.5 L 0.8569491505622864 22.5 L 13 1.016140818595886 L 25.14305114746094 22.5 Z" stroke="none"/>
+    <path d="M 13 2.032281875610352 L 1.713897705078125 22 L 24.28610229492188 22 L 13 2.032281875610352 M 13 0 L 26 23 L 0 23 L 13 0 Z" stroke="none" fill="#0013b1"/>
+  </g>
+</svg>
