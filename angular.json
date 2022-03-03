@@ -60,6 +60,27 @@
               ],
               "outputHashing": "all"
             },
+            "pre-production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.pre.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
             "development": {
               "buildOptimizer": false,
               "optimization": false,
@@ -67,6 +88,20 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "development-jcms": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.jcms.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -77,8 +112,14 @@
             "production": {
               "browserTarget": "Zelli:build:production"
             },
+            "pre-production": {
+              "browserTarget": "Zelli:build:pre-production"
+            },
             "development": {
               "browserTarget": "Zelli:build:development"
+            },
+            "development-jcms": {
+              "browserTarget": "Zelli:build:development-jcms"
             }
           },
           "defaultConfiguration": "development"
