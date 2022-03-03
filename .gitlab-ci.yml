@@ -9,12 +9,6 @@ cache:
   paths:
     - node_modules/
 
-.pull_cached_node_modules:
-  cache:
-    untracked: true
-    key: ${CI_COMMIT_SHORT_SHA}
-    policy: pull
-
 stages:
   - setup
   - test
@@ -26,7 +20,10 @@ install:
 
 test:
   stage: test
-  extends: .pull_cached_node_modules
+  cache:
+    untracked: true
+    key: ${CI_COMMIT_SHORT_SHA}
+    policy: pull
   before_script:
     - apt-get update
     - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
