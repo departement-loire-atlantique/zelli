@@ -12,7 +12,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/themes',
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule),
     pathMatch: 'full'
   },
   {
