@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MainMenuItem } from 'src/app/models/main-menu-item';
 
 @Component({
@@ -12,17 +13,33 @@ export class MainMenuComponent implements OnInit {
   menuItems: MainMenuItem[] = [
     {
       lbl: "themes",
+      icone: "icon-home",
       url: "/themes"
     },
     {
       lbl: "age",
+      icone: "icon-option",
       url: "/age"
+    },
+    {
+      lbl: "home",
+      icone: "",
+      url: "/"
     }
   ];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  /**
+   * 
+   * @param routeUrl 
+   * @returns true if route is curent route
+   */
+  isActive(routeUrl: string): boolean {
+    return this.router.url === routeUrl ;
   }
 
 }

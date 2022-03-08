@@ -1,0 +1,52 @@
+@import "../../../theme/importDep.less";
+
+#main-menu {
+  position: fixed;
+  width: 100vw;
+  bottom: 0;
+  border: 1px solid @grey;
+
+  UL {
+    padding: 0;
+    margin: 0;
+    height: 60px;
+    
+    display: flex;
+    // justify-content: space-around;
+    // align-items: center;
+
+    & > LI {
+      width: 100%;
+      height: 100%;
+      display: inline-block;
+      margin-top: 0;
+      text-align: center;
+
+      border-top: 2px solid transparent;
+
+      &.active {
+        border-top: 2px solid @blue;
+        color: @blue;
+
+        A {
+          color: @blue;
+        }
+      }
+
+      A {
+        height: 100%;
+        font-size: 12px;
+
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+
+        text-decoration: none;
+
+        I::before {
+          font-size: 25px;
+        }
+      }
+    }
+  } 
+}

@@ -1,8 +1,11 @@
-<div class="main-menu">
+<div id="main-menu">
 
   <ul>
-    <li *ngFor="let itMenuItem of menuItems">
-      <a [routerLink]="itMenuItem.url">{{ itMenuItem.lbl }}</a>
+    <li *ngFor="let itMenuItem of menuItems" [class]="this.isActive(itMenuItem.url) ? 'active' : '' ">
+      <a [routerLink]="itMenuItem.url">
+        <i [class]="'icon ' + itMenuItem.icone"></i>
+        {{ itMenuItem.lbl }}
+      </a>
     </li>
   </ul>
 
