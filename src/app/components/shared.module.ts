@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { RouterModule } from '@angular/router';
 import { LoaderComponent } from './loader/loader.component';
+import { PageTitleComponent } from './page-title/page-title.component';
 
 
 
 @NgModule({
   declarations: [
     MainMenuComponent,
-    LoaderComponent
+    LoaderComponent,
+    PageTitleComponent
   ],
   imports: [
     CommonModule,
@@ -17,7 +19,8 @@ import { LoaderComponent } from './loader/loader.component';
   ],
   exports: [
     MainMenuComponent,
-    LoaderComponent
+    LoaderComponent,
+    PageTitleComponent
   ]
 })
 export class SharedModule { }
