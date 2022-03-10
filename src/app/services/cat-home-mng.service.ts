@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CatHomeItem } from '../models/cat-home-item';
+import { Category } from '../models/category';
 import { JcmsClientService } from './jcms-client.service';
 
 @Injectable({
@@ -9,11 +9,11 @@ import { JcmsClientService } from './jcms-client.service';
 })
 export class CatHomeMngService {
 
-  private _catsHome: Observable<CatHomeItem[]>;
+  private _catsHome: Observable<Category[]>;
   /**
    * Map url => CatHomeItem
    */
-  private _catHomeMap: Map<string, CatHomeItem> = new Map();
+  private _catHomeMap: Map<string, Category> = new Map();
 
   constructor(private _jcms: JcmsClientService) {
     if (!environment.production) {
@@ -21,15 +21,15 @@ export class CatHomeMngService {
     }
 
     this._catsHome = this.catFromServ();
-    this._catsHome.subscribe((cats: CatHomeItem[]) => {
+    this._catsHome.subscribe((cats: Category[]) => {
       cats.forEach(itCat => this._catHomeMap.set(itCat.url, itCat));
     }
     );
   }
 
-  private catFromServ(): Observable<CatHomeItem[]> {
+  private catFromServ(): Observable<Category[]> {
     this._catHomeMap = new Map();
-    return this._jcms.get<CatHomeItem[]>("data/children/{id}")// TODO custom rest service
+    return this._jcms.get<Category[]>("data/children/{id}")// TODO custom rest service
       .pipe(
         // ex rep voir /src/mock/catHome.json
         map((rep: any) => rep.dataSet.map((itData: any) => {
@@ -44,15 +44,15 @@ export class CatHomeMngService {
       );
   }
 
-  public getCatFromUrl(url: string): CatHomeItem | undefined {
+  public getCatFromUrl(url: string): Category | undefined {
     return this._catHomeMap.get(url);
   }
 
-  public get catsHome(): Observable<CatHomeItem[]> {
+  public get catsHome(): Observable<Category[]> {
     return this._catsHome;
   }
 
-  public get catHomeMap(): Map<string, CatHomeItem> {
+  public get catHomeMap(): Map<string, Category> {
     return this._catHomeMap;
   }
 

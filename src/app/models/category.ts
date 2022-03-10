@@ -1,4 +1,4 @@
-export interface CatHomeItem {
+export interface Category {
   /**
    * Nom de la catégorie
    */
