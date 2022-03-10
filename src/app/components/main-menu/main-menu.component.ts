@@ -13,7 +13,7 @@ export class MainMenuComponent implements OnInit {
   menuItems: CatHomeItem[] = [];
 
   constructor(private router: Router, private catHomeMng: CatHomeMngService) {
-    catHomeMng
+    this.catHomeMng
       .catsHome
       .subscribe((cats: CatHomeItem[]) =>
         this.menuItems = cats

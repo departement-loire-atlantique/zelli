@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { CatHomeMngService } from 'src/app/services/cat-home-mng.service';
 
 @Component({
@@ -14,13 +15,13 @@ export class PageTitleComponent implements OnInit {
   subTitle: string = "";
 
   constructor(private router: Router, private catHomeMng: CatHomeMngService) {
-    let curentCat = catHomeMng.getCatFromUrl(this.router.url);
+    let curentCat = this.catHomeMng.getCatFromUrl(this.router.url);
 
     if (curentCat) {
       this.titlePage = curentCat.title;
       this.icon = curentCat.icon;
       this.subTitle = curentCat.subTitle;
-    }else {
+    } else {
       console.error("Rout not found in catsHome");
     }
   }

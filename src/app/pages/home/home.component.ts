@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CatHomeMngService } from 'src/app/services/cat-home-mng.service';
 
 @Component({
   selector: 'app-home',
@@ -28,7 +29,7 @@ export class HomeComponent implements OnInit {
     if(this._seeLoad){
       setTimeout(() => {
         this._seeLoad = false;
-        localStorage.setItem('_seeLoad', JSON.stringify(this._seeLoad));
+        // localStorage.setItem('_seeLoad', JSON.stringify(this._seeLoad));
         
         //TODO écran d'introduction
         this.router.navigate([this._homeUrl]);

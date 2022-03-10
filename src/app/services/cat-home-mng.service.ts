@@ -21,8 +21,9 @@ export class CatHomeMngService {
     }
 
     this._catsHome = this.catFromServ();
-    this._catsHome.subscribe((cats: CatHomeItem[]) =>
-      cats.forEach(itCat => this._catHomeMap.set(itCat.url, itCat))
+    this._catsHome.subscribe((cats: CatHomeItem[]) => {
+      cats.forEach(itCat => this._catHomeMap.set(itCat.url, itCat));
+    }
     );
   }
 
