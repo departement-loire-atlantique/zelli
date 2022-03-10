@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CatHomeMngService } from 'src/app/services/cat-home-mng.service';
 
 @Component({
   selector: 'app-page-title',
@@ -7,10 +9,21 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class PageTitleComponent implements OnInit {
 
-  @Input()
-  titlePage: string = "{Def Title. edit titlePage}";
+  icon: string = "";
+  titlePage: string = "";
+  subTitle: string = "";
 
-  constructor() { }
+  constructor(private router: Router, private catHomeMng: CatHomeMngService) {
+    let curentCat = catHomeMng.getCatFromUrl(this.router.url);
+
+    if (curentCat) {
+      this.titlePage = curentCat.title;
+      this.icon = curentCat.icon;
+      this.subTitle = curentCat.subTitle;
+    }else {
+      console.error("Rout not found in catsHome");
+    }
+  }
 
   ngOnInit(): void {
   }

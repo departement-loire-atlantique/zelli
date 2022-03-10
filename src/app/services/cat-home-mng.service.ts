@@ -9,13 +9,25 @@ import { JcmsClientService } from './jcms-client.service';
 })
 export class CatHomeMngService {
 
+  private _catsHome: Observable<CatHomeItem[]>;
+  /**
+   * Map url => CatHomeItem
+   */
+  private _catHomeMap: Map<string, CatHomeItem> = new Map();
+
   constructor(private _jcms: JcmsClientService) {
     if (!environment.production) {
       console.log('init CatHomeMngService');
     }
+
+    this._catsHome = this.catFromServ();
+    this._catsHome.subscribe((cats: CatHomeItem[]) =>
+      cats.forEach(itCat => this._catHomeMap.set(itCat.url, itCat))
+    );
   }
 
-  catFromServ(): Observable<CatHomeItem[]> {
+  private catFromServ(): Observable<CatHomeItem[]> {
+    this._catHomeMap = new Map();
     return this._jcms.get<CatHomeItem[]>("data/children/{id}")// TODO custom rest service
       .pipe(
         // ex rep voir /src/mock/catHome.json
@@ -29,6 +41,18 @@ export class CatHomeMngService {
           };
         }))
       );
+  }
+
+  public getCatFromUrl(url: string): CatHomeItem | undefined {
+    return this._catHomeMap.get(url);
+  }
+
+  public get catsHome(): Observable<CatHomeItem[]> {
+    return this._catsHome;
+  }
+
+  public get catHomeMap(): Map<string, CatHomeItem> {
+    return this._catHomeMap;
   }
 
 }

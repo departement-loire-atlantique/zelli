@@ -14,7 +14,7 @@ export class MainMenuComponent implements OnInit {
 
   constructor(private router: Router, private catHomeMng: CatHomeMngService) {
     catHomeMng
-      .catFromServ()
+      .catsHome
       .subscribe((cats: CatHomeItem[]) =>
         this.menuItems = cats
       );
