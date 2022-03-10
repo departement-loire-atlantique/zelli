@@ -5,6 +5,11 @@ export interface CatHomeItem {
   title: string,
 
   /**
+  * Nom cour de la catégorie
+  */
+  smallTitle: string,
+
+  /**
    * Sous titre afficher dans les pages homes
    */
   subTitle: string,

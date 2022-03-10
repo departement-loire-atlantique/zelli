@@ -22,7 +22,8 @@ export class CatHomeMngService {
         map((rep: any) => rep.dataSet.map((itData: any) => {
           return {
             title: itData.name,
-            subTitle: "",
+            smallTitle: itData.synonyms ? itData.synonyms[0] : itData.name,
+            subTitle: itData.description,
             icon: itData.icon,
             url: itData.friendlyURLSet ? itData.friendlyURLSet[0] : ""
           };
