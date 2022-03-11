@@ -2,5 +2,6 @@
 
 export const environment = {
   production: false,
-  urlJcms: "http://localhost:8080/jcms/rest/"
+  urlJcms: "http://localhost:8080/jcms/rest/",
+  apiKey: ""
 };

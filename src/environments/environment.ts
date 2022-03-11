@@ -5,7 +5,8 @@
 // Dev without JCMS
 export const environment = {
   production: false,
-  urlJcms: ""
+  urlJcms: "",
+  apiKey: ""
 };
 
 /*
