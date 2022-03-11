@@ -14,29 +14,35 @@ export class HomeComponent implements OnInit {
    */
   logoUrl: string = "assets/images/svg/logo-zelli.svg";
 
-  private _homeUrl: string = "/themes";
+  /**
+   * true if see splash screen
+   */
   private _seeLoad: boolean;
 
   constructor(private router: Router) {
 
     // TODO get logoUrl
 
-    this._seeLoad = JSON.parse(localStorage.getItem('_seeLoad') || "true");
+    this._seeLoad = JSON.parse(sessionStorage.getItem('_seeLoad') || "true");
   }
 
   ngOnInit(): void {
 
-    if(this._seeLoad){
+    if (this._seeLoad) {
       setTimeout(() => {
         this._seeLoad = false;
-        // localStorage.setItem('_seeLoad', JSON.stringify(this._seeLoad));
-        
+        sessionStorage.setItem('_seeLoad', JSON.stringify(this._seeLoad));
+
         //TODO écran d'introduction
-        this.router.navigate([this._homeUrl]);
+        this.router.navigate(["/intro"]);
       }, 5000);
-    }else {
-      this.router.navigate([this._homeUrl]);
+    } else {
+      this.router.navigate(["/intro"]);
     }
+  }
+
+  public get seeLoad(): boolean {
+    return this._seeLoad;
   }
 
 }
