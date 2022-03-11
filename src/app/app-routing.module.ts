@@ -11,6 +11,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/home/age/age.module').then(m => m.AgeModule)
   },
   {
+    path: 'intro',
+    loadChildren: () => import('./pages/intro/intro.module').then(m => m.IntroModule)
+  },
+  {
     path: '',
     loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule),
     pathMatch: 'full'
@@ -22,7 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules})],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
