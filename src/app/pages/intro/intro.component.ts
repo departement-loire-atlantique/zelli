@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DateService } from 'src/app/services/utils/date.service';
 
 @Component({
   selector: 'app-intro',
@@ -10,14 +11,30 @@ export class IntroComponent implements OnInit {
 
   private _lastAccess: Date;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private dateUtil: DateService) {
     const strDate = JSON.parse(localStorage.getItem("_lastAccess") || "{}");
     this._lastAccess = new Date(strDate);
   }
 
   ngOnInit(): void {
-    // TODO test date
-    this.router.navigate(["/themes"]);
+
+    if (this.dateUtil.testDate(this._lastAccess)) {
+
+      const curentDate = new Date();
+
+      const diffM = this.dateUtil.monthDiff(this._lastAccess, curentDate);
+
+      if (diffM <= 3) {
+        this.router.navigate(["/themes"]);
+      }
+    }
+
+    this.updateLastAccess();
+
+  }
+
+  private updateLastAccess() {
+    localStorage.setItem("_lastAccess", JSON.stringify(new Date()));
   }
 
 }
