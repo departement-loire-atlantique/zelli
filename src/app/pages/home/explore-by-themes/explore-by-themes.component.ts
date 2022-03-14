@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Category } from 'src/app/models/category';
 
 @Component({
   selector: 'app-explore-by-themes',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExploreByThemesComponent implements OnInit {
 
-  constructor() { }
+  themes: Category[];
+
+  constructor() {
+    this.themes = [];
+  }
 
   ngOnInit(): void {
   }

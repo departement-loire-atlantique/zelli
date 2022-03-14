@@ -4,5 +4,8 @@
 
 <app-main-menu></app-main-menu>
 
-<footer>
-</footer>
+<main>
+    <div *ngFor="let itTheme of themes">
+      <img [src]="itTheme.icon" [alt]="itTheme.title"/>
+    </div>
+</main>
