@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
+import { APageHome } from 'src/app/models/aPageHome';
 import { Category } from 'src/app/models/category';
 
 @Component({
@@ -6,11 +7,12 @@ import { Category } from 'src/app/models/category';
   templateUrl: './explore-by-themes.component.html',
   styleUrls: ['./explore-by-themes.component.less']
 })
-export class ExploreByThemesComponent implements OnInit {
+export class ExploreByThemesComponent extends APageHome implements OnInit {
 
   themes: Category[];
 
-  constructor() {
+  constructor(_injector: Injector) {
+    super(_injector);
     this.themes = [];
   }
 
