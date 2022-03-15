@@ -14,18 +14,21 @@ export class PageTitleComponent implements OnInit {
   subTitle: string = "";
 
   constructor(private router: Router, private catHomeMng: CatHomeMngService) {
-    let curentCat = this.catHomeMng.getCatFromUrl(this.router.url);
-
-    if (curentCat) {
-      this.titlePage = curentCat.title;
-      this.icon = curentCat.icon;
-      this.subTitle = curentCat.subTitle;
-    } else {
-      console.error("Rout not found in catsHome");
-    }
   }
 
   ngOnInit(): void {
+    this.catHomeMng.catsHome.subscribe(_ => {
+      let curentCat = this.catHomeMng.getCatFromUrl(this.router.url);
+
+      if (curentCat) {
+        this.titlePage = curentCat.title;
+        this.icon = curentCat.icon;
+        this.subTitle = curentCat.subTitle;
+      } else {
+        console.error("Route not found in catsHome");
+      }
+    });
+
   }
 
 }
