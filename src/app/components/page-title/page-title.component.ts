@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CatHomeMngService } from 'src/app/services/cat-home-mng.service';
+import { CatsHomeMngService } from 'src/app/services/cats-home-mng.service';
 
 @Component({
   selector: 'app-page-title',
@@ -13,21 +13,19 @@ export class PageTitleComponent implements OnInit {
   titlePage: string = "";
   subTitle: string = "";
 
-  constructor(private router: Router, private catHomeMng: CatHomeMngService) {
+  constructor(private _router: Router, private _catsHomeMng: CatsHomeMngService) {
   }
 
   ngOnInit(): void {
-    this.catHomeMng.catsHome.subscribe(_ => {
-      let curentCat = this.catHomeMng.getCatFromUrl(this.router.url);
+    let curentCat = this._catsHomeMng.getCatFromUrl(this._router.url);
 
-      if (curentCat) {
-        this.titlePage = curentCat.title;
-        this.icon = curentCat.icon;
-        this.subTitle = curentCat.subTitle;
-      } else {
-        console.error("Route not found in catsHome");
-      }
-    });
+    if (curentCat) {
+      this.titlePage = curentCat.title;
+      this.icon = curentCat.icon;
+      this.subTitle = curentCat.subTitle;
+    } else {
+      console.error("Route not found in catsHome");
+    }
 
   }
 

@@ -1,4 +1,5 @@
 export interface ICategory {
+  id: string,
   title: string,
   smallTitle?: string,
   subTitle?: string,
@@ -8,6 +9,12 @@ export interface ICategory {
 }
 
 export class Category implements ICategory {
+
+  /**
+   * id JCMS
+   */
+  id: string;
+
   /**
    * Nom de la catégorie
    */
@@ -16,54 +23,34 @@ export class Category implements ICategory {
   /**
   * Nom cour de la catégorie
   */
-  private _smallTitle?: string | undefined;
+  smallTitle: string;
 
   /**
    * Sous titre afficher dans les pages homes
    */
-  private _subTitle?: string | undefined;
+  subTitle: string;
 
   /**
    * Icon de la catégorie.
    */
-  private _icon?: string | undefined;
+  icon: string;
 
-  private _image?: string | undefined;
+  image: string;
 
   /**
    * Url interne à l'app 
    */
-  private _url?: string | undefined = "";
+  url: string;
 
   constructor(params: ICategory) {
+    this.id = params.id;
     this.title = params.title;
-    this._smallTitle = params.smallTitle;
-    this._subTitle = params.smallTitle;
-    this._subTitle = params.subTitle;
-    this._icon = params.icon;
-    this._image = params.image;
-    this._url = params.url;
+    this.smallTitle = params.smallTitle ||"";
+    this.subTitle = params.smallTitle ||"";
+    this.subTitle = params.subTitle ||"";
+    this.icon = params.icon ||"";
+    this.image = params.image ||"";
+    this.url = params.url || "";
   }
-
-  public get smallTitle(): string {
-    return this._smallTitle || "";
-  }
-
-  public get subTitle(): string {
-    return this._subTitle || "";
-  }
-
-  public get icon(): string {
-    return this._icon || "";
-  }
-
-  public get image(): string {
-    return this._image || "";
-  }
-
-  public get url(): string {
-    return this._url || "";
-  }
-
 
 }

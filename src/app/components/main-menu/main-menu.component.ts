@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
-import { CatHomeMngService } from 'src/app/services/cat-home-mng.service';
+import { CatsHomeMngService } from 'src/app/services/cats-home-mng.service';
 
 @Component({
   selector: 'app-main-menu',
@@ -10,14 +10,10 @@ import { CatHomeMngService } from 'src/app/services/cat-home-mng.service';
 })
 export class MainMenuComponent implements OnInit {
 
-  menuItems: Category[] = [];
+  menuItems:  Category[];
 
-  constructor(private router: Router, private catHomeMng: CatHomeMngService) {
-    this.catHomeMng
-      .catsHome
-      .subscribe((cats: Category[]) =>
-        this.menuItems = cats
-      );
+  constructor(private router: Router, private _catsHomeMng: CatsHomeMngService) {
+    this.menuItems = this._catsHomeMng.getCats();
   }
 
   ngOnInit(): void {
