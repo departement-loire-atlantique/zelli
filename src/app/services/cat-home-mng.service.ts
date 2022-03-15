@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { lastValueFrom, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Category } from '../models/category';
 import { JcmsClientService } from './jcms-client.service';
@@ -32,14 +32,14 @@ export class CatHomeMngService {
     return this._jcms.get<Category[]>("data/children/{id}")// TODO custom rest service
       .pipe(
         // ex rep voir /src/mock/catHome.json
-        map((rep: any) => rep.dataSet.map((itData: any) => {
-          return {
+        map((rep: any) => rep.dataSet.map((itData: any): Category => {
+          return new Category({
             title: itData.name,
             smallTitle: itData.synonyms ? itData.synonyms[0] : itData.name,
             subTitle: itData.description,
             icon: itData.icon,
             url: itData.friendlyURLSet ? itData.friendlyURLSet[0] : ""
-          };
+          });
         }))
       );
   }
