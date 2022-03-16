@@ -4,14 +4,14 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
 import { RouterModule } from '@angular/router';
 import { LoaderComponent } from './loader/loader.component';
 import { PageTitleComponent } from './page-title/page-title.component';
-
-
+import { BackComponent } from './back/back.component';
 
 @NgModule({
   declarations: [
     MainMenuComponent,
     LoaderComponent,
-    PageTitleComponent
+    PageTitleComponent,
+    BackComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +20,8 @@ import { PageTitleComponent } from './page-title/page-title.component';
   exports: [
     MainMenuComponent,
     LoaderComponent,
-    PageTitleComponent
+    PageTitleComponent,
+    BackComponent
   ]
 })
 export class SharedModule { }
