@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
     path: 'themes',
     loadChildren: () => import('./pages/home/explore-by-themes/explore-by-themes.module').then(m => m.ExploreByThemesModule)
+  },
+  {
+    path: 'theme/:id',
+    loadChildren: () => import('./pages/home/explore-by-themes/theme/theme.module').then(m => m.ThemeModule)
   },
   {
     path: 'age',
