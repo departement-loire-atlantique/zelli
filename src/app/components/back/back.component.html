@@ -1,1 +1,4 @@
-<p>back works!</p>
+<a (click)="back()" [title]="titleLink" class="back-btn">
+  <i *ngIf="picto" [class]="'icon ' + picto" aria-hidden="true"></i>
+  <span aria-hidden="true"> {{ text }}</span>
+</a>
