@@ -1,10 +1,13 @@
 @import "/src/theme/importDep.less";
 
+@decal-theme: 40px;
+
 .themes {
   display: grid;
   grid: auto-flow / 1fr 1fr;
 
   padding: 0px;
+  margin-top: @decal-theme;
 
   .theme {
     display: flex;
@@ -13,8 +16,8 @@
 
     padding: 10px;
 
-    &:nth-child(2n){
-      transform: translate(0, 40px);
+    &:nth-child(2n+1){
+      transform: translate(0, -@decal-theme);
     }
   }
 }
