@@ -3,7 +3,7 @@
   <ul>
     <li *ngFor="let itMenuItem of menuItems" [class]="this.isActive(itMenuItem.url) ? 'active' : '' ">
       <a [routerLink]="itMenuItem.url">
-        <i [class]="'icon ' + itMenuItem.icon"></i>
+        <i [class]="'icon ' + itMenuItem.icon" aria-hidden="true"></i>
         {{ itMenuItem.smallTitle }}
       </a>
     </li>
