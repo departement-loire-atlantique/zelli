@@ -58,7 +58,20 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "assets": [
+                "src/favicon.ico",
+                "src/assets",
+                "src/manifest.webmanifest",
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "ignore": [
+                    "**/mock/**"
+                  ],
+                  "output": "/assets/"
+                }
+              ]
             },
             "pre-production": {
               "budgets": [
@@ -79,7 +92,20 @@
                   "with": "src/environments/environment.pre.prod.ts"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "assets": [
+                "src/favicon.ico",
+                "src/assets",
+                "src/manifest.webmanifest",
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "ignore": [
+                    "**/mock/**"
+                  ],
+                  "output": "/assets/"
+                }
+              ]
             },
             "development": {
               "buildOptimizer": false,
