@@ -3,6 +3,7 @@
   "sort": "",
   "dataSet": [
     {
+      "_data from" : "/cats/DemAdmin.json",
       "class": "com.jalios.jcms.Category",
       "id": "DemAdmin",
       "cdate": "2022-03-15T08:08:45Z",

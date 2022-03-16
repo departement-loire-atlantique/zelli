@@ -7,7 +7,7 @@ export const environment = {
   production: false,
   urlJcms: "",
   apiKey: "",
-  catNavMain: "TODO"
+  catNavMain: "catHome"
 };
 
 /*
