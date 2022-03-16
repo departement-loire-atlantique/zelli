@@ -4,7 +4,7 @@
 
 <app-main-menu></app-main-menu>
 
-<main class="themes">
+<main class="themes with-menu">
   <div *ngFor="let itTheme of themes" class="theme">
     <a [routerLink]="'/theme/' + itTheme.id">
       <img [src]="itTheme.image" [alt]="itTheme.title" />
