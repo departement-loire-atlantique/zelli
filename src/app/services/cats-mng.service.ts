@@ -20,18 +20,10 @@ export class CatsMngService {
   public catsChildren(idCat: string): Observable<Category[]> {
     return this._jcms.get<Category[]>("data/children/" + idCat)
       .pipe(
-        // ex rep voir /src/mock/cat/catHome.json
-        map((rep: any) => rep.dataSet.map((itData: any): Category => {
-          return new Category({
-            id: itData.id,
-            title: itData.name,
-            smallTitle: itData.synonyms ? itData.synonyms[0] : itData.name,
-            subTitle: itData.description,
-            icon: itData.icon,
-            image: itData.image,
-            url: itData.friendlyURLSet ? itData.friendlyURLSet[0] : ""
-          });
-        }))
+        // ex rep voir \assets\mock\cats\children\**
+        map((rep: any) => rep.dataSet.map((itData: any): Category =>
+          this.mapToCat(itData)
+        ))
       );
   }
 
@@ -41,7 +33,25 @@ export class CatsMngService {
    * @returns 
    */
   public cat(idCat: string): Observable<Category> {
-    return this._jcms.get<Category>("data/" + idCat);
+    return this._jcms.get<Category>("data/" + idCat)
+      .pipe(
+        // ex rep voir \assets\mock\cats\**
+        map((rep: any): Category =>
+          this.mapToCat(rep)
+        )
+      );
+  }
+
+  private mapToCat(dataRep: any): Category {
+    return {
+      id: dataRep.id,
+      title: dataRep.name,
+      smallTitle: dataRep.synonyms ? dataRep.synonyms[0] : dataRep.name,
+      subTitle: dataRep.description,
+      icon: dataRep.icon,
+      image: dataRep.image,
+      url: dataRep.friendlyURLSet ? dataRep.friendlyURLSet[0] : ""
+    };
   }
 
 }
