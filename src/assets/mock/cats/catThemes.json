@@ -94,6 +94,161 @@
       "image": "/assets/images/png/picto-logement.png",
       "color": "",
       "friendlyURLSet": []
+    },
+    {
+      "class": "com.jalios.jcms.Category",
+      "id": "SanteId",
+      "cdate": "2022-03-15T08:08:45Z",
+      "mdate": "2022-03-15T08:08:45Z",
+      "author": {
+        "class": "com.jalios.jcms.Member",
+        "id": "j_2",
+        "login": "paul.orhon@digiwin.fr",
+        "fullName": "adminPrenom Admin"
+      },
+      "opAuthor": {
+        "class": "com.jalios.jcms.Member",
+        "id": "j_2",
+        "login": "paul.orhon@digiwin.fr",
+        "fullName": "adminPrenom Admin"
+      },
+      "name": "Santé",
+      "parent": {
+        "class": "com.jalios.jcms.Category",
+        "id": "themesCatId"
+      },
+      "description": "",
+      "synonyms": [],
+      "order": 3,
+      "childrenOrder": 0,
+      "icon": "/assets/images/png/picto-sante.png",
+      "image": "/assets/images/png/picto-sante.png",
+      "color": "",
+      "friendlyURLSet": []
+    },
+    {
+      "class": "com.jalios.jcms.Category",
+      "id": "EtudeId",
+      "cdate": "2022-03-15T08:08:45Z",
+      "mdate": "2022-03-15T08:08:45Z",
+      "author": {
+        "class": "com.jalios.jcms.Member",
+        "id": "j_2",
+        "login": "paul.orhon@digiwin.fr",
+        "fullName": "adminPrenom Admin"
+      },
+      "opAuthor": {
+        "class": "com.jalios.jcms.Member",
+        "id": "j_2",
+        "login": "paul.orhon@digiwin.fr",
+        "fullName": "adminPrenom Admin"
+      },
+      "name": "Etudes et formation",
+      "parent": {
+        "class": "com.jalios.jcms.Category",
+        "id": "themesCatId"
+      },
+      "description": "",
+      "synonyms": [],
+      "order": 3,
+      "childrenOrder": 0,
+      "icon": "/assets/images/png/picto-etudes.png",
+      "image": "/assets/images/png/picto-etudes.png",
+      "color": "",
+      "friendlyURLSet": []
+    },
+    {
+      "class": "com.jalios.jcms.Category",
+      "id": "TravailId",
+      "cdate": "2022-03-15T08:08:45Z",
+      "mdate": "2022-03-15T08:08:45Z",
+      "author": {
+        "class": "com.jalios.jcms.Member",
+        "id": "j_2",
+        "login": "paul.orhon@digiwin.fr",
+        "fullName": "adminPrenom Admin"
+      },
+      "opAuthor": {
+        "class": "com.jalios.jcms.Member",
+        "id": "j_2",
+        "login": "paul.orhon@digiwin.fr",
+        "fullName": "adminPrenom Admin"
+      },
+      "name": "Travail",
+      "parent": {
+        "class": "com.jalios.jcms.Category",
+        "id": "themesCatId"
+      },
+      "description": "",
+      "synonyms": [],
+      "order": 3,
+      "childrenOrder": 0,
+      "icon": "/assets/images/png/picto-travail.png",
+      "image": "/assets/images/png/picto-travail.png",
+      "color": "",
+      "friendlyURLSet": []
+    },
+    {
+      "class": "com.jalios.jcms.Category",
+      "id": "TransportId",
+      "cdate": "2022-03-15T08:08:45Z",
+      "mdate": "2022-03-15T08:08:45Z",
+      "author": {
+        "class": "com.jalios.jcms.Member",
+        "id": "j_2",
+        "login": "paul.orhon@digiwin.fr",
+        "fullName": "adminPrenom Admin"
+      },
+      "opAuthor": {
+        "class": "com.jalios.jcms.Member",
+        "id": "j_2",
+        "login": "paul.orhon@digiwin.fr",
+        "fullName": "adminPrenom Admin"
+      },
+      "name": "Transports, permis",
+      "parent": {
+        "class": "com.jalios.jcms.Category",
+        "id": "themesCatId"
+      },
+      "description": "",
+      "synonyms": [],
+      "order": 3,
+      "childrenOrder": 0,
+      "icon": "/assets/images/png/picto-transports.png",
+      "image": "/assets/images/png/picto-transports.png",
+      "color": "",
+      "friendlyURLSet": []
+    },
+    {
+      "class": "com.jalios.jcms.Category",
+      "id": "AideMajId",
+      "cdate": "2022-03-15T08:08:45Z",
+      "mdate": "2022-03-15T08:08:45Z",
+      "author": {
+        "class": "com.jalios.jcms.Member",
+        "id": "j_2",
+        "login": "paul.orhon@digiwin.fr",
+        "fullName": "adminPrenom Admin"
+      },
+      "opAuthor": {
+        "class": "com.jalios.jcms.Member",
+        "id": "j_2",
+        "login": "paul.orhon@digiwin.fr",
+        "fullName": "adminPrenom Admin"
+      },
+      "name": "Aides pour les majeurs",
+      "parent": {
+        "class": "com.jalios.jcms.Category",
+        "id": "themesCatId"
+      },
+      "description": "",
+      "synonyms": [],
+      "order": 3,
+      "childrenOrder": 0,
+      "icon": "/assets/images/png/picto-aides.png",
+      "image": "/assets/images/png/picto-aides.png",
+      "color": "",
+      "friendlyURLSet": []
     }
   ],
   "start": 0,
