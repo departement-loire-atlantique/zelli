@@ -15,7 +15,8 @@ export abstract class APageHome {
     this._router = _injector.get(Router);
     this._catsHomeMng = _injector.get(CatsHomeMngService);
 
-    this.curentCat = this._catsHomeMng.getCatFromUrl(this._router.url)
+    this.curentCat = this._catsHomeMng.getCatFromUrl(this._router.url);
+    // TODO erreur if curentCat is undefined
   }
 
   public get curentCat(): Category | undefined {

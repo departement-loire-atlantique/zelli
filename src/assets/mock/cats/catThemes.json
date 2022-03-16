@@ -1,0 +1,103 @@
+{
+  "total": 3,
+  "sort": "",
+  "dataSet": [
+    {
+      "class": "com.jalios.jcms.Category",
+      "id": "DemAdmin",
+      "cdate": "2022-03-15T08:08:45Z",
+      "mdate": "2022-03-15T08:08:45Z",
+      "author": {
+        "class": "com.jalios.jcms.Member",
+        "id": "j_2",
+        "login": "paul.orhon@digiwin.fr",
+        "fullName": "adminPrenom Admin"
+      },
+      "opAuthor": {
+        "class": "com.jalios.jcms.Member",
+        "id": "j_2",
+        "login": "paul.orhon@digiwin.fr",
+        "fullName": "adminPrenom Admin"
+      },
+      "name": "Démarches administratives",
+      "parent": {
+        "class": "com.jalios.jcms.Category",
+        "id": "themesCatId"
+      },
+      "description": "",
+      "synonyms": [],
+      "order": 3,
+      "childrenOrder": 0,
+      "icon": "/assets/images/svg/picto-demarches.svg",
+      "image": "/assets/images/svg/picto-demarches.svg",
+      "color": "",
+      "friendlyURLSet": []
+    },
+    {
+      "class": "com.jalios.jcms.Category",
+      "id": "BudgetBanque",
+      "cdate": "2022-03-15T08:08:45Z",
+      "mdate": "2022-03-15T08:08:45Z",
+      "author": {
+        "class": "com.jalios.jcms.Member",
+        "id": "j_2",
+        "login": "paul.orhon@digiwin.fr",
+        "fullName": "adminPrenom Admin"
+      },
+      "opAuthor": {
+        "class": "com.jalios.jcms.Member",
+        "id": "j_2",
+        "login": "paul.orhon@digiwin.fr",
+        "fullName": "adminPrenom Admin"
+      },
+      "name": "Budget et banque",
+      "parent": {
+        "class": "com.jalios.jcms.Category",
+        "id": "themesCatId"
+      },
+      "description": "",
+      "synonyms": [],
+      "order": 3,
+      "childrenOrder": 0,
+      "icon": "/assets/images/png/picto-budget.png",
+      "image": "/assets/images/png/picto-budget.png",
+      "color": "",
+      "friendlyURLSet": []
+    },
+    {
+      "class": "com.jalios.jcms.Category",
+      "id": "LogementId",
+      "cdate": "2022-03-15T08:08:45Z",
+      "mdate": "2022-03-15T08:08:45Z",
+      "author": {
+        "class": "com.jalios.jcms.Member",
+        "id": "j_2",
+        "login": "paul.orhon@digiwin.fr",
+        "fullName": "adminPrenom Admin"
+      },
+      "opAuthor": {
+        "class": "com.jalios.jcms.Member",
+        "id": "j_2",
+        "login": "paul.orhon@digiwin.fr",
+        "fullName": "adminPrenom Admin"
+      },
+      "name": "Logement",
+      "parent": {
+        "class": "com.jalios.jcms.Category",
+        "id": "themesCatId"
+      },
+      "description": "",
+      "synonyms": [],
+      "order": 3,
+      "childrenOrder": 0,
+      "icon": "/assets/images/png/picto-logement.png",
+      "image": "/assets/images/png/picto-logement.png",
+      "color": "",
+      "friendlyURLSet": []
+    }
+  ],
+  "start": 0,
+  "reverse": false,
+  "pagerAll": false,
+  "pageSize": 10
+}

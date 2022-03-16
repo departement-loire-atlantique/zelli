@@ -28,6 +28,7 @@ export class CatsMngService {
             smallTitle: itData.synonyms ? itData.synonyms[0] : itData.name,
             subTitle: itData.description,
             icon: itData.icon,
+            image: itData.image,
             url: itData.friendlyURLSet ? itData.friendlyURLSet[0] : ""
           });
         }))

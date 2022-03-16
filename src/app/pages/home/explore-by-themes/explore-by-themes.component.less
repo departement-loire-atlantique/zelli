@@ -1,0 +1,20 @@
+@import "/src/theme/importDep.less";
+
+.themes {
+  display: grid;
+  grid: auto-flow / 1fr 1fr;
+
+  padding: 0px;
+
+  .theme {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 10px;
+
+    &:nth-child(2n){
+      transform: translate(0, 40px);
+    }
+  }
+}

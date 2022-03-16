@@ -4,7 +4,7 @@
   "dataSet": [
       {
           "class": "com.jalios.jcms.Category",
-          "id": "por_12455",
+          "id": "themesCatId",
           "cdate": "2019-12-04T08:08:45Z",
           "mdate": "2019-12-04T08:08:45Z",
           "author": {
@@ -24,7 +24,7 @@
               "class": "com.jalios.jcms.Category",
               "id": "por_12452"
           },
-          "description": "",
+          "description": "Description themes",
           "synonyms": [
               "Themes"
           ],
@@ -65,7 +65,7 @@
       },
       {
           "class": "com.jalios.jcms.Category",
-          "id": "por_12454",
+          "id": "ageCatId",
           "cdate": "2019-12-04T08:08:45Z",
           "mdate": "2019-12-04T08:08:45Z",
           "author": {
@@ -90,7 +90,7 @@
               "class": "com.jalios.jcms.Category",
               "id": "por_12452"
           },
-          "description": "",
+          "description": "Pour bien te préparer, voici ce que tu peux faire selon ton âge.",
           "synonyms": [
               "Age"
           ],
@@ -131,7 +131,7 @@
       },
       {
           "class": "com.jalios.jcms.Category",
-          "id": "por_12453",
+          "id": "HomeCatId",
           "cdate": "2019-12-04T08:08:45Z",
           "mdate": "2022-03-09T10:59:22Z",
           "author": {

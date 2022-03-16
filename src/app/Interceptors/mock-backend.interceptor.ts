@@ -15,9 +15,15 @@ export class MockBackendInterceptor implements HttpInterceptor {
 
     // uniquement si pas d'url de jcms param
     if (environment.urlJcms === "") {
-      console.log("Send mock");
       if (request.url.endsWith("data/children/" + environment.catNavMain)) {
+        console.log("Send mock");
         const newReq = request.clone({ url: "assets/mock/cats/catHome.json" });
+        return next.handle(newReq);
+      }
+
+      if(request.url.endsWith("data/children/themesCatId")){
+        console.log("Send mock");
+        const newReq = request.clone({ url: "assets/mock/cats/catThemes.json" });
         return next.handle(newReq);
       }
 
