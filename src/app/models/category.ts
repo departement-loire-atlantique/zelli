@@ -30,6 +30,8 @@ export interface Category{
   /**
    * Url interne à l'app 
    */
-  url: string
+  url: string,
+
+  order: number
 
 }

@@ -24,6 +24,10 @@ export class CatsMngService {
         map((rep: any) => rep.dataSet.map((itData: any): Category =>
           this.mapToCat(itData)
         ))
+      ).pipe(
+        map((cats: Category[]) =>
+          cats.sort((cat1, cat2) => cat1.order - cat2.order)
+        )
       );
   }
 
@@ -50,7 +54,8 @@ export class CatsMngService {
       subTitle: dataRep.description,
       icon: dataRep.icon,
       image: dataRep.image,
-      url: dataRep.friendlyURLSet ? dataRep.friendlyURLSet[0] : ""
+      url: dataRep.friendlyURLSet ? dataRep.friendlyURLSet[0] : "",
+      order: dataRep.order
     };
   }
 

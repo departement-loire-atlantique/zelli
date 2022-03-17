@@ -28,7 +28,7 @@
             "synonyms": [
                 "Themes"
             ],
-            "order": 3,
+            "order": 0,
             "childrenOrder": 0,
             "icon": "icon-home",
             "image": "",
@@ -94,7 +94,7 @@
             "synonyms": [
                 "Age"
             ],
-            "order": 2,
+            "order": 1,
             "childrenOrder": 0,
             "icon": "icon-option",
             "image": "",
@@ -155,7 +155,7 @@
             "synonyms": [
                 "Contacts"
             ],
-            "order": 3,
+            "order": 2,
             "childrenOrder": 0,
             "icon": "icon-user",
             "image": "",
@@ -225,7 +225,7 @@
             "synonyms": [
                 "Documents"
             ],
-            "order": 3,
+            "order": 4,
             "childrenOrder": 0,
             "icon": "icon-data",
             "image": "",
