@@ -1,9 +1,6 @@
-<header *ngIf="curentCat">
+<header>
   <app-back text=""></app-back>
-  <div class="theme-info">
-    <img [src]="curentCat.icon" alt="icon" aria-hidden="true" />
-    <h1>{{ curentCat.title }}</h1>
-  </div>
+  <app-theme-header [catTheme]="curentCat"></app-theme-header>
 </header>
 <main>
   <ul>

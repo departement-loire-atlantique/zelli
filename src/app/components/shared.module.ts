@@ -5,13 +5,15 @@ import { RouterModule } from '@angular/router';
 import { LoaderComponent } from './loader/loader.component';
 import { PageTitleComponent } from './page-title/page-title.component';
 import { BackComponent } from './back/back.component';
+import { ThemeHeaderComponent } from './theme-header/theme-header.component';
 
 @NgModule({
   declarations: [
     MainMenuComponent,
     LoaderComponent,
     PageTitleComponent,
-    BackComponent
+    BackComponent,
+    ThemeHeaderComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { BackComponent } from './back/back.component';
     MainMenuComponent,
     LoaderComponent,
     PageTitleComponent,
-    BackComponent
+    BackComponent,
+    ThemeHeaderComponent
   ]
 })
 export class SharedModule { }
