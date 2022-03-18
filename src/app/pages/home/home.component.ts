@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Category } from 'src/app/models/category';
 import { CatsHomeMngService } from 'src/app/services/cats-home-mng.service';
 import { CatsMngService } from 'src/app/services/cats-mng.service';
+import { LabelMngService } from 'src/app/services/label-mng.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit {
   logoUrl: string = "assets/images/svg/logo-zelli.svg";
 
 
-  constructor(private _router: Router, private _catMng: CatsMngService, private _catHomeMng: CatsHomeMngService) {
+  constructor(private _router: Router, private _catMng: CatsMngService, private _catHomeMng: CatsHomeMngService, private _lblMng: LabelMngService) {
 
     // TODO get logoUrl
     this._appInit = JSON.parse(sessionStorage.getItem('_appInit') || "false");
@@ -37,6 +38,7 @@ export class HomeComponent implements OnInit {
       const catsHom: Observable<Category[]> = this._catMng.catsChildren(environment.catNavMain);
 
       setTimeout(() => {
+        //TODO _lblMng
         catsHom.subscribe((cats: Category[]) => {
 
           this._catHomeMng.setAllCats(cats);

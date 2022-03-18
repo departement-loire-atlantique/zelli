@@ -1,0 +1,134 @@
+{
+  "total": 3,
+  "sort": "",
+  "dataSet": [
+    {
+      "class": "com.jalios.jcms.Category",
+      "id": "DemAdminSub1",
+      "cdate": "2022-03-15T08:08:45Z",
+      "mdate": "2022-03-15T08:08:45Z",
+      "author": {
+        "class": "com.jalios.jcms.Member",
+        "id": "j_2",
+        "login": "paul.orhon@digiwin.fr",
+        "fullName": "adminPrenom Admin"
+      },
+      "opAuthor": {
+        "class": "com.jalios.jcms.Member",
+        "id": "j_2",
+        "login": "paul.orhon@digiwin.fr",
+        "fullName": "adminPrenom Admin"
+      },
+      "name": "Comment faire une demande de passeport ou de carte d’identité ?",
+      "parent": {
+        "class": "com.jalios.jcms.Category",
+        "id": "DemAdmin"
+      },
+      "description": "",
+      "synonyms": [],
+      "order": 0,
+      "childrenOrder": 0,
+      "icon": "",
+      "image": "",
+      "color": "",
+      "friendlyURLSet": []
+    },
+    {
+      "class": "com.jalios.jcms.Category",
+      "id": "DemAdminSub2",
+      "cdate": "2022-03-15T08:08:45Z",
+      "mdate": "2022-03-15T08:08:45Z",
+      "author": {
+        "class": "com.jalios.jcms.Member",
+        "id": "j_2",
+        "login": "paul.orhon@digiwin.fr",
+        "fullName": "adminPrenom Admin"
+      },
+      "opAuthor": {
+        "class": "com.jalios.jcms.Member",
+        "id": "j_2",
+        "login": "paul.orhon@digiwin.fr",
+        "fullName": "adminPrenom Admin"
+      },
+      "name": "J’ai 18 ans. Qu’est-ce qui change ?",
+      "parent": {
+        "class": "com.jalios.jcms.Category",
+        "id": "DemAdmin"
+      },
+      "description": "",
+      "synonyms": [],
+      "order": 1,
+      "childrenOrder": 0,
+      "icon": "",
+      "image": "",
+      "color": "",
+      "friendlyURLSet": []
+    },
+    {
+      "class": "com.jalios.jcms.Category",
+      "id": "DemAdminSub3",
+      "cdate": "2022-03-15T08:08:45Z",
+      "mdate": "2022-03-15T08:08:45Z",
+      "author": {
+        "class": "com.jalios.jcms.Member",
+        "id": "j_2",
+        "login": "paul.orhon@digiwin.fr",
+        "fullName": "adminPrenom Admin"
+      },
+      "opAuthor": {
+        "class": "com.jalios.jcms.Member",
+        "id": "j_2",
+        "login": "paul.orhon@digiwin.fr",
+        "fullName": "adminPrenom Admin"
+      },
+      "name": "Les impôts : comment ça marche ?",
+      "parent": {
+        "class": "com.jalios.jcms.Category",
+        "id": "DemAdmin"
+      },
+      "description": "",
+      "synonyms": [],
+      "order": 2,
+      "childrenOrder": 0,
+      "icon": "",
+      "image": "",
+      "color": "",
+      "friendlyURLSet": []
+    },
+    {
+      "class": "com.jalios.jcms.Category",
+      "id": "DemAdminSub4",
+      "cdate": "2022-03-15T08:08:45Z",
+      "mdate": "2022-03-15T08:08:45Z",
+      "author": {
+        "class": "com.jalios.jcms.Member",
+        "id": "j_2",
+        "login": "paul.orhon@digiwin.fr",
+        "fullName": "adminPrenom Admin"
+      },
+      "opAuthor": {
+        "class": "com.jalios.jcms.Member",
+        "id": "j_2",
+        "login": "paul.orhon@digiwin.fr",
+        "fullName": "adminPrenom Admin"
+      },
+      "name": "Quelles sont les démarches à faire quand on est étranger ?",
+      "parent": {
+        "class": "com.jalios.jcms.Category",
+        "id": "DemAdmin"
+      },
+      "description": "",
+      "synonyms": [],
+      "order": 3,
+      "childrenOrder": 0,
+      "icon": "",
+      "image": "",
+      "color": "",
+      "friendlyURLSet": []
+    }
+  ],
+  "start": 0,
+  "reverse": false,
+  "pagerAll": false,
+  "pageSize": 10
+}

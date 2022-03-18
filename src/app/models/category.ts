@@ -1,4 +1,4 @@
-export interface Category{
+export interface Category {
 
   /**
    * id JCMS
@@ -32,6 +32,8 @@ export interface Category{
    */
   url: string,
 
-  order: number
+  order: number,
+
+  idContentTrieur: string
 
 }

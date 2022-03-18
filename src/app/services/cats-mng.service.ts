@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { Category } from '../models/category';
 import { JcmsClientService } from './jcms-client.service';
 
@@ -55,7 +54,8 @@ export class CatsMngService {
       icon: dataRep.icon,
       image: dataRep.image,
       url: dataRep.friendlyURLSet ? dataRep.friendlyURLSet[0] : "",
-      order: dataRep.order
+      order: dataRep.order,
+      idContentTrieur: ""/* TODO */
     };
   }
 

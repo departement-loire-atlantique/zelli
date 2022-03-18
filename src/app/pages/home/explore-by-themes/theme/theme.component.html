@@ -1,1 +1,17 @@
-<p>theme works!</p>
+<header *ngIf="curentCat">
+  <app-back text=""></app-back>
+  <div class="theme-info">
+    <img [src]="curentCat.icon" alt="icon" aria-hidden="true" />
+    <h1>{{ curentCat.title }}</h1>
+  </div>
+</header>
+<main>
+  <ul>
+    <li *ngFor="let itSubT of subThemes">
+      <a [routerLink]="'./' + itSubT.id">{{ itSubT.title }}</a>
+    </li>
+  </ul>
+  <div *ngIf="curentCat && curentCat.idContentTrieur">
+    <a class="btn">{{lblMng.lblDocTrieur}}</a>
+  </div>
+</main>

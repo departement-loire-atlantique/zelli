@@ -30,6 +30,28 @@ H1 {
   }
 }
 
-MAIN.with-menu {
-  margin-bottom: 60px;
+MAIN {
+  padding: 0px;
+
+  &.with-menu {
+    margin-bottom: 60px;
+  }
+}
+
+.btn {
+  background: @blue;
+  color: @white;
+  padding: 16px;
+  margin: 20px;
+  display: block;
+  border-radius: 50px;
+
+  text-decoration: none;
+  text-align: center;
+
+  &:hover {
+    background: @blue-light;
+    color: @white;
+    cursor: pointer;
+  }
 }

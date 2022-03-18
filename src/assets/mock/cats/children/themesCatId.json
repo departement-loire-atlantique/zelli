@@ -29,7 +29,7 @@
       "synonyms": [],
       "order": 3,
       "childrenOrder": 0,
-      "icon": "/assets/images/svg/picto-demarches.svg",
+      "icon": "/assets/images/svg/blob-demarches.svg",
       "image": "/assets/images/svg/picto-demarches.svg",
       "color": "",
       "friendlyURLSet": []
@@ -60,7 +60,7 @@
       "synonyms": [],
       "order": 3,
       "childrenOrder": 0,
-      "icon": "/assets/images/png/picto-budget.png",
+      "icon": "/assets/images/png/blob-budget.png",
       "image": "/assets/images/png/picto-budget.png",
       "color": "",
       "friendlyURLSet": []
@@ -91,7 +91,7 @@
       "synonyms": [],
       "order": 3,
       "childrenOrder": 0,
-      "icon": "/assets/images/png/picto-logement.png",
+      "icon": "/assets/images/png/blob-logement.png",
       "image": "/assets/images/png/picto-logement.png",
       "color": "",
       "friendlyURLSet": []
@@ -122,7 +122,7 @@
       "synonyms": [],
       "order": 3,
       "childrenOrder": 0,
-      "icon": "/assets/images/png/picto-sante.png",
+      "icon": "/assets/images/png/blob-sante.png",
       "image": "/assets/images/png/picto-sante.png",
       "color": "",
       "friendlyURLSet": []
@@ -153,7 +153,7 @@
       "synonyms": [],
       "order": 3,
       "childrenOrder": 0,
-      "icon": "/assets/images/png/picto-etudes.png",
+      "icon": "/assets/images/png/blob-etudes.png",
       "image": "/assets/images/png/picto-etudes.png",
       "color": "",
       "friendlyURLSet": []
@@ -184,7 +184,7 @@
       "synonyms": [],
       "order": 3,
       "childrenOrder": 0,
-      "icon": "/assets/images/png/picto-travail.png",
+      "icon": "/assets/images/png/blob-travail.png",
       "image": "/assets/images/png/picto-travail.png",
       "color": "",
       "friendlyURLSet": []
@@ -215,7 +215,7 @@
       "synonyms": [],
       "order": 3,
       "childrenOrder": 0,
-      "icon": "/assets/images/png/picto-transports.png",
+      "icon": "/assets/images/png/blob-transports.png",
       "image": "/assets/images/png/picto-transports.png",
       "color": "",
       "friendlyURLSet": []
@@ -246,7 +246,7 @@
       "synonyms": [],
       "order": 3,
       "childrenOrder": 0,
-      "icon": "/assets/images/png/picto-aides.png",
+      "icon": "/assets/images/png/blob-aides.png",
       "image": "/assets/images/png/picto-aides.png",
       "color": "",
       "friendlyURLSet": []

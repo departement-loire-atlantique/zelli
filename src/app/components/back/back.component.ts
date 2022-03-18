@@ -8,12 +8,24 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class BackComponent implements OnInit {
 
+  /**
+   * Text du lien de retour.
+   * Default: Retour
+   */
   @Input()
   text: string = "Retour";
 
+  /**
+   * Titre du lien.
+   * Default: Retour à la page précédente
+   */
   @Input()
   titleLink: string = "Retour à la page précédente";
 
+  /**
+   * icon du lien.
+   * Default: icon-arrow-left
+   */
   @Input()
   picto: string = "icon-arrow-left";
 
