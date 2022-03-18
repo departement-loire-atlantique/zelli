@@ -6,6 +6,7 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './components/shared.module';
+import { LoginBackendInterceptor } from './Interceptors/login-backend.interceptor';
 import { MockBackendInterceptor } from './Interceptors/mock-backend.interceptor';
 
 @NgModule({
@@ -25,7 +26,8 @@ import { MockBackendInterceptor } from './Interceptors/mock-backend.interceptor'
     SharedModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: MockBackendInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: MockBackendInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoginBackendInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
