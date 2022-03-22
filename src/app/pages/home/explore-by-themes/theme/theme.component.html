@@ -1,11 +1,14 @@
 <header>
-  <app-back text=""></app-back>
+  <app-back text="" picto="icon-arrow-left icon--xlarge"></app-back>
   <app-theme-header [catTheme]="curentCat"></app-theme-header>
 </header>
 <main>
-  <ul>
+  <ul class="ds44-list">
     <li *ngFor="let itSubT of subThemes">
-      <a [routerLink]="'./' + itSubT.id">{{ itSubT.title }}</a>
+      <a [routerLink]="'./' + itSubT.id">
+        <span>{{ itSubT.title }}</span>
+        <i class="icon icon-arrow-right" aria-hidden="true"></i>
+      </a>
     </li>
   </ul>
   <div *ngIf="curentCat && curentCat.idContentTrieur">
