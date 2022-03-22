@@ -38,12 +38,23 @@ MAIN {
   }
 }
 
+.btn-wrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-bottom: 20px;
+
+  .btn {
+    flex: 1;
+  }
+}
 .btn {
   background: @blue;
   color: @white;
   padding: 16px;
-  margin: 20px;
-  display: block;
+  margin: 5px;
+  display: inline-block;
+  border: 1px solid @blue;
   border-radius: 50px;
 
   text-decoration: none;
@@ -53,5 +64,21 @@ MAIN {
     background: @blue-light;
     color: @white;
     cursor: pointer;
+  }
+
+  &.btn-big {
+    display: block;
+    margin: 20px;
+  }
+
+  &.btn-light {
+    background: @white;
+    color: @blue;
+    font-weight: bold;
+
+    &.active {
+      background: @blue;
+      color: @white;
+    }
   }
 }
