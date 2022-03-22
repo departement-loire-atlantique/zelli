@@ -19,7 +19,7 @@ export class MockBackendInterceptor implements HttpInterceptor {
       const resultChild = regexChildren.exec(request.url);
       if (resultChild) {
         console.log("Send mock children : " + resultChild[1]);
-        const newReq = request.clone({ url: "assets/mock/cats/children/" + resultChild[1] + ".json" });
+        const newReq = request.clone({ url: "assets/mock/children/" + resultChild[1] + ".json" });
         return next.handle(newReq);
       }
 
@@ -27,7 +27,7 @@ export class MockBackendInterceptor implements HttpInterceptor {
       const resultDate = regexData.exec(request.url);
       if (resultDate) {
         console.log("Send mock data : " + resultDate[1]);
-        const newReq = request.clone({ url: "assets/mock/cats/" + resultDate[1] + ".json" });
+        const newReq = request.clone({ url: "assets/mock/" + resultDate[1] + ".json" });
         return next.handle(newReq);
       }
 
