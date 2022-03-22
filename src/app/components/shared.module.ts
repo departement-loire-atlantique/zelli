@@ -6,6 +6,7 @@ import { LoaderComponent } from './loader/loader.component';
 import { PageTitleComponent } from './page-title/page-title.component';
 import { BackComponent } from './back/back.component';
 import { ThemeHeaderComponent } from './theme-header/theme-header.component';
+import { HasHelpedComponent } from './has-helped/has-helped.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { ThemeHeaderComponent } from './theme-header/theme-header.component';
     LoaderComponent,
     PageTitleComponent,
     BackComponent,
-    ThemeHeaderComponent
+    ThemeHeaderComponent,
+    HasHelpedComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { ThemeHeaderComponent } from './theme-header/theme-header.component';
     LoaderComponent,
     PageTitleComponent,
     BackComponent,
-    ThemeHeaderComponent
+    ThemeHeaderComponent,
+    HasHelpedComponent
   ]
 })
 export class SharedModule { }
