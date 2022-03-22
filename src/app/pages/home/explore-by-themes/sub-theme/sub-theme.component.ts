@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/models/jcms/category';
+import { Content } from 'src/app/models/jcms/content';
 import { SubThemeASE } from 'src/app/models/jcms/sousThemeASE';
 import { CatsMngService } from 'src/app/services/cats-mng.service';
 
@@ -33,16 +34,28 @@ export class SubThemeComponent implements OnInit {
 
     // TODO get subTheme with idCatSubTheme
     this.subTheme = {
+      clazz: "",
       id: "id",
       title: "Todo titre",
       chapo: "Lorem ipsum dolor sit amet",
-      contenu: [],
+      contenu: [{id:"TEST", title:"Title", clazz:"generated.ArticleASE"}],
       affichagePageAAidee: true,
       navigation: this.catTheme // TODO
     };
   }
 
   ngOnInit(): void {
+  }
+
+  // TODO verif class
+  public buildUrlCotent(content: Content): string {
+    if (content.clazz === "generated.ArticleASE") {
+      return "/article/" + content.id;
+    }
+    if (content.clazz === "generated.Structure") {
+      return "/TODO/" + content.id;
+    }
+    return "";
   }
 
 }

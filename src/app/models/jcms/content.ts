@@ -11,4 +11,9 @@ export interface Content {
    * Nom du contenu
    */
   title: string,
+
+  /**
+   * class java du contenu JCMS
+   */
+  clazz: string
 }

@@ -10,7 +10,9 @@
   TODO LI
   <ul *ngIf="subTheme.contenu && subTheme.contenu.length > 0">
     <li *ngFor="let itContent of subTheme.contenu">
-      {{itContent}}
+      <a [routerLink]="buildUrlCotent(itContent)">
+        {{itContent.title}}
+      </a>
     </li>
   </ul>
   <app-has-helped *ngIf="subTheme.affichagePageAAidee"></app-has-helped>
