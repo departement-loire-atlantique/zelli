@@ -11,6 +11,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/home/explore-by-themes/theme/theme.module').then(m => m.ThemeModule)
   },
   {
+    path: 'theme/:id/:subId',
+    loadChildren: () => import('./pages/home/explore-by-themes/sub-theme/sub-theme.module').then(m => m.SubThemeModule)
+  },
+  {
     path: 'age',
     loadChildren: () => import('./pages/home/age/age.module').then(m => m.AgeModule)
   },

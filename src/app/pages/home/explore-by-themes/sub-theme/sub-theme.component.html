@@ -1,0 +1,17 @@
+<header>
+  <app-back text=""></app-back>
+  <app-theme-header [catTheme]="catTheme"></app-theme-header>
+</header>
+<main *ngIf="subTheme">
+  <h2>{{ subTheme.title }}</h2>
+  <div>
+    {{ subTheme.chapo }}
+  </div>
+  TODO LI
+  <ul *ngIf="subTheme.contenu && subTheme.contenu.length > 0">
+    <li *ngFor="let itContent of subTheme.contenu">
+      {{itContent}}
+    </li>
+  </ul>
+  <app-has-helped *ngIf="subTheme.affichagePageAAidee"></app-has-helped>
+</main>
