@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { Category } from '../models/category';
+import { Category } from '../models/jcms/category';
 import { JcmsClientService } from './jcms-client.service';
 
 @Injectable({

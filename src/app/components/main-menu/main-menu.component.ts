@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Category } from 'src/app/models/category';
+import { Category } from 'src/app/models/jcms/category';
 import { CatsHomeMngService } from 'src/app/services/cats-home-mng.service';
 
 @Component({

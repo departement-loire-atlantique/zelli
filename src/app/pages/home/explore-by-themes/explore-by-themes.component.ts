@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { APageHome } from 'src/app/models/aPageHome';
-import { Category } from 'src/app/models/category';
+import { Category } from 'src/app/models/jcms/category';
 import { CatsMngService } from 'src/app/services/cats-mng.service';
 
 @Component({

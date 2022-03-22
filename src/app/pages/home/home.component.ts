@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Category } from 'src/app/models/category';
+import { Category } from 'src/app/models/jcms/category';
 import { CatsHomeMngService } from 'src/app/services/cats-home-mng.service';
 import { CatsMngService } from 'src/app/services/cats-mng.service';
 import { LabelMngService } from 'src/app/services/label-mng.service';

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Category } from 'src/app/models/category';
+import { Category } from 'src/app/models/jcms/category';
 import { CatsMngService } from 'src/app/services/cats-mng.service';
 import { LabelMngService } from 'src/app/services/label-mng.service';
 

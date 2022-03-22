@@ -1,7 +1,7 @@
 import { Directive, Injector } from "@angular/core";
 import { Router } from "@angular/router";
 import { CatsHomeMngService } from "../services/cats-home-mng.service";
-import { Category } from "./category";
+import { Category } from "./jcms/category";
 
 @Directive()
 export abstract class APageHome {

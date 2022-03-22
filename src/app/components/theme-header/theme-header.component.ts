@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Category } from 'src/app/models/category';
+import { Category } from 'src/app/models/jcms/category';
 
 @Component({
   selector: 'app-theme-header',
