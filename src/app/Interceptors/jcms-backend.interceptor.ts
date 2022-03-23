@@ -1,12 +1,12 @@
 import {
-  HttpEvent, HttpHandler, HttpInterceptor, HttpParams, HttpRequest
+  HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpParams, HttpRequest
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
-export class LoginBackendInterceptor implements HttpInterceptor {
+export class JcmsBackendInterceptor implements HttpInterceptor {
 
   constructor() { }
 
@@ -16,6 +16,7 @@ export class LoginBackendInterceptor implements HttpInterceptor {
     // TODO get user key if login
 
     const newReq = request.clone({
+      headers: (request.headers ? request.headers : new HttpHeaders()).set("Accept", "application/json"),
       params: (request.params ? request.params : new HttpParams()).set("authKey", key)
     });
 

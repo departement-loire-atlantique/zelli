@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Category } from '../models/jcms/category';
 import { JcmsClientService } from './jcms-client.service';
 
@@ -17,7 +18,7 @@ export class CatsMngService {
    * @returns Retourne les categories enfant
    */
   public catsChildren(idCat: string): Observable<Category[]> {
-    return this._jcms.get<Category[]>("data/children/" + idCat)
+    return this._jcms.get<Category[]>("data/children/" + idCat, {params: {"pagerAll": "true"}})
       .pipe(
         // ex rep voir \assets\mock\cats\children\**
         map((rep: any) => rep.dataSet.map((itData: any): Category =>
@@ -51,11 +52,11 @@ export class CatsMngService {
       title: dataRep.name,
       smallTitle: dataRep.synonyms ? dataRep.synonyms[0] : dataRep.name,
       subTitle: dataRep.description,
-      icon: dataRep.icon,
-      image: dataRep.image,
+      icon: dataRep.icon && dataRep.icon.startsWith("upload") ? environment.urlJcms + dataRep.icon : dataRep.icon,
+      image: dataRep.image && dataRep.image.startsWith("upload") ? environment.urlJcms + dataRep.image : dataRep.image,
       url: dataRep.friendlyURLSet ? dataRep.friendlyURLSet[0] : "",
       order: dataRep.order,
-      idContentTrieur: ""/* TODO */
+      idContentTrieur: ""/* TODO get extraData */
     };
   }
 

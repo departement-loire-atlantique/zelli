@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './components/shared.module';
 import { ErrorInterceptor } from './Interceptors/error.interceptor';
-import { LoginBackendInterceptor } from './Interceptors/login-backend.interceptor';
+import { JcmsBackendInterceptor } from './Interceptors/jcms-backend.interceptor';
 import { MockBackendInterceptor } from './Interceptors/mock-backend.interceptor';
 
 @NgModule({
@@ -28,7 +28,7 @@ import { MockBackendInterceptor } from './Interceptors/mock-backend.interceptor'
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: MockBackendInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: LoginBackendInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JcmsBackendInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
