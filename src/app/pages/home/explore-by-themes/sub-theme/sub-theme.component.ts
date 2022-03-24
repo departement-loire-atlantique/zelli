@@ -67,7 +67,8 @@ export class SubThemeComponent implements OnInit {
   public getImgContent(content: Content): string | undefined {
 
     if (content.class === "generated.ArticleASE") {
-      return environment.urlJcms + (content as ArticleASE).picto;
+      const picto = (content as ArticleASE).picto;
+      return picto ? environment.urlJcms + picto : undefined;
     }
     // TODO structures Lot 2
     return undefined;

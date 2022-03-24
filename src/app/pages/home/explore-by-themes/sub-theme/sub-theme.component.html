@@ -13,8 +13,8 @@
     <li *ngFor="let itContent of subTheme.contenu">
       <a [routerLink]="buildUrlCotent(itContent)">
         <span>
-          <img [src]="getImgContent(itContent)" />
-          {{itContent.title}}
+          <img *ngIf="getImgContent(itContent)" [src]="getImgContent(itContent)" aria-hidden="true" />
+          <span class="lbl-link">{{itContent.title}}</span>
         </span>
         <i class="icon icon-arrow-right" aria-hidden="true"></i>
       </a>
