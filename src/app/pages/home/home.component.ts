@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { combineLatest, combineLatestAll, Observable } from 'rxjs';
 import { Category } from 'src/app/models/jcms/category';
 import { CatsHomeMngService } from 'src/app/services/cats-home-mng.service';
 import { CatsMngService } from 'src/app/services/cats-mng.service';
@@ -34,14 +34,25 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 
     if (!this._appInit) {
+
       // init
+      let allObs: any = {};
+
       const catsHom: Observable<Category[]> = this._catMng.catsChildren(environment.catNavMain);
+      allObs.catsHom = catsHom;
+
+      const lbl: any = this._lblMng.initAllLbl();
+      allObs = Object.assign({}, allObs, lbl);
 
       setTimeout(() => {
-        //TODO _lblMng
-        catsHom.subscribe((cats: Category[]) => {
+        combineLatest(allObs).subscribe((rep: any) => {
+
+          // ----- catsHom
+          const cats: Category[] = rep.catsHom;
 
           this._catHomeMng.setAllCats(cats);
+
+          // ----- lbls
 
           // end init
           this._appInit = true;
