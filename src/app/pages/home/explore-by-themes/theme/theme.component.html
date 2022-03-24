@@ -3,7 +3,7 @@
   <app-theme-header [catTheme]="curentCat"></app-theme-header>
 </header>
 <main>
-  <ul class="ds44-list">
+  <ul class="ds44-list list-item-link">
     <li *ngFor="let itSubT of subThemes">
       <a [routerLink]="'./' + itSubT.id">
         <span>{{ itSubT.title }}</span>

@@ -1,17 +1,22 @@
 <header>
   <app-back text="" picto="icon-arrow-left icon--xlarge"></app-back>
-  <app-theme-header [catTheme]="catTheme"></app-theme-header>
+  <app-theme-header [catTheme]="catTheme" [big]="false"></app-theme-header>
+  <div *ngIf="subTheme" class="head-sub-theme">
+    <h1>{{ subTheme.title }}</h1>
+    <div class="chapo">
+      {{ subTheme.chapo }}
+    </div>
+  </div>
 </header>
 <main *ngIf="subTheme">
-  <h2>{{ subTheme.title }}</h2>
-  <div>
-    {{ subTheme.chapo }}
-  </div>
-  TODO LI
-  <ul *ngIf="subTheme.contenu && subTheme.contenu.length > 0">
+  <ul *ngIf="subTheme.contenu && subTheme.contenu.length > 0" class="ds44-list list-item-link contents">
     <li *ngFor="let itContent of subTheme.contenu">
       <a [routerLink]="buildUrlCotent(itContent)">
-        {{itContent.title}}
+        <span>
+          <img [src]="getImgContent(itContent)" />
+          {{itContent.title}}
+        </span>
+        <i class="icon icon-arrow-right" aria-hidden="true"></i>
       </a>
     </li>
   </ul>

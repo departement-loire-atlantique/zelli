@@ -11,6 +11,9 @@ export class ThemeHeaderComponent implements OnInit {
   @Input()
   catTheme: Category | undefined;
 
+  @Input()
+  big: boolean = true;
+
   constructor() { }
 
   ngOnInit(): void {

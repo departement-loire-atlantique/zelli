@@ -2,6 +2,7 @@
  * Contenu JCMS
  */
 export interface Content {
+
   /**
    * id JCMS
    */
@@ -15,5 +16,5 @@ export interface Content {
   /**
    * class java du contenu JCMS
    */
-  clazz: string
+  class: string
 }
