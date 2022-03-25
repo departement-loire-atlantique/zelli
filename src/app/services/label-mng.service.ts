@@ -8,17 +8,16 @@ import { JcmsClientService } from './jcms-client.service';
 export class LabelMngService {
 
   private _lblDocTrieur: string = "Les documents à garder dans ton trieur";
-  private _propDocTrieur: string = "jcmsplugin.zelli.lbl.btn.garde.trieur";
+  private _propDocTrieur: string = "jcmsplugin.zelli.lbl.btn.contenu.trieur";
 
   constructor(private _jcms: JcmsClientService) {
   }
 
   public initAllLbl(): any {
-    return {"lbl": this.updateLblDocTrieur(), "lbl2": this.updateLblDocTrieur()};
+    return {"lblTrieur": this.updateLblDocTrieur()};
   }
 
   public updateLblDocTrieur(): Observable<any> {
-    this._lblDocTrieur = "Les documents à garder dans ton trieur";
     const lbl = this._jcms.get("admin/property/" + this._propDocTrieur);
     lbl.subscribe((rep: any) =>
       this._lblDocTrieur = rep.value
