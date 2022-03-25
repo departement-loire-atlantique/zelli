@@ -27,9 +27,9 @@ export interface ArticleASE extends Content {
    */
   videoTexte: string[] | undefined,
 
-  titreDescription: string | undefined,
+  titreDescription: string[] | undefined,
 
-  description: string | undefined,
+  description: string[] | undefined,
 
   motsCompliques: {} | undefined, // TODO FaqEntry
 

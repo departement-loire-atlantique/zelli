@@ -4,19 +4,6 @@
   <h1 *ngIf="article">{{ article.title }}</h1>
 </header>
 <main *ngIf="article">
-  <ul class="ds44-collapser">
-    <li *ngFor="let descTitle of article.titreDescription; index as i" class="ds44-collapser_element">
-      <p role="heading" aria-level="3">
-        <button type="button" class="ds44-collapser_button">
-          {{descTitle}}
-          <i class="icon icon-down icon--sizeXL" aria-hidden="true"></i>
-        </button>
-      </p>
-      <div class="ds44-collapser_content">
-        <div *ngIf="article.description && article.description[i]" [innerHTML]="article.description[i]">
-        </div>
-      </div>
-    </li>
-  </ul>
+  <app-collapser [dataTitle]="article.titreDescription" [dataVal]="article.description"></app-collapser>
 </main>
 <app-has-helped *ngIf="article && article.affichagePageAAidee"></app-has-helped>

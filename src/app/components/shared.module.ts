@@ -9,6 +9,7 @@ import { ThemeHeaderComponent } from './theme-header/theme-header.component';
 import { HasHelpedComponent } from './has-helped/has-helped.component';
 import { CarouselComponent } from './contents/carousel/carousel.component';
 import { VideoComponent } from './contents/video/video.component';
+import { CollapserComponent } from './collapser/collapser.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { VideoComponent } from './contents/video/video.component';
     ThemeHeaderComponent,
     HasHelpedComponent,
     CarouselComponent,
-    VideoComponent
+    VideoComponent,
+    CollapserComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +35,8 @@ import { VideoComponent } from './contents/video/video.component';
     ThemeHeaderComponent,
     HasHelpedComponent,
     CarouselComponent,
-    VideoComponent
+    VideoComponent,
+    CollapserComponent
   ]
 })
 export class SharedModule { }
