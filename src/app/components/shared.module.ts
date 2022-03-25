@@ -7,6 +7,7 @@ import { PageTitleComponent } from './page-title/page-title.component';
 import { BackComponent } from './back/back.component';
 import { ThemeHeaderComponent } from './theme-header/theme-header.component';
 import { HasHelpedComponent } from './has-helped/has-helped.component';
+import { CarouselComponent } from './contents/carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { HasHelpedComponent } from './has-helped/has-helped.component';
     PageTitleComponent,
     BackComponent,
     ThemeHeaderComponent,
-    HasHelpedComponent
+    HasHelpedComponent,
+    CarouselComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { HasHelpedComponent } from './has-helped/has-helped.component';
     PageTitleComponent,
     BackComponent,
     ThemeHeaderComponent,
-    HasHelpedComponent
+    HasHelpedComponent,
+    CarouselComponent
   ]
 })
 export class SharedModule { }
