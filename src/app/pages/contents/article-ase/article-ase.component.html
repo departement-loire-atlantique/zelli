@@ -1,0 +1,19 @@
+<header>
+  <app-back text=""></app-back>
+  <span *ngIf="article" class="actu-info">
+    <span>{{article.title}}</span>
+    <span class="nav-acts">
+      <span *ngIf="article.contenuPrecedent">
+        <a [routerLink]="'/article/' + article.contenuPrecedent.id" title="Contenu précédent">
+          <i class="icon icon-left" aria-hidden="true"></i>
+        </a>
+      </span>
+      <span *ngIf="article.contenuSuivant">
+        <a [routerLink]="'/article/' + article.contenuSuivant.id" title="Contenu suivant">
+          <i class="icon icon-right" aria-hidden="true"></i>
+        </a>
+      </span>
+    </span>
+  </span>
+</header>
+<p>article-ase works!</p>

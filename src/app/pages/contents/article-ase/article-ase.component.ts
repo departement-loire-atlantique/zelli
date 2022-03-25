@@ -13,16 +13,13 @@ export class ArticleASEComponent implements OnInit {
   article: ArticleASE | undefined;
 
   constructor(private _route: ActivatedRoute, private _jcms: JcmsClientService) {
-    const id = this._route.snapshot.paramMap.get("id");
-
-    if (!id) {
-      return;
-    }
-
-    this._jcms.get<ArticleASE>("data/" + id).subscribe((article: ArticleASE) => this.article = article);
   }
 
   ngOnInit(): void {
+    this._route.paramMap.subscribe(params => {
+      const id = params.get("id");
+      this._jcms.get<ArticleASE>("data/" + id).subscribe((article: ArticleASE) => this.article = article);
+    });
   }
 
 }

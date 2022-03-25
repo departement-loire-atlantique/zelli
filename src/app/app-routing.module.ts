@@ -29,7 +29,7 @@ const routes: Routes = [
   },
   {
     path: 'article/:id',
-    loadChildren: () => import('./pages/article-ase/article-ase.module').then(m => m.ArticleASEModule)
+    loadChildren: () => import('./pages/contents/article-ase/article-ase.module').then(m => m.ArticleASEModule)
   },
   {
     path: '**',
