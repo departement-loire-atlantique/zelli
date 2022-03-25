@@ -1,4 +1,3 @@
-import { Category } from "./category";
 import { Content } from "./content";
 
 /**
