@@ -8,6 +8,7 @@ import { BackComponent } from './back/back.component';
 import { ThemeHeaderComponent } from './theme-header/theme-header.component';
 import { HasHelpedComponent } from './has-helped/has-helped.component';
 import { CarouselComponent } from './contents/carousel/carousel.component';
+import { VideoComponent } from './contents/video/video.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { CarouselComponent } from './contents/carousel/carousel.component';
     BackComponent,
     ThemeHeaderComponent,
     HasHelpedComponent,
-    CarouselComponent
+    CarouselComponent,
+    VideoComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import { CarouselComponent } from './contents/carousel/carousel.component';
     BackComponent,
     ThemeHeaderComponent,
     HasHelpedComponent,
-    CarouselComponent
+    CarouselComponent,
+    VideoComponent
   ]
 })
 export class SharedModule { }
