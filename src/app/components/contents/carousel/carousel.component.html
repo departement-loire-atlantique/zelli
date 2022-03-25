@@ -1,1 +1,16 @@
-<p>carousel works!</p>
+<div *ngIf="carousel" class="ds44-container-large">
+  <div class="mod--hidden ds44-list swipper-carousel-wrap ds44-posRel" data-nb-visible-slides="4"
+    data-swiper-title="Titre du carrousel">
+    <div class="swiper-container">
+      <ul class="swiper-wrapper ds44-list grid-4-small-1 has-gutter-l ds44-carousel-swiper">
+        <li *ngFor="let item of elements" class="swiper-slide">
+          <section class="ds44-card ds44-js-card ds44-card--verticalPicture">
+            <picture class="ds44-container-imgRatio">
+              <img [src]="item.imageMobile" [alt]="item.title" class="ds44-imgRatio" />
+            </picture>
+          </section>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
