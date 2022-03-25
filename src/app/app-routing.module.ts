@@ -32,6 +32,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/contents/article-ase/article-ase.module').then(m => m.ArticleASEModule)
   },
   {
+    path: 'keepDoc/:id',
+    loadChildren: () => import('./pages/contents/keep-doc/keep-doc.module').then(m => m.KeepDocModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/errors/page-not-found/page-not-found.module').then(m => m.PageNotFoundModule)
   }

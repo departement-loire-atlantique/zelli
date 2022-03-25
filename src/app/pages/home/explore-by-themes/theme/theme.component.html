@@ -12,6 +12,6 @@
     </li>
   </ul>
   <div *ngIf="curentCat && curentCat.idContentTrieur">
-    <a class="btn btn-big">{{lblMng.lblDocTrieur}}</a>
+    <a class="btn btn-big" [routerLink]="'/keepDoc/' + curentCat.idContentTrieur">{{lblMng.lblDocTrieur}}</a>
   </div>
 </main>

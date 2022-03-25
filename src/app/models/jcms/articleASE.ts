@@ -43,9 +43,18 @@ export interface ArticleASE extends Content {
 
   affichagePageAAidee: boolean,
 
-  contenuPrecedent: ArticleASE | undefined,
+  /**
+   * ArticleASE
+   */
+  contenuPrecedent: Content | undefined,
 
-  contenuSuivant: ArticleASE | undefined,
+  /**
+   * ArticleASE
+   */
+  contenuSuivant: Content | undefined,
 
-  navigation: Category | undefined
+  /**
+   * id category
+   */
+  navigation: string | undefined
 }

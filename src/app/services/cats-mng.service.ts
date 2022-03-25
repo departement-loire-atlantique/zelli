@@ -37,7 +37,7 @@ export class CatsMngService {
    * @returns 
    */
   public cat(idCat: string): Observable<Category> {
-    return this._jcms.get<Category>("data/" + idCat)
+    return this._jcms.get<Category>("data/" + idCat, {params: {"related" : "extraData.extra.Category.jcmsplugin.zelli.contenu.trieur"}})
       .pipe(
         // ex rep voir \assets\mock\cats\**
         map((rep: any): Category =>
@@ -56,7 +56,7 @@ export class CatsMngService {
       image: dataRep.image && dataRep.image.startsWith("upload") ? environment.urlJcms + dataRep.image : dataRep.image,
       url: dataRep.friendlyURLSet ? dataRep.friendlyURLSet[0] : "",
       order: dataRep.order,
-      idContentTrieur: ""/* TODO get extraData */
+      idContentTrieur: dataRep.related ? dataRep.related.extraDataextraCategoryjcmspluginzellicontenutrieur : "c_5256" // TODO sup c_5256 (bug JCMS)
     };
   }
 

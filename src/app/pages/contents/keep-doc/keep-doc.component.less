@@ -1,0 +1,44 @@
+@import "/src/theme/importDep.less";
+
+HEADER{
+  margin-top: 20px;
+
+  H1 {
+    padding: 40px 33px 20px;
+  }
+}
+
+APP-BACK {
+  color: @blue;
+  margin-left: 25px;
+}
+
+UL {
+  color: @blue-dark;
+  border: none;
+  margin: 5px 18px 30px;
+
+  LI {
+    border-bottom-color: @grey;
+
+    BUTTON {
+      color: @blue-grey;
+      padding-left: 0;
+  
+      I {
+        color: @blue;
+        &::before {
+          line-height: 0.25;
+        }
+      }
+    }
+
+    .ds44-collapser_content {
+      background-color: transparent;
+
+      & > DIV {
+        margin: 0 0 30px 20px;
+      }
+    }
+  }
+}
