@@ -1,0 +1,34 @@
+@import "/src/theme/importDep.less";
+
+HEADER {
+  display: flex;
+  align-items: center;
+  padding: 21px 2vw;
+  color: @blue;
+
+  > * {
+    padding: 0 5px;
+  }
+
+  .atu-title {
+    flex: 1;
+    color: @blue-dark;
+    font-size: 18px;
+    overflow: hidden;
+  }
+
+  .actu-nav {
+
+    > * {
+      padding-right: 20px;
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+
+    A {
+      color: @blue;
+    }
+  }
+}

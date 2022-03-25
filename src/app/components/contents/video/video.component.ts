@@ -15,6 +15,9 @@ export class VideoComponent implements OnInit {
   @Input()
   id: string | undefined;
 
+  @Input("text")
+  diaporamaTexte: string | undefined;
+
   constructor(private _jcms: JcmsClientService) { }
 
   ngOnInit(): void {

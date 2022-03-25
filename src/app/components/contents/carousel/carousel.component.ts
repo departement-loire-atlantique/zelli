@@ -13,7 +13,10 @@ export class CarouselComponent implements OnInit {
   carousel: Carousel | undefined;
 
   @Input()
-  id: string | undefined;
+  id: string = "";
+
+  @Input("text")
+  diaporamaTexte: string | undefined;
 
   constructor(private _jcms: JcmsClientService) { }
 

@@ -1,19 +1,32 @@
 <header>
   <app-back text="" picto="icon-arrow-left icon--xlarge"></app-back>
-  <span *ngIf="article" class="actu-info">
-    <span>{{article.title}}</span>
-    <span class="nav-acts">
-      <span *ngIf="article.contenuPrecedent">
-        <a [routerLink]="'/article/' + article.contenuPrecedent.id" title="Contenu précédent">
-          <i class="icon icon-left" aria-hidden="true"></i>
-        </a>
-      </span>
-      <span *ngIf="article.contenuSuivant">
-        <a [routerLink]="'/article/' + article.contenuSuivant.id" title="Contenu suivant">
-          <i class="icon icon-right" aria-hidden="true"></i>
-        </a>
-      </span>
+  <div *ngIf="article" class="atu-title">{{article.title}}</div>
+  <div *ngIf="article" class="actu-nav">
+    <span *ngIf="article.contenuPrecedent">
+      <a [routerLink]="'/article/' + article.contenuPrecedent.id" title="Contenu précédent">
+        <i class="icon icon-left icon--xlarge" aria-hidden="true"></i>
+      </a>
     </span>
-  </span>
+    <span *ngIf="article.contenuSuivant">
+      <a [routerLink]="'/article/' + article.contenuSuivant.id" title="Contenu suivant">
+        <i class="icon icon-right icon--xlarge" aria-hidden="true"></i>
+      </a>
+    </span>
+  </div>
 </header>
-<p>article-ase works!</p>
+<main *ngIf="article">
+
+  <div *ngIf="article.diaporama">
+    <app-carousel *ngFor="let itCarousel of article.diaporama; index as i" [id]="itCarousel.id"
+      [text]="article.diaporamaTexte ? article.diaporamaTexte[i] : undefined">
+    </app-carousel>
+  </div>
+
+  <div *ngIf="article.video">
+    <app-video *ngFor="let itVideo of article.video; index as i" [id]="itVideo.id"
+      [text]="article.videoTexte ? article.videoTexte[i] : undefined">
+    </app-video>
+  </div>
+
+</main>
+<app-has-helped *ngIf="article && article.affichagePageAAidee"></app-has-helped>

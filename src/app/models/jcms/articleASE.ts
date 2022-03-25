@@ -7,19 +7,25 @@ export interface ArticleASE extends Content {
 
   picto: string | undefined,
 
-  diaporama: {} | undefined, // TODO Carousel
+  /**
+   * De type Carousel
+   */
+  diaporama: Content[] | undefined,
 
   /**
    * Diaporama version texte
    */
-  diaporamaTexte: string | undefined,
+  diaporamaTexte: string[] | undefined,
 
-  video: {} | undefined, // TODO Video
+  /**
+   * De type Video
+   */
+  video: Content[] | undefined,
 
   /**
    * Video version texte
    */
-  videoTexte: string | undefined,
+  videoTexte: string[] | undefined,
 
   titreDescription: string | undefined,
 
