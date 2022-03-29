@@ -1,20 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Category } from 'src/app/models/jcms/category';
+import { Component, Input } from '@angular/core';
+
+import { Category } from '@/app/models/jcms/category';
 
 @Component({
   selector: 'app-page-title',
   templateUrl: './page-title.component.html',
-  styleUrls: ['./page-title.component.less']
+  styleUrls: ['./page-title.component.less'],
 })
-export class PageTitleComponent implements OnInit {
-
+export class PageTitleComponent {
   @Input()
   curentCat: Category | undefined;
 
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
-
+  constructor() {}
 }

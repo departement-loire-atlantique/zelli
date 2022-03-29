@@ -1,21 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-collapser',
   templateUrl: './collapser.component.html',
-  styleUrls: ['./collapser.component.less']
+  styleUrls: ['./collapser.component.less'],
 })
-export class CollapserComponent implements OnInit {
+export class CollapserComponent {
+  @Input()
+  dataTitle: string[] | undefined;
 
   @Input()
-  dataTitle: string[]| undefined;
+  dataVal: string[] | undefined;
 
-  @Input()
-  dataVal: string[]| undefined;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  constructor() {}
 }
