@@ -2,9 +2,27 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
 
-## Development server
+## Getting started
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```bash
+npm install # Make sure to do it first, it will also install husky git hooks
+
+npm run dev # Launch the angular app in dev mode, using development-jcms config
+
+# Usefull commands
+npm run lint    # Run eslint accross all project files to find linter issues (try to fix them if possible)
+npm run pretty  # Format all project files (it is normally done thanks to a pre-push hook)
+```
+
+Make sure you've got the backend up and running before loading the app in your browser.
+
+Once you have run `npm run dev`, navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+## PWA / Service worker
+
+(https://angular.io/guide/service-worker-getting-started#service-worker-in-action-a-tour)  
+Run `ng build`  
+Run `http-server -p 8080 -c-1 dist/zelli`
 
 ## Code scaffolding
 
@@ -25,9 +43,3 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
-## PWA / Service worker
-
-(https://angular.io/guide/service-worker-getting-started#service-worker-in-action-a-tour)   
-Run `ng build`  
-Run `http-server -p 8080 -c-1 dist/zelli`
