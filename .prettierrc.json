@@ -1,11 +1,18 @@
 {
-  "tabWidth": 2,
-  "useTabs": false,
-  "singleQuote": true,
+  "endOfLine": "lf",
   "semi": true,
-  "bracketSpacing": true,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "es5",
   "arrowParens": "always",
-  "trailingComma": "all",
-  "bracketSameLine": true,
-  "printWidth": 100
+  "importOrder": [
+    "^@angular$",
+    "^(?!^react$|^@/|^[./]).*",
+    "^@/app/(.*)$",
+    "^@/(.*)$",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "importOrderParserPlugins": ["typescript", "decorators-legacy"]
 }
