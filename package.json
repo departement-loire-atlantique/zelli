@@ -9,14 +9,13 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint",
-    "lint-staged": "ng lint --cache --fix  && tsc --noEmit",
+    "lint": "eslint ./src --fix && tsc --noEmit",
     "pretty": "prettier -w .",
     "prepare": "husky install"
   },
   "lint-staged": {
     "*.{ts,js,json}": "prettier --write",
-    "*.{ts,js}": "npx lint-staged"
+    "*.{ts,js}": "eslint --cache --fix"
   },
   "dependencies": {
     "@angular/animations": "13.3.0",

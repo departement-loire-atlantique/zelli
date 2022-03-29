@@ -1,18 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-loader',
   templateUrl: './loader.component.html',
-  styleUrls: ['./loader.component.less']
+  styleUrls: ['./loader.component.less'],
 })
-export class LoaderComponent implements OnInit {
-
+export class LoaderComponent {
   @Input()
-  color: String = "#FFF";
+  color: String = '#FFF';
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  constructor() {}
 }
