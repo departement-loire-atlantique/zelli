@@ -1,15 +1,16 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MainMenuComponent } from './main-menu/main-menu.component';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { LoaderComponent } from './loader/loader.component';
-import { PageTitleComponent } from './page-title/page-title.component';
-import { BackComponent } from './back/back.component';
-import { ThemeHeaderComponent } from './theme-header/theme-header.component';
-import { HasHelpedComponent } from './has-helped/has-helped.component';
-import { CarouselComponent } from './contents/carousel/carousel.component';
-import { VideoComponent } from './contents/video/video.component';
-import { CollapserComponent } from './collapser/collapser.component';
+
+import { BackComponent } from '@/app/components/back/back.component';
+import { CollapserComponent } from '@/app/components/collapser/collapser.component';
+import { CarouselComponent } from '@/app/components/contents/carousel/carousel.component';
+import { VideoComponent } from '@/app/components/contents/video/video.component';
+import { HasHelpedComponent } from '@/app/components/has-helped/has-helped.component';
+import { LoaderComponent } from '@/app/components/loader/loader.component';
+import { MainMenuComponent } from '@/app/components/main-menu/main-menu.component';
+import { PageTitleComponent } from '@/app/components/page-title/page-title.component';
+import { ThemeHeaderComponent } from '@/app/components/theme-header/theme-header.component';
 
 @NgModule({
   declarations: [
@@ -21,12 +22,9 @@ import { CollapserComponent } from './collapser/collapser.component';
     HasHelpedComponent,
     CarouselComponent,
     VideoComponent,
-    CollapserComponent
+    CollapserComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterModule
-  ],
+  imports: [CommonModule, RouterModule],
   exports: [
     MainMenuComponent,
     LoaderComponent,
@@ -36,7 +34,7 @@ import { CollapserComponent } from './collapser/collapser.component';
     HasHelpedComponent,
     CarouselComponent,
     VideoComponent,
-    CollapserComponent
-  ]
+    CollapserComponent,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}
