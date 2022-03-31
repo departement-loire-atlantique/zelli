@@ -18,6 +18,10 @@ Make sure you've got the backend up and running before loading the app in your b
 
 Once you have run `npm run dev`, navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+## Tools used
+
+- [Loire Atlantique design system](https://design.loire-atlantique.fr/) ([Lien vers le github](https://github.com/departement-loire-atlantique/design-system-web))
+
 ## PWA / Service worker
 
 (https://angular.io/guide/service-worker-getting-started#service-worker-in-action-a-tour)  
