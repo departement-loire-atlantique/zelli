@@ -1,9 +1,16 @@
 <header>
-  <app-back text="" picto="icon-arrow-left icon--xlarge" class="back-in-top"></app-back>
+  <app-back
+    text=""
+    picto="icon-arrow-left icon--xlarge"
+    class="back-in-top"
+  ></app-back>
   <app-theme-header [catTheme]="catTheme" [big]="false"></app-theme-header>
   <h1 *ngIf="article">{{ article.title }}</h1>
 </header>
 <main *ngIf="article">
-  <app-collapser [dataTitle]="article.titreDescription" [dataVal]="article.description"></app-collapser>
+  <app-collapser
+    [dataTitle]="article.titreDescription"
+    [dataVal]="article.description"
+  ></app-collapser>
 </main>
 <app-has-helped *ngIf="article && article.affichagePageAAidee"></app-has-helped>

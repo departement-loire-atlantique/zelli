@@ -3,7 +3,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { BackComponent } from '@/app/components/back/back.component';
-import { CollapserComponent } from '@/app/components/collapser/collapser.component';
+import {
+  CollapserComponent,
+  CollapserElementComponent,
+} from '@/app/components/collapser';
 import { CarouselComponent } from '@/app/components/contents/carousel/carousel.component';
 import { VideoComponent } from '@/app/components/contents/video/video.component';
 import { HasHelpedComponent } from '@/app/components/has-helped/has-helped.component';
@@ -23,6 +26,7 @@ import { ThemeHeaderComponent } from '@/app/components/theme-header/theme-header
     CarouselComponent,
     VideoComponent,
     CollapserComponent,
+    CollapserElementComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -35,6 +39,7 @@ import { ThemeHeaderComponent } from '@/app/components/theme-header/theme-header
     CarouselComponent,
     VideoComponent,
     CollapserComponent,
+    CollapserElementComponent,
   ],
 })
 export class SharedModule {}

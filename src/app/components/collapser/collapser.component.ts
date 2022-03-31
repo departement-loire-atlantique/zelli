@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-collapser',
@@ -6,11 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./collapser.component.less'],
 })
 export class CollapserComponent {
-  @Input()
-  dataTitle: string[] | undefined;
-
-  @Input()
-  dataVal: string[] | undefined;
-
   constructor() {}
 }
