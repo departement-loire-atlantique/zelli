@@ -13,6 +13,21 @@ const Template: Story<ThemeHeaderComponent> = (args: ThemeHeaderComponent) => ({
 
 export const Default = Template.bind({});
 Default.args = {
+  catTheme: {
+    id: '0',
+    icon: 'http://localhost:8080/zelli/upload/docs/image/png/2022-03/picto-demarches.png',
+    title: 'Title',
+    subTitle: 'Subtitle',
+    idContentTrieur: '0',
+    image: '',
+    order: 0,
+    smallTitle: '',
+    url: '',
+  },
+};
+
+export const Small = Template.bind({});
+Small.args = {
   big: false,
   catTheme: {
     id: '0',
