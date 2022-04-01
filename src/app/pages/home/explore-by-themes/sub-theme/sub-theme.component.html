@@ -1,5 +1,9 @@
 <header>
-  <app-back text="" picto="icon-arrow-left icon--xlarge" class="back-in-top"></app-back>
+  <app-back
+    text=""
+    picto="icon-arrow-left icon--xlarge"
+    class="back-in-top"
+  ></app-back>
   <app-theme-header [catTheme]="catTheme" [big]="false"></app-theme-header>
   <div *ngIf="subTheme" class="head-sub-theme">
     <h1>{{ subTheme.title }}</h1>
@@ -9,12 +13,19 @@
   </div>
 </header>
 <main *ngIf="subTheme">
-  <ul *ngIf="subTheme.contenu && subTheme.contenu.length > 0" class="ds44-list list-item-link contents">
+  <ul
+    *ngIf="subTheme.contenu && subTheme.contenu.length > 0"
+    class="ds44-list list-item-link contents"
+  >
     <li *ngFor="let itContent of subTheme.contenu">
       <a [routerLink]="buildUrlCotent(itContent)">
         <span>
-          <img *ngIf="getImgContent(itContent)" [src]="getImgContent(itContent)" aria-hidden="true" />
-          <span class="lbl-link">{{itContent.title}}</span>
+          <img
+            *ngIf="getImgContent(itContent)"
+            [src]="getImgContent(itContent)"
+            aria-hidden="true"
+          />
+          <span class="lbl-link">{{ itContent.title }}</span>
         </span>
         <i class="icon icon-arrow-right" aria-hidden="true"></i>
       </a>

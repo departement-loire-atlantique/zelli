@@ -18,10 +18,13 @@ export class VideoComponent implements OnInit {
   @Input()
   text: string | undefined;
 
+  isLoadingVideo = false;
+
   constructor(private _jcms: JcmsClientService) {}
 
   ngOnInit(): void {
     if (!this.video && this.id) {
+      this.isLoadingVideo = true;
       this._jcms
         .get<Video>('data/' + this.id)
         .subscribe((res: Video) => (this.video = res));
