@@ -1,6 +1,9 @@
 import { Location } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
+/**
+ * This component should be used to go back to the previous page.
+ */
 @Component({
   selector: 'app-back',
   templateUrl: './back.component.html',
@@ -30,6 +33,9 @@ export class BackComponent {
 
   constructor(private _location: Location) {}
 
+  /**
+   * @ignore
+   */
   back() {
     this._location.back();
   }

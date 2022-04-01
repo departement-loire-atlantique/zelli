@@ -11,6 +11,4 @@ export class CollapserComponent {
 
   @Input()
   dataVal: string[] | undefined;
-
-  constructor() {}
 }
