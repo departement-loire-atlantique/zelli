@@ -12,6 +12,8 @@ import { MainMenuComponent } from '@/app/components/main-menu/main-menu.componen
 import { PageTitleComponent } from '@/app/components/page-title/page-title.component';
 import { ThemeHeaderComponent } from '@/app/components/theme-header/theme-header.component';
 
+import { HiddenTextComponent } from './hidden-text/hidden-text.component';
+
 @NgModule({
   declarations: [
     MainMenuComponent,
@@ -23,6 +25,7 @@ import { ThemeHeaderComponent } from '@/app/components/theme-header/theme-header
     CarouselComponent,
     VideoComponent,
     CollapserComponent,
+    HiddenTextComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
