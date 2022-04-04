@@ -1,4 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 
 import { Carousel, CarouselElement } from '@/app/models/jcms/carousel';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
@@ -15,7 +22,7 @@ declare class CarouselStandard {}
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.less'],
 })
-export class CarouselComponent implements OnInit {
+export class CarouselComponent implements OnInit, AfterViewInit {
   @Input()
   carousel: Carousel | undefined;
 
@@ -26,6 +33,9 @@ export class CarouselComponent implements OnInit {
   text: string | undefined;
 
   elements: CarouselElement[] = [];
+
+  @ViewChildren('itemSwiper')
+  itemSwiper: QueryList<any> | undefined;
 
   constructor(private _jcms: JcmsClientService) {}
 
@@ -40,6 +50,12 @@ export class CarouselComponent implements OnInit {
     }
   }
 
+  ngAfterViewInit() {
+    this.itemSwiper?.changes.subscribe((_) => {
+      this.buildCarousel();
+    });
+  }
+
   private getFullElement() {
     if (!this.carousel || !this.carousel.elements1) {
       return;
@@ -51,9 +67,11 @@ export class CarouselComponent implements OnInit {
           // TODO service fix img link
           res.imageMobile = environment.urlJcms + res.imageMobile;
           this.elements.push(res);
-
-          new CarouselStandard();
         });
     }
+  }
+
+  public buildCarousel() {
+    new CarouselStandard();
   }
 }
