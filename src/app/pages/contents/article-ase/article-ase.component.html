@@ -3,40 +3,40 @@
   <div *ngIf="article" class="atu-title">{{ article.title }}</div>
   <div *ngIf="article" class="actu-nav">
     <span *ngIf="article.contenuPrecedent">
-      <a
-        [routerLink]="'/article/' + article.contenuPrecedent.id"
-        title="Contenu précédent"
-      >
+      <a [routerLink]="'/article/' + article.contenuPrecedent.id" title="Contenu précédent">
         <i class="icon icon-left icon--xlarge" aria-hidden="true"></i>
       </a>
     </span>
     <span *ngIf="article.contenuSuivant">
-      <a
-        [routerLink]="'/article/' + article.contenuSuivant.id"
-        title="Contenu suivant"
-      >
+      <a [routerLink]="'/article/' + article.contenuSuivant.id" title="Contenu suivant">
         <i class="icon icon-right icon--xlarge" aria-hidden="true"></i>
       </a>
     </span>
   </div>
 </header>
 <main *ngIf="article">
-  <div *ngIf="article.diaporama">
-    <app-carousel
-      *ngFor="let itCarousel of article.diaporama; index as i"
-      [id]="itCarousel.id"
-      [text]="article.diaporamaTexte ? article.diaporamaTexte[i] : undefined"
-    >
-    </app-carousel>
-  </div>
 
-  <div *ngIf="article.video">
-    <app-video
-      *ngFor="let itVideo of article.video; index as i"
-      [id]="itVideo.id"
-      [text]="article.videoTexte ? article.videoTexte[i] : undefined"
-    >
-    </app-video>
-  </div>
+  <section>
+    <div *ngIf="article.diaporama">
+      <app-carousel *ngFor="let itCarousel of article.diaporama; index as i" [id]="itCarousel.id"
+        [text]="article.diaporamaTexte ? article.diaporamaTexte[i] : undefined">
+      </app-carousel>
+    </div>
+
+    <div *ngIf="article.video">
+      <app-video *ngFor="let itVideo of article.video; index as i" [id]="itVideo.id"
+        [text]="article.videoTexte ? article.videoTexte[i] : undefined">
+      </app-video>
+    </div>
+  </section>
+
+  <i class="icon icon-arrow-down separator-icon" aria-hidden="true"></i>
+
+  <section *ngIf="article.motsCompliques" role="mots-compliques">
+    <h3><span aria-hidden="true">🤔</span>{{ lblMng.lblMotComp() }}</h3>
+    <app-collapser [dataTitle]="getMotCompliquesTitle()" [dataVal]="getMotCompliquesVar()"></app-collapser>
+  </section>
+
 </main>
+
 <app-has-helped *ngIf="article && article.affichagePageAAidee"></app-has-helped>
