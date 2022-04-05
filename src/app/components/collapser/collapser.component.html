@@ -10,7 +10,7 @@
       </button>
     </p>
     <div class="ds44-collapser_content">
-      <div *ngIf="dataVal && dataVal.length > i">{{ dataVal[i] }}</div>
+      <div *ngIf="dataVal && dataVal.length > i" [outerHTML]="dataVal[i]"></div>
     </div>
   </li>
 </ul>
