@@ -26,7 +26,7 @@ export class HiddenTextComponent implements OnInit {
   }
 
   onClick(event: Event): any {
-    const btn: HTMLInputElement = event.target as HTMLInputElement;
+    const btn: HTMLInputElement = event.currentTarget as HTMLInputElement;
 
     const lblBtn: HTMLInputElement = btn.querySelector(
       'SPAN'
