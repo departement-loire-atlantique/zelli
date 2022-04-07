@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ArticleASE } from 'src/app/models/jcms/articleASE';
+import { ArticleASE, LiensUtils } from 'src/app/models/jcms/articleASE';
 import { JcmsClientService } from 'src/app/services/jcms-client.service';
 
 import { FaqEntry } from '@/app/models/jcms/faqEntry';
@@ -13,6 +13,8 @@ import { LabelMngService } from '@/app/services/label-mng.service';
 })
 export class ArticleASEComponent implements OnInit {
   article: ArticleASE | undefined;
+
+  liensUtils: LiensUtils | undefined;
 
   constructor(
     private _route: ActivatedRoute,
@@ -46,6 +48,13 @@ export class ArticleASEComponent implements OnInit {
             });
         }
       }
+
+      //
+      this.liensUtils = new LiensUtils(
+        this.article.liensInternes,
+        this.article.liensExternes,
+        this.article.libelleLien
+      );
     }
   }
 

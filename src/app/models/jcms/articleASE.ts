@@ -67,4 +67,31 @@ export interface ArticleASE extends Content {
   navigation: string | undefined;
 }
 
-export class LiensUtils {}
+export class LiensUtils {
+  private _liensInternes: Content[];
+
+  private _liensExternes: string[];
+
+  private _libelleLien: string[];
+
+  liens: any;
+
+  constructor(
+    liensInternes: Content[] | undefined,
+    liensExternes: string[] | undefined,
+    libelleLien: string[] | undefined
+  ) {
+    this._liensInternes = liensInternes ? liensInternes : [];
+    this._liensExternes = liensExternes ? liensExternes : [];
+    this._libelleLien = libelleLien ? libelleLien : [];
+
+    const max = Math.max(
+      this._liensInternes.length,
+      this._liensExternes.length,
+      this._libelleLien.length
+    );
+
+    console.log(max);
+    // TODO
+  }
+}
