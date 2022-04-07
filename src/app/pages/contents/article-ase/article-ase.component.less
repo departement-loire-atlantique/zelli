@@ -1,4 +1,14 @@
-@import "/src/theme/importDep.less";
+@import '/src/theme/importDep.less';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  main {
+    flex: 1;
+  }
+}
 
 HEADER {
   display: flex;
@@ -18,7 +28,6 @@ HEADER {
   }
 
   .actu-nav {
-
     > * {
       padding-right: 20px;
 
