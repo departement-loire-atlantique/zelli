@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Subscription } from 'rxjs';
 
 import { Video } from '@/app/models/jcms/video';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
@@ -8,26 +10,48 @@ import { JcmsClientService } from '@/app/services/jcms-client.service';
   templateUrl: './video.component.html',
   styleUrls: ['./video.component.less'],
 })
-export class VideoComponent implements OnInit {
+export class VideoComponent implements OnInit, OnDestroy {
   @Input()
-  video: Video | undefined;
-
-  @Input()
-  id: string | undefined;
+  id?: string;
 
   @Input()
-  text: string | undefined;
+  text?: string;
 
-  isLoadingVideo = false;
+  video?: Video;
 
-  constructor(private _jcms: JcmsClientService) {}
+  isLoadingVideo!: boolean;
+
+  videoUrl?: SafeResourceUrl;
+
+  subscriptions?: Subscription;
+
+  constructor(
+    private _jcms: JcmsClientService,
+    private sanitizer: DomSanitizer
+  ) {}
 
   ngOnInit(): void {
     if (!this.video && this.id) {
       this.isLoadingVideo = true;
-      this._jcms
+      this.subscriptions = this._jcms
         .get<Video>('data/' + this.id)
-        .subscribe((res: Video) => (this.video = res));
+        .subscribe((res) => {
+          this.video = res;
+          this.updateVideoUrl();
+          this.isLoadingVideo = false;
+        });
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions?.unsubscribe();
+  }
+
+  updateVideoUrl(): void {
+    if (this.video?.urlVideo) {
+      this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+        this.video?.urlVideo
+      );
     }
   }
 }

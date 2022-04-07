@@ -1,3 +1,18 @@
-<video preload="auto" controls [poster]="video?.imagePrincipale">
-  <source [src]="video?.urlVideo" />
-</video>
+<iframe
+  width="100%"
+  class="o-player"
+  *ngIf="false && !isLoadingVideo && videoUrl"
+  [src]="videoUrl"
+  [title]="video?.title"
+  frameBorder="0"
+  allowfullscreen
+></iframe>
+
+<section
+  class="ds44-box ds44-bgGray"
+  *ngIf="true || (!isLoadingVideo && !videoUrl)"
+>
+  Un problème est survenu lors du chargement de la vidéo
+</section>
+
+<div *ngIf="isLoadingVideo && !videoUrl">Loading video</div>

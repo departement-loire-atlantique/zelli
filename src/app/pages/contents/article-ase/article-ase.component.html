@@ -30,7 +30,10 @@
     </app-carousel>
   </div>
 
-  <div *ngIf="article.video">
+  <div
+    *ngIf="article.video"
+    class="ds44-flex ds44-flex-container-column ds44-flex-align-center"
+  >
     <app-video
       *ngFor="let itVideo of article.video; index as i"
       [id]="itVideo.id"
