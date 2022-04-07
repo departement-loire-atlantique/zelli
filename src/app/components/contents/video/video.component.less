@@ -1,11 +1,25 @@
+@import '/src/theme/importDep';
+
 :host {
-  margin: 0 auto;
+  width: 100%;
 }
 
 .c-video {
+  padding-top: 1.5rem;
+
   &-player {
-    min-width: 20rem;
-    max-width: 120rem;
+    width: 100%;
+    background-color: transparent;
     min-height: 30rem;
+  }
+
+  &-loader {
+    height: 30rem;
+  }
+
+  &-error {
+    padding: 2rem;
+    background-color: @bg-error;
+    color: @error;
   }
 }

@@ -1,6 +1,5 @@
 <div class="c-video">
   <iframe
-    width="100%"
     class="c-video-player"
     *ngIf="!isLoadingVideo && videoUrl"
     [src]="videoUrl"
@@ -13,8 +12,12 @@
     class="c-video-error ds44-box ds44-bgGray"
     *ngIf="!isLoadingVideo && !videoUrl"
   >
-    Un problème est survenu lors du chargement de la vidéo
+    Un problème est survenu lors du chargement de la vidéo.
   </section>
 
-  <div *ngIf="isLoadingVideo && !videoUrl">Chargement de la vidéo</div>
+  <app-loader
+    class="c-video-loader"
+    *ngIf="isLoadingVideo && !videoUrl"
+    color="#0013b1"
+  ></app-loader>
 </div>
