@@ -17,7 +17,17 @@ export class CollapserComponent implements AfterViewInit {
   @Input()
   dataVal: string[] | undefined;
 
+  prefixId: string =
+    'collapser-' + Math.random().toString().replace('.', '') + '-';
+
   ngAfterViewInit(): void {
     new CollapserStandard();
+  }
+
+  dynamiqueAddInnerHTML(i: number, id: string) {
+    const div = document.querySelector('#' + id);
+    if (div) {
+      div.innerHTML = this.dataVal ? this.dataVal[i] : '';
+    }
   }
 }
