@@ -1,8 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Subscription } from 'rxjs';
+import { Subscription, map } from 'rxjs';
 
-import { Video } from '@/app/models/jcms/video';
+import { Video, VideoApi, mapVideoToUi } from '@/app/models/jcms/video';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 
 @Component({
@@ -19,9 +19,11 @@ export class VideoComponent implements OnInit, OnDestroy {
 
   video?: Video;
 
-  isLoadingVideo!: boolean;
+  isLoadingVideo = false;
+  isLoadingIframe = false;
 
   videoUrl?: SafeResourceUrl;
+  previewPictureUrl?: SafeResourceUrl;
 
   subscriptions?: Subscription;
 
@@ -33,11 +35,16 @@ export class VideoComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (!this.video && this.id) {
       this.isLoadingVideo = true;
+      this.isLoadingIframe = true;
       this.subscriptions = this._jcms
-        .get<Video>('data/' + this.id)
+        .get<VideoApi>('data/' + this.id)
+        .pipe(map((videoFromApi) => mapVideoToUi(videoFromApi)))
         .subscribe((res) => {
           this.video = res;
-          this.updateVideoUrl();
+          this.videoUrl = this.getSanitizedUrl(this.video.videoUrl);
+          this.previewPictureUrl = this.getSanitizedUrl(
+            this.video.previewPictureUrl
+          );
           this.isLoadingVideo = false;
         });
     }
@@ -47,11 +54,13 @@ export class VideoComponent implements OnInit, OnDestroy {
     this.subscriptions?.unsubscribe();
   }
 
-  updateVideoUrl(): void {
-    if (this.video?.urlVideo) {
-      this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-        this.video?.urlVideo
-      );
-    }
+  getSanitizedUrl(unsafeUrl?: string): SafeResourceUrl | undefined {
+    if (!unsafeUrl) return;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(unsafeUrl);
+  }
+
+  handleOnLoad(): void {
+    console.log('loaded');
+    this.isLoadingIframe = false;
   }
 }

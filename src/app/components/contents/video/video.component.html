@@ -2,11 +2,17 @@
   <iframe
     class="c-video-player"
     *ngIf="!isLoadingVideo && videoUrl"
+    [hidden]="isLoadingIframe"
+    (load)="handleOnLoad()"
     [src]="videoUrl"
     [title]="video?.title"
     frameBorder="0"
     allowfullscreen
   ></iframe>
+
+  <div *ngIf="!isLoadingVideo && isLoadingIframe">
+    <img [src]="previewPictureUrl" [alt]="video?.title" />
+  </div>
 
   <section
     class="c-video-error ds44-box ds44-bgGray"
