@@ -66,3 +66,5 @@ export interface ArticleASE extends Content {
    */
   navigation: string | undefined;
 }
+
+export class LiensUtils {}

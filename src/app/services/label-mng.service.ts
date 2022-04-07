@@ -18,6 +18,11 @@ export class LabelMngService {
       lbl: 'Les mots compliqués',
       propJcms: 'jcmsplugin.zelli.lbl.mots.compliques',
     },
+    {
+      id: 'lblLiensUtiles',
+      lbl: 'Les liens utiles',
+      propJcms: 'jcmsplugin.zelli.lbl.liens.utiles',
+    },
   ];
 
   constructor(private _jcms: JcmsClientService) {}
@@ -42,6 +47,10 @@ export class LabelMngService {
 
   public lblMotComp(): string {
     return this._lbls[1].lbl;
+  }
+
+  public lblLiensUtiles(): string {
+    return this._lbls[2].lbl;
   }
 }
 

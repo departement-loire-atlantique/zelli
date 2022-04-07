@@ -37,6 +37,11 @@
     <app-collapser [dataTitle]="getMotCompliquesTitle()" [dataVal]="getMotCompliquesVar()"></app-collapser>
   </section>
 
+  <section *ngIf="article.liensInternes || article.liensExternes" role="liens-utils">
+    <h3><span aria-hidden="true">🤔</span>{{ lblMng.lblLiensUtiles() }}</h3>
+    <div>WIP</div>
+  </section>
+
 </main>
 
 <app-has-helped *ngIf="article && article.affichagePageAAidee"></app-has-helped>
