@@ -1,18 +1,20 @@
-<iframe
-  width="100%"
-  class="o-player"
-  *ngIf="false && !isLoadingVideo && videoUrl"
-  [src]="videoUrl"
-  [title]="video?.title"
-  frameBorder="0"
-  allowfullscreen
-></iframe>
+<div class="c-video">
+  <iframe
+    width="100%"
+    class="c-video-player"
+    *ngIf="!isLoadingVideo && videoUrl"
+    [src]="videoUrl"
+    [title]="video?.title"
+    frameBorder="0"
+    allowfullscreen
+  ></iframe>
 
-<section
-  class="ds44-box ds44-bgGray"
-  *ngIf="true || (!isLoadingVideo && !videoUrl)"
->
-  Un problème est survenu lors du chargement de la vidéo
-</section>
+  <section
+    class="c-video-error ds44-box ds44-bgGray"
+    *ngIf="!isLoadingVideo && !videoUrl"
+  >
+    Un problème est survenu lors du chargement de la vidéo
+  </section>
 
-<div *ngIf="isLoadingVideo && !videoUrl">Loading video</div>
+  <div *ngIf="isLoadingVideo && !videoUrl">Chargement de la vidéo</div>
+</div>
