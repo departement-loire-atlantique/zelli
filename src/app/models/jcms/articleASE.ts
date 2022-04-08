@@ -74,7 +74,7 @@ export class LiensUtils {
 
   private _libelleLien: string[];
 
-  liens: any;
+  liens: { lbl: string; url: string }[];
 
   constructor(
     liensInternes: Content[] | undefined,
@@ -85,13 +85,37 @@ export class LiensUtils {
     this._liensExternes = liensExternes ? liensExternes : [];
     this._libelleLien = libelleLien ? libelleLien : [];
 
-    const max = Math.max(
+    const maxLength = Math.max(
       this._liensInternes.length,
       this._liensExternes.length,
       this._libelleLien.length
     );
 
-    console.log(max);
+    this.liens = [];
+    for (let i = 0; i < maxLength; i++) {
+      let lbl = '';
+      let url = '';
+
+      if (this._libelleLien.length > i) {
+        lbl = this._libelleLien[i];
+      }
+
+      if (this._liensExternes.length > i) {
+        url = this._liensExternes[i];
+        if (!lbl) {
+          lbl = url;
+        }
+      }
+
+      if (this._liensInternes.length > i && this._liensInternes[i]) {
+        url = '/article/' + this._liensInternes[i].id;
+        if (!lbl) {
+          lbl = this._liensInternes[i].title;
+        }
+      }
+
+      this.liens[i] = { lbl: lbl, url: url };
+    }
     // TODO
   }
 }

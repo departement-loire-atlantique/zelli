@@ -32,14 +32,23 @@
 
   <i class="icon icon-arrow-down separator-icon" aria-hidden="true"></i>
 
-  <section *ngIf="article.motsCompliques" role="mots-compliques">
+  <section *ngIf="article.motsCompliques" class="mots-compliques" role="mots-compliques">
     <h3><span aria-hidden="true">🤔</span>{{ lblMng.lblMotComp() }}</h3>
     <app-collapser [dataTitle]="getMotCompliquesTitle()" [dataVal]="getMotCompliquesVar()"></app-collapser>
   </section>
 
-  <section *ngIf="article.liensInternes || article.liensExternes" role="liens-utils">
-    <h3><span aria-hidden="true">🤔</span>{{ lblMng.lblLiensUtiles() }}</h3>
-    <div>WIP</div>
+  <section *ngIf="liensUtils && liensUtils.liens && liensUtils.liens.length > 0" class="liens-utils" role="liens-utils">
+    <h3><span aria-hidden="true">👇</span>{{ lblMng.lblLiensUtiles() }}</h3>
+    <ul class="ds44-list list-item-link contents">
+      <li *ngFor="let itLien of liensUtils.liens">
+        <a [href]="itLien.url" [title]="itLien.lbl" [target]="itLien.url.startsWith('/') ? '_self' : '_blank'">
+          <span>
+            {{ itLien.lbl }}
+          </span>
+          <i class="icon icon-arrow-right" aria-hidden="true"></i>
+        </a>
+      </li>
+    </ul>
   </section>
 
 </main>

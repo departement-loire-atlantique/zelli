@@ -49,7 +49,7 @@ export class ArticleASEComponent implements OnInit {
         }
       }
 
-      //
+      // liens utils
       this.liensUtils = new LiensUtils(
         this.article.liensInternes,
         this.article.liensExternes,
