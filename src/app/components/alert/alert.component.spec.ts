@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlertComponent } from '@/app/components/alert/alert.component';
 
-describe('BackComponent', () => {
+describe('AlertComponent', () => {
   let component: AlertComponent;
   let fixture: ComponentFixture<AlertComponent>;
 
@@ -19,6 +19,9 @@ describe('BackComponent', () => {
   });
 
   it('should create', () => {
+    component.description = 'This is a description';
+    fixture.detectChanges();
+
     expect(component).toBeTruthy();
   });
 });
