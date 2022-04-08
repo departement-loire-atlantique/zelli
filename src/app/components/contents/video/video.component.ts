@@ -25,7 +25,7 @@ export class VideoComponent implements OnInit, OnDestroy {
   videoUrl?: SafeResourceUrl;
   previewPictureUrl?: SafeResourceUrl;
 
-  subscriptions?: Subscription;
+  private subscriptions?: Subscription;
 
   constructor(
     private _jcms: JcmsClientService,
@@ -37,15 +37,21 @@ export class VideoComponent implements OnInit, OnDestroy {
       this.isLoadingVideo = true;
       this.isLoadingIframe = true;
       this.subscriptions = this._jcms
-        .get<VideoApi>('data/' + this.id)
+        .get<VideoApi>(`data/${this.id}`)
         .pipe(map((videoFromApi) => mapVideoToUi(videoFromApi)))
-        .subscribe((res) => {
-          this.video = res;
-          this.videoUrl = this.getSanitizedUrl(this.video.videoUrl);
-          this.previewPictureUrl = this.getSanitizedUrl(
-            this.video.previewPictureUrl
-          );
-          this.isLoadingVideo = false;
+        .subscribe({
+          next: (res) => {
+            this.video = res;
+            this.videoUrl = this.getSanitizedUrl(this.video.videoUrl);
+            this.previewPictureUrl = this.getSanitizedUrl(
+              this.video.previewPictureUrl
+            );
+            this.isLoadingVideo = false;
+          },
+          error: () => {
+            this.isLoadingVideo = false;
+            this.isLoadingIframe = false;
+          },
         });
     }
   }
@@ -54,13 +60,12 @@ export class VideoComponent implements OnInit, OnDestroy {
     this.subscriptions?.unsubscribe();
   }
 
-  getSanitizedUrl(unsafeUrl?: string): SafeResourceUrl | undefined {
+  private getSanitizedUrl(unsafeUrl?: string): SafeResourceUrl | undefined {
     if (!unsafeUrl) return;
     return this.sanitizer.bypassSecurityTrustResourceUrl(unsafeUrl);
   }
 
   handleOnLoad(): void {
-    console.log('loaded');
     this.isLoadingIframe = false;
   }
 }
