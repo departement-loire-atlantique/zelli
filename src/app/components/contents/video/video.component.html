@@ -14,12 +14,11 @@
     <img [src]="previewPictureUrl" [alt]="video?.title" />
   </div>
 
-  <section
-    class="c-video-error ds44-box ds44-bgGray"
+  <app-alert
     *ngIf="!isLoadingVideo && !videoUrl"
-  >
-    Un problème est survenu lors du chargement de la vidéo.
-  </section>
+    status="error"
+    description="Un problème est survenu lors du chargement de la vidéo."
+  ></app-alert>
 
   <app-loader
     class="c-video-loader"
