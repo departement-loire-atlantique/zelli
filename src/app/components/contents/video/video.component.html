@@ -1,1 +1,29 @@
-<p>video works!</p>
+<div class="c-video">
+  <iframe
+    class="c-video-player"
+    *ngIf="!isLoadingVideo && videoUrl"
+    [hidden]="isLoadingIframe"
+    (load)="handleOnLoad()"
+    [src]="videoUrl"
+    [title]="video?.title"
+    frameBorder="0"
+    allowfullscreen
+  ></iframe>
+
+  <div *ngIf="!isLoadingVideo && isLoadingIframe">
+    <img [src]="previewPictureUrl" [alt]="video?.title" />
+  </div>
+
+  <section
+    class="c-video-error ds44-box ds44-bgGray"
+    *ngIf="!isLoadingVideo && !videoUrl"
+  >
+    Un problème est survenu lors du chargement de la vidéo.
+  </section>
+
+  <app-loader
+    class="c-video-loader"
+    *ngIf="isLoadingVideo && !videoUrl"
+    color="#0013b1"
+  ></app-loader>
+</div>

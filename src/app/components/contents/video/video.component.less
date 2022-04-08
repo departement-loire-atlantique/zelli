@@ -1,0 +1,25 @@
+@import '/src/theme/importDep';
+
+:host {
+  width: 100%;
+}
+
+.c-video {
+  padding-top: 1.5rem;
+
+  &-player {
+    width: 100%;
+    background-color: transparent;
+    min-height: 30rem;
+  }
+
+  &-loader {
+    height: 30rem;
+  }
+
+  &-error {
+    padding: 2rem;
+    background-color: @bg-error;
+    color: @error;
+  }
+}

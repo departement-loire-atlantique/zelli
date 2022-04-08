@@ -1,5 +1,9 @@
 <header>
-  <app-back text="" picto="icon-arrow-left icon--xlarge" class="back-in-top"></app-back>
+  <app-back
+    text=""
+    picto="icon-arrow-left icon--xlarge"
+    class="back-in-top"
+  ></app-back>
   <app-theme-header [catTheme]="curentCat"></app-theme-header>
 </header>
 <main>
@@ -12,6 +16,10 @@
     </li>
   </ul>
   <div *ngIf="curentCat && curentCat.idContentTrieur">
-    <a class="btn btn-big" [routerLink]="'/keepDoc/' + curentCat.idContentTrieur">{{lblMng.lblDocTrieur}}</a>
+    <a
+      class="btn btn-big"
+      [routerLink]="'/keepDoc/' + curentCat.idContentTrieur"
+      >{{ lblMng.lblDocTrieur }}</a
+    >
   </div>
 </main>
