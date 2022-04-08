@@ -1,0 +1,13 @@
+<div class="ds44-collapser_element">
+  <button class="btn btn-light btn-big ds44-collapser_button" (click)="onClick($event)">
+    <span>
+      {{ btnLbl }}
+    </span>
+  </button>
+  <div class="text-hidden ds44-collapser_content" aria-hidden="true">
+    <div class="text-from-serv">
+      <div [outerHTML]="text">
+      </div>
+    </div>
+  </div>
+</div>
