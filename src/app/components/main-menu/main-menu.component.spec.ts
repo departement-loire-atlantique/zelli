@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
+
+import { CatsHomeMngService } from '@/app/services/cats-home-mng.service';
 
 import { MainMenuComponent } from './main-menu.component';
 
@@ -8,9 +11,28 @@ describe('MainMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MainMenuComponent ]
-    })
-    .compileComponents();
+      declarations: [MainMenuComponent],
+      providers: [
+        {
+          provide: Router,
+          useValue: {
+            url: '',
+          },
+        },
+        {
+          provide: CatsHomeMngService,
+          useValue: {
+            getCats: () => [
+              {
+                url: '/',
+                icon: 'icon',
+                smallTitle: 'Small title',
+              },
+            ],
+          },
+        },
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {
