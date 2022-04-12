@@ -6,6 +6,7 @@
     "ng": "ng",
     "start": "ng serve -c",
     "dev": "ng serve -c development-jcms",
+    "dev-R7": "ng serve -c development-jcms-R7",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
