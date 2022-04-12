@@ -1,5 +1,6 @@
 <div *ngIf="curentCat" class="page-title">
-  <div class="page-icon">
+  <img class="img-page-head-bg" *ngIf="curentCat.image" [src]="curentCat.image" aria-hidden="true"/>
+  <div class="page-icon"  aria-hidden="true">
     <i [class]="'icon ' + curentCat.icon"></i>
   </div>
   <h1>{{ curentCat.title }}</h1>
