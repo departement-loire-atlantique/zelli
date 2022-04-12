@@ -1,0 +1,42 @@
+@import "/src/theme/importDep.less";
+
+UL.list-item-link.contents {
+  padding: 18px;
+
+  LI {
+    display: inline-block;
+    width: 100%;
+    padding: 20px 0;
+    border-bottom: 1px solid @grey;
+
+    SPAN {
+      font-size: 23px;
+      font-weight: bold;
+
+      IMG {
+        max-width: 50px;
+      }
+      .lbl-link {
+        padding-left: 15px;
+      }
+    }
+
+    A {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      text-decoration: none;
+
+      > SPAN {
+        flex: 1;
+        color: @blue-grey;
+        font-size: 21px;
+      }
+
+      I {
+        color: @blue;
+      }
+    }
+  }
+}

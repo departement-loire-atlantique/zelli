@@ -1,0 +1,22 @@
+<ul *ngIf="items && items.length > 0" class="ds44-list list-item-link contents">
+  <li *ngFor="let itItem of items">
+
+    <ng-template #content>
+      <span>
+        <img *ngIf="itItem.img" [src]="itItem.img" aria-hidden="true" />
+        <span class="lbl-link">{{ itItem.lbl }}</span>
+      </span>
+    </ng-template>
+
+    <a *ngIf="itItem.url" [href]="itItem.url" [title]="itItem.lbl"
+      [target]="itItem.url.startsWith('/') ? '_self' : '_blank'">
+      <ng-container *ngIf="false; else content"></ng-container>
+      <i class="icon icon-arrow-right" aria-hidden="true"></i>
+    </a>
+
+    <ng-container *ngIf="itItem.url; else content"></ng-container>
+
+  </li>
+</ul>
+
+<ng-container></ng-container>
