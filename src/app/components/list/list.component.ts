@@ -16,7 +16,7 @@ export class ListComponent {
 
   constructor() {}
 
-  public isInterLink(url: string): boolean {
+  public isInternLink(url: string): boolean {
     return ListComponent.regInternLink.test(url);
   }
 }
