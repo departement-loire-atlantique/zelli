@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ArticleASE, LiensUtils } from 'src/app/models/jcms/articleASE';
 import { JcmsClientService } from 'src/app/services/jcms-client.service';
 
+import { Item } from '@/app/components/list/list.component';
 import { FaqEntry } from '@/app/models/jcms/faqEntry';
 import { LabelMngService } from '@/app/services/label-mng.service';
 
@@ -68,5 +69,18 @@ export class ArticleASEComponent implements OnInit {
     return this.article?.motsCompliques?.map(
       (itFaqEntry: FaqEntry) => itFaqEntry.answer
     );
+  }
+
+  public getItemForLiensUtiles(): Item[] {
+    let item: Item[] = [];
+    if (this.liensUtils) {
+      for (let itLien of this.liensUtils.liens) {
+        item.push({
+          lbl: itLien.lbl,
+          url: itLien.url,
+        });
+      }
+    }
+    return item;
   }
 }

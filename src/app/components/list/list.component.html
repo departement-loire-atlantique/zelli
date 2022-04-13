@@ -1,4 +1,4 @@
-<ul *ngIf="items && items.length > 0" class="ds44-list list-item-link contents">
+<ul *ngIf="items && items.length > 0" [class]="'ds44-list ' + (cssClass ? cssClass : '')">
   <li *ngFor="let itItem of items">
 
     <ng-template #content>

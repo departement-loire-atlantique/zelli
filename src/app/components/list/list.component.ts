@@ -11,6 +11,9 @@ export class ListComponent {
   @Input()
   items: Item[] | undefined;
 
+  @Input()
+  cssClass: string | undefined;
+
   constructor() {}
 
   public isInterLink(url: string): boolean {

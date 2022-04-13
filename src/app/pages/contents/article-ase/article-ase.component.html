@@ -45,16 +45,9 @@
 
   <section *ngIf="liensUtils && liensUtils.liens && liensUtils.liens.length > 0" class="liens-utils" role="liens-utils">
     <h3><span aria-hidden="true">👇</span>{{ lblMng.lblLiensUtiles() }}</h3>
-    <ul class="ds44-list list-item-link contents">
-      <li *ngFor="let itLien of liensUtils.liens">
-        <a [href]="itLien.url" [title]="itLien.lbl" [target]="itLien.url.startsWith('/') ? '_self' : '_blank'">
-          <span>
-            {{ itLien.lbl }}
-          </span>
-          <i class="icon icon-arrow-right" aria-hidden="true"></i>
-        </a>
-      </li>
-    </ul>
+
+    <app-list [items]="getItemForLiensUtiles()" cssClass="in-tuile"></app-list>
+    
   </section>
 
 </main>
