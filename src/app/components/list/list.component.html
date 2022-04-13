@@ -8,8 +8,11 @@
       </span>
     </ng-template>
 
-    <a *ngIf="itItem.url" [href]="itItem.url" [title]="itItem.lbl"
-      [target]="itItem.url.startsWith('/') ? '_self' : '_blank'">
+    <a *ngIf="itItem.url" 
+      [attr.href]="isInterLink(itItem.url) ? null : itItem.url"
+      [routerLink]="isInterLink(itItem.url) ? itItem.url : null" 
+      [title]="itItem.lbl"
+      [target]="isInterLink(itItem.url) ? '_self' : '_blank'">
       <ng-container *ngIf="false; else content"></ng-container>
       <i class="icon icon-arrow-right" aria-hidden="true"></i>
     </a>

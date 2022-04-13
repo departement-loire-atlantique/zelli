@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-list',
@@ -6,13 +6,19 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./list.component.less'],
 })
 export class ListComponent {
+  static regInternLink: RegExp = /^(\/|\.\/)/;
+
   @Input()
-  items: item[] | undefined;
+  items: Item[] | undefined;
 
   constructor() {}
+
+  public isInterLink(url: string): boolean {
+    return ListComponent.regInternLink.test(url);
+  }
 }
 
-export interface item {
+export interface Item {
   lbl: string;
   url?: string;
   img?: string;
