@@ -65,3 +65,25 @@ Link.args = {
     },
   ],
 };
+
+export const Long = Template.bind({});
+Long.args = {
+  items: [
+    {
+      lbl: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    },
+    {
+      lbl: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      url: 'http://google.fr',
+    },
+    {
+      lbl: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      img: '/assets/icons/icon-72x72.png',
+    },
+    {
+      lbl: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      url: 'http://google.fr',
+      img: '/assets/icons/icon-72x72.png',
+    },
+  ],
+};
