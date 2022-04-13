@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
 
+import { Item } from '@/app/components/list/list.component';
 import { ArticleASE } from '@/app/models/jcms/articleASE';
 import { Category } from '@/app/models/jcms/category';
 import { Content } from '@/app/models/jcms/content';
@@ -91,5 +92,19 @@ export class SubThemeComponent {
       return '/TODO/' + content.id;
     }
     return '';
+  }
+
+  public getItemForList(): Item[] {
+    let item: Item[] = [];
+    if (this.subTheme && this.subTheme.contenu) {
+      for (let itContent of this.subTheme.contenu) {
+        item.push({
+          lbl: itContent.title,
+          url: this.buildUrlCotent(itContent),
+          img: this.getImgContent(itContent),
+        });
+      }
+    }
+    return item;
   }
 }
