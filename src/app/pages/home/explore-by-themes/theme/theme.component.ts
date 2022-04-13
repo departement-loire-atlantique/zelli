@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { Item } from '@/app/components/list/list.component';
 import { Category } from '@/app/models/jcms/category';
 import { CatsMngService } from '@/app/services/cats-mng.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
@@ -29,7 +30,16 @@ export class ThemeComponent {
     this._catMng.catsChildren(id).subscribe((cats) => (this.subThemes = cats));
   }
 
-  public get route(): ActivatedRoute {
-    return this._route;
+  public getItemForList(): Item[] {
+    let item: Item[] = [];
+    if (this.subThemes) {
+      for (let itSubT of this.subThemes) {
+        item.push({
+          lbl: itSubT.title,
+          url: './' + itSubT.id,
+        });
+      }
+    }
+    return item;
   }
 }
