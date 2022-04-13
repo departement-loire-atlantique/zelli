@@ -8,14 +8,21 @@
       </span>
     </ng-template>
 
-    <a *ngIf="itItem.url" 
-      [attr.href]="isInternLink(itItem.url) ? null : itItem.url"
-      [routerLink]="isInternLink(itItem.url) ? itItem.url : null" 
-      [title]="itItem.lbl"
-      [target]="isInternLink(itItem.url) ? '_self' : '_blank'">
-      <ng-container *ngIf="false; else content"></ng-container>
-      <i class="icon icon-arrow-right" aria-hidden="true"></i>
-    </a>
+    <ng-container *ngIf="itItem.url">
+      <ng-template #externLink>
+        <a *ngIf="itItem.url" [href]="itItem.url" target="_blank">
+          <ng-container *ngIf="false; else content"></ng-container>
+          <i class="icon icon-arrow-right" aria-hidden="true"></i>
+        </a>
+      </ng-template>
+
+      <ng-container *ngIf="isInternLink(itItem.url); else externLink">
+        <a *ngIf="itItem.url" [routerLink]="itItem.url">
+          <ng-container *ngIf="false; else content"></ng-container>
+          <i class="icon icon-arrow-right" aria-hidden="true"></i>
+        </a>
+      </ng-container>
+    </ng-container>
 
     <ng-container *ngIf="itItem.url; else content"></ng-container>
 
