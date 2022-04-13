@@ -2,7 +2,7 @@
   <li *ngFor="let itItem of items">
 
     <ng-template #content>
-      <span>
+      <span class="lbl-link-wrapper">
         <img *ngIf="itItem.img" [src]="itItem.img" aria-hidden="true" />
         <span class="lbl-link">{{ itItem.lbl }}</span>
       </span>

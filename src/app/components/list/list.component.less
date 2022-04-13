@@ -9,18 +9,25 @@ UL.list-item-link.contents {
     padding: 20px 0;
     border-bottom: 1px solid @grey;
 
-    SPAN {
+    .lbl-link-wrapper {
+      display: flex;
       font-size: 23px;
       font-weight: bold;
 
       IMG {
         max-width: 50px;
+        height: 100%;
+
+        + .lbl-link {
+          padding-left: 15px;
+        }
       }
       .lbl-link {
-        padding-left: 15px;
+        flex: 1;
       }
     }
 
+    // Si lien
     A {
       display: flex;
       justify-content: space-between;
@@ -28,10 +35,13 @@ UL.list-item-link.contents {
 
       text-decoration: none;
 
-      > SPAN {
+      .lbl-link-wrapper {
         flex: 1;
         color: @blue-grey;
-        font-size: 21px;
+
+        .lbl-link {
+          padding-right: 15px;
+        }
       }
 
       I {
