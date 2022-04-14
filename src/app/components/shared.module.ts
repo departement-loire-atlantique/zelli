@@ -44,6 +44,7 @@ import { ListComponent } from './list/list.component';
     CollapserComponent,
     AlertComponent,
     ListComponent,
+    HiddenTextComponent,
   ],
 })
 export class SharedModule {}
