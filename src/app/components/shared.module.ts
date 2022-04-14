@@ -11,6 +11,7 @@ import { HasHelpedComponent } from '@/app/components/has-helped/has-helped.compo
 import { LoaderComponent } from '@/app/components/loader/loader.component';
 import { MainMenuComponent } from '@/app/components/main-menu/main-menu.component';
 import { PageTitleComponent } from '@/app/components/page-title/page-title.component';
+import { PaginationComponent } from '@/app/components/pagination/pagination.component';
 import { ThemeHeaderComponent } from '@/app/components/theme-header/theme-header.component';
 
 import { HiddenTextComponent } from './hidden-text/hidden-text.component';
@@ -30,6 +31,7 @@ import { ListComponent } from './list/list.component';
     AlertComponent,
     HiddenTextComponent,
     ListComponent,
+    PaginationComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -45,6 +47,7 @@ import { ListComponent } from './list/list.component';
     AlertComponent,
     ListComponent,
     HiddenTextComponent,
+    PaginationComponent,
   ],
 })
 export class SharedModule {}
