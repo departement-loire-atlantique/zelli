@@ -44,29 +44,41 @@
     </div>
   </section>
 
-  <i class="icon icon-arrow-down separator-icon" aria-hidden="true"></i>
+  <span class="icon icon-arrow-down separator-icon" aria-hidden="true"></span>
 
-  <section
-    *ngIf="article.motsCompliques"
-    class="mots-compliques"
-    role="mots-compliques"
-  >
-    <h3><span aria-hidden="true">🤔</span>{{ lblMng.lblMotComp() }}</h3>
-    <app-collapser
-      [dataTitle]="getMotCompliquesTitle()"
-      [dataVal]="getMotCompliquesVar()"
-    ></app-collapser>
-  </section>
+  <div class="secondary-content">
+    <section
+      *ngIf="article.motsCompliques"
+      class="mots-compliques"
+      role="mots-compliques"
+    >
+      <app-heading icon="🤔">
+        {{ lblMng.lblMotComp() }}
+      </app-heading>
 
-  <section
-    *ngIf="liensUtils && liensUtils.liens && liensUtils.liens.length > 0"
-    class="liens-utils"
-    role="liens-utils"
-  >
-    <h3><span aria-hidden="true">👇</span>{{ lblMng.lblLiensUtiles() }}</h3>
+      <app-collapser
+        [dataTitle]="getMotCompliquesTitle()"
+        [dataVal]="getMotCompliquesVar()"
+      ></app-collapser>
+    </section>
 
-    <app-list [items]="getItemForLiensUtiles()" cssClass="in-tuile"></app-list>
-  </section>
+    <section
+      *ngIf="liensUtils && liensUtils.liens && liensUtils.liens.length > 0"
+      class="liens-utils"
+      role="liens-utils"
+    >
+      <app-heading icon="👇">
+        {{ lblMng.lblLiensUtiles() }}
+      </app-heading>
+
+      <app-list
+        [items]="getItemForLiensUtiles()"
+        cssClass="in-tuile"
+      ></app-list>
+    </section>
+
+    <app-contact> WIP </app-contact>
+  </div>
 </main>
 
 <app-has-helped *ngIf="article && article.affichagePageAAidee"></app-has-helped>

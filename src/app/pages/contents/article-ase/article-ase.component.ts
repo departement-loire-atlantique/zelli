@@ -37,6 +37,7 @@ export class ArticleASEComponent implements OnInit {
 
   private getAllContent(): any {
     if (this.article) {
+      console.log({ article: this.article });
       // Mot compliqués
       if (this.article.motsCompliques) {
         for (let i = 0; i < this.article.motsCompliques.length; i++) {
