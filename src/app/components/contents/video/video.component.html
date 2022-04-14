@@ -10,10 +10,6 @@
     allowfullscreen
   ></iframe>
 
-  <div *ngIf="!isLoadingVideo && isLoadingIframe">
-    <img [src]="previewPictureUrl" [alt]="video?.title" />
-  </div>
-
   <app-alert
     *ngIf="!isLoadingVideo && !videoUrl"
     status="error"
@@ -22,7 +18,7 @@
 
   <app-loader
     class="c-video-loader"
-    *ngIf="isLoadingVideo && !videoUrl"
+    *ngIf="isLoadingIframe || isLoadingVideo"
     color="#0013b1"
   ></app-loader>
 </div>
