@@ -1,11 +1,26 @@
-@import "/src/theme/importDep.less";
+@import '/src/theme/importDep.less';
+
+.c-carousel {
+  position: relative;
+
+  &__pagination {
+    z-index: 1;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+  }
+}
 
 .swipper-carousel-wrap .swiper-container {
   padding: unset;
 }
 
-.ds44-card{
+.ds44-card {
   background-color: @white;
+  position: relative;
+
   &:hover {
     box-shadow: none;
   }

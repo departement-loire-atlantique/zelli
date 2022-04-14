@@ -1,18 +1,33 @@
-<div *ngIf="carousel" class="">
-  <div class="mod--hidden ds44-list swipper-carousel-wrap ds44-posRel" data-nb-visible-slides="1"
-    [attr.data-swiper-title]="carousel.titre">
+<div *ngIf="carousel" class="c-carousel">
+  <div
+    class="mod--hidden ds44-list swipper-carousel-wrap ds44-posRel"
+    data-nb-visible-slides="1"
+    [attr.data-swiper-title]="carousel.titre"
+  >
     <div class="swiper-container">
-      <ul class="swiper-wrapper ds44-list grid-1-small-1 has-gutter-l ds44-carousel-swiper">
+      <ul
+        class="swiper-wrapper ds44-list grid-1-small-1 has-gutter-l ds44-carousel-swiper"
+      >
         <li #itemSwiper *ngFor="let item of elements" class="swiper-slide">
           <section class="ds44-card ds44-js-card ds44-card--verticalPicture">
             <picture class="ds44-container-imgRatio">
-              <img [src]="item.imageMobile" [alt]="item.title" class="ds44-imgRatio" />
+              <img
+                [src]="item.imageMobile"
+                [alt]="item.title"
+                class="ds44-imgRatio"
+              />
             </picture>
           </section>
         </li>
       </ul>
     </div>
   </div>
+
+  <app-pagination
+    class="c-carousel__pagination"
+    [currentPage]="1"
+    [totalPage]="elements.length"
+  ></app-pagination>
 </div>
 
 <div class="carrousel-text">
