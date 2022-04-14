@@ -8,6 +8,7 @@ import { CollapserComponent } from '@/app/components/collapser/collapser.compone
 import { CarouselComponent } from '@/app/components/contents/carousel/carousel.component';
 import { VideoComponent } from '@/app/components/contents/video/video.component';
 import { HasHelpedComponent } from '@/app/components/has-helped/has-helped.component';
+import { HeadingComponent } from '@/app/components/heading/heading.component';
 import { LoaderComponent } from '@/app/components/loader/loader.component';
 import { MainMenuComponent } from '@/app/components/main-menu/main-menu.component';
 import { PageTitleComponent } from '@/app/components/page-title/page-title.component';
@@ -32,6 +33,7 @@ import { ListComponent } from './list/list.component';
     HiddenTextComponent,
     ListComponent,
     PaginationComponent,
+    HeadingComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -48,6 +50,7 @@ import { ListComponent } from './list/list.component';
     ListComponent,
     HiddenTextComponent,
     PaginationComponent,
+    HeadingComponent,
   ],
 })
 export class SharedModule {}
