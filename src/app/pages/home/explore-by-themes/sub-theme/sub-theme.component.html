@@ -13,23 +13,8 @@
   </div>
 </header>
 <main *ngIf="subTheme">
-  <ul
-    *ngIf="subTheme.contenu && subTheme.contenu.length > 0"
-    class="ds44-list list-item-link contents"
-  >
-    <li *ngFor="let itContent of subTheme.contenu">
-      <a [routerLink]="buildUrlCotent(itContent)">
-        <span>
-          <img
-            *ngIf="getImgContent(itContent)"
-            [src]="getImgContent(itContent)"
-            aria-hidden="true"
-          />
-          <span class="lbl-link">{{ itContent.title }}</span>
-        </span>
-        <i class="icon icon-arrow-right" aria-hidden="true"></i>
-      </a>
-    </li>
-  </ul>
+  
+  <app-list [items]="getItemForList()"></app-list>
+
   <app-has-helped *ngIf="subTheme.affichagePageAAidee"></app-has-helped>
 </main>

@@ -1,0 +1,69 @@
+@import "/src/theme/importDep.less";
+
+UL {
+  padding: 18px;
+
+  LI {
+    display: inline-block;
+    width: 100%;
+    padding: 20px 0;
+    border-bottom: 1px solid @grey;
+
+    .lbl-link-wrapper {
+      display: flex;
+      font-size: 23px;
+      font-weight: bold;
+
+      IMG {
+        max-width: 50px;
+        height: 100%;
+
+        + .lbl-link {
+          padding-left: 15px;
+        }
+      }
+      .lbl-link {
+        flex: 1;
+      }
+    }
+
+    // Si lien
+    A {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      text-decoration: none;
+
+      .lbl-link-wrapper {
+        flex: 1;
+        color: @blue-grey;
+
+        .lbl-link {
+          padding-right: 15px;
+        }
+      }
+
+      I {
+        color: @blue;
+      }
+    }
+  }
+}
+
+UL.in-tuile {
+  padding: 0 18px;
+  font-size: 21px;
+  color: @blue-dark;
+
+  LI {
+    border-bottom: none;
+    padding: 0;
+    padding-top: 20px;
+
+    .lbl-link-wrapper {
+      font-weight: 400;
+    }
+    
+  }
+}

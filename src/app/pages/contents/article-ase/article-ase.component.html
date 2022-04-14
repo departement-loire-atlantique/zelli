@@ -3,23 +3,31 @@
   <div *ngIf="article" class="atu-title">{{ article.title }}</div>
   <div *ngIf="article" class="actu-nav">
     <span *ngIf="article.contenuPrecedent">
-      <a [routerLink]="'/article/' + article.contenuPrecedent.id" title="Contenu précédent">
+      <a
+        [routerLink]="'/article/' + article.contenuPrecedent.id"
+        title="Contenu précédent"
+      >
         <i class="icon icon-left icon--xlarge" aria-hidden="true"></i>
       </a>
     </span>
     <span *ngIf="article.contenuSuivant">
-      <a [routerLink]="'/article/' + article.contenuSuivant.id" title="Contenu suivant">
+      <a
+        [routerLink]="'/article/' + article.contenuSuivant.id"
+        title="Contenu suivant"
+      >
         <i class="icon icon-right icon--xlarge" aria-hidden="true"></i>
       </a>
     </span>
   </div>
 </header>
 <main *ngIf="article">
-
   <section>
     <div *ngIf="article.diaporama">
-      <app-carousel *ngFor="let itCarousel of article.diaporama; index as i" [id]="itCarousel.id"
-        [text]="article.diaporamaTexte ? article.diaporamaTexte[i] : undefined">
+      <app-carousel
+        *ngFor="let itCarousel of article.diaporama; index as i"
+        [id]="itCarousel.id"
+        [text]="article.diaporamaTexte ? article.diaporamaTexte[i] : undefined"
+      >
       </app-carousel>
     </div>
 
@@ -38,25 +46,27 @@
 
   <i class="icon icon-arrow-down separator-icon" aria-hidden="true"></i>
 
-  <section *ngIf="article.motsCompliques" class="mots-compliques" role="mots-compliques">
+  <section
+    *ngIf="article.motsCompliques"
+    class="mots-compliques"
+    role="mots-compliques"
+  >
     <h3><span aria-hidden="true">🤔</span>{{ lblMng.lblMotComp() }}</h3>
-    <app-collapser [dataTitle]="getMotCompliquesTitle()" [dataVal]="getMotCompliquesVar()"></app-collapser>
+    <app-collapser
+      [dataTitle]="getMotCompliquesTitle()"
+      [dataVal]="getMotCompliquesVar()"
+    ></app-collapser>
   </section>
 
-  <section *ngIf="liensUtils && liensUtils.liens && liensUtils.liens.length > 0" class="liens-utils" role="liens-utils">
+  <section
+    *ngIf="liensUtils && liensUtils.liens && liensUtils.liens.length > 0"
+    class="liens-utils"
+    role="liens-utils"
+  >
     <h3><span aria-hidden="true">👇</span>{{ lblMng.lblLiensUtiles() }}</h3>
-    <ul class="ds44-list list-item-link contents">
-      <li *ngFor="let itLien of liensUtils.liens">
-        <a [href]="itLien.url" [title]="itLien.lbl" [target]="itLien.url.startsWith('/') ? '_self' : '_blank'">
-          <span>
-            {{ itLien.lbl }}
-          </span>
-          <i class="icon icon-arrow-right" aria-hidden="true"></i>
-        </a>
-      </li>
-    </ul>
-  </section>
 
+    <app-list [items]="getItemForLiensUtiles()" cssClass="in-tuile"></app-list>
+  </section>
 </main>
 
 <app-has-helped *ngIf="article && article.affichagePageAAidee"></app-has-helped>

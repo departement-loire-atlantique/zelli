@@ -1,0 +1,30 @@
+<ul *ngIf="items && items.length > 0" [class]="'ds44-list ' + (cssClass ? cssClass : '')">
+  <li *ngFor="let itItem of items">
+
+    <ng-template #content>
+      <span class="lbl-link-wrapper">
+        <img *ngIf="itItem.img" [src]="itItem.img" aria-hidden="true" />
+        <span class="lbl-link">{{ itItem.lbl }}</span>
+      </span>
+    </ng-template>
+
+    <ng-container *ngIf="itItem.url">
+      <ng-template #externLink>
+        <a *ngIf="itItem.url" [href]="itItem.url" target="_blank">
+          <ng-container *ngIf="false; else content"></ng-container>
+          <i class="icon icon-arrow-right" aria-hidden="true"></i>
+        </a>
+      </ng-template>
+
+      <ng-container *ngIf="isInternLink(itItem.url); else externLink">
+        <a *ngIf="itItem.url" [routerLink]="itItem.url">
+          <ng-container *ngIf="false; else content"></ng-container>
+          <i class="icon icon-arrow-right" aria-hidden="true"></i>
+        </a>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="itItem.url; else content"></ng-container>
+
+  </li>
+</ul>

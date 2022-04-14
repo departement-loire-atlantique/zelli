@@ -14,6 +14,7 @@ import { PageTitleComponent } from '@/app/components/page-title/page-title.compo
 import { ThemeHeaderComponent } from '@/app/components/theme-header/theme-header.component';
 
 import { HiddenTextComponent } from './hidden-text/hidden-text.component';
+import { ListComponent } from './list/list.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { HiddenTextComponent } from './hidden-text/hidden-text.component';
     CollapserComponent,
     AlertComponent,
     HiddenTextComponent,
+    ListComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -41,6 +43,8 @@ import { HiddenTextComponent } from './hidden-text/hidden-text.component';
     VideoComponent,
     CollapserComponent,
     AlertComponent,
+    ListComponent,
+    HiddenTextComponent,
   ],
 })
 export class SharedModule {}
