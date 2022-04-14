@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { AlertComponent } from '@/app/components/alert/alert.component';
 import { BackComponent } from '@/app/components/back/back.component';
 import { CollapserComponent } from '@/app/components/collapser/collapser.component';
+import { ContactComponent } from '@/app/components/contact/contact.component';
 import { CarouselComponent } from '@/app/components/contents/carousel/carousel.component';
 import { VideoComponent } from '@/app/components/contents/video/video.component';
 import { HasHelpedComponent } from '@/app/components/has-helped/has-helped.component';
@@ -34,6 +35,7 @@ import { ListComponent } from './list/list.component';
     ListComponent,
     PaginationComponent,
     HeadingComponent,
+    ContactComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -50,6 +52,7 @@ import { ListComponent } from './list/list.component';
     ListComponent,
     HiddenTextComponent,
     PaginationComponent,
+    ContactComponent,
     HeadingComponent,
   ],
 })
