@@ -1,4 +1,4 @@
-@import "/src/theme/importDep.less";
+@import '/src/theme/importDep.less';
 
 UL {
   padding: 18px;
@@ -6,11 +6,12 @@ UL {
   LI {
     display: inline-block;
     width: 100%;
-    padding: 20px 0;
     border-bottom: 1px solid @grey;
 
     .lbl-link-wrapper {
+      padding: 20px 0;
       display: flex;
+      align-items: center;
       font-size: 23px;
       font-weight: bold;
 
@@ -36,6 +37,7 @@ UL {
       text-decoration: none;
 
       .lbl-link-wrapper {
+        padding: 20px 0;
         flex: 1;
         color: @blue-grey;
 
@@ -64,6 +66,5 @@ UL.in-tuile {
     .lbl-link-wrapper {
       font-weight: 400;
     }
-    
   }
 }
