@@ -7,6 +7,7 @@ import { Category } from '@/app/models/jcms/category';
 import { Content } from '@/app/models/jcms/content';
 import { CatsMngService } from '@/app/services/cats-mng.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
+import { Util } from '@/app/util';
 
 @Component({
   selector: 'app-age',
@@ -63,7 +64,9 @@ export class AgeComponent extends APageHome implements OnInit {
                       lbl: itSubCat.title,
                       img: itSubCat.image,
                       url:
-                        contents && contents.length > 0 ? contents[0].id : '', // TODO build local url
+                        contents && contents.length > 0
+                          ? Util.buildUrlCotent(contents[0])
+                          : '',
                     });
                   });
               }

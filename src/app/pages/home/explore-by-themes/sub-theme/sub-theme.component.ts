@@ -9,6 +9,7 @@ import { Content } from '@/app/models/jcms/content';
 import { SubThemeASE } from '@/app/models/jcms/sousThemeASE';
 import { CatsMngService } from '@/app/services/cats-mng.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
+import { Util } from '@/app/util';
 
 import { environment } from '@/environments/environment';
 
@@ -82,25 +83,13 @@ export class SubThemeComponent {
     return undefined;
   }
 
-  public buildUrlCotent(content: Content): string {
-    if (content.class === 'generated.ArticleASE') {
-      return '/article/' + content.id;
-    }
-
-    // TODO structures Lot 2
-    if (content.class === 'generated.Structure') {
-      return '/TODO/' + content.id;
-    }
-    return '';
-  }
-
   public getItemForList(): Item[] {
     let item: Item[] = [];
     if (this.subTheme && this.subTheme.contenu) {
       for (let itContent of this.subTheme.contenu) {
         item.push({
           lbl: itContent.title,
-          url: this.buildUrlCotent(itContent),
+          url: Util.buildUrlCotent(itContent),
           img: this.getImgContent(itContent),
         });
       }
