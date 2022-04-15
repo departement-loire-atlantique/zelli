@@ -8,6 +8,7 @@
     </p>
     <div class="ds44-collapser_content">
       <div *ngIf="dataVal && dataVal.length > i" [id]="prefixId+i">{{dynamiqueAddInnerHTML(i, prefixId+i)}}</div>
+      <app-list *ngIf="dataItems && dataItems.length > i" [items]="dataItems[i]"></app-list>
     </div>
   </li>
 </ul>

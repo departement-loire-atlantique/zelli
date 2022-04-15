@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
 
+import { Item } from '../list/list.component';
+
 /**
  * Class JS du DS 44
  */
@@ -16,6 +18,9 @@ export class CollapserComponent implements AfterViewInit {
 
   @Input()
   dataVal: string[] | undefined;
+
+  @Input()
+  dataItems: Item[][] | undefined;
 
   prefixId: string =
     'collapser-' + Math.random().toString().replace('.', '') + '-';
