@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
 
@@ -18,59 +18,90 @@ import { environment } from '@/environments/environment';
   templateUrl: './sub-theme.component.html',
   styleUrls: ['./sub-theme.component.less'],
 })
-export class SubThemeComponent {
+export class SubThemeComponent implements OnInit {
   /**
    * Id de la catégorie theme principale
    */
-  idCatTheme: string | null;
-  catTheme: Category | undefined;
+  // idCatTheme: string | null;
+  // catTheme: Category | undefined;
 
   /**
    * Id de la catégorie dans la quelle chercher le contenu Sous-thème ASE
    */
-  idCatSubTheme: string | null;
   subTheme: SubThemeASE | undefined;
 
   constructor(
     private _route: ActivatedRoute,
     private _catMng: CatsMngService,
     private _jcms: JcmsClientService
-  ) {
-    this.idCatTheme = this._route.snapshot.paramMap.get('id');
-    if (this.idCatTheme) {
-      this._catMng
-        .cat(this.idCatTheme)
-        .subscribe((cat) => (this.catTheme = cat));
-    }
+  ) {}
 
-    this.idCatSubTheme = this._route.snapshot.paramMap.get('subId');
-
-    if (this.idCatSubTheme) {
-      this._jcms
-        .get('search', {
-          params: {
-            types: 'SousthemeASE',
-            exactCat: true,
-            cids: this.idCatSubTheme,
-          },
-        })
-        .pipe(map((rep: any): SubThemeASE[] => rep.dataSet))
-        .subscribe((rep: SubThemeASE[]) => {
-          if (rep && rep.length > 0) {
-            this.subTheme = rep[0];
-
-            // get ful content
-            for (let i = 0; i < this.subTheme.contenu.length; i++) {
-              this._jcms
-                .get('data/' + this.subTheme.contenu[i].id)
-                .subscribe((fullContent: any) => {
-                  if (this.subTheme) {
-                    this.subTheme.contenu[i] = fullContent;
-                  }
-                });
-            }
+  ngOnInit(): void {
+    this._route.paramMap.subscribe((params) => {
+      const idParam = params.get('id');
+      if (idParam) {
+        this._route.data.subscribe((data) => {
+          if (data['isIdCat']) {
+            this.initSubThemeFromCat(idParam);
+          } else {
+            this.initSubThemeFromId(idParam);
           }
         });
+      }
+    });
+  }
+
+  private initSubThemeFromCat(idCat: string) {
+    this._jcms
+      .get('search', {
+        params: {
+          types: 'SousthemeASE',
+          exactCat: true,
+          cids: idCat,
+        },
+      })
+      .pipe(map((rep: any): SubThemeASE[] => rep.dataSet))
+      .subscribe((rep: SubThemeASE[]) => {
+        if (rep && rep.length > 0) {
+          this.initSubTheme(rep[0]);
+        }
+      });
+  }
+
+  private initSubThemeFromId(id: string) {
+    this._jcms
+      .get<SubThemeASE>('data/' + id)
+      .subscribe((subTheme: SubThemeASE) => {
+        this.initSubTheme(subTheme);
+      });
+  }
+
+  private initSubTheme(subTheme: SubThemeASE | undefined) {
+    if (subTheme) {
+      // TODO bug jalios
+      subTheme.navigation = (subTheme as any).categories[0];
+
+      this.subTheme = subTheme;
+
+      // get full content
+
+      // TODO cat parent
+      if (subTheme.navigation) {
+        console.log(subTheme.navigation);
+        this._catMng.cat(subTheme.navigation.id).subscribe((cat) => {
+          subTheme.navigation = cat;
+        });
+      }
+
+      for (let i = 0; i < this.subTheme.contenu.length; i++) {
+        this._jcms
+          .get('data/' + this.subTheme.contenu[i].id)
+          .subscribe((fullContent: any) => {
+            if (this.subTheme) {
+              this.subTheme.contenu[i] = fullContent;
+            }
+          });
+      }
     }
   }
 
