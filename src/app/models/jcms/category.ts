@@ -1,39 +1,42 @@
 export interface Category {
-
   /**
    * id JCMS
    */
-  id: string,
+  id: string;
 
   /**
    * Nom de la catégorie
    */
-  title: string,
+  title: string;
 
   /**
-  * Nom cour de la catégorie
-  */
-  smallTitle: string,
+   * Nom cour de la catégorie
+   */
+  smallTitle: string;
 
   /**
    * Sous titre afficher dans les pages homes
    */
-  subTitle: string,
+  subTitle: string;
 
   /**
    * Icon de la catégorie.
    */
-  icon: string,
+  icon: string;
 
-  image: string,
+  image: string;
 
   /**
-   * Url interne à l'app 
+   * Url interne à l'app
    */
-  url: string,
+  url: string;
 
-  order: number,
+  order: number;
 
-  idContentTrieur: string
+  idContentTrieur: string;
 
+  /**
+   * id parent category
+   */
+  parent: string | undefined;
 }

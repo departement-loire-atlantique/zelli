@@ -83,16 +83,18 @@ export class SubThemeComponent implements OnInit {
 
       this.subTheme = subTheme;
 
-      // get full content
-
-      // TODO cat parent
       if (subTheme.navigation) {
-        console.log(subTheme.navigation);
+        // OPTI ?
         this._catMng.cat(subTheme.navigation.id).subscribe((cat) => {
-          subTheme.navigation = cat;
+          if (cat.parent) {
+            this._catMng.cat(cat.parent).subscribe((catParent) => {
+              subTheme.navigation = catParent;
+            });
+          }
         });
       }
 
+      // get full content
       for (let i = 0; i < this.subTheme.contenu.length; i++) {
         this._jcms
           .get('data/' + this.subTheme.contenu[i].id)
