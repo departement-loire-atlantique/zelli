@@ -47,7 +47,13 @@ export class AgeComponent extends APageHome implements OnInit {
           this._catMng
             .catsChildren(itCat.id)
             .subscribe((subCats: Category[]) => {
-              for (let itSubCat of subCats) {
+              // /!\ Le fonctionnement avec i et l'init de "items" est là pour conserver l'ordre d'affichage BO => FO
+              for (let i = 0; i < subCats.length; i++) {
+                let itSubCat = subCats[i];
+
+                // array init with empty item
+                items.push({ lbl: '' });
+
                 // get fist content
                 this._jcms
                   .get('search', {
@@ -60,17 +66,18 @@ export class AgeComponent extends APageHome implements OnInit {
                   })
                   .pipe(map((rep: any): Content[] => rep.dataSet))
                   .subscribe((contents: Content[]) => {
-                    items.push({
+                    items[i] = {
                       lbl: itSubCat.title,
                       img: itSubCat.image,
                       url:
                         contents && contents.length > 0
                           ? Util.buildUrlCotent(contents[0])
                           : '',
-                    });
+                    };
                   });
               }
             });
+
           this.itemsCollaps.push(items);
         }
       });
