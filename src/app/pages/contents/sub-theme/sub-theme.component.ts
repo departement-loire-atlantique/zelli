@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 
 import { Item } from '@/app/components/list/list.component';
@@ -26,6 +26,7 @@ export class SubThemeComponent implements OnInit {
 
   constructor(
     private _route: ActivatedRoute,
+    private _router: Router,
     private _catMng: CatsMngService,
     private _jcms: JcmsClientService
   ) {}
@@ -58,6 +59,8 @@ export class SubThemeComponent implements OnInit {
       .subscribe((rep: SubThemeASE[]) => {
         if (rep && rep.length > 0) {
           this.initSubTheme(rep[0]);
+        } else {
+          this.displayErrorNotFound();
         }
       });
   }
@@ -98,7 +101,13 @@ export class SubThemeComponent implements OnInit {
             }
           });
       }
+    } else {
+      this.displayErrorNotFound();
     }
+  }
+
+  private displayErrorNotFound() {
+    this._router.navigateByUrl('**', { skipLocationChange: true });
   }
 
   public getImgContent(content: Content): string | undefined {
