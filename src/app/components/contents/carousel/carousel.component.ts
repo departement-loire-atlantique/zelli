@@ -32,7 +32,7 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   @Input()
   text: string | undefined;
 
-  elements: CarouselElement[] = [];
+  elements: (CarouselElement | undefined)[] = [];
 
   @ViewChildren('itemSwiper')
   itemSwiper: QueryList<any> | undefined;
@@ -60,13 +60,18 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     if (!this.carousel || !this.carousel.elements1) {
       return;
     }
-    for (let item of this.carousel.elements1) {
+    for (let i = 0; i < this.carousel.elements1.length; i++) {
+      let item = this.carousel.elements1[i];
+
+      // array init with empty item (for order)
+      this.elements.push(undefined);
+
       this._jcms
         .get<CarouselElement>('data/' + item.id)
         .subscribe((res: CarouselElement) => {
           // TODO service fix img link
           res.imageMobile = environment.urlJcms + res.imageMobile;
-          this.elements.push(res);
+          this.elements[i] = res;
         });
     }
   }
