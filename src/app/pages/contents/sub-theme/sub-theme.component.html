@@ -4,7 +4,7 @@
     picto="icon-arrow-left icon--xlarge"
     class="back-in-top"
   ></app-back>
-  <app-theme-header [catTheme]="catTheme" [big]="false"></app-theme-header>
+  <app-theme-header *ngIf="subTheme" [catTheme]="subTheme.navigation" [big]="false"></app-theme-header>
   <div *ngIf="subTheme" class="head-sub-theme">
     <h1>{{ subTheme.title }}</h1>
     <div class="chapo">

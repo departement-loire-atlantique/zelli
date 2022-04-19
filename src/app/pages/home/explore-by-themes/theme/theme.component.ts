@@ -36,7 +36,7 @@ export class ThemeComponent {
       for (let itSubT of this.subThemes) {
         item.push({
           lbl: itSubT.title,
-          url: './' + itSubT.id,
+          url: '/subTheme/fromCat/' + itSubT.id,
         });
       }
     }
