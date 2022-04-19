@@ -1,3 +1,8 @@
+import {
+  Contact,
+  ContactFromApi,
+} from '@/app/components/contact/contact-details/contact-details.service';
+
 import { Content } from './content';
 import { FaqEntry } from './faqEntry';
 
@@ -42,7 +47,7 @@ export interface ArticleASE extends Content {
 
   libelleLien: string[] | undefined;
 
-  fichesStructures: {} | undefined; // TODO Contact
+  fichesStructures: Pick<ContactFromApi, 'id' | 'title'>[];
 
   /**
    * html

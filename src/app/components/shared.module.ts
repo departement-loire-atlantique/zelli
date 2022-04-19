@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { AlertComponent } from '@/app/components/alert/alert.component';
 import { BackComponent } from '@/app/components/back/back.component';
 import { CollapserComponent } from '@/app/components/collapser/collapser.component';
+import { ContactDetailsComponent } from '@/app/components/contact/contact-details/contact-details.component';
 import { ContactComponent } from '@/app/components/contact/contact.component';
 import { CarouselComponent } from '@/app/components/contents/carousel/carousel.component';
 import { VideoComponent } from '@/app/components/contents/video/video.component';
@@ -36,6 +37,7 @@ import { ListComponent } from './list/list.component';
     PaginationComponent,
     HeadingComponent,
     ContactComponent,
+    ContactDetailsComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -54,6 +56,7 @@ import { ListComponent } from './list/list.component';
     PaginationComponent,
     ContactComponent,
     HeadingComponent,
+    ContactDetailsComponent,
   ],
 })
 export class SharedModule {}

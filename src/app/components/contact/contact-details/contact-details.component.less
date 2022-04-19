@@ -1,0 +1,28 @@
+@import '/src/theme/importDep';
+
+:host {
+  display: flex;
+  flex-direction: column;
+
+  .c-contact-details__line {
+    display: flex;
+    margin-top: 1.5rem;
+    color: @blue-grey;
+
+    a {
+      color: @blue;
+    }
+
+    .icon {
+      color: @blue;
+      width: 2rem;
+      margin-top: 0.4rem;
+      margin-right: 1rem;
+    }
+  }
+
+  .c-contact-details__sub-line {
+    display: flex;
+    flex-direction: column;
+  }
+}
