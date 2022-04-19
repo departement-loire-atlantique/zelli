@@ -23,5 +23,6 @@ Default.args = {
     order: 0,
     smallTitle: '',
     url: '',
+    parent: undefined,
   },
 };

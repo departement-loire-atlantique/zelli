@@ -15,7 +15,7 @@ export const Default = Template.bind({});
 Default.args = {
   catTheme: {
     id: '0',
-    icon: 'http://localhost:8080/zelli/upload/docs/image/png/2022-03/picto-demarches.png',
+    icon: '/assets/icons/icon-72x72.png',
     title: 'Title',
     subTitle: 'Subtitle',
     idContentTrieur: '0',
@@ -23,6 +23,7 @@ Default.args = {
     order: 0,
     smallTitle: '',
     url: '',
+    parent: undefined,
   },
 };
 
@@ -31,7 +32,7 @@ Small.args = {
   big: false,
   catTheme: {
     id: '0',
-    icon: 'http://localhost:8080/zelli/upload/docs/image/png/2022-03/picto-demarches.png',
+    icon: '/assets/icons/icon-72x72.png',
     title: 'Title',
     subTitle: 'Subtitle',
     idContentTrieur: '0',
@@ -39,5 +40,6 @@ Small.args = {
     order: 0,
     smallTitle: '',
     url: '',
+    parent: undefined,
   },
 };
