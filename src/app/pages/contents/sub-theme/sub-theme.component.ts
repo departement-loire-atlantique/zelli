@@ -20,12 +20,6 @@ import { environment } from '@/environments/environment';
 })
 export class SubThemeComponent implements OnInit {
   /**
-   * Id de la catégorie theme principale
-   */
-  // idCatTheme: string | null;
-  // catTheme: Category | undefined;
-
-  /**
    * Id de la catégorie dans la quelle chercher le contenu Sous-thème ASE
    */
   subTheme: SubThemeASE | undefined;
