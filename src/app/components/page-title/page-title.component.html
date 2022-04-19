@@ -1,10 +1,20 @@
 <div *ngIf="curentCat" class="page-title">
-  <img class="img-page-head-bg" *ngIf="curentCat.image" [src]="curentCat.image" aria-hidden="true"/>
-  <div class="page-icon"  aria-hidden="true">
-    <i [class]="'icon ' + curentCat.icon"></i>
+  <img class="img-page-head-bg" *ngIf="curentCat.image" [src]="curentCat.image" aria-hidden="true" />
+
+  <div class="page-topbar">
+
+    <app-research-btn></app-research-btn>
+
+    <!-- TODO profil -->
   </div>
-  <h1>{{ curentCat.title }}</h1>
-  <p *ngIf="curentCat.subTitle">
-    {{ curentCat.subTitle }}
-  </p>
+
+  <div class="page-infos">
+    <div class="page-icon" aria-hidden="true">
+      <i [class]="'icon ' + curentCat.icon"></i>
+    </div>
+    <h1>{{ curentCat.title }}</h1>
+    <p *ngIf="curentCat.subTitle">
+      {{ curentCat.subTitle }}
+    </p>
+  </div>
 </div>
