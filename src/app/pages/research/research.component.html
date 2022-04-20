@@ -1,1 +1,35 @@
-<p>research works!</p>
+<app-back text="" picto="icon-cross icon--large"></app-back>
+
+<header>
+  <h1>Recherche</h1>
+  <div>
+    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
+    magna
+  </div>
+</header>
+
+<form (ngSubmit)="research()">
+
+  <div class="ds44-form__container">
+
+    <div class="ds44-posRel">
+      <label for="form-element-92873" class="ds44-formLabel"><span class="ds44-labelTypePlaceholder"><span>Ta
+            recherche<sup aria-hidden="true">*</sup></span></span></label>
+
+      <input type="text" id="form-element-92873" name="form-element-92873" class="ds44-inpStd"
+        title="Champ standard - obligatoire" required [(ngModel)]="text"/>
+
+      <button class="ds44-reset" type="button"><i class="icon icon-cross icon--sizeL" aria-hidden="true"></i><span
+          class="visually-hidden">Effacer le contenu saisi dans le champ : Ta recherche</span></button>
+    </div>
+  </div>
+
+  <div class="btn-wrapper">
+    <button class="btn btn-big" [disabled]="researchRun" type="submit">Rechercher</button>
+  </div>
+</form>
+
+<section class="search-result">
+  <app-loader *ngIf="researchRun" color="#0013b1"></app-loader>
+  <app-list [items]="result"></app-list>
+</section>
