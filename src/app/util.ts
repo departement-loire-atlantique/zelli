@@ -20,6 +20,11 @@ export class Util {
       return '/TODO/' + content.id;
     }
 
+    if (content.class === 'com.jalios.jcms.FileDocument') {
+      let fileDoc = content as any;
+      return fileDoc.absDownloadUrl;
+    }
+
     return '';
   }
 }

@@ -15,6 +15,8 @@ import { Item } from '../../components/list/list.component';
   styleUrls: ['./research.component.less'],
 })
 export class ResearchComponent {
+  static regexMimeType: RegExp = /^[a-zA-Z0-9]+\/(.+)/gm;
+
   text: string = '';
 
   researchRun: boolean = false;
@@ -24,6 +26,7 @@ export class ResearchComponent {
   constructor(private _jcms: JcmsClientService) {}
 
   public research(): void {
+    this.result = [];
     if (!this.text) {
       return;
     }
@@ -39,10 +42,22 @@ export class ResearchComponent {
       })
       .pipe(map((rep: any): Content[] => rep.dataSet))
       .subscribe((contents: Content[]) => {
-        console.log(contents);
         for (let itContent of contents) {
+          let title: string = itContent.title;
+
+          if (itContent.class === 'com.jalios.jcms.FileDocument') {
+            let fileDoc = itContent as any;
+
+            const match = ResearchComponent.regexMimeType.exec(
+              fileDoc.contentType
+            );
+            let type: string = match ? match[1] : '';
+
+            title += ' (' + type + ' - ' + fileDoc.size / 1000 + ' Ko)';
+          }
+
           this.result.push({
-            lbl: itContent.title,
+            lbl: title,
             url: Util.buildUrlCotent(itContent),
           });
         }
