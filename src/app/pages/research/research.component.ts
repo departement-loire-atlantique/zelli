@@ -21,12 +21,12 @@ export class ResearchComponent {
 
   researchRun: boolean = false;
 
-  result: Item[] = [];
+  result: Item[] | undefined;
 
   constructor(private _jcms: JcmsClientService) {}
 
   public research(): void {
-    this.result = [];
+    this.result = undefined;
     if (!this.text) {
       return;
     }
@@ -42,6 +42,7 @@ export class ResearchComponent {
       })
       .pipe(map((rep: any): Content[] => rep.dataSet))
       .subscribe((contents: Content[]) => {
+        this.result = [];
         for (let itContent of contents) {
           let title: string = itContent.title;
 
@@ -63,5 +64,18 @@ export class ResearchComponent {
         }
         this.researchRun = false;
       });
+  }
+
+  public lblNbResult(): string {
+    if (this.result) {
+      if (this.result.length <= 0) {
+        return 'Oups, il n’y a pas de résultat. Merci de préciser ou reformuler ta recherche';
+      }
+      if (this.result.length == 1) {
+        return 'Il y a 1 résultat';
+      }
+      return 'Il y a ' + this.result.length + ' résultats';
+    }
+    return '';
   }
 }

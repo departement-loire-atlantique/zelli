@@ -31,5 +31,10 @@
 
 <section class="search-result">
   <app-loader *ngIf="researchRun" color="#0013b1"></app-loader>
+
+  <h3 *ngIf="!researchRun" class="search-result-info">
+    {{ lblNbResult() }}
+  </h3>
+
   <app-list [items]="result"></app-list>
 </section>
