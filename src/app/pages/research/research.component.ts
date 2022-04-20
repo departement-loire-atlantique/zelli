@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { map } from 'rxjs';
 
 import { Content } from '@/app/models/jcms/content';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { Util } from '@/app/util';
-
-import { environment } from '@/environments/environment';
 
 import { Item } from '../../components/list/list.component';
 
@@ -15,8 +13,6 @@ import { Item } from '../../components/list/list.component';
   styleUrls: ['./research.component.less'],
 })
 export class ResearchComponent {
-  static regexMimeType: RegExp = /^[a-zA-Z0-9]+\/(.+)/gm;
-
   text: string = '';
 
   researchRun: boolean = false;
@@ -47,12 +43,9 @@ export class ResearchComponent {
           let title: string = itContent.title;
 
           if (itContent.class === 'com.jalios.jcms.FileDocument') {
-            let fileDoc = itContent as any;
+            const fileDoc = itContent as any;
 
-            const match = ResearchComponent.regexMimeType.exec(
-              fileDoc.contentType
-            );
-            let type: string = match ? match[1] : '';
+            const type: string = (fileDoc.contentType as string).split('/')[1];
 
             title += ' (' + type + ' - ' + fileDoc.size / 1000 + ' Ko)';
           }
