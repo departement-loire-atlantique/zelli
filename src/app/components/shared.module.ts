@@ -5,9 +5,12 @@ import { RouterModule } from '@angular/router';
 import { AlertComponent } from '@/app/components/alert/alert.component';
 import { BackComponent } from '@/app/components/back/back.component';
 import { CollapserComponent } from '@/app/components/collapser/collapser.component';
+import { ContactDetailsComponent } from '@/app/components/contact/contact-details/contact-details.component';
+import { ContactComponent } from '@/app/components/contact/contact.component';
 import { CarouselComponent } from '@/app/components/contents/carousel/carousel.component';
 import { VideoComponent } from '@/app/components/contents/video/video.component';
 import { HasHelpedComponent } from '@/app/components/has-helped/has-helped.component';
+import { HeadingComponent } from '@/app/components/heading/heading.component';
 import { LoaderComponent } from '@/app/components/loader/loader.component';
 import { MainMenuComponent } from '@/app/components/main-menu/main-menu.component';
 import { PageTitleComponent } from '@/app/components/page-title/page-title.component';
@@ -32,6 +35,9 @@ import { ListComponent } from './list/list.component';
     HiddenTextComponent,
     ListComponent,
     PaginationComponent,
+    HeadingComponent,
+    ContactComponent,
+    ContactDetailsComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -48,6 +54,9 @@ import { ListComponent } from './list/list.component';
     ListComponent,
     HiddenTextComponent,
     PaginationComponent,
+    ContactComponent,
+    HeadingComponent,
+    ContactDetailsComponent,
   ],
 })
 export class SharedModule {}

@@ -7,8 +7,8 @@
   <app-theme-header [catTheme]="curentCat"></app-theme-header>
 </header>
 <main>
-  <app-list [items]="getItemForList()"></app-list>
-  
+  <app-list [items]="getItemForList()" [isBold]="true"></app-list>
+
   <div *ngIf="curentCat && curentCat.idContentTrieur">
     <a
       class="btn btn-big"

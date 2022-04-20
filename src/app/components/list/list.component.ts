@@ -14,6 +14,9 @@ export class ListComponent {
   @Input()
   cssClass: string | undefined;
 
+  @Input()
+  isBold: boolean = false;
+
   constructor() {}
 
   public isInternLink(url: string): boolean {
