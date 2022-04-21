@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import { JcmsPager } from '@/app/core/jcmsPager';
 import { Content } from '@/app/models/jcms/content';
@@ -30,39 +30,47 @@ export class ResearchComponent {
     if (!this.text) {
       return;
     }
+
     this.researchRun = true;
 
-    this._jcms
-      .getPager<Content>('search', {
+    this.processResult(
+      this._jcms.getPager<Content>('search', {
         params: {
           text: this.text,
           types: ['SousthemeASE', 'ArticleASE', 'Contact', 'FileDocument'],
           exactType: true,
         },
       })
-      .subscribe((pager: JcmsPager<Content>) => {
-        this.pager = pager;
-        const contents = pager.dataInPage;
+    );
+  }
 
+  public processResult(obs: Observable<JcmsPager<Content>>) {
+    obs.subscribe((pager: JcmsPager<Content>) => {
+      if (!this.result) {
         this.result = [];
-        for (let itContent of contents) {
-          let title: string = itContent.title;
+      }
 
-          if (itContent.class === 'com.jalios.jcms.FileDocument') {
-            const fileDoc = itContent as any;
+      this.pager = pager;
+      const contents = pager.dataInPage;
 
-            const type: string = (fileDoc.contentType as string).split('/')[1];
+      for (let itContent of contents) {
+        let title: string = itContent.title;
 
-            title += ' (' + type + ' - ' + fileDoc.size / 1000 + ' Ko)';
-          }
+        if (itContent.class === 'com.jalios.jcms.FileDocument') {
+          const fileDoc = itContent as any;
 
-          this.result.push({
-            lbl: title,
-            url: Util.buildUrlCotent(itContent),
-          });
+          const type: string = (fileDoc.contentType as string).split('/')[1];
+
+          title += ' (' + type + ' - ' + fileDoc.size / 1000 + ' Ko)';
         }
-        this.researchRun = false;
-      });
+
+        this.result.push({
+          lbl: title,
+          url: Util.buildUrlCotent(itContent),
+        });
+      }
+      this.researchRun = false;
+    });
   }
 
   public lblNbResult(): string {
@@ -80,5 +88,11 @@ export class ResearchComponent {
       );
     }
     return '';
+  }
+
+  public moreResult() {
+    if (this.pager) {
+      this.processResult(this.pager.next());
+    }
   }
 }

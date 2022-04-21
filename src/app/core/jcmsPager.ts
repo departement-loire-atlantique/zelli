@@ -88,4 +88,8 @@ export class JcmsPager<T> {
     this.setStart();
     return this.setObs();
   }
+
+  public hasMore(): boolean {
+    return this.start + this.pageSize <= this.total;
+  }
 }
