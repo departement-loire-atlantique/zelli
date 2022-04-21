@@ -8,6 +8,8 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
+import { JcmsPager } from '../core/jcmsPager';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -29,6 +31,10 @@ export class JcmsClientService {
     );
   }
 
+  getPager<T>(endpoint: string, option?: OptionHttp): Observable<JcmsPager<T>> {
+    return new JcmsPager<T>(this, endpoint, option).get();
+  }
+
   post(endpoint: string, body: any, option?: OptionHttp): Observable<any> {
     return this.http.post(this._url + endpoint, body, option);
   }
@@ -42,7 +48,7 @@ export class JcmsClientService {
   }
 }
 
-interface OptionHttp {
+export interface OptionHttp {
   headers?:
     | HttpHeaders
     | {

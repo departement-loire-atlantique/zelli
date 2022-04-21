@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs';
 
+import { JcmsPager } from '@/app/core/jcmsPager';
 import { Content } from '@/app/models/jcms/content';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { Util } from '@/app/util';
@@ -19,25 +20,30 @@ export class ResearchComponent {
 
   result: Item[] | undefined;
 
+  pager: JcmsPager<Content> | undefined;
+
   constructor(private _jcms: JcmsClientService) {}
 
   public research(): void {
     this.result = undefined;
+    this.pager = undefined;
     if (!this.text) {
       return;
     }
     this.researchRun = true;
 
     this._jcms
-      .get('search', {
+      .getPager<Content>('search', {
         params: {
           text: this.text,
           types: ['SousthemeASE', 'ArticleASE', 'Contact', 'FileDocument'],
           exactType: true,
         },
       })
-      .pipe(map((rep: any): Content[] => rep.dataSet))
-      .subscribe((contents: Content[]) => {
+      .subscribe((pager: JcmsPager<Content>) => {
+        this.pager = pager;
+        const contents = pager.dataInPage;
+
         this.result = [];
         for (let itContent of contents) {
           let title: string = itContent.title;
@@ -67,7 +73,11 @@ export class ResearchComponent {
       if (this.result.length == 1) {
         return 'Il y a 1 résultat';
       }
-      return 'Il y a ' + this.result.length + ' résultats';
+      return (
+        'Il y a ' +
+        (this.pager ? this.pager.total : this.result.length) +
+        ' résultats'
+      );
     }
     return '';
   }
