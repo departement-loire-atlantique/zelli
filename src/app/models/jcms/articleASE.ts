@@ -1,7 +1,4 @@
-import {
-  Contact,
-  ContactFromApi,
-} from '@/app/components/contact/contact-details/contact-details.service';
+import { ContactFromApi } from '@/app/models/jcms/contact';
 
 import { Content } from './content';
 import { FaqEntry } from './faqEntry';

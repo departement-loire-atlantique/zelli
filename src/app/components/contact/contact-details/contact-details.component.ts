@@ -1,15 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import {
-  Contact,
-  ContactDetailsService,
-} from '@/app/components/contact/contact-details/contact-details.service';
+import { Contact } from '@/app/models/jcms/contact';
+import { ContactDetailsService } from '@/app/services/contact-details.service';
 
 @Component({
   selector: 'app-contact-details',
   templateUrl: './contact-details.component.html',
   styleUrls: ['./contact-details.component.less'],
-  providers: [ContactDetailsService],
 })
 export class ContactDetailsComponent implements OnInit {
   @Input()
