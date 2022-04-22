@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { JcmsPager } from '@/app/core/jcmsPager';
 import { Content } from '@/app/models/jcms/content';
@@ -70,6 +70,8 @@ export class ResearchComponent {
         });
       }
       this.researchRun = false;
+
+      // TODO Focus for accessibility
     });
   }
 

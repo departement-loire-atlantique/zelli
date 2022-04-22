@@ -32,8 +32,6 @@ export class JcmsPager<T> {
     this.load = true;
     return new Observable((observer) => {
       this._jcms.get(this.endpoint, this.option).subscribe((rep: any) => {
-        console.log(rep);
-
         this.dataInPage = rep.dataSet;
         this.pageSize = rep.pageSize;
         this.start = rep.start;
@@ -51,6 +49,9 @@ export class JcmsPager<T> {
     });
   }
 
+  /**
+   * set attr "start" in http params
+   */
   private setStart() {
     if (!this.option) {
       this.option = {};

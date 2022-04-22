@@ -31,13 +31,14 @@
 </form>
 
 <section class="search-result">
-  <app-loader *ngIf="researchRun" color="#0013b1"></app-loader>
 
   <h3 *ngIf="!researchRun" class="search-result-info">
     {{ lblNbResult() }}
   </h3>
 
   <app-list [items]="result"></app-list>
+  
+  <app-loader *ngIf="researchRun" color="#0013b1"></app-loader>
 
   <button *ngIf="pager && pager.hasMore()" [disabled]="researchRun" (click)="moreResult()" class="btn btn-big" type="button" title="Afficher plus de résultat">
     <span class="ds44-btnInnerText">Plus de résultat</span><i class="icon icon-long-arrow-right" aria-hidden="true"></i>
