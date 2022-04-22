@@ -63,7 +63,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'contact',
+    path: 'contacts',
     loadChildren: () =>
       import('./pages/contact/contact.module').then((m) => m.ContactModule),
   },
