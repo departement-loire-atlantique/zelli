@@ -73,6 +73,13 @@ const routes: Routes = [
       import('./pages/research/research.module').then((m) => m.ResearchModule),
   },
   {
+    path: 'documents',
+    loadChildren: () =>
+      import('./pages/home/documents/documents.module').then(
+        (m) => m.DocumentsModule
+      ),
+  },
+  {
     path: '**',
     loadChildren: () =>
       import('./pages/errors/page-not-found/page-not-found.module').then(
