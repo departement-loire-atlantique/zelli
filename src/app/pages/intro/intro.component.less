@@ -1,0 +1,62 @@
+@import '/src/theme/importDep.less';
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  min-height: 100vh;
+
+  .step-display {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .ds44-card__section {
+      padding: 0 42px;
+    
+      H1 {
+        text-align: left;
+        font-size: 32px;
+      }
+    
+      .desc {
+        color: @blue-dark;
+      }
+    }
+  }
+  
+  .ctrl-intro {
+    padding: 42px;
+    display: flex;
+    justify-content: space-between;
+  
+    .btn-link {
+      padding: 0;
+    }
+  
+    .steps-info {
+      flex: 1;
+      text-align: center;
+      margin: auto;
+  
+      .step-pin {
+        width: 10px;
+        height: 10px;
+        display: inline-block;
+        border: 1px solid @blue;
+        margin-right: 10px;
+        border-radius: 20px;
+  
+        &.active {
+          background-color: @blue;
+        }
+  
+        &:last-child {
+          margin-right: 0px;
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
-  urlJcms: "http://prep-zelli.loire-atlantique.fr/",
-  apiKey: "",
-  catNavMain: "TODO"
+  urlJcms: 'http://prep-zelli.loire-atlantique.fr/',
+  apiKey: '',
+  catNavMain: 'TODO',
+  catIntro: 'TODO',
 };

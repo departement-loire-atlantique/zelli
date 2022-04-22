@@ -1,1 +1,28 @@
-<p>intro works!</p>
+<section class="intro">
+
+  <section *ngIf="steps.length > curentStepIndex" class="step-display">
+    <picture class="">
+      <img [src]="steps[curentStepIndex].image" alt="" class="" aria-hidden="true" />
+    </picture>
+    <div class="ds44-card__section">
+      <h1 role="heading" aria-level="2" class="ds44-card__title">
+        {{ steps[curentStepIndex].title }}
+      </h1>
+      <p class="desc">
+        {{ steps[curentStepIndex].subTitle }}
+      </p>
+    </div>
+  </section>
+
+  <section class="ctrl-intro">
+    <button class="btn-link" (click)="end()">Passer</button>
+    <div class="steps-info">
+      <figure [title]="'Etape ' + (curentStepIndex+1) +' sur ' + steps.length ">
+        <span *ngFor="let _ of steps; index as i" class="step-pin" [class.active]="i === curentStepIndex">
+        </span>
+      </figure>
+    </div>
+    <button class="btn-link" (click)="next()">Suivant</button>
+  </section>
+
+</section>
