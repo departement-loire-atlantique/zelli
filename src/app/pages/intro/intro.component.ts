@@ -2,39 +2,67 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DateService } from 'src/app/services/utils/date.service';
 
+import { Category } from '@/app/models/jcms/category';
+import { CatsMngService } from '@/app/services/cats-mng.service';
+
+import { environment } from '@/environments/environment';
+
 @Component({
   selector: 'app-intro',
   templateUrl: './intro.component.html',
-  styleUrls: ['./intro.component.less']
+  styleUrls: ['./intro.component.less'],
 })
 export class IntroComponent implements OnInit {
-
   private _lastAccess: Date;
 
-  constructor(private router: Router, private dateUtil: DateService) {
-    const strDate = JSON.parse(localStorage.getItem("_lastAccess") || "{}");
+  steps: Category[] = [];
+
+  curentStepIndex: number = 0;
+
+  constructor(
+    private _router: Router,
+    private _dateUtil: DateService,
+    private _catMng: CatsMngService
+  ) {
+    const strDate = JSON.parse(localStorage.getItem('_lastAccess') || '{}');
     this._lastAccess = new Date(strDate);
   }
 
   ngOnInit(): void {
+    let diffM = -1;
 
-    if (this.dateUtil.testDate(this._lastAccess)) {
-
+    if (this._dateUtil.testDate(this._lastAccess)) {
       const curentDate = new Date();
 
-      const diffM = this.dateUtil.monthDiff(this._lastAccess, curentDate);
-
-      if (diffM <= 3) {
-        this.router.navigate(["/themes"]);
-      }
+      diffM = this._dateUtil.monthDiff(this._lastAccess, curentDate);
     }
 
     this.updateLastAccess();
 
+    if (0 <= diffM && diffM <= 3) {
+      this.end();
+    }
+
+    this._catMng
+      .catsChildren(environment.catIntro)
+      .subscribe((cats: Category[]) => {
+        this.steps = cats;
+      });
   }
 
   private updateLastAccess() {
-    localStorage.setItem("_lastAccess", JSON.stringify(new Date()));
+    localStorage.setItem('_lastAccess', JSON.stringify(new Date()));
   }
 
+  public next() {
+    // TODO Focus for accessibility
+    this.curentStepIndex++;
+    if (this.curentStepIndex >= this.steps.length) {
+      this.end();
+    }
+  }
+
+  public end() {
+    this._router.navigate(['/themes']);
+  }
 }
