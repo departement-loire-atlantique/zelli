@@ -1,1 +1,17 @@
-<p>documents works!</p>
+<header>
+  <app-page-title [curentCat]="this.curentCat"></app-page-title>
+</header>
+
+<app-main-menu></app-main-menu>
+
+<main class="with-menu">
+
+  <div *ngIf="video" class="ds44-flex ds44-flex-container-column ds44-flex-align-center">
+    <app-video [id]="video.id" [text]="'TODO'"></app-video>
+  </div>
+
+  <div *ngIf="video && video.description" [innerHTML]="video.description">
+  </div>
+
+  <app-has-helped></app-has-helped>
+</main>
