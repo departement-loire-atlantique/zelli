@@ -8,33 +8,37 @@
   </app-heading>
 
   <div class="c-contact-details__line" *ngIf="contact?.location">
-    <span class="icon icon-marker"></span>
+    <app-icon name="marker"></app-icon>
     <div class="c-contact-details__sub-line">
       <span>{{
-        [contact?.location?.roadNumber, contact?.location?.roadName].join(' ')
+        [contact?.location?.roadNumber, contact?.location?.roadName]
+          .join(' ')
+          .trim()
       }}</span>
       <span>{{
         [
           contact?.location?.cs,
           contact?.location?.postalCode,
           contact?.location?.city
-        ].join(' ')
+        ]
+          .join(' ')
+          .trim()
       }}</span>
     </div>
   </div>
 
   <div class="c-contact-details__line" *ngIf="contact?.phoneNumber">
-    <span class="icon icon-phone"></span>
+    <app-icon name="phone"></app-icon>
     <a href="tel:{{ contact?.phoneNumber }}">{{ contact?.phoneNumber }}</a>
   </div>
 
   <div class="c-contact-details__line" *ngIf="contact?.email">
-    <span class="icon icon-mail"></span>
+    <app-icon name="mail"></app-icon>
     <a href="mailto:{{ contact?.email }}">{{ contact?.email }}</a>
   </div>
 
   <div class="c-contact-details__line" *ngIf="contact?.location?.website">
-    <span class="icon icon-link"></span>
+    <app-icon name="link"></app-icon>
     <a
       href="https://{{ contact?.location?.website }}"
       target="_blank"
