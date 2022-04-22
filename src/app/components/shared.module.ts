@@ -19,6 +19,7 @@ import { ThemeHeaderComponent } from '@/app/components/theme-header/theme-header
 
 import { HiddenTextComponent } from './hidden-text/hidden-text.component';
 import { ListComponent } from './list/list.component';
+import { ResearchBtnComponent } from './research-btn/research-btn.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ListComponent } from './list/list.component';
     HeadingComponent,
     ContactComponent,
     ContactDetailsComponent,
+    ResearchBtnComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -57,6 +59,7 @@ import { ListComponent } from './list/list.component';
     ContactComponent,
     HeadingComponent,
     ContactDetailsComponent,
+    ResearchBtnComponent,
   ],
 })
 export class SharedModule {}

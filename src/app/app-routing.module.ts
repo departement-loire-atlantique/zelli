@@ -68,6 +68,11 @@ const routes: Routes = [
       import('./pages/contact/contact.module').then((m) => m.ContactModule),
   },
   {
+    path: 'research',
+    loadChildren: () =>
+      import('./pages/research/research.module').then((m) => m.ResearchModule),
+  },
+  {
     path: '**',
     loadChildren: () =>
       import('./pages/errors/page-not-found/page-not-found.module').then(

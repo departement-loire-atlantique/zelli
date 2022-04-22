@@ -1,17 +1,30 @@
 @import "../../../theme/importDep.less";
 
-.page-title {
+.img-page-head-bg {
+  position: absolute;
+  height: 98px;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.page-topbar {
+  position: absolute;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  padding: 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-infos {
   text-align: center;
   margin: 55px 20px 30px;
-
-  .img-page-head-bg {
-    position: absolute;
-    height: 98px;
-    width: 100vw;
-    top: 0;
-    left: 0;
-    z-index: -1;
-  }
 
   .page-icon {
     width: 50px;
