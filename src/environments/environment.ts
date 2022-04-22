@@ -5,9 +5,10 @@
 // Dev without JCMS
 export const environment = {
   production: false,
-  urlJcms: "",
-  apiKey: "",
-  catNavMain: "catHome"
+  urlJcms: '',
+  apiKey: '',
+  catNavMain: 'catHome',
+  catIntro: 'TODO',
 };
 
 /*
