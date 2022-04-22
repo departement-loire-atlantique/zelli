@@ -1,6 +1,10 @@
 <ng-container *ngIf="!isLoading && !isError">
   <app-heading *ngIf="name" [options]="{ noBold: true }">
-    <a [routerLink]="['/contact', contact?.id]">{{ name }}</a>
+    <a
+      style="text-decoration: none"
+      [routerLink]="['/contacts', contact?.id]"
+      >{{ name }}</a
+    >
   </app-heading>
 
   <div class="c-contact-details__line" *ngIf="contact?.location">
