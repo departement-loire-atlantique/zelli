@@ -1,0 +1,43 @@
+@import '/src/theme/importDep';
+
+.p-contact {
+  margin: 0 2.5rem;
+
+  &__header {
+    h3 {
+      color: @blue;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    &__item {
+      text-decoration: none;
+      border-radius: 3rem;
+      padding: 1.5rem;
+      background-color: @blue;
+      color: white;
+    }
+  }
+
+  app-contact-details {
+    margin: 0 1.5rem;
+  }
+
+  &__description {
+    margin-top: 2rem;
+    color: @dark-gray;
+
+    &::first-letter {
+      text-transform: capitalize;
+    }
+  }
+
+  hr {
+    margin: 0;
+    margin-top: 2.5rem;
+  }
+}

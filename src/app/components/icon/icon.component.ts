@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 
+/**
+ * Icon name based on icons from the ds44 design system
+ */
 export type IconName =
   | 'accident'
   | 'arrow-down'
@@ -106,4 +109,7 @@ export type IconName =
 export class IconComponent {
   @Input()
   name!: IconName;
+
+  @Input()
+  color?: string = '';
 }
