@@ -10,6 +10,11 @@ export class LabelMngService {
   private _lbls: { [key: string]: lbl } = {};
 
   constructor(private _jcms: JcmsClientService) {
+    this._lbls['lblBaseline'] = {
+      lbl: "Ton guide vers la majorité et l'autonomie",
+      propJcms: 'jcmsplugin.zelli.lbl.baseline',
+    };
+
     this._lbls['lblTrieur'] = {
       lbl: 'Les documents à garder dans ton trieur',
       propJcms: 'jcmsplugin.zelli.lbl.btn.contenu.trieur',
