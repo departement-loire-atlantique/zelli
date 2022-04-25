@@ -7,6 +7,8 @@ import { CatsMngService } from 'src/app/services/cats-mng.service';
 import { LabelMngService } from 'src/app/services/label-mng.service';
 import { environment } from 'src/environments/environment';
 
+import { JcmsClientService } from '@/app/services/jcms-client.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -21,16 +23,20 @@ export class HomeComponent implements OnInit {
   /**
    * url du logo
    */
-  logoUrl: string = 'assets/images/svg/logo-zelli.svg';
+  logoUrl: string = '';
 
   constructor(
     private _router: Router,
+    private _jcms: JcmsClientService,
     private _catMng: CatsMngService,
     private _catHomeMng: CatsHomeMngService,
     private _lblMng: LabelMngService
   ) {
-    // TODO get logoUrl
     this._appInit = JSON.parse(sessionStorage.getItem('_appInit') || 'false');
+
+    this.logoUrl = JSON.parse(
+      sessionStorage.getItem('logoUrl') || '"assets/images/svg/logo-zelli.svg"'
+    );
   }
 
   ngOnInit(): void {
@@ -38,16 +44,31 @@ export class HomeComponent implements OnInit {
       // init
       let allObs: any = {};
 
+      // Logo
+      allObs.logo = this._jcms.get(
+        'plugins/zelli/prop/jcmsplugin.zelli.logo.app'
+      );
+      allObs.logo.subscribe((rep: any) => {
+        this.logoUrl = rep.value;
+        sessionStorage.setItem('logoUrl', JSON.stringify(this.logoUrl));
+      });
+
+      // catsHom
       const catsHom: Observable<Category[]> = this._catMng.catsChildren(
         environment.catNavMain
       );
       allObs.catsHom = catsHom;
+      catsHom.subscribe(); // pre run
 
+      // lbl
       const lbl: any = this._lblMng.initAllLbl();
       allObs = Object.assign({}, allObs, lbl);
 
       setTimeout(() => {
+        // wait all obs
         combineLatest(allObs).subscribe((rep: any) => {
+          // ----- Logo
+
           // ----- catsHom
           const cats: Category[] = rep.catsHom;
 
