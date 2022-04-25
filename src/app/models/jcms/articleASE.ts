@@ -118,6 +118,5 @@ export class LiensUtils {
 
       this.liens[i] = { lbl: lbl, url: url };
     }
-    // TODO
   }
 }

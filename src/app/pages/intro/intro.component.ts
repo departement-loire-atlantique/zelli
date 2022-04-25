@@ -41,6 +41,7 @@ export class IntroComponent implements OnInit {
 
     if (0 <= diffM && diffM <= 3) {
       this.end();
+      return;
     }
 
     this._catMng
