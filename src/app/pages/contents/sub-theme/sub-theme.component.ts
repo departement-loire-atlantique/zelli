@@ -52,7 +52,8 @@ export class SubThemeComponent implements OnInit {
         params: {
           types: 'SousthemeASE',
           exactCat: true,
-          cids: idCat,
+          catMode: 'and',
+          cids: [idCat, environment.catMainContent],
         },
       })
       .pipe(map((rep: any): SubThemeASE[] => rep.dataSet))

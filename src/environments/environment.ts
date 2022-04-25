@@ -9,6 +9,7 @@ export const environment = {
   apiKey: '',
   catNavMain: 'catHome',
   catIntro: 'TODO',
+  catMainContent: 'TODO',
 };
 
 /*

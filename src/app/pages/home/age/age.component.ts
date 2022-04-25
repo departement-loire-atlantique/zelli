@@ -9,6 +9,8 @@ import { CatsMngService } from '@/app/services/cats-mng.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { Util } from '@/app/util';
 
+import { environment } from '@/environments/environment';
+
 @Component({
   selector: 'app-age',
   templateUrl: './age.component.html',
@@ -60,7 +62,8 @@ export class AgeComponent extends APageHome implements OnInit {
                     params: {
                       types: 'Content',
                       exactCat: true,
-                      cids: itSubCat.id,
+                      catMode: 'and',
+                      cids: [itSubCat.id, environment.catMainContent],
                       pageSize: 1,
                     },
                   })

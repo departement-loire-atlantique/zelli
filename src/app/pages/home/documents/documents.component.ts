@@ -5,6 +5,8 @@ import { APageHome } from '@/app/models/aPageHome';
 import { Video, VideoApi, mapVideoToUi } from '@/app/models/jcms/video';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 
+import { environment } from '@/environments/environment';
+
 @Component({
   selector: 'app-documents',
   templateUrl: './documents.component.html',
@@ -26,7 +28,8 @@ export class DocumentsComponent extends APageHome implements OnInit {
         params: {
           types: 'Video',
           exactCat: true,
-          cids: this.curentCat.id,
+          catMode: 'and',
+          cids: [this.curentCat.id, environment.catMainContent],
           pageSize: 1,
         },
       })

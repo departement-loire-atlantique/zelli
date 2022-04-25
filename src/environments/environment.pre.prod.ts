@@ -4,4 +4,5 @@ export const environment = {
   apiKey: '',
   catNavMain: 'TODO',
   catIntro: 'TODO',
+  catMainContent: 'c_1154085',
 };
