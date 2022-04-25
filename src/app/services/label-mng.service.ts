@@ -36,7 +36,7 @@ export class LabelMngService {
   }
 
   public updateLbl(lbl: lbl): Observable<any> {
-    const obs = this._jcms.get('admin/property/' + lbl.propJcms);
+    const obs = this._jcms.get('plugins/zelli/prop/' + lbl.propJcms);
     obs.subscribe((rep: any) => (lbl.lbl = rep.value));
     return obs;
   }
