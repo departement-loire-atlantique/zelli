@@ -7,30 +7,29 @@ import { JcmsClientService } from './jcms-client.service';
   providedIn: 'root',
 })
 export class LabelMngService {
-  private _lbls: lbl[] = [
-    {
-      id: 'lblTrieur',
+  private _lbls: { [key: string]: lbl } = {};
+
+  constructor(private _jcms: JcmsClientService) {
+    this._lbls['lblTrieur'] = {
       lbl: 'Les documents à garder dans ton trieur',
       propJcms: 'jcmsplugin.zelli.lbl.btn.contenu.trieur',
-    },
-    {
-      id: 'lblMotsComp',
+    };
+
+    this._lbls['lblMotsComp'] = {
       lbl: 'Les mots compliqués',
       propJcms: 'jcmsplugin.zelli.lbl.mots.compliques',
-    },
-    {
-      id: 'lblLiensUtiles',
+    };
+
+    this._lbls['lblLiensUtiles'] = {
       lbl: 'Les liens utiles',
       propJcms: 'jcmsplugin.zelli.lbl.liens.utiles',
-    },
-  ];
-
-  constructor(private _jcms: JcmsClientService) {}
+    };
+  }
 
   public initAllLbl(): any {
     let rep: any = {};
-    for (let itLbl of this._lbls) {
-      rep[itLbl.id] = this.updateLbl(itLbl);
+    for (let key in this._lbls) {
+      rep[key] = this.updateLbl(this._lbls[key]);
     }
     return rep;
   }
@@ -42,20 +41,19 @@ export class LabelMngService {
   }
 
   public lblDocTrieur(): string {
-    return this._lbls[0].lbl;
+    return this._lbls['lblTrieur'].lbl;
   }
 
   public lblMotComp(): string {
-    return this._lbls[1].lbl;
+    return this._lbls['lblMotsComp'].lbl;
   }
 
   public lblLiensUtiles(): string {
-    return this._lbls[2].lbl;
+    return this._lbls['lblLiensUtiles'].lbl;
   }
 }
 
 interface lbl {
-  id: string;
   lbl: string;
   propJcms: string;
 }
