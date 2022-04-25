@@ -45,6 +45,10 @@ export class LabelMngService {
     return obs;
   }
 
+  public lblBaseline(): string {
+    return this._lbls['lblBaseline'].lbl;
+  }
+
   public lblDocTrieur(): string {
     return this._lbls['lblTrieur'].lbl;
   }

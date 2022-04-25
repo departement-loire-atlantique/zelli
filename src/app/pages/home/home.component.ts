@@ -71,4 +71,8 @@ export class HomeComponent implements OnInit {
   public get appInit(): boolean {
     return this._appInit;
   }
+
+  public getLblBaseline(): string {
+    return this._lblMng.lblBaseline();
+  }
 }
