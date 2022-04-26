@@ -94,7 +94,6 @@ export class CarouselComponent implements OnInit, AfterViewInit {
         ) {
           const target = <Element>mutation.target;
           const ariaCurrent = target.getAttribute('aria-current');
-          console.log(target);
           if (ariaCurrent == 'true') {
             this.curentSlide =
               ~~('' + target.getAttribute('data-swiper-slide-index')) + 1;

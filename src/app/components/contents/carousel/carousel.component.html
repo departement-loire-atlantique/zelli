@@ -23,8 +23,14 @@
       </ul>
     </div>
   </div>
+
+  <app-pagination
+    class="c-carousel__pagination"
+    [currentPage]="curentSlide"
+    [totalPage]="elements.length"
+  ></app-pagination>
 </div>
-{{ curentSlide }}
+
 <div class="carrousel-text">
   <app-hidden-text [text]="text"></app-hidden-text>
 </div>
