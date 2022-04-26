@@ -37,6 +37,10 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   @ViewChildren('itemSwiper')
   itemSwiper: QueryList<any> | undefined;
 
+  private _obsPager: MutationObserver | undefined;
+
+  curentSlide: number = 1;
+
   constructor(private _jcms: JcmsClientService) {}
 
   ngOnInit(): void {
@@ -53,6 +57,7 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.itemSwiper?.changes.subscribe((_) => {
       this.buildCarousel();
+      this.pagerInit();
     });
   }
 
@@ -78,5 +83,30 @@ export class CarouselComponent implements OnInit, AfterViewInit {
 
   public buildCarousel() {
     new CarouselStandard();
+  }
+
+  public pagerInit() {
+    this._obsPager = new MutationObserver((mutationsList) => {
+      for (let mutation of mutationsList) {
+        if (
+          mutation.type === 'attributes' &&
+          mutation.attributeName === 'aria-current'
+        ) {
+          const target = <Element>mutation.target;
+          const ariaCurrent = target.getAttribute('aria-current');
+          console.log(target);
+          if (ariaCurrent == 'true') {
+            this.curentSlide =
+              ~~('' + target.getAttribute('data-swiper-slide-index')) + 1;
+          }
+        }
+      }
+    });
+    document
+      .querySelectorAll('.c-carousel LI.swiper-slide:not(.obs-curent)')
+      .forEach((node) => {
+        node.classList.add('obs-curent');
+        this._obsPager?.observe(node, { attributes: true });
+      });
   }
 }
