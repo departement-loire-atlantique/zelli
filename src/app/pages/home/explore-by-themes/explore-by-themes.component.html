@@ -7,6 +7,8 @@
 
 <app-main-menu></app-main-menu>
 
+<app-loader *ngIf="themes.length <= 0" color="#0013b1"></app-loader>
+
 <main class="themes with-menu">
   <div *ngFor="let itTheme of themes" class="theme">
     <a [routerLink]="['/theme', itTheme.id]">

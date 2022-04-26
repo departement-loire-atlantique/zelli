@@ -4,6 +4,8 @@
 
 <app-main-menu></app-main-menu>
 
+<app-loader *ngIf="loading" color="#0013b1"></app-loader>
+
 <main class="age with-menu">
 
   <app-collapser [dataTitle]="titleCollaps" [dataItems]="itemsCollaps"></app-collapser>

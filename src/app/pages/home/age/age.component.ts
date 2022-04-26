@@ -18,8 +18,12 @@ import { environment } from '@/environments/environment';
 })
 export class AgeComponent extends APageHome implements OnInit {
   ages: Category[];
+
   titleCollaps: string[];
+
   itemsCollaps: Item[][];
+
+  loading: boolean;
 
   constructor(
     _injector: Injector,
@@ -30,6 +34,7 @@ export class AgeComponent extends APageHome implements OnInit {
     this.ages = [];
     this.titleCollaps = [];
     this.itemsCollaps = [];
+    this.loading = true;
   }
 
   ngOnInit(): void {
@@ -83,6 +88,7 @@ export class AgeComponent extends APageHome implements OnInit {
 
           this.itemsCollaps.push(items);
         }
+        this.loading = false;
       });
   }
 }

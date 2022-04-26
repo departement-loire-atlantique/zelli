@@ -12,6 +12,9 @@
     </div>
   </div>
 </header>
+
+<app-loader *ngIf="!subTheme" color="#0013b1"></app-loader>
+
 <main *ngIf="subTheme">
   
   <app-list [items]="getItemForList()"></app-list>

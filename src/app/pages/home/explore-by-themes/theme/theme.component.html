@@ -7,6 +7,9 @@
   <app-theme-header [catTheme]="curentCat"></app-theme-header>
 </header>
 <main>
+
+  <app-loader *ngIf="!subThemes" color="#0013b1"></app-loader>
+  
   <app-list [items]="getItemForList()" [isBold]="true"></app-list>
 
   <div *ngIf="curentCat && curentCat.idContentTrieur">
