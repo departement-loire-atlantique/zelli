@@ -80,6 +80,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'mycontacts',
+    loadChildren: () =>
+      import('./pages/home/my-contacts/my-contacts.module').then(
+        (m) => m.MyContactsModule
+      ),
+  },
+  {
     path: '**',
     loadChildren: () =>
       import('./pages/errors/page-not-found/page-not-found.module').then(
