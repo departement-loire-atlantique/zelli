@@ -87,6 +87,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'questions',
+    loadChildren: () =>
+      import('./pages/home/questions/questions.module').then(
+        (m) => m.QuestionsModule
+      ),
+  },
+  {
     path: '**',
     loadChildren: () =>
       import('./pages/errors/page-not-found/page-not-found.module').then(
