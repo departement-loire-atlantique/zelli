@@ -99,6 +99,13 @@ const routes: Routes = [
       import('./pages/welcome/welcome.module').then((m) => m.WelcomeModule),
   },
   {
+    path: 'account/create',
+    loadChildren: () =>
+      import('./pages/account/account-creation/account-creation.module').then(
+        (m) => m.AccountCreationModule
+      ),
+  },
+  {
     path: '**',
     loadChildren: () =>
       import('./pages/errors/page-not-found/page-not-found.module').then(
