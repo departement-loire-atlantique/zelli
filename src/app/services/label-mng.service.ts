@@ -29,6 +29,25 @@ export class LabelMngService {
       lbl: 'Les liens utiles',
       propJcms: 'jcmsplugin.zelli.lbl.liens.utiles',
     };
+
+    // Welcome Page
+
+    this._lbls['lblTitleWelcome'] = {
+      lbl: 'Bienvenue !',
+      propJcms: 'jcmsplugin.zelli.lbl.welcome.title',
+    };
+
+    this._lbls['lblDescWelcome'] = {
+      lbl: 'Zelli, c’est ton guide vers la majorité et l’autonomie. Il répond à toutes les questions que tu te poses, et t’aide dans tes démarches.',
+      propJcms: 'jcmsplugin.zelli.lbl.welcome.desc',
+    };
+
+    this._lbls['lblWelcomeFooter'] = {
+      lbl: 'En t’inscrivant, tu acceptes les ',
+      propJcms: 'jcmsplugin.zelli.lbl.welcome.footer',
+    };
+
+    //
   }
 
   public initAllLbl(): any {
@@ -45,20 +64,36 @@ export class LabelMngService {
     return obs;
   }
 
+  public getLbl(idLbl: string): string {
+    return this._lbls[idLbl].lbl;
+  }
+
   public lblBaseline(): string {
-    return this._lbls['lblBaseline'].lbl;
+    return this.getLbl('lblBaseline');
   }
 
   public lblDocTrieur(): string {
-    return this._lbls['lblTrieur'].lbl;
+    return this.getLbl('lblTrieur');
   }
 
   public lblMotComp(): string {
-    return this._lbls['lblMotsComp'].lbl;
+    return this.getLbl('lblMotsComp');
   }
 
   public lblLiensUtiles(): string {
-    return this._lbls['lblLiensUtiles'].lbl;
+    return this.getLbl('lblLiensUtiles');
+  }
+
+  public lblTitleWelcome(): string {
+    return this.getLbl('lblTitleWelcome');
+  }
+
+  public lblDescWelcome(): string {
+    return this.getLbl('lblDescWelcome');
+  }
+
+  public lblWelcomeFooter(): string {
+    return this.getLbl('lblWelcomeFooter');
   }
 }
 
