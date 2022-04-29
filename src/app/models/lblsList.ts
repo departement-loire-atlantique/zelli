@@ -30,7 +30,23 @@ export const lbls: { [key: string]: lbl } = {
     propJcms: 'jcmsplugin.zelli.lbl.welcome.footer',
   },
 
-  //
+  // Account Creation
+  accountCreateTitle: {
+    lbl: 'Créer mon compte',
+    propJcms: 'jcmsplugin.zelli.lbl.account.create.title',
+  },
+  accountCreateStep1: {
+    lbl: 'Saisis ton prénom ou un pseudo',
+    propJcms: 'jcmsplugin.zelli.lbl.account.create.step1',
+  },
+  accountCreateStep2: {
+    lbl: 'Quel âge as-tu ?',
+    propJcms: 'jcmsplugin.zelli.lbl.account.create.step2',
+  },
+  accountCreateStep3: {
+    lbl: 'Choisis ton mot de passe',
+    propJcms: 'jcmsplugin.zelli.lbl.account.create.step3',
+  },
 };
 
 export interface lbl {
