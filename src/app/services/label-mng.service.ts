@@ -1,5 +1,6 @@
+import { HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 
 import { lbl, lbls } from '../models/lblsList';
 import { JcmsClientService } from './jcms-client.service';
@@ -10,9 +11,13 @@ import { JcmsClientService } from './jcms-client.service';
 export class LabelMngService {
   private _lbls: { [key: string]: lbl } = lbls;
 
-  constructor(private _jcms: JcmsClientService) {}
+  obsLbls: { [key: string]: Observable<any> } = {};
 
-  public initAllLbl(): any {
+  constructor(private _jcms: JcmsClientService) {
+    this.obsLbls = this.initAllLbl();
+  }
+
+  private initAllLbl(): { [key: string]: Observable<any> } {
     let rep: any = {};
     for (let key in this._lbls) {
       rep[key] = this.updateLbl(this._lbls[key]);
@@ -21,13 +26,21 @@ export class LabelMngService {
   }
 
   public updateLbl(lbl: lbl): Observable<any> {
-    const obs = this._jcms.get('plugins/zelli/prop/' + lbl.propJcms);
-    obs.subscribe((rep: any) => (lbl.lbl = rep.value));
+    const obs = this._jcms.get('plugins/zelli/prop/' + lbl.propJcms).pipe(
+      catchError((error) => {
+        return of(null);
+      })
+    );
+    obs.subscribe((rep: any) => {
+      if (rep) {
+        lbl.lbl = rep.value;
+      }
+    });
     return obs;
   }
 
   public getLbl(idLbl: string): string {
-    return this._lbls[idLbl].lbl;
+    return this._lbls[idLbl]?.lbl;
   }
 
   public lblBaseline(): string {

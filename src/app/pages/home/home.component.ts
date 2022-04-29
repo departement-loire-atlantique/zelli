@@ -61,7 +61,7 @@ export class HomeComponent implements OnInit {
       catsHom.subscribe(); // pre run
 
       // lbl
-      const lbl: any = this._lblMng.initAllLbl();
+      const lbl: any = this._lblMng.obsLbls;
       allObs = Object.assign({}, allObs, lbl);
 
       setTimeout(() => {
