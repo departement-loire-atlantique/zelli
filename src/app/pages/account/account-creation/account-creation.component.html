@@ -1,1 +1,19 @@
-<p>account-creation works!</p>
+<div class="account-create full-bg-color">
+  <h1>{{ lblService.getLbl('accountCreateTitle')}}</h1>
+
+   <div>
+     {{ step }} / {{ maxStep }}
+   </div>
+   <h2>
+     {{ lblService.getLbl(titleByStep[step-1]) }}
+   </h2>
+
+   <div [ngSwitch]="step">
+     <div *ngSwitchCase="1">output 1</div>
+     <div *ngSwitchCase="2">output 2</div>
+     <div *ngSwitchCase="3">output 3</div>
+     <div *ngSwitchDefault>output Error</div>
+   </div>
+
+   <button class="btn btn-big" (click)="nextStep()">{{ lblBtnNext() }}</button>
+</div>
