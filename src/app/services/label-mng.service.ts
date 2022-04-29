@@ -1,54 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { lbl, lbls } from '../models/lblsList';
 import { JcmsClientService } from './jcms-client.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LabelMngService {
-  private _lbls: { [key: string]: lbl } = {};
+  private _lbls: { [key: string]: lbl } = lbls;
 
-  constructor(private _jcms: JcmsClientService) {
-    this._lbls['lblBaseline'] = {
-      lbl: "Ton guide vers la majorité et l'autonomie",
-      propJcms: 'jcmsplugin.zelli.lbl.baseline',
-    };
-
-    this._lbls['lblTrieur'] = {
-      lbl: 'Les documents à garder dans ton trieur',
-      propJcms: 'jcmsplugin.zelli.lbl.btn.contenu.trieur',
-    };
-
-    this._lbls['lblMotsComp'] = {
-      lbl: 'Les mots compliqués',
-      propJcms: 'jcmsplugin.zelli.lbl.mots.compliques',
-    };
-
-    this._lbls['lblLiensUtiles'] = {
-      lbl: 'Les liens utiles',
-      propJcms: 'jcmsplugin.zelli.lbl.liens.utiles',
-    };
-
-    // Welcome Page
-
-    this._lbls['lblTitleWelcome'] = {
-      lbl: 'Bienvenue !',
-      propJcms: 'jcmsplugin.zelli.lbl.welcome.title',
-    };
-
-    this._lbls['lblDescWelcome'] = {
-      lbl: 'Zelli, c’est ton guide vers la majorité et l’autonomie. Il répond à toutes les questions que tu te poses, et t’aide dans tes démarches.',
-      propJcms: 'jcmsplugin.zelli.lbl.welcome.desc',
-    };
-
-    this._lbls['lblWelcomeFooter'] = {
-      lbl: 'En t’inscrivant, tu acceptes les ',
-      propJcms: 'jcmsplugin.zelli.lbl.welcome.footer',
-    };
-
-    //
-  }
+  constructor(private _jcms: JcmsClientService) {}
 
   public initAllLbl(): any {
     let rep: any = {};
@@ -95,9 +57,4 @@ export class LabelMngService {
   public lblWelcomeFooter(): string {
     return this.getLbl('lblWelcomeFooter');
   }
-}
-
-interface lbl {
-  lbl: string;
-  propJcms: string;
 }
