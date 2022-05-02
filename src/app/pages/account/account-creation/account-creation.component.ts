@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
 
 @Component({
@@ -18,18 +19,61 @@ export class AccountCreationComponent implements OnInit {
     'accountCreateStep3',
   ];
 
-  constructor(public lblService: LabelMngService) {}
+  loading: boolean = false;
+
+  // field
+  pseudo: string = '';
+
+  constructor(
+    public lblService: LabelMngService,
+    private _jcms: JcmsClientService
+  ) {}
 
   ngOnInit(): void {
     console.log('TODO');
   }
 
+  public validStep(): boolean {
+    if (this.step === 1) {
+      this.processNexStep();
+      // TODO update API
+      /*
+      this._jcms
+        .get('plugins/zelli/member/pwd/' + this.pseudo)
+        .subscribe({
+          next: (rep) => {
+            // TODO error
+            this.processNexStep();
+          },
+          error: (error) => {
+            console.log(error);
+            this.loading = false;
+          }
+        });*/
+      return false;
+    }
+
+    this.loading = false;
+    return false;
+  }
+
   public nextStep() {
-    // TODO test curent step
+    this.loading = true;
+
+    if (!this.validStep()) {
+      return;
+    }
+
+    this.processNexStep();
+  }
+
+  private processNexStep() {
     if (this.step >= this.maxStep) {
       // TODO end
     }
+
     this.step++;
+    this.loading = false;
   }
 
   public lblBtnNext(): string {
