@@ -38,10 +38,11 @@
 
   <hr />
 
-  <app-contact-details
+  <app-contact
     *ngIf="contactId"
-    [contactId]="contactId"
-  ></app-contact-details>
+    [contactIds]="[contactId]"
+    noHeader
+  ></app-contact>
 
   <hr />
 

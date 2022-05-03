@@ -17,6 +17,9 @@ export class ListComponent {
   @Input()
   isBold: boolean = false;
 
+  @Input()
+  noSeparator: boolean = false;
+
   constructor() {}
 
   public isInternLink(url: string): boolean {

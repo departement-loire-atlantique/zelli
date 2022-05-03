@@ -93,3 +93,35 @@ export type ContactFromApi = {
   telephone: string[];
   adresseMail: string;
 };
+
+export const mapContactFromApi = (contact: ContactFromApi): Contact => {
+  return {
+    firstname: contact.prenom,
+    gender: contact.civilite,
+    id: contact.id,
+    lastname: contact.nom,
+    title: contact.title,
+    email: contact.adresseMail,
+    idPicture: contact.photoDidentite,
+    job: contact.fonction,
+    phoneNumber: contact.telephone,
+    location: {
+      id: contact.lieuDeRattachement.id,
+      title: contact.lieuDeRattachement.title,
+      city: contact.lieuDeRattachement.commune?.title,
+      enterNumber: contact.lieuDeRattachement.entreeBatimentImmeuble,
+      place: contact.lieuDeRattachement.lieudit,
+      postalCode: contact.lieuDeRattachement.codePostal,
+      roadName: contact.lieuDeRattachement.libelleDeVoie,
+      roadNumber: contact.lieuDeRattachement.ndeVoie,
+      stairOrCorridor: contact.lieuDeRattachement.etageCouloirEscalier,
+      website: contact.lieuDeRattachement.siteInternet,
+      cs: contact.lieuDeRattachement.cs2
+        ? `CS ${contact.lieuDeRattachement.cs2}`
+        : undefined,
+      cedex: contact.lieuDeRattachement.cedex2
+        ? `CEDEX ${contact.lieuDeRattachement.cedex2}`
+        : undefined,
+    },
+  };
+};

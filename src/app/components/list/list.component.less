@@ -6,8 +6,12 @@ UL {
   LI {
     display: inline-block;
     width: 100%;
-    padding: 2rem 0;
-    border-bottom: 1px solid @grey;
+    padding: 1rem 0;
+
+    &.with-separator {
+      padding: 2rem 0;
+      border-bottom: 1px solid @grey;
+    }
 
     .lbl-link-wrapper {
       display: flex;
@@ -53,9 +57,8 @@ UL {
     }
 
     .icon {
-      padding-top: 1rem;
+      margin-top: 0.5rem;
       color: @blue;
-      font-size: 1em;
     }
   }
 }

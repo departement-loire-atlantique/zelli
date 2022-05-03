@@ -1,9 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Subscription, map, switchMap, throwIfEmpty } from 'rxjs';
-
-import { Contact } from '@/app/models/jcms/contact';
-import { ContactDetailsService } from '@/app/services/contact-details.service';
+import { Subscription, map } from 'rxjs';
 
 @Component({
   selector: 'app-page-contact',
