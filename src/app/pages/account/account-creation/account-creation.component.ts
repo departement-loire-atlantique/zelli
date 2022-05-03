@@ -1,7 +1,9 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
+import { DateService } from '@/app/services/utils/date.service';
 
 @Component({
   selector: 'app-account-creation',
@@ -24,9 +26,15 @@ export class AccountCreationComponent implements OnInit {
   // field
   pseudo: string = '';
 
+  date: Date | undefined;
+  dateDay: string = '';
+  dateMonth: string = '';
+  dateYear: string = '';
+
   constructor(
     public lblService: LabelMngService,
-    private _jcms: JcmsClientService
+    private _jcms: JcmsClientService,
+    private _utilDate: DateService
   ) {}
 
   ngOnInit(): void {
@@ -35,22 +43,37 @@ export class AccountCreationComponent implements OnInit {
 
   public validStep(): boolean {
     if (this.step === 1) {
-      this.processNexStep();
-      // TODO update API
-      /*
-      this._jcms
-        .get('plugins/zelli/member/pwd/' + this.pseudo)
-        .subscribe({
-          next: (rep) => {
-            // TODO error
-            this.processNexStep();
-          },
-          error: (error) => {
-            console.log(error);
-            this.loading = false;
-          }
-        });*/
-      return false;
+      if (this.pseudo) {
+        this.processNexStep();
+        // TODO update API
+        /*
+        this._jcms
+          .get('plugins/zelli/member/pwd/' + this.pseudo)
+          .subscribe({
+            next: (rep) => {
+              // TODO error
+              this.processNexStep();
+            },
+            error: (error) => {
+              console.log(error);
+              this.loading = false;
+            }
+          });*/
+        return false;
+      }
+    } else if (this.step === 2) {
+      // test null => by DS ?
+      this.date = new Date(
+        ~~this.dateYear,
+        ~~this.dateMonth - 1,
+        ~~this.dateDay
+      );
+
+      if (this._utilDate.testDate(this.date)) {
+        return true;
+      } else {
+        // TODO error
+      }
     }
 
     this.loading = false;

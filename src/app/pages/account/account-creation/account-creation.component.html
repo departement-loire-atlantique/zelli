@@ -1,15 +1,12 @@
 <div class="account-create full-bg-color">
-  <h1>{{ lblService.getLbl('accountCreateTitle')}}</h1>
+  <h1>{{ lblService.getLbl('accountCreateTitle') }}</h1>
 
-  <div>
-    {{ step }} / {{ maxStep }}
-  </div>
+  <div>{{ step }} / {{ maxStep }}</div>
   <h2>
-    {{ lblService.getLbl(titleByStep[step-1]) }}
+    {{ lblService.getLbl(titleByStep[step - 1]) }}
   </h2>
 
   <div [ngSwitch]="step">
-
     <div *ngSwitchCase="1">
       <div class="ds44-posRel">
         <label for="input-pseudo" class="ds44-formLabel">
@@ -17,13 +14,51 @@
             <span>Prénom ou pseudo<sup aria-hidden="true">*</sup></span>
           </span>
         </label>
-        <input [(ngModel)]="pseudo" id="input-pseudo" type="text" name="pseudo" class="ds44-inpStd" title="Prénom ou pseudo - obligatoire" required />
-        <button class="ds44-reset" type="button"><i class="icon icon-cross icon--sizeL" aria-hidden="true"></i><span
-            class="visually-hidden">Effacer le contenu saisi dans le champ : Prénom ou pseudo</span></button>
+        <input [(ngModel)]="pseudo" id="input-pseudo" type="text" name="pseudo" class="ds44-inpStd"
+          title="Prénom ou pseudo - obligatoire" required />
+        <button class="ds44-reset" type="button">
+          <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i><span class="visually-hidden">Effacer le contenu
+            saisi dans le champ : Prénom ou pseudo</span>
+        </button>
       </div>
     </div>
 
-    <div *ngSwitchCase="2">output 2</div>
+    <div *ngSwitchCase="2">
+      <div class="ds44-posRel">
+        <label for="date-birth" class="ds44-formLabel ds44-datepicker"><span
+            class="ds44-labelTypePlaceholder"><span>Date de naissance</span></span></label>
+
+        <div data-name="date-birth" class="ds44-datepicker__shape ds44-inpStd">
+          <input [(ngModel)]="dateDay" id="date-birth" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2"
+            title="Date de naissance : Jour (ex. 04)" data-is-date="true" aria-describedby="explanation-date-birth" />
+          <span>/</span>
+          <input [(ngModel)]="dateMonth" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2"
+            title="Date de naissance : Mois (ex. 05)" data-is-date="true" aria-describedby="explanation-date-birth" />
+          <span>/</span>
+          <input [(ngModel)]="dateYear" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4"
+            title="Date de naissance : Année (ex. 1977)" data-is-date="true"
+            aria-describedby="explanation-date-birth" />
+        </div>
+        <button class="ds44-reset" type="button">
+          <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+          <span class="visually-hidden">Effacer le contenu saisi dans le champ : Date de naissance</span>
+        </button>
+        <span class="ds44-calendar" aria-hidden="true" aria-describedby="">
+          <i class="icon icon-date icon--large" aria-hidden="true"></i>
+          <span class="visually-hidden">
+            Afficher le calendrier pour le champ : Date de naissance
+          </span>
+        </span>
+        <div class="vanilla-calendar hidden"></div>
+      </div>
+      <div class="ds44-field-information" aria-live="polite">
+        <ul class="ds44-field-information-list ds44-list">
+          <li id="explanation-date-birth" class="ds44-field-information-explanation">
+            Ex : 04/05/1977
+          </li>
+        </ul>
+      </div>
+    </div>
 
     <div *ngSwitchCase="3">output 3</div>
 
@@ -32,5 +67,7 @@
 
   <app-loader *ngIf="loading"></app-loader>
 
-  <button class="btn btn-big" (click)="nextStep()" [disabled]="loading">{{ lblBtnNext() }}</button>
+  <button class="btn btn-big" (click)="nextStep()" [disabled]="loading">
+    {{ lblBtnNext() }}
+  </button>
 </div>
