@@ -31,6 +31,8 @@ export type Location = {
 export type LocationFromApi = {
   id: string;
   title: string;
+  soustitre: string;
+  chapo: string;
   etageCouloirEscalier: string;
   entreeBatimentImmeuble: string;
   ndeVoie: string;
@@ -86,7 +88,7 @@ export type LocationFromApi = {
 export type ContactFromApi = {
   id: string;
   title: string;
-  sousTitre: string;
+  soustitre: string;
   chapo: string;
   nom: string;
   prenom: string;
@@ -106,7 +108,7 @@ export const mapContactFromApi = (contact: ContactFromApi): Contact => {
     id: contact.id,
     lastname: contact.nom,
     title: contact.title,
-    subTitle: contact.sousTitre,
+    subTitle: contact.soustitre,
     email: contact.adresseMail,
     idPicture: contact.photoDidentite,
     job: contact.fonction,

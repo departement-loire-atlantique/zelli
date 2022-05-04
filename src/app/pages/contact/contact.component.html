@@ -54,7 +54,9 @@
 
   <hr />
 
-  <div *ngIf="contact?.description" class="p-contact__description">
-    {{ contact?.description }}
-  </div>
+  <div
+    *ngIf="contact?.description"
+    class="p-contact__description"
+    [innerHtml]="contact?.description"
+  ></div>
 </div>

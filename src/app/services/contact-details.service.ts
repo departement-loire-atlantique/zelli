@@ -27,6 +27,8 @@ export class ContactDetailsService {
             .pipe(
               map((result) => ({
                 ...contactFromApi,
+                soustitre: result.soustitre,
+                chapo: result.chapo,
                 lieuDeRattachement: {
                   ...result,
                   city: result.commune.title,
