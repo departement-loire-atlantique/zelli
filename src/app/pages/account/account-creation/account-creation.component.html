@@ -60,7 +60,62 @@
       </div>
     </div>
 
-    <div *ngSwitchCase="3">output 3</div>
+    <div *ngSwitchCase="3">
+      <div class="ds44-posRel">
+        <label for="pwd" class="ds44-formLabel">
+          <span class="ds44-labelTypePlaceholder">
+            <span>Mot de passe<sup aria-hidden="true">*</sup>
+            </span>
+          </span>
+        </label>
+
+        <input [(ngModel)]="pwd" type="password" id="pwd" name="pwd" class="ds44-inpStd"
+          title="Mot de passe - obligatoire" required autocomplete="current-password"
+          aria-describedby="explanation-pwd" />
+
+        <button class="ds44-showPassword" type="button">
+          <i class="icon icon-visuel icon--sizeL" aria-hidden="true"></i>
+          <span class="visually-hidden">Afficher le contenu saisi dans le champ : Mot de passe</span>
+        </button>
+
+        <button class="ds44-reset" type="button">
+          <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+          <span class="visually-hidden">Effacer le contenu saisi dans le champ : Mot de passe</span>
+        </button>
+      </div>
+
+      <div class="ds44-posRel">
+        <label for="pwdConfirm" class="ds44-formLabel">
+          <span class="ds44-labelTypePlaceholder">
+            <span>Confirmes ton mot de passe<sup aria-hidden="true">*</sup>
+            </span>
+          </span>
+        </label>
+
+        <input [(ngModel)]="pwdConfirm" type="password" id="pwdConfirm" name="pwdConfirm" class="ds44-inpStd"
+          title="Mot de passe - obligatoire" required autocomplete="current-password"
+          aria-describedby="explanation-pwdConfirm" />
+
+        <button class="ds44-showPassword" type="button">
+          <i class="icon icon-visuel icon--sizeL" aria-hidden="true"></i>
+          <span class="visually-hidden">Afficher le contenu saisi dans le champ : Confirmes ton mot de passe</span>
+        </button>
+
+        <button class="ds44-reset" type="button">
+          <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+          <span class="visually-hidden">Effacer le contenu saisi dans le champ : Confirmes ton mot de passe</span>
+        </button>
+      </div>
+
+      <div class="ds44-field-information" aria-live="polite">
+        <ul class="ds44-field-information-list ds44-list">
+          <li id="explanation-pwd" class="ds44-field-information-explanation">
+            Ton mot de passe doit comporter au moins : - Lorem ipsum dolor sit amet - Lorem ipsum dolor sit amet - Lorem
+            ipsum dolor sit amet
+          </li>
+        </ul>
+      </div>
+    </div>
 
     <div *ngSwitchDefault>Error</div>
   </div>

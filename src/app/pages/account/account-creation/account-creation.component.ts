@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 import { JcmsClientService } from '@/app/services/jcms-client.service';
@@ -30,6 +29,9 @@ export class AccountCreationComponent implements OnInit {
   dateDay: string = '';
   dateMonth: string = '';
   dateYear: string = '';
+
+  pwd: string = '';
+  pwdConfirm: string = '';
 
   constructor(
     public lblService: LabelMngService,
@@ -70,6 +72,12 @@ export class AccountCreationComponent implements OnInit {
       );
 
       if (this._utilDate.testDate(this.date)) {
+        return true;
+      } else {
+        // TODO error
+      }
+    } else if (this.step === 3) {
+      if (this.pwd && this.pwdConfirm && this.pwd === this.pwdConfirm) {
         return true;
       } else {
         // TODO error
