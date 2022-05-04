@@ -33,6 +33,8 @@ export class AccountCreationComponent implements OnInit {
   pwd: string = '';
   pwdConfirm: string = '';
 
+  accountCreate: boolean = false;
+
   constructor(
     public lblService: LabelMngService,
     private _jcms: JcmsClientService,
@@ -110,12 +112,17 @@ export class AccountCreationComponent implements OnInit {
         .subscribe({
           next: (rep) => {
             // TODO
+
             // if ok
+            this.accountCreate = true;
           },
           error: (error) => {
             // TODO error
             console.log(error);
             this.loading = false;
+
+            // TODO sup
+            this.accountCreate = true;
           },
         });
       return;

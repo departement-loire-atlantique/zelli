@@ -1,4 +1,4 @@
-<div class="account-create full-bg-color">
+<div *ngIf="!accountCreate" class="account-create full-bg-color">
   <h1>{{ lblService.getLbl('accountCreateTitle') }}</h1>
 
   <div>{{ step }} / {{ maxStep }}</div>
@@ -125,4 +125,21 @@
   <button class="btn btn-big" (click)="nextStep()" [disabled]="loading">
     {{ lblBtnNext() }}
   </button>
+</div>
+
+<div *ngIf="accountCreate" class="account-create-end">
+  <img src="/assets/images/svg/illustration-reussite.svg" />
+  <h1>
+    C’est bon, ton inscription sur Zelli est faite !
+  </h1>
+  <div>
+    Tu peux compléter ton profil, gérer ta liste de contacts, poser des questions via l’appli ou t’envoyer des alertes
+    personnalisées.
+  </div>
+  <a class="btn btn-big" [routerLink]="'/TODO'">
+    Compléter mon profil
+  </a>
+  <a class="btn btn-big btn-light" [routerLink]="'/intro'">
+    Explorer les contenus
+  </a>
 </div>
