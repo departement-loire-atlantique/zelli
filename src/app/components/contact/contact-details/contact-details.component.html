@@ -1,4 +1,3 @@
-<!-- TODO: remove this line to handle it inside the contact-component -->
 <app-heading *ngIf="!noTitle && contact?.title" [options]="{ noBold: true }">
   <a
     class="link"
@@ -12,15 +11,22 @@
   <app-icon name="marker"></app-icon>
   <div class="c-contact-details__sub-line">
     <span>{{
+      [contact?.location?.building, contact?.location?.stairOrCorridor]
+        .join(' ')
+        .trim()
+    }}</span>
+    <span>{{
       [contact?.location?.roadNumber, contact?.location?.roadName]
         .join(' ')
         .trim()
     }}</span>
     <span>{{
       [
+        contact?.location?.place,
         contact?.location?.cs,
         contact?.location?.postalCode,
-        contact?.location?.city
+        contact?.location?.city,
+        contact?.location?.cedex
       ]
         .join(' ')
         .trim()

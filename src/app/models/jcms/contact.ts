@@ -16,16 +16,16 @@ export type Contact = {
 export type Location = {
   id: string;
   title: string;
+  building: string;
   stairOrCorridor: string;
-  enterNumber: string;
   roadNumber: string;
   roadName: string;
   place: string;
+  cs: string;
   postalCode: string;
   city: string;
-  website: string[];
-  cs: string;
   cedex: string;
+  website: string[];
 };
 
 export type LocationFromApi = {
@@ -118,7 +118,7 @@ export const mapContactFromApi = (contact: ContactFromApi): Contact => {
       id: contact.lieuDeRattachement.id,
       title: contact.lieuDeRattachement.title,
       city: contact.lieuDeRattachement.commune?.title,
-      enterNumber: contact.lieuDeRattachement.entreeBatimentImmeuble,
+      building: contact.lieuDeRattachement.entreeBatimentImmeuble,
       place: contact.lieuDeRattachement.lieudit,
       postalCode: contact.lieuDeRattachement.codePostal,
       roadName: contact.lieuDeRattachement.libelleDeVoie,

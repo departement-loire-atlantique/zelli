@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Subscription, bufferCount, map, mergeMap } from 'rxjs';
+import { Subscription, map } from 'rxjs';
 
 import { Contact } from '@/app/models/jcms/contact';
 import { ContactDetailsService } from '@/app/services/contact-details.service';
@@ -83,6 +83,18 @@ export class PageContactComponent implements OnInit, OnDestroy {
 
   getContactLocation(): string {
     const location = this.contact?.location;
-    return `${location?.roadNumber} ${location?.roadName} ${location?.cs} ${location?.postalCode} ${location?.city}`;
+    return [
+      location?.building,
+      location?.stairOrCorridor,
+      location?.roadNumber,
+      location?.roadName,
+      location?.place,
+      location?.cs,
+      location?.postalCode,
+      location?.city,
+      location?.cedex,
+    ]
+      .join(' ')
+      .trim();
   }
 }
