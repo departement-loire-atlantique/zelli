@@ -77,13 +77,13 @@
       ></app-list>
     </section>
 
-    <ng-container *ngIf="article.fichesStructures">
+    <section class="contacts" *ngIf="article.fichesStructures">
       <app-contact
         name="Les contacts"
         [contactIds]="getContactsForListDisplay(article.fichesStructures)"
       >
       </app-contact>
-    </ng-container>
+    </section>
   </div>
 </main>
 

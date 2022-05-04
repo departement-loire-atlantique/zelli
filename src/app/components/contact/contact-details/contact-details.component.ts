@@ -10,4 +10,7 @@ import { Contact } from '@/app/models/jcms/contact';
 export class ContactDetailsComponent {
   @Input()
   contact?: Partial<Contact>;
+
+  @Input()
+  noTitle = false;
 }

@@ -1,17 +1,21 @@
 <div class="p-contact">
   <div class="p-contact__header">
-    <small>Mes contacts</small>
+    <app-back
+      text=""
+      picto="icon-arrow-left icon--large"
+      class="back-in-top"
+    ></app-back>
+    <small *ngIf="fromContactPage">Mes contacts</small>
+    <h3>{{ contact?.title }}</h3>
     <br />
-    <h3>Repairs 44</h3>
-    <br />
-    <p>
-      Association d'entraide pour les jeunes issu.es de l'Aide sociale à
-      l'enfance
+    <p *ngIf="contact?.subTitle">
+      {{ contact?.subTitle }}
     </p>
   </div>
   <div class="p-contact__actions">
     <a
-      href="#"
+      *ngIf="contact?.phoneNumber"
+      href="tel:{{ contact?.phoneNumber }}"
       target="_blank"
       rel="noopener noreferrer"
       class="p-contact__actions__item"
@@ -19,7 +23,8 @@
       <app-icon name="phone"></app-icon>
     </a>
     <a
-      href="#"
+      *ngIf="contact?.email"
+      href="mailto:{{ contact?.email }}"
       target="_blank"
       rel="noopener noreferrer"
       class="p-contact__actions__item"
@@ -27,7 +32,10 @@
       <app-icon name="mail"></app-icon>
     </a>
     <a
-      href="#"
+      *ngIf="contact?.location"
+      href="https://www.google.com/maps/search/?api=1&query={{
+        getContactLocation()
+      }}"
       target="_blank"
       rel="noopener noreferrer"
       class="p-contact__actions__item"
@@ -38,22 +46,15 @@
 
   <hr />
 
-  <app-contact
-    *ngIf="contactId"
-    [contactIds]="[contactId]"
-    noHeader
-  ></app-contact>
+  <app-contact-details
+    *ngIf="!isLoading && !isError"
+    [contact]="contact"
+    [noTitle]="true"
+  ></app-contact-details>
 
   <hr />
 
-  <div class="p-contact__description">
-    lorem ipsum dolor sit amet et concetur lorem ipsum dolor sit amet et
-    concetur lorem ipsum dolor sit amet et concetur lorem ipsum dolor sit amet
-    et concetur lorem ipsum dolor sit amet et concetur lorem ipsum dolor sit
-    amet et concetur lorem ipsum dolor sit amet et concetur lorem ipsum dolor
-    sit amet et concetur lorem ipsum dolor sit amet et concetur lorem ipsum
-    dolor sit amet et concetur lorem ipsum dolor sit amet et concetur lorem
-    ipsum dolor sit amet et concetur lorem ipsum dolor sit amet et concetur
-    lorem ipsum dolor sit amet et concetur
+  <div *ngIf="contact?.description" class="p-contact__description">
+    {{ contact?.description }}
   </div>
 </div>

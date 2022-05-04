@@ -1,6 +1,8 @@
 export type Contact = {
   id: string;
   title: string;
+  subTitle: string;
+  description: string;
   firstname: string;
   lastname: string;
   gender: string;
@@ -84,6 +86,8 @@ export type LocationFromApi = {
 export type ContactFromApi = {
   id: string;
   title: string;
+  sousTitre: string;
+  chapo: string;
   nom: string;
   prenom: string;
   civilite: string;
@@ -95,16 +99,19 @@ export type ContactFromApi = {
 };
 
 export const mapContactFromApi = (contact: ContactFromApi): Contact => {
+  console.log('coucou', contact);
   return {
     firstname: contact.prenom,
     gender: contact.civilite,
     id: contact.id,
     lastname: contact.nom,
     title: contact.title,
+    subTitle: contact.sousTitre,
     email: contact.adresseMail,
     idPicture: contact.photoDidentite,
     job: contact.fonction,
     phoneNumber: contact.telephone,
+    description: contact.chapo,
     location: {
       id: contact.lieuDeRattachement.id,
       title: contact.lieuDeRattachement.title,

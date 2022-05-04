@@ -1,8 +1,11 @@
 <!-- TODO: remove this line to handle it inside the contact-component -->
-<app-heading *ngIf="contact?.title" [options]="{ noBold: true }">
-  <a style="text-decoration: none" [routerLink]="['/contacts', contact?.id]">{{
-    contact?.title
-  }}</a>
+<app-heading *ngIf="!noTitle && contact?.title" [options]="{ noBold: true }">
+  <a
+    class="link"
+    style="text-decoration: none"
+    [routerLink]="['/contacts', contact?.id]"
+    >{{ contact?.title }}</a
+  >
 </app-heading>
 
 <div class="c-contact-details__line" *ngIf="contact?.location">
