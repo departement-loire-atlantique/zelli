@@ -35,11 +35,11 @@ export class JcmsClientService {
     return new JcmsPager<T>(this, endpoint, option).get();
   }
 
-  post(endpoint: string, body: any, option?: OptionHttp): Observable<any> {
+  post(endpoint: string, body?: any, option?: OptionHttp): Observable<any> {
     return this.http.post(this._url + endpoint, body, option);
   }
 
-  put(endpoint: string, body: any, option?: OptionHttp): Observable<any> {
+  put(endpoint: string, body?: any, option?: OptionHttp): Observable<any> {
     return this.http.put(this._url + endpoint, body, option);
   }
 

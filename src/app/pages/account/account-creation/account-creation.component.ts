@@ -100,7 +100,25 @@ export class AccountCreationComponent implements OnInit {
 
   private processNexStep() {
     if (this.step >= this.maxStep) {
-      // TODO end
+      // TODO create
+      this._jcms
+        .put('plugins/zelli/member/pwd/' + this.pseudo, undefined, {
+          params: {
+            pwd: Buffer.from(this.pwd).toString('base64'),
+          },
+        })
+        .subscribe({
+          next: (rep) => {
+            // TODO
+            // if ok
+          },
+          error: (error) => {
+            // TODO error
+            console.log(error);
+            this.loading = false;
+          },
+        });
+      return;
     }
 
     this.step++;
