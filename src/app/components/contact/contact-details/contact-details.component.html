@@ -1,54 +1,56 @@
-<ng-container *ngIf="!isLoading && !isError">
-  <app-heading *ngIf="name" [options]="{ noBold: true }">
-    <a
-      style="text-decoration: none"
-      [routerLink]="['/contacts', contact?.id]"
-      >{{ name }}</a
-    >
-  </app-heading>
+<app-heading *ngIf="!noTitle && contact?.title" [options]="{ noBold: true }">
+  <a
+    class="link"
+    style="text-decoration: none"
+    [routerLink]="['/contacts', contact?.id]"
+    >{{ contact?.title }}</a
+  >
+</app-heading>
 
-  <div class="c-contact-details__line" *ngIf="contact?.location">
-    <span class="icon icon-marker"></span>
-    <div class="c-contact-details__sub-line">
-      <span>{{
-        [contact?.location?.roadNumber, contact?.location?.roadName].join(' ')
-      }}</span>
-      <span>{{
-        [
-          contact?.location?.cs,
-          contact?.location?.postalCode,
-          contact?.location?.city
-        ].join(' ')
-      }}</span>
-    </div>
+<div class="c-contact-details__line" *ngIf="contact?.location">
+  <app-icon name="marker"></app-icon>
+  <div class="c-contact-details__sub-line">
+    <span>{{
+      [contact?.location?.building, contact?.location?.stairOrCorridor]
+        .join(' ')
+        .trim()
+    }}</span>
+    <span>{{
+      [contact?.location?.roadNumber, contact?.location?.roadName]
+        .join(' ')
+        .trim()
+    }}</span>
+    <span>{{
+      [
+        contact?.location?.place,
+        contact?.location?.cs,
+        contact?.location?.postalCode,
+        contact?.location?.city,
+        contact?.location?.cedex
+      ]
+        .join(' ')
+        .trim()
+    }}</span>
   </div>
+</div>
 
-  <div class="c-contact-details__line" *ngIf="contact?.phoneNumber">
-    <span class="icon icon-phone"></span>
-    <a href="tel:{{ contact?.phoneNumber }}">{{ contact?.phoneNumber }}</a>
-  </div>
+<div class="c-contact-details__line" *ngIf="contact?.phoneNumber">
+  <app-icon name="phone"></app-icon>
+  <a href="tel:{{ contact?.phoneNumber }}">{{ contact?.phoneNumber }}</a>
+</div>
 
-  <div class="c-contact-details__line" *ngIf="contact?.email">
-    <span class="icon icon-mail"></span>
-    <a href="mailto:{{ contact?.email }}">{{ contact?.email }}</a>
-  </div>
+<div class="c-contact-details__line" *ngIf="contact?.email">
+  <app-icon name="mail"></app-icon>
+  <a href="mailto:{{ contact?.email }}">{{ contact?.email }}</a>
+</div>
 
-  <div class="c-contact-details__line" *ngIf="contact?.location?.website">
-    <span class="icon icon-link"></span>
-    <a
-      href="https://{{ contact?.location?.website }}"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      {{ contact?.location?.website }}
-    </a>
-  </div>
-</ng-container>
-
-<app-loader *ngIf="isLoading" color="blue"></app-loader>
-
-<app-alert
-  *ngIf="!isLoading && isError"
-  status="error"
-  description="Impossible de charger les informations des contacts."
-></app-alert>
+<div class="c-contact-details__line" *ngIf="contact?.location?.website">
+  <app-icon name="link"></app-icon>
+  <a
+    href="https://{{ contact?.location?.website }}"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    {{ contact?.location?.website }}
+  </a>
+</div>

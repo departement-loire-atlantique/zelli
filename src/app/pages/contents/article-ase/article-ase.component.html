@@ -77,20 +77,13 @@
       ></app-list>
     </section>
 
-    <ng-container *ngIf="article.fichesStructures" >
-      <app-contact *ngIf="article.fichesStructures.length === 1">
-        <app-contact-details
-          *ngFor="let contact of article.fichesStructures"
-          [name]="contact.title"
-          [contactId]="contact.id"
-        ></app-contact-details>
+    <section class="contacts" *ngIf="article.fichesStructures">
+      <app-contact
+        name="Les contacts"
+        [contactIds]="getContactsForListDisplay(article.fichesStructures)"
+      >
       </app-contact>
-      <app-contact *ngIf="article.fichesStructures.length > 1">
-        <app-list
-          [items]="getContactsForListDisplay(article.fichesStructures)"
-        ></app-list>
-      </app-contact>
-    </ng-container>
+    </section>
   </div>
 </main>
 

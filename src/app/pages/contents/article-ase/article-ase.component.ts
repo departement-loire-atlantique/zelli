@@ -4,7 +4,7 @@ import { ArticleASE, LiensUtils } from 'src/app/models/jcms/articleASE';
 import { JcmsClientService } from 'src/app/services/jcms-client.service';
 
 import { Item } from '@/app/components/list/list.component';
-import { ContactFromApi } from '@/app/models/jcms/contact';
+import { ContactFromApi, mapContactFromApi } from '@/app/models/jcms/contact';
 import { FaqEntry } from '@/app/models/jcms/faqEntry';
 import { LabelMngService } from '@/app/services/label-mng.service';
 
@@ -85,12 +85,7 @@ export class ArticleASEComponent implements OnInit {
     return item;
   }
 
-  getContactsForListDisplay(
-    contacts: Pick<ContactFromApi, 'id' | 'title'>[]
-  ): Item[] {
-    return contacts.map((contact) => ({
-      lbl: contact.title,
-      url: `/contacts/${contact.id}`,
-    }));
+  getContactsForListDisplay(contacts: Pick<ContactFromApi, 'id'>[]) {
+    return contacts.map((contact) => contact.id);
   }
 }

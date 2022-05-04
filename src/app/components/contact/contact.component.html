@@ -1,4 +1,25 @@
-<app-heading icon="📱"> Les contacts</app-heading>
+<app-heading *ngIf="name" icon="📱">{{ name }}</app-heading>
 <div class="c-contact__wrapper">
-  <ng-content></ng-content>
+  <ng-container *ngIf="!isLoading && !isError">
+    <!-- If we have multiple contacts, show them as a list -->
+    <app-list
+      *ngIf="contactIds.length > 1"
+      [items]="getContactsForListing()"
+      [noSeparator]="true"
+    ></app-list>
+
+    <!-- If we only have 1 contact, show the details -->
+    <app-contact-details
+      *ngIf="contactIds.length === 1"
+      [contact]="contacts[0]"
+    ></app-contact-details>
+  </ng-container>
+
+  <app-loader *ngIf="isLoading" color="blue"></app-loader>
+
+  <app-alert
+    *ngIf="!isLoading && isError"
+    status="error"
+    description="Impossible de charger les informations des contacts."
+  ></app-alert>
 </div>

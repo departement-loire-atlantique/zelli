@@ -1,8 +1,62 @@
-<hr />
+<div class="p-contact">
+  <div class="p-contact__header">
+    <app-back
+      text=""
+      picto="icon-arrow-left icon--large"
+      class="back-in-top"
+    ></app-back>
+    <small *ngIf="fromContactPage">Mes contacts</small>
+    <h3>{{ contact?.title }}</h3>
+    <br />
+    <p *ngIf="contact?.subTitle">
+      {{ contact?.subTitle }}
+    </p>
+  </div>
+  <div class="p-contact__actions">
+    <a
+      *ngIf="contact?.phoneNumber"
+      href="tel:{{ contact?.phoneNumber }}"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="p-contact__actions__item"
+    >
+      <app-icon name="phone"></app-icon>
+    </a>
+    <a
+      *ngIf="contact?.email"
+      href="mailto:{{ contact?.email }}"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="p-contact__actions__item"
+    >
+      <app-icon name="mail"></app-icon>
+    </a>
+    <a
+      *ngIf="contact?.location"
+      href="https://www.google.com/maps/search/?api=1&query={{
+        getContactLocation()
+      }}"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="p-contact__actions__item"
+    >
+      <app-icon name="marker"></app-icon>
+    </a>
+  </div>
 
-<app-contact-details
-  *ngIf="contactId"
-  [contactId]="contactId"
-></app-contact-details>
+  <hr />
 
-<hr />
+  <app-contact-details
+    *ngIf="!isLoading && !isError"
+    [contact]="contact"
+    [noTitle]="true"
+  ></app-contact-details>
+
+  <hr />
+
+  <div
+    *ngIf="contact?.description"
+    class="p-contact__description"
+    [innerHtml]="contact?.description"
+  ></div>
+</div>

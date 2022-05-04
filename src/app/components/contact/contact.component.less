@@ -1,7 +1,19 @@
 @import '/src/theme/importDep.less';
 
+app-heading {
+  color: @blue-dark;
+}
+
 .c-contact {
   &__wrapper {
-    padding: 1rem;
+    app-contact-details {
+      margin-top: 4rem;
+      margin-left: 2rem;
+    }
+
+    app-list {
+      margin: 0;
+      margin-left: -1rem;
+    }
   }
 }

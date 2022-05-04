@@ -4,19 +4,30 @@
   display: flex;
   flex-direction: column;
 
+  app-heading {
+    margin-bottom: 1rem;
+    font-size: 0.8em;
+  }
+
+  a {
+    color: @blue-grey;
+  }
+
   .c-contact-details__line {
     display: flex;
-    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
     color: @blue-grey;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
 
     a {
       color: @blue;
     }
 
-    .icon {
+    app-icon {
       color: @blue;
-      width: 2rem;
-      margin-top: 0.4rem;
       margin-right: 1rem;
     }
   }

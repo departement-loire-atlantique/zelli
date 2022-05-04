@@ -2,7 +2,7 @@
   *ngIf="items && items.length > 0"
   [class]="'ds44-list ' + (cssClass ? cssClass : '')"
 >
-  <li *ngFor="let itItem of items">
+  <li *ngFor="let itItem of items" [class.with-separator]="!noSeparator">
     <ng-template #content>
       <span class="lbl-link-wrapper">
         <img *ngIf="itItem.img" [src]="itItem.img" aria-hidden="true" />

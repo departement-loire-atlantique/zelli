@@ -11,6 +11,7 @@ import { CarouselComponent } from '@/app/components/contents/carousel/carousel.c
 import { VideoComponent } from '@/app/components/contents/video/video.component';
 import { HasHelpedComponent } from '@/app/components/has-helped/has-helped.component';
 import { HeadingComponent } from '@/app/components/heading/heading.component';
+import { IconComponent } from '@/app/components/icon/icon.component';
 import { LoaderComponent } from '@/app/components/loader/loader.component';
 import { MainMenuComponent } from '@/app/components/main-menu/main-menu.component';
 import { PageTitleComponent } from '@/app/components/page-title/page-title.component';
@@ -40,6 +41,7 @@ import { ResearchBtnComponent } from './research-btn/research-btn.component';
     ContactComponent,
     ContactDetailsComponent,
     ResearchBtnComponent,
+    IconComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -60,6 +62,7 @@ import { ResearchBtnComponent } from './research-btn/research-btn.component';
     HeadingComponent,
     ContactDetailsComponent,
     ResearchBtnComponent,
+    IconComponent,
   ],
 })
 export class SharedModule {}
