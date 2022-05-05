@@ -45,6 +45,10 @@ export class AccountCreationComponent implements OnInit {
     console.log('TODO');
   }
 
+  /**
+   * Validate curent step
+   * @returns true if curent step is ok
+   */
   public validStep(): boolean {
     if (this.step === 1) {
       if (this.pseudo) {
@@ -55,14 +59,16 @@ export class AccountCreationComponent implements OnInit {
           .get('plugins/zelli/member/pwd/' + this.pseudo)
           .subscribe({
             next: (rep) => {
-              // TODO error
+              // TODO error DS
               this.processNexStep();
             },
             error: (error) => {
+              // TODO error DS
               console.log(error);
               this.loading = false;
             }
           });*/
+        // valide step after result of WS
         return false;
       }
     } else if (this.step === 2) {
@@ -76,13 +82,13 @@ export class AccountCreationComponent implements OnInit {
       if (this._utilDate.testDate(this.date)) {
         return true;
       } else {
-        // TODO error
+        // TODO error DS
       }
     } else if (this.step === 3) {
       if (this.pwd && this.pwdConfirm && this.pwd === this.pwdConfirm) {
         return true;
       } else {
-        // TODO error
+        // TODO error DS
       }
     }
 
@@ -101,8 +107,9 @@ export class AccountCreationComponent implements OnInit {
   }
 
   private processNexStep() {
+    // if end => create account
     if (this.step >= this.maxStep) {
-      // TODO create
+      // TODO create update API
       this._jcms
         .put('plugins/zelli/member/pwd/' + this.pseudo, undefined, {
           params: {
@@ -127,6 +134,7 @@ export class AccountCreationComponent implements OnInit {
         });
       return;
     }
+    //else next step
 
     this.step++;
     this.loading = false;
