@@ -1,0 +1,55 @@
+@import "/src/theme/importDep.less";
+
+.account-create {
+
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  HEADER {
+    H1 {
+      margin: 55px 50px 0;
+    }
+  }
+
+  MAIN {
+    .step-infos {
+      margin: 0 20px 25px;
+
+      .step-num {
+        font-size: 17px;
+      }
+
+      // .step-title {
+      //   font-size: 17px;
+      // }
+    }
+
+    .curent-step {
+      margin: 0 20px;
+
+      .ds44-field-information {
+        * {
+          color: @white;
+        }
+      }
+
+      .step-date {
+        text-align: initial;
+      }
+    }
+  }
+
+  FOOTER {
+    border: none;
+  }
+}
+
+.account-create-end {
+  text-align: center;
+
+  .create-end-msg {
+    margin: 0 50px;
+  }
+}

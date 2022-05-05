@@ -1,140 +1,153 @@
 <div *ngIf="!accountCreate" class="account-create full-bg-color">
-  <h1>{{ lblService.getLbl('accountCreateTitle') }}</h1>
+  <header>
+    <h1>{{ lblService.getLbl('accountCreateTitle') }}</h1>
+  </header>
 
-  <div>{{ step }} / {{ maxStep }}</div>
-  <h2>
-    {{ lblService.getLbl(titleByStep[step - 1]) }}
-  </h2>
-
-  <div [ngSwitch]="step">
-    <div *ngSwitchCase="1">
-      <div class="ds44-posRel">
-        <label for="input-pseudo" class="ds44-formLabel">
-          <span class="ds44-labelTypePlaceholder">
-            <span>Prénom ou pseudo<sup aria-hidden="true">*</sup></span>
-          </span>
-        </label>
-        <input [(ngModel)]="pseudo" id="input-pseudo" type="text" name="pseudo" class="ds44-inpStd"
-          title="Prénom ou pseudo - obligatoire" required />
-        <button class="ds44-reset" type="button">
-          <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i><span class="visually-hidden">Effacer le contenu
-            saisi dans le champ : Prénom ou pseudo</span>
-        </button>
-      </div>
+  <main>
+    <div class="step-infos">
+      <div class="step-num">{{ step }} / {{ maxStep }}</div>
+      <h2 class="step-title">
+        {{ lblService.getLbl(titleByStep[step - 1]) }}
+      </h2>
     </div>
 
-    <div *ngSwitchCase="2">
-      <div class="ds44-posRel">
-        <label for="date-birth" class="ds44-formLabel ds44-datepicker"><span
-            class="ds44-labelTypePlaceholder"><span>Date de naissance</span></span></label>
-
-        <div data-name="date-birth" class="ds44-datepicker__shape ds44-inpStd">
-          <input [(ngModel)]="dateDay" id="date-birth" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2"
-            title="Date de naissance : Jour (ex. 04)" data-is-date="true" aria-describedby="explanation-date-birth" />
-          <span>/</span>
-          <input [(ngModel)]="dateMonth" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2"
-            title="Date de naissance : Mois (ex. 05)" data-is-date="true" aria-describedby="explanation-date-birth" />
-          <span>/</span>
-          <input [(ngModel)]="dateYear" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4"
-            title="Date de naissance : Année (ex. 1977)" data-is-date="true"
-            aria-describedby="explanation-date-birth" />
+    <div [ngSwitch]="step" class="curent-step">
+      <div *ngSwitchCase="1">
+        <div class="ds44-posRel">
+          <label for="input-pseudo" class="ds44-formLabel">
+            <span class="ds44-labelTypePlaceholder">
+              <span>Prénom ou pseudo<sup aria-hidden="true">*</sup></span>
+            </span>
+          </label>
+          <input [(ngModel)]="pseudo" id="input-pseudo" type="text" name="pseudo" class="ds44-inpStd"
+            title="Prénom ou pseudo - obligatoire" required />
+          <button class="ds44-reset" type="button">
+            <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i><span class="visually-hidden">Effacer le
+              contenu
+              saisi dans le champ : Prénom ou pseudo</span>
+          </button>
         </div>
-        <button class="ds44-reset" type="button">
-          <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
-          <span class="visually-hidden">Effacer le contenu saisi dans le champ : Date de naissance</span>
-        </button>
-        <span class="ds44-calendar" aria-hidden="true" aria-describedby="">
-          <i class="icon icon-date icon--large" aria-hidden="true"></i>
-          <span class="visually-hidden">
-            Afficher le calendrier pour le champ : Date de naissance
-          </span>
-        </span>
-        <div class="vanilla-calendar hidden"></div>
       </div>
-      <div class="ds44-field-information" aria-live="polite">
-        <ul class="ds44-field-information-list ds44-list">
-          <li id="explanation-date-birth" class="ds44-field-information-explanation">
-            Ex : 04/05/1977
-          </li>
-        </ul>
-      </div>
-    </div>
 
-    <div *ngSwitchCase="3">
-      <div class="ds44-posRel">
-        <label for="pwd" class="ds44-formLabel">
-          <span class="ds44-labelTypePlaceholder">
-            <span>Mot de passe<sup aria-hidden="true">*</sup>
+      <div *ngSwitchCase="2">
+        <div class="ds44-posRel step-date">
+          <label for="date-birth" class="ds44-formLabel ds44-datepicker"><span
+              class="ds44-labelTypePlaceholder"><span>Date de naissance</span></span></label>
+
+          <div data-name="date-birth" class="ds44-datepicker__shape ds44-inpStd">
+            <input [(ngModel)]="dateDay" id="date-birth" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2"
+              title="Date de naissance : Jour (ex. 04)" data-is-date="true" aria-describedby="explanation-date-birth" />
+            <span>/</span>
+            <input [(ngModel)]="dateMonth" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2"
+              title="Date de naissance : Mois (ex. 05)" data-is-date="true" aria-describedby="explanation-date-birth" />
+            <span>/</span>
+            <input [(ngModel)]="dateYear" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4"
+              title="Date de naissance : Année (ex. 1977)" data-is-date="true"
+              aria-describedby="explanation-date-birth" />
+          </div>
+          <button class="ds44-reset" type="button">
+            <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+            <span class="visually-hidden">Effacer le contenu saisi dans le champ : Date de naissance</span>
+          </button>
+          <span class="ds44-calendar" aria-hidden="true" aria-describedby="">
+            <i class="icon icon-date icon--large" aria-hidden="true"></i>
+            <span class="visually-hidden">
+              Afficher le calendrier pour le champ : Date de naissance
             </span>
           </span>
-        </label>
-
-        <input [(ngModel)]="pwd" type="password" id="pwd" name="pwd" class="ds44-inpStd"
-          title="Mot de passe - obligatoire" required autocomplete="current-password"
-          aria-describedby="explanation-pwd" />
-
-        <button class="ds44-showPassword" type="button">
-          <i class="icon icon-visuel icon--sizeL" aria-hidden="true"></i>
-          <span class="visually-hidden">Afficher le contenu saisi dans le champ : Mot de passe</span>
-        </button>
-
-        <button class="ds44-reset" type="button">
-          <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
-          <span class="visually-hidden">Effacer le contenu saisi dans le champ : Mot de passe</span>
-        </button>
+          <div class="vanilla-calendar hidden"></div>
+        </div>
+        <div class="ds44-field-information" aria-live="polite">
+          <ul class="ds44-field-information-list ds44-list">
+            <li id="explanation-date-birth" class="ds44-field-information-explanation">
+              Ex : 04/05/1977
+            </li>
+          </ul>
+        </div>
       </div>
 
-      <div class="ds44-posRel">
-        <label for="pwdConfirm" class="ds44-formLabel">
-          <span class="ds44-labelTypePlaceholder">
-            <span>Confirmes ton mot de passe<sup aria-hidden="true">*</sup>
+      <div *ngSwitchCase="3">
+        <div class="ds44-posRel">
+          <label for="pwd" class="ds44-formLabel">
+            <span class="ds44-labelTypePlaceholder">
+              <span>Mot de passe<sup aria-hidden="true">*</sup>
+              </span>
             </span>
-          </span>
-        </label>
+          </label>
 
-        <input [(ngModel)]="pwdConfirm" type="password" id="pwdConfirm" name="pwdConfirm" class="ds44-inpStd"
-          title="Mot de passe - obligatoire" required autocomplete="current-password"
-          aria-describedby="explanation-pwdConfirm" />
+          <input [(ngModel)]="pwd" type="password" id="pwd" name="pwd" class="ds44-inpStd"
+            title="Mot de passe - obligatoire" required autocomplete="current-password"
+            aria-describedby="explanation-pwd" />
 
-        <button class="ds44-showPassword" type="button">
-          <i class="icon icon-visuel icon--sizeL" aria-hidden="true"></i>
-          <span class="visually-hidden">Afficher le contenu saisi dans le champ : Confirmes ton mot de passe</span>
-        </button>
+          <button class="ds44-showPassword" type="button">
+            <i class="icon icon-visuel icon--sizeL" aria-hidden="true"></i>
+            <span class="visually-hidden">Afficher le contenu saisi dans le champ : Mot de passe</span>
+          </button>
 
-        <button class="ds44-reset" type="button">
-          <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
-          <span class="visually-hidden">Effacer le contenu saisi dans le champ : Confirmes ton mot de passe</span>
-        </button>
+          <button class="ds44-reset" type="button">
+            <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+            <span class="visually-hidden">Effacer le contenu saisi dans le champ : Mot de passe</span>
+          </button>
+        </div>
+
+        <div class="ds44-posRel">
+          <label for="pwdConfirm" class="ds44-formLabel">
+            <span class="ds44-labelTypePlaceholder">
+              <span>Confirmes ton mot de passe<sup aria-hidden="true">*</sup>
+              </span>
+            </span>
+          </label>
+
+          <input [(ngModel)]="pwdConfirm" type="password" id="pwdConfirm" name="pwdConfirm" class="ds44-inpStd"
+            title="Mot de passe - obligatoire" required autocomplete="current-password"
+            aria-describedby="explanation-pwdConfirm" />
+
+          <button class="ds44-showPassword" type="button">
+            <i class="icon icon-visuel icon--sizeL" aria-hidden="true"></i>
+            <span class="visually-hidden">Afficher le contenu saisi dans le champ : Confirmes ton mot de passe</span>
+          </button>
+
+          <button class="ds44-reset" type="button">
+            <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+            <span class="visually-hidden">Effacer le contenu saisi dans le champ : Confirmes ton mot de passe</span>
+          </button>
+        </div>
+
+        <div class="ds44-field-information" aria-live="polite">
+          <ul class="ds44-field-information-list ds44-list">
+            <li id="explanation-pwd" class="ds44-field-information-explanation">
+              Ton mot de passe doit comporter au moins : - Lorem ipsum dolor sit amet - Lorem ipsum dolor sit amet -
+              Lorem
+              ipsum dolor sit amet
+            </li>
+          </ul>
+        </div>
       </div>
 
-      <div class="ds44-field-information" aria-live="polite">
-        <ul class="ds44-field-information-list ds44-list">
-          <li id="explanation-pwd" class="ds44-field-information-explanation">
-            Ton mot de passe doit comporter au moins : - Lorem ipsum dolor sit amet - Lorem ipsum dolor sit amet - Lorem
-            ipsum dolor sit amet
-          </li>
-        </ul>
-      </div>
+      <div *ngSwitchDefault>Error</div>
     </div>
 
-    <div *ngSwitchDefault>Error</div>
-  </div>
+    <app-loader *ngIf="loading"></app-loader>
 
-  <app-loader *ngIf="loading"></app-loader>
+  </main>
 
-  <button class="btn btn-big" (click)="nextStep()" [disabled]="loading">
-    {{ lblBtnNext() }}
-  </button>
+  <footer>
+    <button class="btn btn-big" (click)="nextStep()" [disabled]="loading">
+      {{ lblBtnNext() }}
+    </button>
+  </footer>
 </div>
 
 <div *ngIf="accountCreate" class="account-create-end">
   <img src="/assets/images/svg/illustration-reussite.svg" />
-  <h1>
-    C’est bon, ton inscription sur Zelli est faite !
-  </h1>
-  <div>
-    Tu peux compléter ton profil, gérer ta liste de contacts, poser des questions via l’appli ou t’envoyer des alertes
-    personnalisées.
+  <div class="create-end-msg">
+    <h1>
+      C’est bon, ton inscription sur Zelli est faite !
+    </h1>
+    <div>
+      Tu peux compléter ton profil, gérer ta liste de contacts, poser des questions via l’appli ou t’envoyer des alertes
+      personnalisées.
+    </div>
   </div>
   <a class="btn btn-big" [routerLink]="'/TODO'">
     Compléter mon profil
