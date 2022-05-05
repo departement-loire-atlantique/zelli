@@ -146,4 +146,14 @@ export class AccountCreationComponent implements OnInit {
     }
     return 'Suivant';
   }
+
+  public customReturn(): boolean {
+    return this.step > 1;
+  }
+
+  public prevStep() {
+    if (this.step > 1) {
+      this.step--;
+    }
+  }
 }

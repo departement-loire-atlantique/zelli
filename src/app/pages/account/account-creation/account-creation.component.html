@@ -1,5 +1,8 @@
 <div *ngIf="!accountCreate" class="account-create full-bg-color">
   <header>
+    <app-back class="back-in-top color-w" (returnCustom)="prevStep()" [customProcess]="customReturn()" text=""
+      picto="icon-arrow-left icon--xlarge">
+    </app-back>
     <h1>{{ lblService.getLbl('accountCreateTitle') }}</h1>
   </header>
 
