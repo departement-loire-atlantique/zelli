@@ -142,9 +142,9 @@ export class AccountCreationComponent implements OnInit {
 
   public lblBtnNext(): string {
     if (this.step >= this.maxStep) {
-      return 'Créer mon compte';
+      return this.lblService.getLbl('accountCreateBtnEnd');
     }
-    return 'Suivant';
+    return this.lblService.getLbl('accountCreateBtnNextStep');
   }
 
   public customReturn(): boolean {

@@ -30,22 +30,95 @@ export const lbls: { [key: string]: lbl } = {
     propJcms: 'jcmsplugin.zelli.lbl.welcome.footer',
   },
 
+  // --------------------
   // Account Creation
   accountCreateTitle: {
     lbl: 'Créer mon compte',
     propJcms: 'jcmsplugin.zelli.lbl.account.create.title',
   },
+  accountCreateRequired: {
+    lbl: 'champs obligatoires',
+    propJcms: 'jcmsplugin.zelli.lbl.account.create.title.required',
+  },
+  accountCreateSupField: {
+    lbl: 'Effacer le contenu saisi dans le champ : ',
+    propJcms: 'jcmsplugin.zelli.lbl.account.create.sup.field',
+  },
+  accountCreateBtnNextStep: {
+    lbl: 'Suivant',
+    propJcms: 'jcmsplugin.zelli.lbl.account.create.btn.nextStep',
+  },
+  accountCreateBtnEnd: {
+    lbl: 'Créer mon compte',
+    propJcms: 'jcmsplugin.zelli.lbl.account.create.btn.end',
+  },
+  // step 1
   accountCreateStep1: {
     lbl: 'Saisis ton prénom ou un pseudo',
     propJcms: 'jcmsplugin.zelli.lbl.account.create.step1',
   },
+  accountCreateS1Field: {
+    lbl: 'Prénom ou pseudo',
+    propJcms: 'jcmsplugin.zelli.lbl.account.create.step1.field',
+  },
+  // step 2
   accountCreateStep2: {
     lbl: 'Quel âge as-tu ?',
     propJcms: 'jcmsplugin.zelli.lbl.account.create.step2',
   },
+  accountCreateS2FieldDate: {
+    lbl: 'Date de naissance',
+    propJcms: 'jcmsplugin.zelli.lbl.account.create.step2.date',
+  },
+  accountCreateS2FieldDateDisplay: {
+    lbl: 'Afficher le calendrier pour le champ : Date de naissance',
+    propJcms: 'jcmsplugin.zelli.lbl.account.create.step2.date.display',
+  },
+  accountCreateS2FieldDay: {
+    lbl: 'Date de naissance : Jour (ex. 04)',
+    propJcms: 'jcmsplugin.zelli.lbl.account.create.step2.date.day',
+  },
+  accountCreateS2FieldMonth: {
+    lbl: 'Date de naissance : Mois (ex. 05)',
+    propJcms: 'jcmsplugin.zelli.lbl.account.create.step2.date.month',
+  },
+  accountCreateS2FieldYear: {
+    lbl: 'Date de naissance : Année (ex. 1977)',
+    propJcms: 'jcmsplugin.zelli.lbl.account.create.step2.date.year',
+  },
+  // step 3
   accountCreateStep3: {
     lbl: 'Choisis ton mot de passe',
     propJcms: 'jcmsplugin.zelli.lbl.account.create.step3',
+  },
+  accountCreateS3PwdDisplay: {
+    lbl: 'Afficher le contenu saisi dans le champ : ',
+    propJcms: 'jcmsplugin.zelli.lbl.account.create.step3.display',
+  },
+  accountCreateS3FieldPwd: {
+    lbl: 'Mot de passe',
+    propJcms: 'jcmsplugin.zelli.lbl.account.create.step3.pwd',
+  },
+  accountCreateS3FieldPwdConfirm: {
+    lbl: 'Confirmes ton mot de passe',
+    propJcms: 'jcmsplugin.zelli.lbl.account.create.step3.pwdConfirm',
+  },
+  // END
+  accountCreateEnd: {
+    lbl: 'C’est bon, ton inscription sur Zelli est faite !',
+    propJcms: 'jcmsplugin.zelli.lbl.account.create.end',
+  },
+  accountCreateEndDesc: {
+    lbl: 'Tu peux compléter ton profil, gérer ta liste de contacts, poser des questions via l’appli ou t’envoyer des alertes personnalisées.',
+    propJcms: 'jcmsplugin.zelli.lbl.account.create.end.desc',
+  },
+  accountCreateEndBtnProfil: {
+    lbl: 'Compléter mon profil',
+    propJcms: 'jcmsplugin.zelli.lbl.account.create.end.btn.profil',
+  },
+  accountCreateEndBtnNext: {
+    lbl: 'Explorer les contenus',
+    propJcms: 'jcmsplugin.zelli.lbl.account.create.end.btn.next',
   },
 };
 
