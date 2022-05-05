@@ -97,7 +97,7 @@ export const lbls: { [key: string]: lbl } = {
   },
   accountCreateS3FieldPwd: {
     lbl: 'Mot de passe',
-    propJcms: 'jcmsplugin.zelli.lbl.account.create.step3.pwd',
+    propJcms: 'jcmsplugin.zelli.lbl.account.create.step3.pwdF',
   },
   accountCreateS3FieldPwdConfirm: {
     lbl: 'Confirmes ton mot de passe',
