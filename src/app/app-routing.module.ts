@@ -106,6 +106,11 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'account/login',
+    loadChildren: () =>
+      import('./pages/account/login/login.module').then((m) => m.LoginModule),
+  },
+  {
     path: '**',
     loadChildren: () =>
       import('./pages/errors/page-not-found/page-not-found.module').then(
