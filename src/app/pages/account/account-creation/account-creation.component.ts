@@ -9,7 +9,7 @@ import { DateService } from '@/app/services/utils/date.service';
   templateUrl: './account-creation.component.html',
   styleUrls: ['./account-creation.component.less'],
 })
-export class AccountCreationComponent implements OnInit {
+export class AccountCreationComponent {
   step: number = 1;
 
   maxStep: number = 3;
@@ -40,10 +40,6 @@ export class AccountCreationComponent implements OnInit {
     private _jcms: JcmsClientService,
     private _utilDate: DateService
   ) {}
-
-  ngOnInit(): void {
-    console.log('TODO');
-  }
 
   /**
    * Validate curent step
