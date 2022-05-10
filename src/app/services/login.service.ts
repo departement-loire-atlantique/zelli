@@ -1,6 +1,5 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 import { environment } from '@/environments/environment';
 
@@ -98,6 +97,7 @@ export class LoginService {
           }
         },
         error: (error) => {
+          this.clearPersonalToken();
           if (callback) {
             callback.func.call(callback.class, false, error.error.status);
           }
