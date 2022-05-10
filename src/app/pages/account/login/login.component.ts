@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
+import { LoginService } from '@/app/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -17,19 +18,48 @@ export class LoginComponent implements OnInit {
   process: boolean = false;
 
   constructor(
+    private _router: Router,
     public lblService: LabelMngService,
-    private _jcms: JcmsClientService
+    private _login: LoginService
   ) {}
 
   ngOnInit(): void {
-    console.log('TODO login');
+    if (this._login.isLogged) {
+      this._router.navigate(['/themes']);
+    }
   }
 
   public login() {
-    // this.process = true;
-    console.log(this.pseudo);
-    console.log(this.pwd);
-    console.log(this.saveLogin);
-    // TODO service account
+    this.process = true;
+
+    let error: boolean = false;
+    if (!this.pseudo || this.pseudo === '') {
+      error = true;
+      // TODO error DS
+    }
+    if (!this.pwd || this.pwd === '') {
+      error = true;
+      // TODO error DS
+    }
+
+    if (error) {
+      this.process = false;
+      return;
+    }
+
+    this._login.login(this.pseudo, this.pwd, this.saveLogin, {
+      class: this,
+      func: this.callbackLogin,
+    });
+  }
+
+  private callbackLogin(status: boolean, msg?: string) {
+    this.process = false;
+    if (status) {
+      this._router.navigate(['/intro']);
+      return;
+    }
+    // TODO error DS
+    console.error('login KO : ' + msg);
   }
 }

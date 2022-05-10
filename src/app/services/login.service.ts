@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { environment } from '@/environments/environment';
@@ -15,7 +16,7 @@ export class LoginService {
 
   private _keyPersoToken: string = '_loginPersoToken';
 
-  constructor(private _jcms: JcmsClientService) {
+  constructor(private _router: Router, private _jcms: JcmsClientService) {
     this._personalToken = localStorage.getItem(this._keyPersoToken);
 
     if (!this._personalToken || this._personalToken === '') {
@@ -24,15 +25,12 @@ export class LoginService {
       this._personalToken = environment.apiKey;
     } else {
       console.debug('Member logged');
-      if (this.testToken()) {
-        this._isLogged = true;
-      } else {
-        this.clearPersonalToken();
-      }
+      this._isLogged = true;
     }
   }
 
   private clearPersonalToken() {
+    this._isLogged = false;
     this._personalToken = environment.apiKey;
     localStorage.removeItem(this._keyPersoToken);
   }
@@ -42,11 +40,29 @@ export class LoginService {
   }
 
   /**
-   * @returns true if is valid token
+   * @returns true if is valid personal token (no API token)
    */
   public testToken(): boolean {
-    // TODO
-    return false;
+    if (this._personalToken === environment.apiKey) {
+      this.clearPersonalToken();
+      return false;
+    }
+    this._jcms.get('WhoAmI').subscribe({
+      next: (rep) => {
+        console.log(rep);
+
+        // if rep == token ok
+        this._isLogged = true;
+      },
+      error: (error) => {
+        console.log(error);
+        // if error == token ko
+        this.clearPersonalToken();
+
+        this._router.navigate(['/welcome']);
+      },
+    });
+    return true; // test async
   }
 
   public get isLogged(): boolean {
@@ -61,7 +77,7 @@ export class LoginService {
     pseudo: string,
     pwd: string,
     saveLogin: boolean,
-    callback?: (status: boolean, msg?: string) => any
+    callback?: { class: any; func: (status: boolean, msg?: string) => any }
   ) {
     this.clearPersonalToken();
     // token to void for JcmsBackendInterceptor and use silent login
@@ -78,12 +94,12 @@ export class LoginService {
         next: (rep) => {
           // TODO test rep
           if (callback) {
-            callback(true);
+            callback.func.call(callback.class, true);
           }
         },
         error: (error) => {
           if (callback) {
-            callback(false, error);
+            callback.func.call(callback.class, false, error.error.status);
           }
         },
       });
