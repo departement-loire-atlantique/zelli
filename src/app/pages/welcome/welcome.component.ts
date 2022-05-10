@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Content } from '@/app/models/jcms/content';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
+import { LoginService } from '@/app/services/login.service';
 import { Util } from '@/app/util';
 
 @Component({
@@ -17,13 +18,15 @@ export class WelcomeComponent implements OnInit {
   constructor(
     private _router: Router,
     private _jcms: JcmsClientService,
-    public lblService: LabelMngService
+    public lblService: LabelMngService,
+    private _login: LoginService
   ) {}
 
   ngOnInit(): void {
-    // TODO test connected / skip => intro
-    // this._router.navigate(['/intro']);
-    // return
+    if (this._login.isLogged) {
+      this._router.navigate(['/intro']);
+      return;
+    }
 
     this._jcms
       .get<any>('plugins/zelli/prop/jcmsplugin.zelli.lbl.welcome.footer.link')
