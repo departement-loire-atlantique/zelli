@@ -14,6 +14,7 @@ import { HeadingComponent } from '@/app/components/heading/heading.component';
 import { IconComponent } from '@/app/components/icon/icon.component';
 import { LoaderComponent } from '@/app/components/loader/loader.component';
 import { MainMenuComponent } from '@/app/components/main-menu/main-menu.component';
+import { NextLinkComponent } from '@/app/components/next-link/next-link.component';
 import { PageTitleComponent } from '@/app/components/page-title/page-title.component';
 import { PaginationComponent } from '@/app/components/pagination/pagination.component';
 import { ThemeHeaderComponent } from '@/app/components/theme-header/theme-header.component';
@@ -42,6 +43,7 @@ import { ResearchBtnComponent } from './research-btn/research-btn.component';
     ContactDetailsComponent,
     ResearchBtnComponent,
     IconComponent,
+    NextLinkComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -63,6 +65,7 @@ import { ResearchBtnComponent } from './research-btn/research-btn.component';
     ContactDetailsComponent,
     ResearchBtnComponent,
     IconComponent,
+    NextLinkComponent,
   ],
 })
 export class SharedModule {}

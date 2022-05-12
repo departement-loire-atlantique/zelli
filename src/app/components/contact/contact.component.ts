@@ -47,7 +47,6 @@ export class ContactComponent implements OnInit, OnDestroy {
           this.isLoading = false;
         },
         next: (data) => {
-          console.log('data', data);
           this.contacts = data;
           this.isLoading = false;
         },

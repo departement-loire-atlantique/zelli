@@ -1,0 +1,29 @@
+@import '/src/theme/importDep.less';
+
+.c-next-link {
+  a {
+    font-size: 1.2em;
+    padding: 4rem 2rem 4rem 2rem;
+    color: @white;
+    background-color: @blue-dark;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  strong {
+    font-size: 1.2em;
+  }
+
+  &__description {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    span {
+      flex: 1;
+      margin-right: 2rem;
+    }
+  }
+}
