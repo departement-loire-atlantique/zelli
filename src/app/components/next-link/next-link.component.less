@@ -1,0 +1,24 @@
+@import '/src/theme/importDep.less';
+
+.c-next-link {
+  a {
+    padding: 2rem;
+    color: @white;
+    background-color: @blue-dark;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  &__description {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    span {
+      flex: 1;
+      margin-right: 2rem;
+    }
+  }
+}
