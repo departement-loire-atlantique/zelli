@@ -1,11 +1,30 @@
-@import "/src/theme/importDep.less";
+@import '/src/theme/importDep.less';
 
 .has-helped-wrapper {
   background-color: @blue-bg;
-  padding: 25px;
-  
-  H2 {
+  padding: 2rem 2rem;
+
+  h2 {
     margin: 0 20px;
     text-align: center;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+
+    transition: all ease-in-out 200ms;
+
+    app-icon {
+      font-size: 0.9em;
+      margin-left: 1rem;
+    }
+
+    &:hover {
+      background-color: @blue;
+      color: @white;
+    }
   }
 }
