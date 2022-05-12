@@ -101,7 +101,6 @@ export type ContactFromApi = {
 };
 
 export const mapContactFromApi = (contact: ContactFromApi): Contact => {
-  console.log('coucou', contact);
   return {
     firstname: contact.prenom,
     gender: contact.civilite,

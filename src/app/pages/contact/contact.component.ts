@@ -69,7 +69,6 @@ export class PageContactComponent implements OnInit, OnDestroy {
           this.isLoading = false;
         },
         next: (data) => {
-          console.log('data', data);
           this.contact = data;
           this.isLoading = false;
         },
