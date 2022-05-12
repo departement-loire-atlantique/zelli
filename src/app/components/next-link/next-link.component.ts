@@ -10,8 +10,8 @@ export class NextLinkComponent {
   title = 'Page suivante';
 
   @Input()
-  description!: string;
+  description?: string;
 
   @Input()
-  link!: string;
+  link?: string | string[];
 }

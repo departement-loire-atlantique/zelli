@@ -88,3 +88,11 @@
 </main>
 
 <app-has-helped *ngIf="article && article.affichagePageAAidee"></app-has-helped>
+
+<!-- TODO: Remplacer le titre "title" par la valeur renseignée sur Jalios -->
+<app-next-link
+  *ngIf="article?.contenuSuivant"
+  title="Page suivante"
+  [description]="article?.contenuSuivant?.title"
+  [link]="'/article/' + article?.contenuSuivant?.id"
+></app-next-link>
