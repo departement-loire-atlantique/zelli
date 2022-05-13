@@ -1,6 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { Category } from '@/app/models/jcms/category';
+import { Member } from '@/app/models/jcms/member';
 import { LoginService } from '@/app/services/login.service';
 
 @Component({
@@ -8,15 +10,26 @@ import { LoginService } from '@/app/services/login.service';
   templateUrl: './page-title.component.html',
   styleUrls: ['./page-title.component.less'],
 })
-export class PageTitleComponent {
+export class PageTitleComponent implements OnDestroy {
   @Input()
   curentCat: Category | undefined;
 
-  constructor(public login: LoginService) {}
+  profil: Member | undefined;
+  profilObs: Subscription;
+
+  constructor(public login: LoginService) {
+    this.profilObs = login.profil.subscribe((rep) => {
+      this.profil = rep;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.profilObs.unsubscribe();
+  }
 
   public getProfileImg(): string {
-    if (this.login.isLogged && this.login.profil && this.login.profil.photo) {
-      return this.login.profil.photo;
+    if (this.login.isLogged && this.profil && this.profil.photo) {
+      return this.profil.photo;
     }
     return 'assets/images/svg/icone-profil.svg';
   }

@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { environment } from '@/environments/environment';
 
@@ -9,16 +10,20 @@ import { JcmsClientService } from './jcms-client.service';
 @Injectable({
   providedIn: 'root',
 })
-export class LoginService {
+export class LoginService implements OnDestroy {
   private _isLogged: boolean = false;
 
   private _personalToken: string | null = '';
 
   private _keyPersoToken: string = '_loginPersoToken';
 
-  private _profil: Member | undefined;
+  private _profil: BehaviorSubject<Member | undefined>;
+  public profil: Observable<Member | undefined>;
 
   constructor(private _router: Router, private _jcms: JcmsClientService) {
+    this._profil = new BehaviorSubject<Member | undefined>(undefined);
+    this.profil = this._profil.asObservable();
+
     this._personalToken = localStorage.getItem(this._keyPersoToken);
 
     if (!this._personalToken || this._personalToken === '') {
@@ -32,9 +37,13 @@ export class LoginService {
     }
   }
 
+  ngOnDestroy(): void {
+    this._profil?.complete();
+  }
+
   private clearPersonalToken() {
     this._isLogged = false;
-    this._profil = undefined;
+    this._profil?.next(undefined);
     this._personalToken = environment.apiKey;
     localStorage.removeItem(this._keyPersoToken);
   }
@@ -55,7 +64,7 @@ export class LoginService {
       next: (rep: Member) => {
         console.log(rep);
 
-        this._profil = rep;
+        this._profil?.next(rep);
 
         // if rep == token ok
         this._isLogged = true;
@@ -78,10 +87,6 @@ export class LoginService {
 
   public get token(): string {
     return this._personalToken ? this._personalToken : '';
-  }
-
-  public get profil(): Member | undefined {
-    return this._profil;
   }
 
   public login(
