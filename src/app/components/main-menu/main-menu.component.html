@@ -1,12 +1,13 @@
 <nav id="main-menu">
-
   <ul>
-    <li *ngFor="let itMenuItem of menuItems" [class]="this.isActive(itMenuItem.url) ? 'active' : '' ">
+    <li
+      *ngFor="let itMenuItem of menuItems"
+      [class]="this.isActive(itMenuItem.url) ? 'active' : ''"
+    >
       <a [routerLink]="itMenuItem.url">
-        <i [class]="'icon ' + itMenuItem.icon" aria-hidden="true"></i>
+        <span [class]="'icon ' + itMenuItem.icon" aria-hidden="true"></span>
         {{ itMenuItem.smallTitle }}
       </a>
     </li>
   </ul>
-
 </nav>
