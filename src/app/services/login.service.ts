@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { environment } from '@/environments/environment';
 
+import { Member } from '../models/jcms/member';
 import { JcmsClientService } from './jcms-client.service';
 
 @Injectable({
@@ -15,6 +16,8 @@ export class LoginService {
 
   private _keyPersoToken: string = '_loginPersoToken';
 
+  private _profil: Member | undefined;
+
   constructor(private _router: Router, private _jcms: JcmsClientService) {
     this._personalToken = localStorage.getItem(this._keyPersoToken);
 
@@ -25,11 +28,13 @@ export class LoginService {
     } else {
       console.debug('Member logged');
       this._isLogged = true;
+      // _profil update when testToken call in default module
     }
   }
 
   private clearPersonalToken() {
     this._isLogged = false;
+    this._profil = undefined;
     this._personalToken = environment.apiKey;
     localStorage.removeItem(this._keyPersoToken);
   }
@@ -46,15 +51,18 @@ export class LoginService {
       this.clearPersonalToken();
       return false;
     }
-    this._jcms.get('WhoAmI').subscribe({
-      next: (rep) => {
+    this._jcms.get<Member>('WhoAmI').subscribe({
+      next: (rep: Member) => {
         console.log(rep);
+
+        this._profil = rep;
 
         // if rep == token ok
         this._isLogged = true;
       },
       error: (error) => {
         console.log(error);
+        // test type error (offline | disconnected)
         // if error == token ko
         this.clearPersonalToken();
 
@@ -70,6 +78,10 @@ export class LoginService {
 
   public get token(): string {
     return this._personalToken ? this._personalToken : '';
+  }
+
+  public get profil(): Member | undefined {
+    return this._profil;
   }
 
   public login(
