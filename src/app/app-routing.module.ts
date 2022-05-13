@@ -116,6 +116,13 @@ const routes: Routes = [
       import('./pages/profile/profile.module').then((m) => m.ProfileModule),
   },
   {
+    path: 'newAlert',
+    loadChildren: () =>
+      import('./pages/new-alert/new-alert.module').then(
+        (m) => m.NewAlertModule
+      ),
+  },
+  {
     path: '**',
     loadChildren: () =>
       import('./pages/errors/page-not-found/page-not-found.module').then(
