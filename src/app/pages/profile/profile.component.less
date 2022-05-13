@@ -37,7 +37,18 @@ MAIN {
     }
 
     &.infos-section {
-      .infos {
+      .title-section {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .btn-edit-info {
+          padding: 0;
+          margin: 0;
+        }
+      }
+
+      .infos-grid {
         display: grid;
         grid: auto-flow / 1fr 2fr;
 

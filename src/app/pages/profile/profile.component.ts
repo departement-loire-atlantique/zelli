@@ -14,15 +14,21 @@ export class ProfileComponent implements OnInit {
   profil?: Member;
 
   edit: boolean = false;
+  //field
+  email: string = '';
+  phone: string = '';
+  address: string = '';
 
   photoFile?: File;
 
   constructor(public login: LoginService) {}
 
   ngOnInit(): void {
-    console.log('TODO profile');
     this.login.profil.subscribe((rep) => {
       this.profil = rep;
+      this.email = rep && rep.email ? rep.email : '';
+      this.phone = rep && rep.phone ? rep.phone : '';
+      this.address = rep && rep.address ? rep.address : '';
     });
   }
 
@@ -44,5 +50,18 @@ export class ProfileComponent implements OnInit {
       // close overlay
       document.getElementById('edit-photo-close')?.click();
     }
+  }
+
+  public toggleEditInfos() {
+    this.edit = !this.edit;
+  }
+
+  public editInfo() {
+    this.edit = false; // TODO if ok
+    this.login.updateInfos({
+      email: this.email,
+      phone: this.phone,
+      address: this.address,
+    });
   }
 }

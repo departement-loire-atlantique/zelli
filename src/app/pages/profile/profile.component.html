@@ -44,7 +44,7 @@
               </span>
             </div>
 
-            <button class="btn btn-big" type="submit">Rechercher</button>
+            <button class="btn btn-big" type="submit">Sauvegarder</button>
           </form>
         </div>
       </div>
@@ -56,43 +56,97 @@
 <main>
 
   <section class="infos-section">
-    <h2>Mes informations</h2>
-    <div *ngIf="!edit" class="infos">
-      <div>
-        Pseudo
-      </div>
-      <div>
-        {{ profil?.login }}
-      </div>
-
-      <div>
-        Email
-      </div>
-      <div>
-        {{ profil?.email }}
-      </div>
-
-      <div>
-        Téléphone
-      </div>
-      <div>
-        {{ profil?.phone }}
-      </div>
-
-      <div>
-        Adresse
-      </div>
-      <div>
-        {{ profil?.address }}
-      </div>
-
-      <div>
-        Date de naissance
-      </div>
-      <div>
-        {{ profil?.dateNaissance }}
-      </div>
+    <div class="title-section">
+      <h2>Mes informations</h2>
+      <button (click)="toggleEditInfos()" class="btn-link btn-edit-info" type="button" title="Edition des informations">
+        <i class="icon icon-panne icon--large" aria-hidden="true"></i>
+      </button>
     </div>
+    <form class="infos" (ngSubmit)="editInfo()">
+      <div class="infos-grid">
+        <div>
+          Pseudo
+        </div>
+        <div>
+          {{ profil?.login }}
+        </div>
+
+        <div>
+          Email
+        </div>
+        <div>
+          <span *ngIf="!edit">{{ profil?.email }}</span>
+          <div *ngIf="edit" class="ds44-posRel">
+            <label for="form-email" class="ds44-formLabel">
+              <span class="ds44-labelTypePlaceholder">
+                <span>Email</span>
+              </span>
+            </label>
+
+            <input type="text" id="form-email" name="form-email" class="ds44-inpStd" title="Email"
+              [(ngModel)]="email" />
+
+            <button class="ds44-reset" type="button">
+              <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+              <span class="visually-hidden">Effacer le contenu saisi dans le champ : Email</span>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          Téléphone
+        </div>
+        <div>
+          <span *ngIf="!edit">{{ profil?.phone }}</span>
+          <div *ngIf="edit" class="ds44-posRel">
+            <label for="form-phone" class="ds44-formLabel">
+              <span class="ds44-labelTypePlaceholder">
+                <span>Téléphone</span>
+              </span>
+            </label>
+
+            <input type="text" id="form-phone" name="form-phone" class="ds44-inpStd" title="Téléphone"
+              [(ngModel)]="phone" />
+
+            <button class="ds44-reset" type="button">
+              <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+              <span class="visually-hidden">Effacer le contenu saisi dans le champ : Téléphone</span>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          Adresse
+        </div>
+        <div>
+          <span *ngIf="!edit">{{ profil?.address }}</span>
+          <div *ngIf="edit" class="ds44-posRel">
+            <label for="form-address" class="ds44-formLabel">
+              <span class="ds44-labelTypePlaceholder">
+                <span>Adresse</span>
+              </span>
+            </label>
+
+            <input type="text" id="form-address" name="form-address" class="ds44-inpStd" title="Adresse"
+              [(ngModel)]="address" />
+
+            <button class="ds44-reset" type="button">
+              <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+              <span class="visually-hidden">Effacer le contenu saisi dans le champ : Adresse</span>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          Date de naissance
+        </div>
+        <div>
+          {{ profil?.dateNaissance }}
+        </div>
+
+      </div>
+      <button *ngIf="edit" class="btn btn-big" type="submit">Sauvegarder</button>
+    </form>
   </section>
 
   <section>

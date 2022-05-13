@@ -142,4 +142,27 @@ export class LoginService implements OnDestroy {
         });
     }
   }
+
+  /**
+   *
+   * @param params  format {'key': val, 'key2': val2}
+   */
+  public updateInfos(params: any) {
+    if (this.isLogged && this._profil && params) {
+      let urlEncodedData = '';
+      let urlEncodedDataPairs = [];
+      for (let name in params) {
+        urlEncodedDataPairs.push(
+          encodeURIComponent(name) + '=' + encodeURIComponent(params[name])
+        );
+      }
+      urlEncodedData = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
+
+      this._jcms
+        .post('data/' + this._profil.id, urlEncodedData)
+        .subscribe((rep) => {
+          this.testToken(); // For update local member infos
+        });
+    }
+  }
 }
