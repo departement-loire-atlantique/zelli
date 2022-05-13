@@ -11,9 +11,11 @@ import { environment } from '@/environments/environment';
   styleUrls: ['./profile.component.less'],
 })
 export class ProfileComponent implements OnInit {
-  profil: Member | undefined;
+  profil?: Member;
 
   edit: boolean = false;
+
+  photoFile?: File;
 
   constructor(public login: LoginService) {}
 
@@ -29,5 +31,18 @@ export class ProfileComponent implements OnInit {
       return environment.urlJcms + this.profil.photo;
     }
     return 'assets/images/svg/icone-profil.svg';
+  }
+
+  public onChangeFile(event: any) {
+    this.photoFile = event.srcElement.files[0];
+  }
+
+  public editPhoto() {
+    if (this.photoFile) {
+      this.login.updatePhoto(this.photoFile);
+      this.photoFile = undefined;
+      // close overlay
+      document.getElementById('edit-photo-close')?.click();
+    }
   }
 }

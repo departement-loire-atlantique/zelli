@@ -2,9 +2,54 @@
   <app-back text="" picto="icon-cross icon--xlarge"></app-back>
   <div class="photo">
     <img [src]="getProfileImg()" alt="Photo" aria-hidden="true" />
-    <form>
-      TODO edit btn
-    </form>
+
+    <button class="btn-link btn-edit-photo" type="button" data-target="#overlay-edit-photo" data-js="ds44-modal"
+      title="Edition de la photo">
+      <i class="icon icon-panne icon--large" aria-hidden="true"></i>
+    </button>
+    <section class="ds44-modal-container" id="overlay-edit-photo" aria-hidden="true" role="dialog" aria-modal="true"
+      aria-labelledby="overlay-edit-photo-title">
+      <div class="ds44-modal-box">
+        <button id="edit-photo-close" class="ds44-btnOverlay--modale ds44-btnOverlay--closeOverlay" type="button"
+          title="Fermer la boîte de dialogue : Edition de la photo" data-js="ds44-modal-action-close">
+          <i class="icon icon-cross icon--xlarge" aria-hidden="true"></i>
+          <span class="ds44-btnInnerText--bottom">Fermer</span>
+        </button>
+        <h2 id="overlay-edit-photo-title" class="">Edition de la photo</h2>
+        <div class="ds44-modal-gab">
+          <form (ngSubmit)="editPhoto()">
+            <div class="ds44-posRel">
+              <label for="form-photo" class="ds44-formLabel">
+                <span class="ds44-labelTypePlaceholder">
+                  <span>Photo<sup aria-hidden="true">*</sup>
+                  </span>
+                </span>
+              </label>
+
+              <div class="ds44-file__shape ds44-inpStd">
+                <input (change)="onChangeFile($event)" type="file" id="form-photo" name="form-photo"
+                  title="Photo - obligatoire" data-file-extensions="doc,pdf" required
+                  aria-describedby="explanation-form-photo" />
+                <div id="file-display-form-photo" class="ds44-fileDisplay"></div>
+              </div>
+              <button class="ds44-reset" type="button">
+                <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+                <span class="visually-hidden">
+                  Effacer le contenu saisi dans le champ : Photo
+                </span>
+              </button>
+
+              <span class="ds44-file" aria-hidden="true">
+                <i class="icon icon-directory icon--medium" aria-hidden="true"></i>
+              </span>
+            </div>
+
+            <button class="btn btn-big" type="submit">Rechercher</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
   </div>
   <h1>Mon profil</h1>
 </header>

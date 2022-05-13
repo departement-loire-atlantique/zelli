@@ -17,12 +17,13 @@ export class LoginService implements OnDestroy {
 
   private _keyPersoToken: string = '_loginPersoToken';
 
-  private _profil: BehaviorSubject<Member | undefined>;
+  private _profilSubject: BehaviorSubject<Member | undefined>;
+  private _profil: Member | undefined;
   public profil: Observable<Member | undefined>;
 
   constructor(private _router: Router, private _jcms: JcmsClientService) {
-    this._profil = new BehaviorSubject<Member | undefined>(undefined);
-    this.profil = this._profil.asObservable();
+    this._profilSubject = new BehaviorSubject<Member | undefined>(undefined);
+    this.profil = this._profilSubject.asObservable();
 
     this._personalToken = localStorage.getItem(this._keyPersoToken);
 
@@ -33,17 +34,17 @@ export class LoginService implements OnDestroy {
     } else {
       console.debug('Member logged');
       this._isLogged = true;
-      // _profil update when testToken call in default module
+      // _profilSubject update when testToken call in default module
     }
   }
 
   ngOnDestroy(): void {
-    this._profil?.complete();
+    this._profilSubject?.complete();
   }
 
   private clearPersonalToken() {
     this._isLogged = false;
-    this._profil?.next(undefined);
+    this.setProfil(undefined);
     this._personalToken = environment.apiKey;
     localStorage.removeItem(this._keyPersoToken);
   }
@@ -52,7 +53,13 @@ export class LoginService implements OnDestroy {
     localStorage.setItem(this._keyPersoToken, token);
   }
 
+  private setProfil(mbr: Member | undefined) {
+    this._profil = mbr;
+    this._profilSubject.next(mbr);
+  }
+
   /**
+   * & update this.member
    * @returns true if is valid personal token (no API token)
    */
   public testToken(): boolean {
@@ -64,7 +71,7 @@ export class LoginService implements OnDestroy {
       next: (rep: Member) => {
         console.log(rep);
 
-        this._profil?.next(rep);
+        this.setProfil(rep);
 
         // if rep == token ok
         this._isLogged = true;
@@ -123,4 +130,16 @@ export class LoginService implements OnDestroy {
   }
 
   public createAccount() {}
+
+  public updatePhoto(file: File) {
+    if (this.isLogged && this._profil) {
+      let form: FormData = new FormData();
+      form.append('photo', file);
+      this._jcms
+        .put('data/Member/updatephoto/' + this._profil.login, form)
+        .subscribe((rep) => {
+          this.testToken(); // For update local member infos
+        });
+    }
+  }
 }

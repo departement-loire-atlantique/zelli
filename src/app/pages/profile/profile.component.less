@@ -12,6 +12,19 @@ HEADER {
     color: @blue;
   }
 
+  .photo {
+    IMG {
+      border-radius: 50%;
+      width: 75px;
+      height: 75px;
+    }
+
+    .btn-edit-photo {
+      position: absolute;
+      height: 75px;
+    }
+  }
+
 }
 
 MAIN {
@@ -34,6 +47,7 @@ MAIN {
         :nth-child(2n+1) {
           color: #46474E;
         }
+
         :nth-child(2n) {
           font-size: 18px;
           color: @blue-dark;
