@@ -1,0 +1,44 @@
+@import "/src/theme/importDep.less";
+
+HEADER {
+  margin-top: 15px;
+  margin-bottom: 50px;
+  text-align: center;
+
+  APP-BACK {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: @blue;
+  }
+
+}
+
+MAIN {
+  SECTION {
+    margin: 0 20px 30px;
+
+    H2 {
+      text-align: unset;
+    }
+
+    &.infos-section {
+      .infos {
+        display: grid;
+        grid: auto-flow / 1fr 2fr;
+
+        > DIV {
+          margin-bottom: 15px;
+        }
+
+        :nth-child(2n+1) {
+          color: #46474E;
+        }
+        :nth-child(2n) {
+          font-size: 18px;
+          color: @blue-dark;
+        }
+      }
+    }
+  }
+}

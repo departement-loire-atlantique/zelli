@@ -4,6 +4,9 @@ export interface Member extends Content {
   login: string;
 
   // TODO dateNaissance
+  dateNaissance: string;
+
+  email: string;
 
   photo: string;
 

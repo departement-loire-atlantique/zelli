@@ -1,1 +1,50 @@
-<p>profile works!</p>
+<header>
+  <app-back text="" picto="icon-cross icon--xlarge"></app-back>
+  <div class="photo">
+    <img [src]="getProfileImg()" alt="Photo" aria-hidden="true" />
+    <form>
+      TODO edit btn
+    </form>
+  </div>
+  <h1>Mon profil</h1>
+</header>
+<main>
+
+  <section class="infos-section">
+    <h2>Mes informations</h2>
+    <div *ngIf="!edit" class="infos">
+      <div>
+        Pseudo
+      </div>
+      <div>
+        {{ profil?.login }}
+      </div>
+
+      <div>
+        Email
+      </div>
+      <div>
+        {{ profil?.email }}
+      </div>
+
+      <div>
+        Adresse
+      </div>
+      <div>
+        {{ profil?.address }}
+      </div>
+
+      <div>
+        Date de naissance
+      </div>
+      <div>
+        {{ profil?.dateNaissance }}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Mes alertes</h2>
+    TODO Component
+  </section>
+</main>
