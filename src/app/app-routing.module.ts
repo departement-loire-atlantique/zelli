@@ -111,6 +111,11 @@ const routes: Routes = [
       import('./pages/account/login/login.module').then((m) => m.LoginModule),
   },
   {
+    path: 'profile',
+    loadChildren: () =>
+      import('./pages/profile/profile.module').then((m) => m.ProfileModule),
+  },
+  {
     path: '**',
     loadChildren: () =>
       import('./pages/errors/page-not-found/page-not-found.module').then(
