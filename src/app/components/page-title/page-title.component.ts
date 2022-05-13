@@ -5,6 +5,8 @@ import { Category } from '@/app/models/jcms/category';
 import { Member } from '@/app/models/jcms/member';
 import { LoginService } from '@/app/services/login.service';
 
+import { environment } from '@/environments/environment';
+
 @Component({
   selector: 'app-page-title',
   templateUrl: './page-title.component.html',
@@ -29,7 +31,7 @@ export class PageTitleComponent implements OnDestroy {
 
   public getProfileImg(): string {
     if (this.login.isLogged && this.profil && this.profil.photo) {
-      return this.profil.photo;
+      return environment.urlJcms + this.profil.photo;
     }
     return 'assets/images/svg/icone-profil.svg';
   }

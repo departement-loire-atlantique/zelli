@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Member } from '@/app/models/jcms/member';
 import { LoginService } from '@/app/services/login.service';
 
+import { environment } from '@/environments/environment';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -24,7 +26,7 @@ export class ProfileComponent implements OnInit {
 
   public getProfileImg(): string {
     if (this.profil && this.profil.photo) {
-      return this.profil.photo;
+      return environment.urlJcms + this.profil.photo;
     }
     return 'assets/images/svg/icone-profil.svg';
   }
