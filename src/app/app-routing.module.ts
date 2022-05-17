@@ -123,6 +123,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'alert/:id',
+    loadChildren: () =>
+      import('./pages/new-alert/new-alert.module').then(
+        (m) => m.NewAlertModule
+      ),
+  },
+  {
     path: '**',
     loadChildren: () =>
       import('./pages/errors/page-not-found/page-not-found.module').then(

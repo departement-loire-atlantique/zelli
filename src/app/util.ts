@@ -25,6 +25,10 @@ export class Util {
       return fileDoc.absDownloadUrl;
     }
 
+    if (content.class === 'generated.AlerteZelli') {
+      return '/alert/' + content.id;
+    }
+
     return '';
   }
 }
