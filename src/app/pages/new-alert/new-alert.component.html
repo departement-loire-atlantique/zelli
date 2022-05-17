@@ -6,5 +6,97 @@
   </div>
 </header>
 <main>
-  TODO new alert
+  <div>* Champs obligatoires</div>
+  <form (ngSubmit)="newAlert()">
+
+    <!-- Sujet -->
+    <div class="ds44-posRel">
+      <label for="form-subject" class="ds44-formLabel">
+        <span class="ds44-labelTypePlaceholder">
+          <span>Sujet<sup aria-hidden="true">*</sup></span>
+        </span>
+      </label>
+
+      <input type="text" id="form-subject" name="form-subject" class="ds44-inpStd" title="subject"
+        [(ngModel)]="subject" />
+
+      <button class="ds44-reset" type="button">
+        <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+        <span class="visually-hidden">Effacer le contenu saisi dans le champ : Sujet</span>
+      </button>
+    </div>
+
+    <!-- Date -->
+    <div class="ds44-posRel">
+      <label for="date" class="ds44-formLabel ds44-datepicker"><span class="ds44-labelTypePlaceholder"><span>Date
+            de rappel<sup aria-hidden="true">*</sup></span></span></label>
+
+      <div data-name="date" class="ds44-datepicker__shape ds44-inpStd">
+        <input [(ngModel)]="dateDay" id="date" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2"
+          title="Date de rappel : Jour (ex. 04)" data-is-date="true" name="date-day"
+          aria-describedby="explanation-date" />
+        <span>/</span>
+        <input [(ngModel)]="dateMonth" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2"
+          title="Date de rappel : Mois (ex. 05)" data-is-date="true" name="date-month"
+          aria-describedby="explanation-date" />
+        <span>/</span>
+        <input [(ngModel)]="dateYear" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4"
+          title="Date de rappel : Année (ex. 1977)" data-is-date="true" name="date-year"
+          aria-describedby="explanation-date" />
+      </div>
+      <button class="ds44-reset" type="button">
+        <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+        <span class="visually-hidden">{{ lblService.getLbl('accountCreateSupField') }}
+          Date de rappel</span>
+      </button>
+      <span class="ds44-calendar" aria-hidden="true" aria-describedby="">
+        <i class="icon icon-date icon--large" aria-hidden="true"></i>
+        <span class="visually-hidden">
+          Afficher le calendrier pour le champ : Date de rappel
+        </span>
+      </span>
+      <div class="vanilla-calendar hidden"></div>
+    </div>
+    <div class="ds44-field-information" aria-live="polite">
+      <ul class="ds44-field-information-list ds44-list">
+        <li id="explanation-date" class="ds44-field-information-explanation">
+          Ex : 04/05/1977
+        </li>
+      </ul>
+    </div>
+
+    <!-- Commentaire -->
+    <div class="ds44-posRel">
+      <label for="form-comment" class="ds44-formLabel">
+        <span class="ds44-labelTypePlaceholder">
+          <span>Commentaire
+          </span>
+        </span>
+      </label>
+
+      <textarea [(ngModel)]="comment" rows="5" cols="1" id="form-comment" name="form-comment" class="ds44-inpStd"
+        title="Commentaire" required></textarea>
+
+    </div>
+
+    <!-- add Calendar -->
+    <div class="ds44-form__container ds44-checkBox-radio_list ">
+      <input [(ngModel)]="addCalendar" [ngModelOptions]="{standalone: true}" type="checkbox" id="name-check-addCalendar-m" name="addCalendar" value="true"
+        class="ds44-checkbox" required aria-describedby="mandatory-message-addCalendar" />
+      <label for="name-check-addCalendar-m" class="ds44-boxLabel" id="name-check-label-addCalendar-m">
+        Ajouter à mon calendrier
+      </label>
+    </div>
+
+    <!-- add Calendar -->
+    <div class="ds44-form__container ds44-checkBox-radio_list ">
+      <input [(ngModel)]="sendAlert" [ngModelOptions]="{standalone: true}" type="checkbox" id="name-check-sendAlert-m" name="sendAlert" value="true"
+        class="ds44-checkbox" required aria-describedby="mandatory-message-sendAlert" />
+      <label for="name-check-sendAlert-m" class="ds44-boxLabel" id="name-check-label-sendAlert-m">
+        J’accepte de recevoir des notifications sur mon smartphone (lire les conditions d’utilisation)
+      </label>
+    </div>
+
+    <button class="btn btn-big" type="submit">Créer l’alerte</button>
+  </form>
 </main>
