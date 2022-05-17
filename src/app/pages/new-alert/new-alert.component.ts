@@ -1,7 +1,8 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import { Alerte } from '@/app/models/jcms/alerte';
+import { Alerte, AlerteApi } from '@/app/models/jcms/alerte';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
 
@@ -11,6 +12,9 @@ import { LabelMngService } from '@/app/services/label-mng.service';
   styleUrls: ['./new-alert.component.less'],
 })
 export class NewAlertComponent implements OnInit {
+  private _isUpdate: boolean = false;
+  private _idAlertUpdate: string = '';
+
   private _event?: Alerte;
 
   //fields
@@ -29,11 +33,37 @@ export class NewAlertComponent implements OnInit {
   constructor(
     public lblService: LabelMngService,
     private _jcms: JcmsClientService,
-    private _location: Location
+    private _location: Location,
+    private _route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    console.log('TODO new alert');
+    this._route.paramMap.subscribe((params) => {
+      const idParam = params.get('id');
+      if (idParam) {
+        this._isUpdate = true;
+        this._idAlertUpdate = idParam;
+        this._jcms.get<AlerteApi>('data/' + idParam).subscribe((rep) => {
+          this.subject = rep.title;
+          this.comment = rep.description;
+
+          // TODO date
+          const date = new Date(rep.edate);
+
+          this.dateDay = date.getDate().toString();
+          if (this.dateDay.length <= 1) {
+            this.dateDay = '0' + this.dateDay;
+          }
+
+          this.dateMonth = (date.getMonth() + 1).toString();
+          if (this.dateMonth.length <= 1) {
+            this.dateMonth = '0' + this.dateMonth;
+          }
+
+          this.dateYear = date.getFullYear().toString();
+        });
+      }
+    });
   }
 
   public newAlert() {
@@ -64,7 +94,11 @@ export class NewAlertComponent implements OnInit {
         this._event.buildForSendApi()
       );
 
-      this._jcms.post('data/AlerteZelli', urlEncodedData).subscribe({
+      let endpoint = 'data/AlerteZelli';
+      if (this._isUpdate) {
+        endpoint = 'data/' + this._idAlertUpdate;
+      }
+      this._jcms.post(endpoint, urlEncodedData).subscribe({
         next: (rep) => {
           this._location.back();
         },
