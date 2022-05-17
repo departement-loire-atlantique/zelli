@@ -1,7 +1,14 @@
+import { Content } from '@angular/compiler/src/render3/r3_ast';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
+import { Item } from '@/app/components/list/list.component';
+import { JcmsPager } from '@/app/core/jcmsPager';
+import { AlerteApi } from '@/app/models/jcms/alerte';
 import { Member } from '@/app/models/jcms/member';
+import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LoginService } from '@/app/services/login.service';
+import { Util } from '@/app/util';
 
 import { environment } from '@/environments/environment';
 
@@ -21,7 +28,12 @@ export class ProfileComponent implements OnInit {
 
   photoFile?: File;
 
-  constructor(public login: LoginService) {}
+  // alertes
+  loadAlert: boolean = true;
+  alertes: Item[] | undefined;
+  pagerAlertes: JcmsPager<AlerteApi> | undefined;
+
+  constructor(public login: LoginService, private _jcms: JcmsClientService) {}
 
   ngOnInit(): void {
     this.login.profil.subscribe((rep) => {
@@ -30,6 +42,16 @@ export class ProfileComponent implements OnInit {
       this.phone = rep && rep.phone ? rep.phone : '';
       this.address = rep && rep.address ? rep.address : '';
     });
+
+    this.processAlertesResult(
+      this._jcms.getPager<AlerteApi>('search', {
+        params: {
+          types: ['AlerteZelli'],
+          exactType: true,
+          // TODO filtre edate
+        },
+      })
+    );
   }
 
   public getProfileImg(): string {
@@ -63,5 +85,37 @@ export class ProfileComponent implements OnInit {
       phone: this.phone,
       address: this.address,
     });
+  }
+
+  // --------------
+  // ALERTES
+
+  public processAlertesResult(obs: Observable<JcmsPager<AlerteApi>>) {
+    this.loadAlert = true;
+    obs.subscribe((pager: JcmsPager<AlerteApi>) => {
+      if (!this.alertes) {
+        this.alertes = [];
+      }
+
+      this.pagerAlertes = pager;
+
+      const contents = pager.dataInPage;
+
+      for (let itContent of contents) {
+        this.alertes.push({
+          lbl: itContent.title,
+          prefix: itContent.edate,
+          url: Util.buildUrlCotent(itContent),
+        });
+      }
+
+      this.loadAlert = false;
+    });
+  }
+
+  public moreAlertes() {
+    if (this.pagerAlertes) {
+      this.processAlertesResult(this.pagerAlertes.next());
+    }
   }
 }

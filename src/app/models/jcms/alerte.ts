@@ -1,3 +1,5 @@
+import { Content } from './content';
+
 export class Alerte {
   subject: string;
 
@@ -58,7 +60,7 @@ export class Alerte {
     return blob;
   }
 
-  public buildForApi(): AlerteApi {
+  public buildForSendApi(): AlerteSend {
     return {
       title: this.subject,
       description: this.comment,
@@ -69,7 +71,7 @@ export class Alerte {
   }
 }
 
-export interface AlerteApi {
+export interface AlerteSend {
   title: string;
 
   description: string;
@@ -81,3 +83,5 @@ export interface AlerteApi {
    */
   edate: string;
 }
+
+export interface AlerteApi extends Content, AlerteSend {}

@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
-import { Alerte } from '@/app/models/alerte';
+import { Alerte } from '@/app/models/jcms/alerte';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
 
@@ -61,7 +61,7 @@ export class NewAlertComponent implements OnInit {
   private saveAlert() {
     if (this._event) {
       let urlEncodedData = this._jcms.encodeParamForBody(
-        this._event.buildForApi()
+        this._event.buildForSendApi()
       );
 
       this._jcms.post('data/AlerteZelli', urlEncodedData).subscribe({
