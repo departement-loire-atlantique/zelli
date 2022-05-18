@@ -48,6 +48,7 @@ export class ProfileComponent implements OnInit {
         params: {
           types: ['AlerteZelli'],
           exactType: true,
+          pstatus: 2,
           // TODO filtre edate
         },
       })
