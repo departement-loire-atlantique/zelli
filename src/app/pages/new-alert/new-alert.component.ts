@@ -76,7 +76,16 @@ export class NewAlertComponent implements OnInit {
       return;
     }
 
-    //TODO date after day
+    if (
+      new Date() >=
+      new Date(~~this.dateYear, ~~this.dateMonth - 1, ~~this.dateDay)
+    ) {
+      console.error('Sélectionner une date de rappel dans le future ');
+
+      // TODO error DS
+      this.process = false;
+      return;
+    }
 
     this._event = new Alerte(
       this.subject,
