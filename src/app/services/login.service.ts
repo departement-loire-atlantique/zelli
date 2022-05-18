@@ -147,16 +147,9 @@ export class LoginService implements OnDestroy {
    *
    * @param params  format {'key': val, 'key2': val2}
    */
-  public updateInfos(params: any) {
+  public updateInfos(params: { [key: string]: any }) {
     if (this.isLogged && this._profil && params) {
-      let urlEncodedData = '';
-      let urlEncodedDataPairs = [];
-      for (let name in params) {
-        urlEncodedDataPairs.push(
-          encodeURIComponent(name) + '=' + encodeURIComponent(params[name])
-        );
-      }
-      urlEncodedData = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
+      let urlEncodedData = this._jcms.encodeParamForBody(params);
 
       this._jcms
         .post('data/' + this._profil.id, urlEncodedData)

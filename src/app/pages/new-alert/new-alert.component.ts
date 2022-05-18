@@ -1,0 +1,137 @@
+import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { Alerte, AlerteApi } from '@/app/models/jcms/alerte';
+import { JcmsClientService } from '@/app/services/jcms-client.service';
+import { LabelMngService } from '@/app/services/label-mng.service';
+
+@Component({
+  selector: 'app-new-alert',
+  templateUrl: './new-alert.component.html',
+  styleUrls: ['./new-alert.component.less'],
+})
+export class NewAlertComponent implements OnInit {
+  private _isUpdate: boolean = false;
+  private _idAlertUpdate: string = '';
+
+  private _event?: Alerte;
+
+  //fields
+  subject: string = '';
+
+  dateDay: string = '';
+  dateMonth: string = '';
+  dateYear: string = '';
+
+  comment: string = '';
+
+  addCalendar: boolean = false;
+
+  sendAlert: boolean = true;
+
+  process: boolean = false;
+
+  constructor(
+    public lblService: LabelMngService,
+    private _jcms: JcmsClientService,
+    private _location: Location,
+    private _route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    this._route.paramMap.subscribe((params) => {
+      const idParam = params.get('id');
+      if (idParam) {
+        this._isUpdate = true;
+        this._idAlertUpdate = idParam;
+        this._jcms.get<AlerteApi>('data/' + idParam).subscribe((rep) => {
+          this.subject = rep.title;
+          this.comment = rep.description;
+
+          const date = new Date(rep.edate);
+
+          this.dateDay = date.getDate().toString();
+          if (this.dateDay.length <= 1) {
+            this.dateDay = '0' + this.dateDay;
+          }
+
+          this.dateMonth = (date.getMonth() + 1).toString();
+          if (this.dateMonth.length <= 1) {
+            this.dateMonth = '0' + this.dateMonth;
+          }
+
+          this.dateYear = date.getFullYear().toString();
+        });
+      }
+    });
+  }
+
+  public newAlert() {
+    this.process = true;
+
+    if (!this.subject || !this.dateYear || !this.dateMonth || !this.dateDay) {
+      // TODO error DS
+      this.process = false;
+      return;
+    }
+
+    if (
+      new Date() >=
+      new Date(~~this.dateYear, ~~this.dateMonth - 1, ~~this.dateDay)
+    ) {
+      console.error('Sélectionner une date de rappel dans le future ');
+
+      // TODO error DS
+      this.process = false;
+      return;
+    }
+
+    this._event = new Alerte(
+      this.subject,
+      this.dateDay,
+      this.dateMonth,
+      this.dateYear,
+      this.comment,
+      this.sendAlert
+    );
+
+    this.saveAlert();
+  }
+
+  private saveAlert() {
+    if (this._event) {
+      let urlEncodedData = this._jcms.encodeParamForBody(
+        this._event.buildForSendApi()
+      );
+
+      let endpoint = 'data/AlerteZelli';
+      if (this._isUpdate) {
+        endpoint = 'data/' + this._idAlertUpdate;
+      }
+      this._jcms.post(endpoint, urlEncodedData).subscribe({
+        next: (rep) => {
+          this.process = false;
+          this.createIcs();
+          this._location.back();
+        },
+        error: (error) => {
+          console.error(error);
+
+          // TODO error DS
+          this.process = false;
+        },
+      });
+    }
+  }
+
+  private createIcs() {
+    if (!this.addCalendar) {
+      return;
+    }
+    let blob = this._event?.createIcs();
+    if (blob) {
+      window.open(window.URL.createObjectURL(blob));
+    }
+  }
+}

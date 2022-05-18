@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -37,6 +38,7 @@ import { SharedModule } from '@/app/components/shared.module';
       multi: true,
     },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    DatePipe,
   ],
   bootstrap: [AppComponent],
 })

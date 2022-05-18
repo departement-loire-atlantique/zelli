@@ -151,6 +151,18 @@
 
   <section>
     <h2>Mes alertes</h2>
-    TODO Component
+
+    <div *ngIf="!loadAlert && !alertes">
+      Tu n’as pas créé d’alerte pour l’instant
+    </div>
+
+    <app-list class="no-padding" [items]="alertes"></app-list>
+
+    <app-loader *ngIf="loadAlert" color="#0013b1"></app-loader>
+    <button *ngIf="pagerAlertes && pagerAlertes.hasMore()" [disabled]="loadAlert" (click)="moreAlertes()"
+      class="btn btn-big" type="button" title="Afficher plus d'alertes'">
+      <span class="ds44-btnInnerText">Plus d'alertes</span>
+    </button>
+    <a class="btn btn-big btn-light" [routerLink]="'/newAlert'">Créer une alerte</a>
   </section>
 </main>
