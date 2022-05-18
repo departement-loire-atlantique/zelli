@@ -1,22 +1,18 @@
-@import "../../../theme/importDep.less";
+@import '../../../theme/importDep.less';
 
 #main-menu {
   position: fixed;
   background: white;
   width: 100vw;
   bottom: 0;
-  border: 1px solid @grey;
   z-index: 100;
 
   UL {
     padding: 0;
     margin: 0;
-    margin-top: -1px;
     height: 60px;
-    
+
     display: flex;
-    // justify-content: space-around;
-    // align-items: center;
 
     & > LI {
       width: 100%;
@@ -25,11 +21,16 @@
       margin-top: 0;
       text-align: center;
 
-      border-top: 2px solid transparent;
+      border-top: 1px solid @grey;
+      padding-top: 1px;
 
       overflow-wrap: break-word;
 
-      &.active {
+      transition: all ease-in-out 200ms;
+
+      &.active,
+      &:hover {
+        padding-top: 0;
         border-top: 2px solid @blue;
         color: @blue;
 
@@ -39,19 +40,22 @@
       }
 
       A {
+        color: @light-black;
         height: 100%;
-        font-size: 12px;
+        font-size: 0.75em;
 
         display: flex;
         flex-flow: column;
         justify-content: center;
+        align-items: center;
 
         text-decoration: none;
 
-        I::before {
-          font-size: 25px;
+        span {
+          font-size: 1.5em;
+          margin-bottom: 0.3rem;
         }
       }
     }
-  } 
+  }
 }
