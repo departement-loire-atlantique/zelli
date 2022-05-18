@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -33,7 +34,11 @@ export class ProfileComponent implements OnInit {
   alertes: Item[] | undefined;
   pagerAlertes: JcmsPager<AlerteApi> | undefined;
 
-  constructor(public login: LoginService, private _jcms: JcmsClientService) {}
+  constructor(
+    public login: LoginService,
+    private _jcms: JcmsClientService,
+    private _datePipe: DatePipe
+  ) {}
 
   ngOnInit(): void {
     this.login.profil.subscribe((rep) => {
@@ -105,7 +110,7 @@ export class ProfileComponent implements OnInit {
       for (let itContent of contents) {
         this.alertes.push({
           lbl: itContent.title,
-          prefix: itContent.edate,
+          prefix: this._datePipe.transform(itContent.edate, 'mediumDate') || '',
           url: Util.buildUrlCotent(itContent),
         });
       }

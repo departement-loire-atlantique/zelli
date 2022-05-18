@@ -79,7 +79,7 @@ export interface AlerteSend {
   sendAlert: boolean;
 
   /**
-   * date millis
+   * date
    */
   edate: string;
 }

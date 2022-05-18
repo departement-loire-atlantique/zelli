@@ -42,6 +42,26 @@ All.args = {
     },
     {
       lbl: 'Item 4',
+      prefix: '04/05/1977',
+    },
+    {
+      lbl: 'Item 5',
+      url: 'http://google.fr',
+      img: '/assets/icons/icon-72x72.png',
+    },
+    {
+      lbl: 'Item 6',
+      url: 'http://google.fr',
+      prefix: '04/05/1977',
+    },
+    {
+      lbl: 'Item 7',
+      prefix: '04/05/1977',
+      img: '/assets/icons/icon-72x72.png',
+    },
+    {
+      lbl: 'Item 8',
+      prefix: '04/05/1977',
       url: 'http://google.fr',
       img: '/assets/icons/icon-72x72.png',
     },

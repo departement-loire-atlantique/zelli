@@ -1,5 +1,8 @@
 @import '/src/theme/importDep.less';
 
+:host.no-padding UL {
+  padding: 0;
+}
 UL {
   padding: 0rem 2rem;
 
@@ -23,6 +26,13 @@ UL {
         font-weight: bold;
       }
 
+      .lbl-prefix {
+        color: #46474E;
+        font-size: 16px;
+        padding-right: 5px;
+        align-self: center;
+        flex: 1;
+      }
       IMG {
         width: 4rem;
         height: 4rem;
@@ -34,7 +44,7 @@ UL {
       }
       .lbl-link {
         align-self: center;
-        flex: 1;
+        flex: 2;
       }
     }
 

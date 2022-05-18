@@ -156,7 +156,7 @@
       Tu n’as pas créé d’alerte pour l’instant
     </div>
 
-    <app-list [items]="alertes"></app-list>
+    <app-list class="no-padding" [items]="alertes"></app-list>
 
     <app-loader *ngIf="loadAlert" color="#0013b1"></app-loader>
     <button *ngIf="pagerAlertes && pagerAlertes.hasMore()" [disabled]="loadAlert" (click)="moreAlertes()"
