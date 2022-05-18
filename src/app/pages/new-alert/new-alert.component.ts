@@ -30,6 +30,8 @@ export class NewAlertComponent implements OnInit {
 
   sendAlert: boolean = true;
 
+  process: boolean = false;
+
   constructor(
     public lblService: LabelMngService,
     private _jcms: JcmsClientService,
@@ -47,7 +49,6 @@ export class NewAlertComponent implements OnInit {
           this.subject = rep.title;
           this.comment = rep.description;
 
-          // TODO date
           const date = new Date(rep.edate);
 
           this.dateDay = date.getDate().toString();
@@ -67,8 +68,11 @@ export class NewAlertComponent implements OnInit {
   }
 
   public newAlert() {
+    this.process = true;
+
     if (!this.subject || !this.dateYear || !this.dateMonth || !this.dateDay) {
       // TODO error DS
+      this.process = false;
       return;
     }
 
@@ -84,8 +88,6 @@ export class NewAlertComponent implements OnInit {
     );
 
     this.saveAlert();
-
-    this.createIcs();
   }
 
   private saveAlert() {
@@ -100,12 +102,15 @@ export class NewAlertComponent implements OnInit {
       }
       this._jcms.post(endpoint, urlEncodedData).subscribe({
         next: (rep) => {
+          this.process = false;
+          this.createIcs();
           this._location.back();
         },
         error: (error) => {
           console.error(error);
 
           // TODO error DS
+          this.process = false;
         },
       });
     }
