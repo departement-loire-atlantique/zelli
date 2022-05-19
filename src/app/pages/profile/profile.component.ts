@@ -1,12 +1,13 @@
 import { DatePipe } from '@angular/common';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Item } from '@/app/components/list/list.component';
 import { JcmsPager } from '@/app/core/jcmsPager';
 import { AlerteApi } from '@/app/models/jcms/alerte';
 import { Member } from '@/app/models/jcms/member';
+import { DesignSystemService } from '@/app/services/design-system.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LoginService } from '@/app/services/login.service';
 import { Util } from '@/app/util';
@@ -18,7 +19,7 @@ import { environment } from '@/environments/environment';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.less'],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, AfterViewInit {
   profil?: Member;
 
   edit: boolean = false;
@@ -37,7 +38,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     public login: LoginService,
     private _jcms: JcmsClientService,
-    private _datePipe: DatePipe
+    private _datePipe: DatePipe,
+    private _ds: DesignSystemService
   ) {}
 
   ngOnInit(): void {
@@ -58,6 +60,10 @@ export class ProfileComponent implements OnInit {
         },
       })
     );
+  }
+
+  ngAfterViewInit(): void {
+    this._ds.initOverlay();
   }
 
   public getProfileImg(): string {

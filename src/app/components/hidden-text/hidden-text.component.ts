@@ -1,9 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-/**
- * Class JS du DS 44
- */
-declare class CollapserStandard {}
+import { DesignSystemService } from '@/app/services/design-system.service';
 
 @Component({
   selector: 'app-hidden-text',
@@ -19,10 +16,10 @@ export class HiddenTextComponent implements OnInit {
 
   btnLbl: string = HiddenTextComponent._readMore;
 
-  constructor() {}
+  constructor(private _ds: DesignSystemService) {}
 
   ngOnInit(): void {
-    new CollapserStandard();
+    this._ds.initCollapser();
   }
 
   onClick(event: Event): any {
