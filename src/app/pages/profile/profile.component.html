@@ -3,21 +3,22 @@
   <div class="photo">
     <img [src]="getProfileImg()" alt="Photo" aria-hidden="true" />
 
-    <button (click)="toggleEditPhoto()" class="btn-link btn-edit-photo" type="button" data-target="#overlay-edit-photo" data-js="ds44-modal"
-      title="Edition de la photo">
+    <button (click)="toggleEditPhoto()" class="btn-link btn-edit-photo" type="button" data-target="#overlay-edit-photo"
+      data-js="ds44-modal" title="Edition de la photo">
       <i class="icon icon-panne icon--large" aria-hidden="true"></i>
     </button>
     <section class="ds44-modal-container" id="overlay-edit-photo" aria-hidden="true" role="dialog" aria-modal="true"
       aria-labelledby="overlay-edit-photo-title">
       <div class="ds44-modal-box">
-        <button (click)="toggleEditPhoto()" id="edit-photo-close" class="ds44-btnOverlay--modale ds44-btnOverlay--closeOverlay" type="button"
+        <button (click)="toggleEditPhoto()" id="edit-photo-close"
+          class="ds44-btnOverlay--modale ds44-btnOverlay--closeOverlay" type="button"
           title="Fermer la boîte de dialogue : Edition de la photo" data-js="ds44-modal-action-close">
           <i class="icon icon-cross icon--xlarge" aria-hidden="true"></i>
           <span class="ds44-btnInnerText--bottom">Fermer</span>
         </button>
         <h2 id="overlay-edit-photo-title" class="">Edition de la photo</h2>
         <div class="ds44-modal-gab">
-          <form *ngIf="editPhoto" (ngSubmit)="subEditPhoto()">
+          <form *ngIf="editPhoto" (ngSubmit)="subEditPhoto()" data-is-ajax="true">
             <div class="ds44-form__container">
               <div class="ds44-posRel">
                 <label for="form-photo" class="ds44-formLabel">
@@ -64,7 +65,7 @@
         <i class="icon icon-panne icon--large" aria-hidden="true"></i>
       </button>
     </div>
-    <form class="infos" (ngSubmit)="editInfo()">
+    <form class="infos" (ngSubmit)="editInfo()" data-is-ajax="true">
       <div class="infos-grid">
         <div>
           Pseudo
@@ -87,7 +88,7 @@
               </label>
 
               <input type="text" id="form-email" name="form-email" class="ds44-inpStd" title="Email"
-                [(ngModel)]="email" />
+                autocomplete="email" [(ngModel)]="email" />
 
               <button class="ds44-reset" type="button">
                 <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
@@ -111,7 +112,7 @@
               </label>
 
               <input type="text" id="form-phone" name="form-phone" class="ds44-inpStd" title="Téléphone"
-                [(ngModel)]="phone" />
+                autocomplete="tel-national" [(ngModel)]="phone" />
 
               <button class="ds44-reset" type="button">
                 <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
@@ -134,13 +135,21 @@
                 </span>
               </label>
 
-              <input type="text" id="form-address" name="form-address" class="ds44-inpStd" title="Adresse"
-                [(ngModel)]="address" />
+              <input type="text" id="form-address" name="form-address" class="ds44-inpStd ds44-js-field-address"
+                aria-autocomplete="list" autocomplete="off" aria-expanded="false"
+                data-url="https://api-adresse.data.gouv.fr/search/?limit=5&citycode=44109" title="Adresse"
+                data-mode="free-text" [(ngModel)]="address" />
 
               <button class="ds44-reset" type="button">
                 <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
                 <span class="visually-hidden">Effacer le contenu saisi dans le champ : Adresse</span>
               </button>
+
+              <div class="ds44-autocomp-container hidden">
+                <div class="ds44-autocomp-list">
+                  <ul class="ds44-list" role="listbox"></ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
