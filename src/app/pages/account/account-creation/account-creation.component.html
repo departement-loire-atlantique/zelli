@@ -16,120 +16,128 @@
     </div>
 
     <div [ngSwitch]="step" class="curent-step">
-      <div *ngSwitchCase="1">
-        <div class="ds44-posRel">
-          <label for="input-pseudo" class="ds44-formLabel">
-            <span class="ds44-labelTypePlaceholder">
-              <span>{{ lblService.getLbl('accountCreateS1Field') }}<sup aria-hidden="true">*</sup></span>
-            </span>
-          </label>
-          <input [(ngModel)]="pseudo" id="input-pseudo" type="text" name="pseudo" class="ds44-inpStd"
-            [title]="lblService.getLbl('accountCreateS1Field') + ' - obligatoire'" required />
-          <button class="ds44-reset" type="button">
-            <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i><span class="visually-hidden">
-              {{ lblService.getLbl('accountCreateSupField') }} {{ lblService.getLbl('accountCreateS1Field') }}</span>
-          </button>
-        </div>
-      </div>
-
-      <div class="step-date" *ngSwitchCase="2">
-        <div class="ds44-posRel">
-          <label for="date-birth" class="ds44-formLabel ds44-datepicker"><span
-              class="ds44-labelTypePlaceholder"><span>{{ lblService.getLbl('accountCreateS2FieldDate') }}<sup
-                  aria-hidden="true">*</sup></span></span></label>
-
-          <div data-name="date-birth" class="ds44-datepicker__shape ds44-inpStd">
-            <input [(ngModel)]="dateDay" id="date-birth" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2"
-              [title]="lblService.getLbl('accountCreateS2FieldDay')" data-is-date="true"
-              aria-describedby="explanation-date-birth" />
-            <span>/</span>
-            <input [(ngModel)]="dateMonth" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2"
-              [title]="lblService.getLbl('accountCreateS2FieldMonth')" data-is-date="true"
-              aria-describedby="explanation-date-birth" />
-            <span>/</span>
-            <input [(ngModel)]="dateYear" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4"
-              [title]="lblService.getLbl('accountCreateS2FieldYear')" data-is-date="true"
-              aria-describedby="explanation-date-birth" />
+      <div #formDisplay *ngSwitchCase="1">
+        <div class="ds44-form__container">
+          <div class="ds44-posRel">
+            <label for="input-pseudo" class="ds44-formLabel">
+              <span class="ds44-labelTypePlaceholder">
+                <span>{{ lblService.getLbl('accountCreateS1Field') }}<sup aria-hidden="true">*</sup></span>
+              </span>
+            </label>
+            <input [(ngModel)]="pseudo" id="input-pseudo" type="text" name="pseudo" class="ds44-inpStd"
+              [title]="lblService.getLbl('accountCreateS1Field') + ' - obligatoire'" required />
+            <button class="ds44-reset" type="button">
+              <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i><span class="visually-hidden">
+                {{ lblService.getLbl('accountCreateSupField') }} {{ lblService.getLbl('accountCreateS1Field') }}</span>
+            </button>
           </div>
-          <button class="ds44-reset" type="button">
-            <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
-            <span class="visually-hidden">{{ lblService.getLbl('accountCreateSupField') }}
-              {{ lblService.getLbl('accountCreateS2FieldDate') }}</span>
-          </button>
-          <span class="ds44-calendar" aria-hidden="true" aria-describedby="">
-            <i class="icon icon-date icon--large" aria-hidden="true"></i>
-            <span class="visually-hidden">
-              {{ lblService.getLbl('accountCreateS2FieldDateDisplay') }}
-            </span>
-          </span>
-          <div class="vanilla-calendar hidden"></div>
-        </div>
-        <div class="ds44-field-information" aria-live="polite">
-          <ul class="ds44-field-information-list ds44-list">
-            <li id="explanation-date-birth" class="ds44-field-information-explanation">
-              Ex : 04/05/1977
-            </li>
-          </ul>
         </div>
       </div>
 
-      <div class="step-pwd" *ngSwitchCase="3">
-        <div class="ds44-posRel">
-          <label for="pwd" class="ds44-formLabel">
-            <span class="ds44-labelTypePlaceholder">
-              <span>{{ lblService.getLbl('accountCreateS3FieldPwd') }}<sup aria-hidden="true">*</sup>
+      <div #formDisplay class="step-date" *ngSwitchCase="2">
+        <div class="ds44-form__container">
+          <div class="ds44-posRel">
+            <label for="date-birth" class="ds44-formLabel ds44-datepicker"><span
+                class="ds44-labelTypePlaceholder"><span>{{ lblService.getLbl('accountCreateS2FieldDate') }}<sup
+                    aria-hidden="true">*</sup></span></span></label>
+
+            <div data-name="date-birth" class="ds44-datepicker__shape ds44-inpStd">
+              <input [(ngModel)]="dateDay" id="date-birth" type="text" inputmode="numeric" pattern="[0-9]*"
+                maxlength="2" [title]="lblService.getLbl('accountCreateS2FieldDay')" data-is-date="true"
+                aria-describedby="explanation-date-birth" />
+              <span>/</span>
+              <input [(ngModel)]="dateMonth" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2"
+                [title]="lblService.getLbl('accountCreateS2FieldMonth')" data-is-date="true"
+                aria-describedby="explanation-date-birth" />
+              <span>/</span>
+              <input [(ngModel)]="dateYear" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4"
+                [title]="lblService.getLbl('accountCreateS2FieldYear')" data-is-date="true"
+                aria-describedby="explanation-date-birth" />
+            </div>
+            <button class="ds44-reset" type="button">
+              <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+              <span class="visually-hidden">{{ lblService.getLbl('accountCreateSupField') }}
+                {{ lblService.getLbl('accountCreateS2FieldDate') }}</span>
+            </button>
+            <span class="ds44-calendar" aria-hidden="true" aria-describedby="">
+              <i class="icon icon-date icon--large" aria-hidden="true"></i>
+              <span class="visually-hidden">
+                {{ lblService.getLbl('accountCreateS2FieldDateDisplay') }}
               </span>
             </span>
-          </label>
+            <div class="vanilla-calendar hidden"></div>
+          </div>
+          <div class="ds44-field-information" aria-live="polite">
+            <ul class="ds44-field-information-list ds44-list">
+              <li id="explanation-date-birth" class="ds44-field-information-explanation">
+                Ex : 04/05/1977
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-          <input [(ngModel)]="pwd" type="password" id="pwd" name="pwd" class="ds44-inpStd"
-            [title]="lblService.getLbl('accountCreateS3FieldPwd') + ' - obligatoire'" required
-            autocomplete="current-password" aria-describedby="explanation-pwd" />
+      <div #formDisplay class="step-pwd" *ngSwitchCase="3">
+        <div class="ds44-form__container">
+          <div class="ds44-posRel">
+            <label for="pwd" class="ds44-formLabel">
+              <span class="ds44-labelTypePlaceholder">
+                <span>{{ lblService.getLbl('accountCreateS3FieldPwd') }}<sup aria-hidden="true">*</sup>
+                </span>
+              </span>
+            </label>
 
-          <button class="ds44-showPassword" type="button">
-            <i class="icon icon-visuel icon--sizeL" aria-hidden="true"></i>
-            <span class="visually-hidden">{{ lblService.getLbl('accountCreateS3PwdDisplay') }}
-              {{ lblService.getLbl('accountCreateS3FieldPwd') }}</span>
-          </button>
+            <input [(ngModel)]="pwd" type="password" id="pwd" name="pwd" class="ds44-inpStd"
+              [title]="lblService.getLbl('accountCreateS3FieldPwd') + ' - obligatoire'" required
+              autocomplete="current-password" aria-describedby="explanation-pwd" />
 
-          <button class="ds44-reset" type="button">
-            <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
-            <span class="visually-hidden">{{ lblService.getLbl('accountCreateSupField') }}
-              {{ lblService.getLbl('accountCreateS3FieldPwd') }}</span>
-          </button>
+            <button class="ds44-showPassword" type="button">
+              <i class="icon icon-visuel icon--sizeL" aria-hidden="true"></i>
+              <span class="visually-hidden">{{ lblService.getLbl('accountCreateS3PwdDisplay') }}
+                {{ lblService.getLbl('accountCreateS3FieldPwd') }}</span>
+            </button>
+
+            <button class="ds44-reset" type="button">
+              <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+              <span class="visually-hidden">{{ lblService.getLbl('accountCreateSupField') }}
+                {{ lblService.getLbl('accountCreateS3FieldPwd') }}</span>
+            </button>
+          </div>
         </div>
 
-        <div class="ds44-posRel">
-          <label for="pwdConfirm" class="ds44-formLabel">
-            <span class="ds44-labelTypePlaceholder">
-              <span>{{ lblService.getLbl('accountCreateS3FieldPwdConfirm') }}<sup aria-hidden="true">*</sup>
+        <div class="ds44-form__container">
+          <div class="ds44-posRel">
+            <label for="pwdConfirm" class="ds44-formLabel">
+              <span class="ds44-labelTypePlaceholder">
+                <span>{{ lblService.getLbl('accountCreateS3FieldPwdConfirm') }}<sup aria-hidden="true">*</sup>
+                </span>
               </span>
-            </span>
-          </label>
+            </label>
 
-          <input [(ngModel)]="pwdConfirm" type="password" id="pwdConfirm" name="pwdConfirm" class="ds44-inpStd"
-            [title]="lblService.getLbl('accountCreateS3FieldPwdConfirm') + ' - obligatoire'" required
-            autocomplete="current-password" aria-describedby="explanation-pwdConfirm" />
+            <input [(ngModel)]="pwdConfirm" type="password" id="pwdConfirm" name="pwdConfirm" class="ds44-inpStd"
+              [title]="lblService.getLbl('accountCreateS3FieldPwdConfirm') + ' - obligatoire'" required
+              autocomplete="current-password" aria-describedby="explanation-pwdConfirm" />
 
-          <button class="ds44-showPassword" type="button">
-            <i class="icon icon-visuel icon--sizeL" aria-hidden="true"></i>
-            <span class="visually-hidden">{{ lblService.getLbl('accountCreateS3PwdDisplay') }}
-              {{ lblService.getLbl('accountCreateS3FieldPwdConfirm') }}</span>
-          </button>
+            <button class="ds44-showPassword" type="button">
+              <i class="icon icon-visuel icon--sizeL" aria-hidden="true"></i>
+              <span class="visually-hidden">{{ lblService.getLbl('accountCreateS3PwdDisplay') }}
+                {{ lblService.getLbl('accountCreateS3FieldPwdConfirm') }}</span>
+            </button>
 
-          <button class="ds44-reset" type="button">
-            <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
-            <span class="visually-hidden">{{ lblService.getLbl('accountCreateSupField') }}
-              {{ lblService.getLbl('accountCreateS3FieldPwdConfirm') }}</span>
-          </button>
+            <button class="ds44-reset" type="button">
+              <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+              <span class="visually-hidden">{{ lblService.getLbl('accountCreateSupField') }}
+                {{ lblService.getLbl('accountCreateS3FieldPwdConfirm') }}</span>
+            </button>
+          </div>
         </div>
 
         <div class="ds44-field-information" aria-live="polite">
           <ul class="ds44-field-information-list ds44-list">
             <li id="explanation-pwd" class="ds44-field-information-explanation">
-              Ton mot de passe doit comporter au moins : 
-              - Lorem ipsum dolor sit amet 
-              - Lorem ipsum dolor sit amet 
+              Ton mot de passe doit comporter au moins :
+              - Lorem ipsum dolor sit amet
+              - Lorem ipsum dolor sit amet
               - Lorem ipsum dolor sit amet
             </li>
           </ul>

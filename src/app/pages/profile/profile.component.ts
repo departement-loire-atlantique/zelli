@@ -1,6 +1,12 @@
 import { DatePipe } from '@angular/common';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Item } from '@/app/components/list/list.component';
@@ -28,12 +34,16 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   phone: string = '';
   address: string = '';
 
+  editPhoto: boolean = false;
   photoFile?: File;
 
   // alertes
   loadAlert: boolean = true;
   alertes: Item[] | undefined;
   pagerAlertes: JcmsPager<AlerteApi> | undefined;
+
+  @ViewChildren('formEndDisplay')
+  formEndDisplay: QueryList<any> | undefined;
 
   constructor(
     public login: LoginService,
@@ -64,6 +74,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this._ds.initOverlay();
+    this.formEndDisplay?.changes.subscribe((_) => {
+      this._ds.initForm();
+    });
   }
 
   public getProfileImg(): string {
@@ -73,11 +86,15 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     return 'assets/images/svg/icone-profil.svg';
   }
 
+  public toggleEditPhoto() {
+    this.editPhoto = !this.editPhoto;
+  }
+
   public onChangeFile(event: any) {
     this.photoFile = event.srcElement.files[0];
   }
 
-  public editPhoto() {
+  public subEditPhoto() {
     if (this.photoFile) {
       this.login.updatePhoto(this.photoFile);
       this.photoFile = undefined;
