@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { verify } from 'crypto';
+import { firstValueFrom } from 'rxjs';
 
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
+import { LoginService } from '@/app/services/login.service';
 import { DateService } from '@/app/services/utils/date.service';
+
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-account-creation',
@@ -38,34 +43,40 @@ export class AccountCreationComponent {
   constructor(
     public lblService: LabelMngService,
     private _jcms: JcmsClientService,
-    private _utilDate: DateService
+    private _utilDate: DateService,
+    public login: LoginService
   ) {}
 
   /**
-   * Validate curent step
-   * @returns true if curent step is ok
+   * Validate current step
+   * @returns true if current step is ok
    */
   public validStep(): boolean {
     if (this.step === 1) {
       if (this.pseudo) {
-        this.processNexStep();
-        // TODO update API
-        /*
-        this._jcms
-          .get('plugins/zelli/member/pwd/' + this.pseudo)
-          .subscribe({
-            next: (rep) => {
-              // TODO error DS
+        this._jcms.get('plugins/zelli/member/pwd/' + this.pseudo).subscribe({
+          next: (rep: any) => {
+            type reponseJson = {
+              success: string;
+            };
+            const result = rep as reponseJson;
+            if (
+              typeof result.success === 'string' &&
+              result.success.includes("Le membre indiqué n'existe pas.")
+            ) {
+              this.loading = true;
               this.processNexStep();
-            },
-            error: (error) => {
-              // TODO error DS
-              console.log(error);
-              this.loading = false;
+              return false;
             }
-          });*/
-        // valide step after result of WS
-        return false;
+            // TODO error DS
+            console.log("Le pseudo n'est pas valide");
+            return true;
+          },
+          error: (error) => {
+            // TODO error DS
+            console.log(error);
+          },
+        });
       }
     } else if (this.step === 2) {
       // test null => by DS ?
@@ -74,11 +85,17 @@ export class AccountCreationComponent {
         ~~this.dateMonth - 1,
         ~~this.dateDay
       );
-
-      if (this._utilDate.testDate(this.date)) {
+      if (
+        this.dateYear.length > 0 &&
+        this.dateMonth.length > 0 &&
+        this.dateDay.length > 0 &&
+        this._utilDate.testDate(this.date) &&
+        this.date < new Date()
+      ) {
         return true;
       } else {
         // TODO error DS
+        console.log("La date n'est pas valide");
       }
     } else if (this.step === 3) {
       if (this.pwd && this.pwdConfirm && this.pwd === this.pwdConfirm) {
@@ -106,16 +123,26 @@ export class AccountCreationComponent {
     // if end => create account
     if (this.step >= this.maxStep) {
       // TODO create update API
-      this._jcms
-        .put('plugins/zelli/member/pwd/' + this.pseudo, undefined, {
-          params: {
-            pwd: Buffer.from(this.pwd).toString('base64'),
-          },
-        })
-        .subscribe({
-          next: (rep) => {
-            // TODO
 
+      let body = new URLSearchParams();
+      body.set('login', Buffer.from(this.pseudo).toString('base64'));
+      body.set(
+        'dateNaissance',
+        this.date === undefined ? '' : this.date.getTime().toString()
+      );
+      body.set('pwd', Buffer.from(this.pwd).toString('base64'));
+
+      this._jcms
+        .post('plugins/zelli/member/create', body.toString())
+        .subscribe({
+          next: (rep: any) => {
+            // TODO
+            console.log(rep);
+            type reponseJson = {
+              token: string;
+            };
+            const result = rep as reponseJson;
+            localStorage.setItem('token', result.token);
             // if ok
             this.accountCreate = true;
           },
