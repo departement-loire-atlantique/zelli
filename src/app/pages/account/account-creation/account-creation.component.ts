@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { verify } from 'crypto';
-import { firstValueFrom } from 'rxjs';
 
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
 import { LoginService } from '@/app/services/login.service';
 import { DateService } from '@/app/services/utils/date.service';
-
-import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-account-creation',
@@ -122,8 +118,6 @@ export class AccountCreationComponent {
   private processNexStep() {
     // if end => create account
     if (this.step >= this.maxStep) {
-      // TODO create update API
-
       let body = new URLSearchParams();
       body.set('login', Buffer.from(this.pseudo).toString('base64'));
       body.set(
@@ -131,7 +125,6 @@ export class AccountCreationComponent {
         this.date === undefined ? '' : this.date.getTime().toString()
       );
       body.set('pwd', Buffer.from(this.pwd).toString('base64'));
-
       this._jcms
         .post('plugins/zelli/member/create', body.toString())
         .subscribe({
@@ -142,7 +135,7 @@ export class AccountCreationComponent {
               token: string;
             };
             const result = rep as reponseJson;
-            localStorage.setItem('token', result.token);
+            localStorage.setItem('_loginPersoToken', result.token);
             // if ok
             this.accountCreate = true;
           },
