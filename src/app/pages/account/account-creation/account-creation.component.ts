@@ -40,7 +40,7 @@ export class AccountCreationComponent {
     public lblService: LabelMngService,
     private _jcms: JcmsClientService,
     private _utilDate: DateService,
-    public login: LoginService
+    public _login: LoginService
   ) {}
 
   /**
@@ -50,28 +50,10 @@ export class AccountCreationComponent {
   public validStep(): boolean {
     if (this.step === 1) {
       if (this.pseudo) {
-        this._jcms.get('plugins/zelli/member/pwd/' + this.pseudo).subscribe({
-          next: (rep: any) => {
-            type reponseJson = {
-              success: string;
-            };
-            const result = rep as reponseJson;
-            if (
-              typeof result.success === 'string' &&
-              result.success.includes("Le membre indiqué n'existe pas.")
-            ) {
-              this.loading = true;
-              this.processNexStep();
-              return false;
-            }
-            // TODO error DS
-            console.log("Le pseudo n'est pas valide");
-            return true;
-          },
-          error: (error) => {
-            // TODO error DS
-            console.log(error);
-          },
+        this.loading = true;
+        this._login.isMemberNotExist(this.pseudo, {
+          class: this,
+          func: this.callbackIsMemberNotExist,
         });
       }
     } else if (this.step === 2) {
@@ -118,42 +100,34 @@ export class AccountCreationComponent {
   private processNexStep() {
     // if end => create account
     if (this.step >= this.maxStep) {
-      let body = new URLSearchParams();
-      body.set('login', Buffer.from(this.pseudo).toString('base64'));
-      body.set(
-        'dateNaissance',
-        this.date === undefined ? '' : this.date.getTime().toString()
+      this._login.createMember(
+        this.pseudo,
+        this.date === undefined ? '' : this.date.getTime().toString(),
+        this.pwd,
+        {
+          class: this,
+          func: this.callbackCreateMember,
+        }
       );
-      body.set('pwd', Buffer.from(this.pwd).toString('base64'));
-      this._jcms
-        .post('plugins/zelli/member/create', body.toString())
-        .subscribe({
-          next: (rep: any) => {
-            // TODO
-            console.log(rep);
-            type reponseJson = {
-              token: string;
-            };
-            const result = rep as reponseJson;
-            localStorage.setItem('_loginPersoToken', result.token);
-            // if ok
-            this.accountCreate = true;
-          },
-          error: (error) => {
-            // TODO error
-            console.log(error);
-            this.loading = false;
-
-            // TODO sup
-            this.accountCreate = true;
-          },
-        });
       return;
     }
     //else next step
 
     this.step++;
     this.loading = false;
+  }
+
+  private callbackIsMemberNotExist(status: boolean, msg?: string): boolean {
+    if (status) {
+      this.processNexStep();
+      return false;
+    }
+    return true;
+  }
+
+  private callbackCreateMember(status: boolean, msg?: string) {
+    this.accountCreate = status;
+    this.loading = status;
   }
 
   public lblBtnNext(): string {

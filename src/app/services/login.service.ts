@@ -114,8 +114,13 @@ export class LoginService implements OnDestroy {
         },
       })
       .subscribe({
-        next: (rep) => {
+        next: (rep: any) => {
           // TODO test rep
+          type reponseJson = {
+            token: string;
+          };
+          const result = rep as reponseJson;
+          console.log('Token : ' + result.token);
           if (callback) {
             callback.func.call(callback.class, true);
           }
@@ -129,7 +134,63 @@ export class LoginService implements OnDestroy {
       });
   }
 
-  public createAccount() {}
+  public createMember(
+    pseudo: string,
+    dateNaissance: string,
+    pwd: string,
+    callback?: { class: any; func: (status: boolean, msg?: string) => any }
+  ) {
+    let body = new URLSearchParams();
+    body.set('login', Buffer.from(pseudo).toString('base64'));
+    body.set('dateNaissance', dateNaissance);
+    body.set('pwd', Buffer.from(pwd).toString('base64'));
+
+    this._jcms.post('plugins/zelli/member/create', body.toString()).subscribe({
+      next: (rep: any) => {
+        if (JSON.stringify(rep).includes('token')) {
+          let reponseJson = JSON.stringify(rep);
+          let index = reponseJson.indexOf(':');
+          this.savePersonalToken(
+            reponseJson.substring(index + 2, reponseJson.length - 2)
+          );
+          if (callback) {
+            callback.func.call(callback.class, true);
+          }
+        }
+      },
+      error: (error) => {
+        // TODO error
+        console.log(error);
+        if (callback) {
+          callback.func.call(callback.class, false, error.error.status);
+        }
+        // TODO sup
+      },
+    });
+  }
+
+  public isMemberNotExist(
+    pseudo: string,
+    callback?: { class: any; func: (status: boolean, msg?: string) => any }
+  ) {
+    this._jcms.get('plugins/zelli/member/notexist/' + pseudo).subscribe({
+      next: (rep: any) => {
+        if (JSON.stringify(rep).includes('success')) {
+          if (callback) {
+            callback.func.call(callback.class, true);
+          }
+          // TODO error DS
+        }
+      },
+      error: (error) => {
+        // TODO error DS
+        console.log(error);
+        if (callback) {
+          callback.func.call(callback.class, false, error.error.status);
+        }
+      },
+    });
+  }
 
   public updatePhoto(file: File) {
     if (this.isLogged && this._profil) {
