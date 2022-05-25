@@ -76,7 +76,7 @@ export class SubThemeComponent implements OnInit {
 
   private initSubTheme(subTheme: SubThemeASE | undefined) {
     if (subTheme) {
-      // TODO bug jalios
+      // TODO bug jalios #27121
       subTheme.navigation = (subTheme as any).categories[0];
 
       this.subTheme = subTheme;
