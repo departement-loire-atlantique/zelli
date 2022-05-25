@@ -43,7 +43,7 @@ export class CatsMngService {
     return this._jcms
       .get<Category>('data/' + idCat, {
         params: {
-          related: 'extraData.extra.Category.jcmsplugin.zelli.contenu.trieur',
+          related: 'extraDataMap',
         },
       })
       .pipe(
@@ -68,9 +68,9 @@ export class CatsMngService {
           : dataRep.image,
       url: dataRep.friendlyURLSet ? dataRep.friendlyURLSet[0] : '',
       order: dataRep.order,
-      idContentTrieur: dataRep.related
-        ? dataRep.related.extraDataextraCategoryjcmspluginzellicontenutrieur
-        : 'rzelli_1394737', // TODO sup rzelli_1394737 (bug JCMS)
+      idContentTrieur: dataRep.extraDataMap
+        ? dataRep.extraDataMap['extra.Category.jcmsplugin.zelli.contenu.trieur']
+        : '', // TODO sup rzelli_1394737 (bug JCMS)
       parent: dataRep.parent ? dataRep.parent.id : undefined,
     };
   }
