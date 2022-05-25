@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -105,22 +106,19 @@ export class LoginService implements OnDestroy {
     this.clearPersonalToken();
     // token to void for JcmsBackendInterceptor and use silent login
     this._personalToken = '';
-
+    const params = new HttpParams()
+      .set('silentLogin', pseudo)
+      .set('silentPassword', pwd);
     this._jcms
-      .get('plugins/zelli/token/create/' + pseudo, {
-        params: {
-          silentLogin: pseudo,
-          silentPassword: pwd,
-        },
-      })
+      .get('plugins/zelli/token/create/' + pseudo, { params })
       .subscribe({
         next: (rep: any) => {
           // TODO test rep
-          type reponseJson = {
-            token: string;
-          };
-          const result = rep as reponseJson;
-          console.log('Token : ' + result.token);
+          let reponseJson = JSON.stringify(rep);
+          let index = reponseJson.indexOf(':');
+          this.savePersonalToken(
+            reponseJson.substring(index + 2, reponseJson.length - 2)
+          );
           if (callback) {
             callback.func.call(callback.class, true);
           }
