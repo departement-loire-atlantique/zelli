@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
+import { LoginService } from '@/app/services/login.service';
 import { DateService } from '@/app/services/utils/date.service';
 
 @Component({
@@ -38,34 +39,22 @@ export class AccountCreationComponent {
   constructor(
     public lblService: LabelMngService,
     private _jcms: JcmsClientService,
-    private _utilDate: DateService
+    private _utilDate: DateService,
+    public _login: LoginService
   ) {}
 
   /**
-   * Validate curent step
-   * @returns true if curent step is ok
+   * Validate current step
+   * @returns true if current step is ok
    */
   public validStep(): boolean {
     if (this.step === 1) {
       if (this.pseudo) {
-        this.processNexStep();
-        // TODO update API
-        /*
-        this._jcms
-          .get('plugins/zelli/member/pwd/' + this.pseudo)
-          .subscribe({
-            next: (rep) => {
-              // TODO error DS
-              this.processNexStep();
-            },
-            error: (error) => {
-              // TODO error DS
-              console.log(error);
-              this.loading = false;
-            }
-          });*/
-        // valide step after result of WS
-        return false;
+        this.loading = true;
+        this._login.isMemberNotExist(this.pseudo, {
+          class: this,
+          func: this.callbackIsMemberNotExist,
+        });
       }
     } else if (this.step === 2) {
       // test null => by DS ?
@@ -74,11 +63,17 @@ export class AccountCreationComponent {
         ~~this.dateMonth - 1,
         ~~this.dateDay
       );
-
-      if (this._utilDate.testDate(this.date)) {
+      if (
+        this.dateYear.length > 0 &&
+        this.dateMonth.length > 0 &&
+        this.dateDay.length > 0 &&
+        this._utilDate.testDate(this.date) &&
+        this.date < new Date()
+      ) {
         return true;
       } else {
         // TODO error DS
+        console.log("La date n'est pas valide");
       }
     } else if (this.step === 3) {
       if (this.pwd && this.pwdConfirm && this.pwd === this.pwdConfirm) {
@@ -105,35 +100,34 @@ export class AccountCreationComponent {
   private processNexStep() {
     // if end => create account
     if (this.step >= this.maxStep) {
-      // TODO create update API
-      this._jcms
-        .put('plugins/zelli/member/pwd/' + this.pseudo, undefined, {
-          params: {
-            pwd: Buffer.from(this.pwd).toString('base64'),
-          },
-        })
-        .subscribe({
-          next: (rep) => {
-            // TODO
-
-            // if ok
-            this.accountCreate = true;
-          },
-          error: (error) => {
-            // TODO error
-            console.log(error);
-            this.loading = false;
-
-            // TODO sup
-            this.accountCreate = true;
-          },
-        });
+      this._login.createMember(
+        this.pseudo,
+        this.date === undefined ? '' : this.date.getTime().toString(),
+        this.pwd,
+        {
+          class: this,
+          func: this.callbackCreateMember,
+        }
+      );
       return;
     }
     //else next step
 
     this.step++;
     this.loading = false;
+  }
+
+  private callbackIsMemberNotExist(status: boolean, msg?: string): boolean {
+    if (status) {
+      this.processNexStep();
+      return false;
+    }
+    return true;
+  }
+
+  private callbackCreateMember(status: boolean, msg?: string) {
+    this.accountCreate = status;
+    this.loading = status;
   }
 
   public lblBtnNext(): string {

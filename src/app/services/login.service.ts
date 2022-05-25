@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -105,17 +106,19 @@ export class LoginService implements OnDestroy {
     this.clearPersonalToken();
     // token to void for JcmsBackendInterceptor and use silent login
     this._personalToken = '';
-
+    const params = new HttpParams()
+      .set('silentLogin', pseudo)
+      .set('silentPassword', pwd);
     this._jcms
-      .get('plugins/zelli/token/create/' + pseudo, {
-        params: {
-          silentLogin: pseudo,
-          silentPassword: pwd,
-        },
-      })
+      .get('plugins/zelli/token/create/' + pseudo, { params })
       .subscribe({
-        next: (rep) => {
+        next: (rep: any) => {
           // TODO test rep
+          let reponseJson = JSON.stringify(rep);
+          let index = reponseJson.indexOf(':');
+          this.savePersonalToken(
+            reponseJson.substring(index + 2, reponseJson.length - 2)
+          );
           if (callback) {
             callback.func.call(callback.class, true);
           }
@@ -129,7 +132,63 @@ export class LoginService implements OnDestroy {
       });
   }
 
-  public createAccount() {}
+  public createMember(
+    pseudo: string,
+    dateNaissance: string,
+    pwd: string,
+    callback?: { class: any; func: (status: boolean, msg?: string) => any }
+  ) {
+    let body = new URLSearchParams();
+    body.set('login', Buffer.from(pseudo).toString('base64'));
+    body.set('dateNaissance', dateNaissance);
+    body.set('pwd', Buffer.from(pwd).toString('base64'));
+
+    this._jcms.post('plugins/zelli/member/create', body.toString()).subscribe({
+      next: (rep: any) => {
+        if (JSON.stringify(rep).includes('token')) {
+          let reponseJson = JSON.stringify(rep);
+          let index = reponseJson.indexOf(':');
+          this.savePersonalToken(
+            reponseJson.substring(index + 2, reponseJson.length - 2)
+          );
+          if (callback) {
+            callback.func.call(callback.class, true);
+          }
+        }
+      },
+      error: (error) => {
+        // TODO error
+        console.log(error);
+        if (callback) {
+          callback.func.call(callback.class, false, error.error.status);
+        }
+        // TODO sup
+      },
+    });
+  }
+
+  public isMemberNotExist(
+    pseudo: string,
+    callback?: { class: any; func: (status: boolean, msg?: string) => any }
+  ) {
+    this._jcms.get('plugins/zelli/member/notexist/' + pseudo).subscribe({
+      next: (rep: any) => {
+        if (JSON.stringify(rep).includes('success')) {
+          if (callback) {
+            callback.func.call(callback.class, true);
+          }
+          // TODO error DS
+        }
+      },
+      error: (error) => {
+        // TODO error DS
+        console.log(error);
+        if (callback) {
+          callback.func.call(callback.class, false, error.error.status);
+        }
+      },
+    });
+  }
 
   public updatePhoto(file: File) {
     if (this.isLogged && this._profil) {

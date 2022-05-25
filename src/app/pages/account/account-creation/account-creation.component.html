@@ -41,15 +41,15 @@
           <div data-name="date-birth" class="ds44-datepicker__shape ds44-inpStd">
             <input [(ngModel)]="dateDay" id="date-birth" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2"
               [title]="lblService.getLbl('accountCreateS2FieldDay')" data-is-date="true"
-              aria-describedby="explanation-date-birth" />
+              aria-describedby="explanation-date-birth" required/>
             <span>/</span>
             <input [(ngModel)]="dateMonth" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2"
               [title]="lblService.getLbl('accountCreateS2FieldMonth')" data-is-date="true"
-              aria-describedby="explanation-date-birth" />
+              aria-describedby="explanation-date-birth" required/>
             <span>/</span>
             <input [(ngModel)]="dateYear" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4"
               [title]="lblService.getLbl('accountCreateS2FieldYear')" data-is-date="true"
-              aria-describedby="explanation-date-birth" />
+              aria-describedby="explanation-date-birth" required/>
           </div>
           <button class="ds44-reset" type="button">
             <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
