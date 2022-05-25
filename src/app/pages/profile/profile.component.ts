@@ -1,12 +1,19 @@
 import { DatePipe } from '@angular/common';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Item } from '@/app/components/list/list.component';
 import { JcmsPager } from '@/app/core/jcmsPager';
 import { AlerteApi } from '@/app/models/jcms/alerte';
 import { Member } from '@/app/models/jcms/member';
+import { DesignSystemService } from '@/app/services/design-system.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LoginService } from '@/app/services/login.service';
 import { Util } from '@/app/util';
@@ -18,7 +25,7 @@ import { environment } from '@/environments/environment';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.less'],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, AfterViewInit {
   profil?: Member;
 
   edit: boolean = false;
@@ -27,6 +34,7 @@ export class ProfileComponent implements OnInit {
   phone: string = '';
   address: string = '';
 
+  editPhoto: boolean = false;
   photoFile?: File;
 
   // alertes
@@ -34,10 +42,14 @@ export class ProfileComponent implements OnInit {
   alertes: Item[] | undefined;
   pagerAlertes: JcmsPager<AlerteApi> | undefined;
 
+  @ViewChildren('formEndDisplay')
+  formEndDisplay: QueryList<any> | undefined;
+
   constructor(
     public login: LoginService,
     private _jcms: JcmsClientService,
-    private _datePipe: DatePipe
+    private _datePipe: DatePipe,
+    private _ds: DesignSystemService
   ) {}
 
   ngOnInit(): void {
@@ -60,6 +72,13 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  ngAfterViewInit(): void {
+    this._ds.initOverlay();
+    this.formEndDisplay?.changes.subscribe((_) => {
+      this._ds.initForm();
+    });
+  }
+
   public getProfileImg(): string {
     if (this.profil && this.profil.photo) {
       return environment.urlJcms + this.profil.photo;
@@ -67,11 +86,15 @@ export class ProfileComponent implements OnInit {
     return 'assets/images/svg/icone-profil.svg';
   }
 
+  public toggleEditPhoto() {
+    this.editPhoto = !this.editPhoto;
+  }
+
   public onChangeFile(event: any) {
     this.photoFile = event.srcElement.files[0];
   }
 
-  public editPhoto() {
+  public subEditPhoto() {
     if (this.photoFile) {
       this.login.updatePhoto(this.photoFile);
       this.photoFile = undefined;

@@ -1,5 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 
+import { DesignSystemService } from '@/app/services/design-system.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
 import { LoginService } from '@/app/services/login.service';
@@ -10,7 +17,7 @@ import { DateService } from '@/app/services/utils/date.service';
   templateUrl: './account-creation.component.html',
   styleUrls: ['./account-creation.component.less'],
 })
-export class AccountCreationComponent {
+export class AccountCreationComponent implements AfterViewInit {
   step: number = 1;
 
   maxStep: number = 3;
@@ -36,12 +43,23 @@ export class AccountCreationComponent {
 
   accountCreate: boolean = false;
 
+  @ViewChildren('formDisplay')
+  formDisplay: QueryList<any> | undefined;
+
   constructor(
     public lblService: LabelMngService,
     private _jcms: JcmsClientService,
     private _utilDate: DateService,
-    public _login: LoginService
+    public _login: LoginService,
+    private _ds: DesignSystemService
   ) {}
+
+  ngAfterViewInit(): void {
+    this._ds.initForm();
+    this.formDisplay?.changes.subscribe((_) => {
+      this._ds.initForm();
+    });
+  }
 
   /**
    * Validate current step
@@ -57,20 +75,18 @@ export class AccountCreationComponent {
         });
       }
     } else if (this.step === 2) {
-      // test null => by DS ?
-      this.date = new Date(
-        ~~this.dateYear,
-        ~~this.dateMonth - 1,
-        ~~this.dateDay
-      );
-      if (
-        this.dateYear.length > 0 &&
-        this.dateMonth.length > 0 &&
-        this.dateDay.length > 0 &&
-        this._utilDate.testDate(this.date) &&
-        this.date < new Date()
-      ) {
-        return true;
+      if (this.dateYear && this.dateMonth && this.dateDay) {
+        this.date = new Date(
+          ~~this.dateYear,
+          ~~this.dateMonth - 1,
+          ~~this.dateDay
+        );
+
+        if (this._utilDate.testDate(this.date)) {
+          return true;
+        } else {
+          // TODO error DS
+        }
       } else {
         // TODO error DS
         console.log("La date n'est pas valide");

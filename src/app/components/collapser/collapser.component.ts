@@ -1,11 +1,8 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
 
-import { Item } from '../list/list.component';
+import { DesignSystemService } from '@/app/services/design-system.service';
 
-/**
- * Class JS du DS 44
- */
-declare class CollapserStandard {}
+import { Item } from '../list/list.component';
 
 @Component({
   selector: 'app-collapser',
@@ -25,8 +22,10 @@ export class CollapserComponent implements AfterViewInit {
   prefixId: string =
     'collapser-' + Math.random().toString().replace('.', '') + '-';
 
+  constructor(private _ds: DesignSystemService) {}
+
   ngAfterViewInit(): void {
-    new CollapserStandard();
+    this._ds.initCollapser();
   }
 
   dynamiqueAddInnerHTML(i: number, id: string) {

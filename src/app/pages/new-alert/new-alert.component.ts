@@ -1,8 +1,9 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Alerte, AlerteApi } from '@/app/models/jcms/alerte';
+import { DesignSystemService } from '@/app/services/design-system.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
 
@@ -11,7 +12,7 @@ import { LabelMngService } from '@/app/services/label-mng.service';
   templateUrl: './new-alert.component.html',
   styleUrls: ['./new-alert.component.less'],
 })
-export class NewAlertComponent implements OnInit {
+export class NewAlertComponent implements OnInit, AfterViewInit {
   private _isUpdate: boolean = false;
   private _idAlertUpdate: string = '';
 
@@ -36,7 +37,8 @@ export class NewAlertComponent implements OnInit {
     public lblService: LabelMngService,
     private _jcms: JcmsClientService,
     private _location: Location,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _ds: DesignSystemService
   ) {}
 
   ngOnInit(): void {
@@ -65,6 +67,10 @@ export class NewAlertComponent implements OnInit {
         });
       }
     });
+  }
+
+  ngAfterViewInit() {
+    this._ds.initForm();
   }
 
   public newAlert() {

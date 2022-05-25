@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { DesignSystemService } from '@/app/services/design-system.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
 import { LoginService } from '@/app/services/login.service';
 
@@ -9,7 +10,7 @@ import { LoginService } from '@/app/services/login.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.less'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
   //fields
   pseudo: string = '';
   pwd: string = '';
@@ -20,13 +21,18 @@ export class LoginComponent implements OnInit {
   constructor(
     private _router: Router,
     public lblService: LabelMngService,
-    private _login: LoginService
+    private _login: LoginService,
+    private _ds: DesignSystemService
   ) {}
 
   ngOnInit(): void {
     if (this._login.isLogged) {
       this._router.navigate(['/themes']);
     }
+  }
+
+  ngAfterViewInit(): void {
+    this._ds.initForm();
   }
 
   public login() {

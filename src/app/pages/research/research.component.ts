@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { JcmsPager } from '@/app/core/jcmsPager';
 import { Content } from '@/app/models/jcms/content';
+import { DesignSystemService } from '@/app/services/design-system.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { Util } from '@/app/util';
 
@@ -13,7 +14,7 @@ import { Item } from '../../components/list/list.component';
   templateUrl: './research.component.html',
   styleUrls: ['./research.component.less'],
 })
-export class ResearchComponent {
+export class ResearchComponent implements AfterViewInit {
   text: string = '';
 
   researchRun: boolean = false;
@@ -22,7 +23,14 @@ export class ResearchComponent {
 
   pager: JcmsPager<Content> | undefined;
 
-  constructor(private _jcms: JcmsClientService) {}
+  constructor(
+    private _jcms: JcmsClientService,
+    private _ds: DesignSystemService
+  ) {}
+
+  ngAfterViewInit(): void {
+    this._ds.initForm();
+  }
 
   public research(): void {
     this.result = undefined;
