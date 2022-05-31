@@ -1,0 +1,20 @@
+language: node_js
+
+node_js:
+  - 16
+
+install:
+  - npm install
+
+script:
+  - npm run build
+
+deploy:
+  provider: releases
+  api_key:
+    secure: ByT6zMWetpaFT2vuGCuchPf++rUEPmR4TIG34wUCkwMRJAmW2uoy5ckKkXNjgra4aaPUjtM6ISQnG8GeOshwBQQgehzdSIThAi0J7DltemArKa+Kz1EOZGpMC497KUgTYbmmpgqXjSFWg4D+09pfPA7kH4iCiT9ysoUeqvLAOHdZwE5EGb4EiEh8IxZsXuWevVFiOiHm2PMA1psXRRdfzl1NG5DJfRf7fCLVzyboTuN7afzWLjRDGCew/Ypv9Yyff591GxPL/lv2aP7KpdYa3c6utWxEDrTBLF5IdCCVEWYNH5iV83Tl+CPOYmL6StHj2DLtoFhwpOh6udTuTPu285KXHpuUN/gpMnqyR62bcNsgrMQcg2tTJuUE8WbsLIyvn5aDPiBW7IFB4AVBQ1mSkG79AQT+FEDxzCiaeQpv7P6qnZ0x9djTkKJCxsv/stP+fdnrqdkDIGzIXY0C1H6ND1CpxQAhquwdyhhHWLvS7Dw7J26Jd55WkLF6feWJG03HzRiv2DwsyU/zoRZQN+2E7x0TYfgOB0u/hAuLJ1Agr0o2Vnqjfl15Xq2WpBg0ZoeggsArTEjwdHUFl28ZRK0rmYX9Z7++0s3LfVR0I+lX2EWwI1obZeVq2iyuCwBHq3g221QszyUXEWSnzif2+fIU/wXm+1je0IaVfETlOSTTQWc=
+  file_glob: true
+  file: "${TRAVIS_BUILD_DIR}/dist/*.zip"
+  skip_cleanup: true
+  on:
+    tags: true
