@@ -9,7 +9,7 @@ install:
 
 script:
   - ng build
-  - zip "zelli_${TRAVIS_TAG}.zip" "dist/" 
+  - zip -r "zelli_${TRAVIS_TAG}.zip" "dist/" 
   
 deploy:
   provider: releases
