@@ -9,6 +9,9 @@ install:
 script:
   - npm run build
   
+after_script:
+  - zip -r "${TRAVIS_BUILD_DIR}/zelli_${TRAVIS_TAG}.zip ${TRAVIS_BUILD_DIR}/dist/" 
+  
 deploy:
   provider: releases
   api_key:
