@@ -4,7 +4,7 @@ export class Util {
   /**
    *
    * @param content
-   * @returns L'url interne à l'application pour rendre le contenue
+   * @returns L'url interne à l'application pour rendre le contenu
    */
   public static buildUrlCotent(content: Content): string {
     if (content.class === 'generated.ArticleASE') {
@@ -13,6 +13,10 @@ export class Util {
 
     if (content.class === 'generated.SousthemeASE') {
       return '/subTheme/' + content.id;
+    }
+
+    if (content.class === 'generated.Contact') {
+      return '/contact/' + content.id;
     }
 
     // TODO structures Lot 2

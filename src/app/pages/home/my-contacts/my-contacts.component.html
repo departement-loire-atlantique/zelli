@@ -9,14 +9,14 @@
     <button class="p-contacts__add btn btn-full">Ajouter un contact</button>
 
     <!-- Pas de contacts -->
-    <section *ngIf="contactsIds.length <= 0" class="p-contacts__empty">
+    <section *ngIf="!isResult()" class="p-contacts__empty">
       Tu peux enregistrer des contacts dans cet espace au fil de ta navigation
       dans l'appli ou en cliquant sur le bouton "Ajouter un contact".
     </section>
 
     <!-- On a des contacts -->
-    <section *ngIf="contactsIds.length > 0" class="p-contacts__list">
-      <app-contact [contactIds]="contactsIds"></app-contact>
+    <section *ngIf="isResult()" class="p-contacts__list">
+      <app-list [items]="result"></app-list>
     </section>
   </ng-container>
 </main>

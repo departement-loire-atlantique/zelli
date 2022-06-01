@@ -8,8 +8,8 @@
     <small *ngIf="fromContactPage">Mes contacts</small>
     <h3>{{ contact?.title }}</h3>
     <br />
-    <p *ngIf="contact?.subTitle">
-      {{ contact?.subTitle }}
+    <p *ngIf="contact?.job">
+      {{ contact?.job }}
     </p>
   </div>
   <div class="p-contact__actions">
@@ -32,7 +32,7 @@
       <app-icon name="mail"></app-icon>
     </a>
     <a
-      *ngIf="contact?.location"
+      *ngIf="contact?.location?.title"
       href="https://www.google.com/maps/search/?api=1&query={{
         getContactLocation()
       }}"
