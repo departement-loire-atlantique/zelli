@@ -8,7 +8,7 @@ install:
   - npm install -g @angular/cli
 
 script:
-  - ng build
+  - ng build -c pre-production
   - cd dist/zelli
   - zip -r "${TRAVIS_BUILD_DIR}/zelli_${TRAVIS_TAG}.zip" * 
   
