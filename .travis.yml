@@ -5,9 +5,10 @@ node_js:
 
 install:
   - npm install
+  - npm install -g @angular/cli
 
 script:
-  - npm run build
+  - ng build
   - zip -r "${TRAVIS_BUILD_DIR}/zelli_${TRAVIS_TAG}.zip" "${TRAVIS_BUILD_DIR}/dist/" 
   
 deploy:
