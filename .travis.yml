@@ -17,7 +17,7 @@ deploy:
   api_key:
     secure: J2jdPKq4FdKrQpkps/hDowGHMjNPGwpHGPJ/+C5eJU6XzLi4aHh36aNiGuZaWoDfNJaFCndmkaQlAxsA9bq6LIMR2sMEJ+uJnoaXmyoJl1hlZQ+7nEZSUD4PtT0+JEwysbDsmTshbskFxsX2xw88ovgymAi2zEafDs+BHfD33wf5xAmgkpm28ctxdQ4m2twRTo6toM6IDtnjBmBw329CNbnACpCP4TJZL+4PHd5fJpXHNf6E6N2NEorjtNIViC0YZSD8X8kZagNU9PCvVUvmWEoSPj/bo67DAcXlstSVGhIJ3SYd50flDRUnu7wycmpF+sjMPi7dxS/SorsGCtgiDva9QPp7NABdO+5WZNt+x0T0f8cgTUUdnIpXhfiXCZwA5VTY188Bled5noZK11aOKr7MNz6pKAnJoynF0CABxSjFJ6J/ohte6szbbX9wqi2Pc2x+RlPF+Zz0YuV6tCgAYxHbSHkM7V/iYysuDPA482HkVkqCSBt0KY6cSty/ha5dtAMuiN/E9OHFLy+ab8LfaaupaVhJi9K4HDI5jWm1mHXnWc9VNYl+TSOAO5AyNzD5s7Wq6orMSjjsFgVHMYwi3uzLZ5nfDAUT6CoB8WAsp1xcDgK9RiYEFIOtmhAk1o48tA4fF0PCqKgRT0w9mmmz0lKQMqvu+frKSWh41TYqHw8=
   file_glob: true
-  file: "${TRAVIS_BUILD_DIR}/dist/*.zip"
+  file: "${TRAVIS_BUILD_DIR}/*.zip"
   skip_cleanup: true
   on:
     tags: true
