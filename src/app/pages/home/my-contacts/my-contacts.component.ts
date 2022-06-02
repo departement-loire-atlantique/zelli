@@ -1,12 +1,13 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { LabelMngService } from 'src/app/services/label-mng.service';
 
 import { Item } from '@/app/components/list/list.component';
 import { JcmsPager } from '@/app/core/jcmsPager';
 import { APageHome } from '@/app/models/aPageHome';
 import { Content } from '@/app/models/jcms/content';
-import { ContactDetailsService } from '@/app/services/contact-details.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
+import { LoginService } from '@/app/services/login.service';
 import { Util } from '@/app/util';
 
 @Component({
@@ -19,19 +20,22 @@ export class MyContactsComponent extends APageHome implements OnInit {
   researchRun: boolean = false;
   result: Item[] | undefined;
   pager: JcmsPager<Content> | undefined;
+  isLogged!: boolean;
 
-  isLoadingContacts = false;
-  errorLoadingContacts = false;
+  isLoadingContacts!: boolean;
+  errorLoadingContacts!: boolean;
 
   constructor(
     _injector: Injector,
     private _jcms: JcmsClientService,
-    private _contactDetailsService: ContactDetailsService
+    private _login: LoginService,
+    public _lblService: LabelMngService
   ) {
     super(_injector);
   }
 
   ngOnInit(): void {
+    this.isLogged = this._login.isLogged;
     this.isLoadingContacts = true;
     this.getMyContacts();
     this.isLoadingContacts = false;
@@ -70,8 +74,8 @@ export class MyContactsComponent extends APageHome implements OnInit {
     });
   }
 
-  public isResult(): boolean {
-    if (this.result) {
+  public displayResult(): boolean {
+    if (this._login.isLogged && this.result) {
       if (this.result.length > 0) {
         return true;
       }
