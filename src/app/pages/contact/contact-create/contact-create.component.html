@@ -1,0 +1,114 @@
+<header>
+    <app-back text="" picto="icon-cross icon--xlarge"></app-back>
+    <h1>Ajouter un contact</h1>
+    <div class="sub-title">
+        Ici, tu peux créer et ajouter tous tes contacts utiles pour ne pas les oublier.
+    </div>
+</header>
+
+<div><sup aria-hidden="true">*</sup>Champs obligatoire</div>
+<form (ngSubmit)="addContact()">
+    <div class="ds44-form__container">
+        <div class="ds44-posRel">
+            <label for="form-element-92874" class="ds44-formLabel">
+                <span class="ds44-labelTypePlaceholder">
+                    <span>Nom du contact<sup aria-hidden="true">*</sup></span>
+                </span>
+            </label>
+            <input type="text" id="form-element-92874" name="form-element-92874" class="ds44-inpStd"
+                title="Champ standard - obligatoire" required [(ngModel)]="nom" />
+            <button class="ds44-reset" type="button">
+                <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+                <span class="visually-hidden">Effacer le contenu saisi dans le champ : Nom du contact</span>
+            </button>
+        </div>
+    </div>
+    <div class="ds44-form__container">
+        <div class="ds44-posRel">
+            <label for="form-element-36253" class="ds44-formLabel">
+                <span class="ds44-labelTypePlaceholder"><span>Téléphone mobile</span></span>
+            </label>
+            <input type="text" id="form-element-36253" name="form-element-36253" class="ds44-inpStd"
+                title="Téléphone mobile" aria-describedby="explanation-form-element-36253" [(ngModel)]="telmobile" />
+            <button class="ds44-reset" type="button">
+                <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+                <span class="visually-hidden">Effacer le contenu saisi dans le champ : Téléphone mobile</span>
+            </button>
+        </div>
+        <div class="ds44-field-information" aria-live="polite">
+            <ul class="ds44-field-information-list ds44-list">
+                <li id="explanation-form-element-36253" class="ds44-field-information-explanation">Ex: 0602030405</li>
+            </ul>
+        </div>
+    </div>
+    <div class="ds44-form__container">
+        <div class="ds44-posRel">
+            <label for="form-element-36254" class="ds44-formLabel">
+                <span class="ds44-labelTypePlaceholder"><span>Téléphone fixe</span></span>
+            </label>
+            <input type="tel" id="form-element-36254" name="form-element-36254" class="ds44-inpStd"
+                title="Téléphone fixe" aria-describedby="explanation-form-element-36254" [(ngModel)]="telfixe" />
+            <button class="ds44-reset" type="button">
+                <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+                <span class="visually-hidden">Effacer le contenu saisi dans le champ : Téléphone fixe</span>
+            </button>
+        </div>
+        <div class="ds44-field-information" aria-live="polite">
+            <ul class="ds44-field-information-list ds44-list">
+                <li id="explanation-form-element-36254" class="ds44-field-information-explanation">Ex: 0102030405</li>
+            </ul>
+        </div>
+    </div>
+    <div class="ds44-form__container">
+        <div class="ds44-posRel">
+            <label for="form-element-36255" class="ds44-formLabel">
+                <span class="ds44-labelTypePlaceholder"><span>Email</span></span>
+            </label>
+            <input type="email" id="form-element-36255" name="form-element-36255" class="ds44-inpStd"
+                title="Téléphone fixe" aria-describedby="explanation-form-element-36255" [(ngModel)]="email" />
+            <button class="ds44-reset" type="button">
+                <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+                <span class="visually-hidden">Effacer le contenu saisi dans le champ : Email</span>
+            </button>
+        </div>
+        <div class="ds44-field-information" aria-live="polite">
+            <ul class="ds44-field-information-list ds44-list">
+                <li id="explanation-form-element-36255" class="ds44-field-information-explanation">Ex:
+                    adresseemail@fai.com</li>
+            </ul>
+        </div>
+    </div>
+    <div class="ds44-form__container">
+        <div class="ds44-posRel">
+            <label for="form-element-92875" class="ds44-formLabel">
+                <span class="ds44-labelTypePlaceholder">
+                    <span>Adresse</span>
+                </span>
+            </label>
+            <input type="text" id="form-element-92875" name="form-element-92875" class="ds44-inpStd"
+                title="Champ standard" [(ngModel)]="adresse" />
+            <button class="ds44-reset" type="button">
+                <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+                <span class="visually-hidden">Effacer le contenu saisi dans le champ : Adresse</span>
+            </button>
+        </div>
+    </div>
+    <div class="ds44-form__container">
+        <div class="ds44-posRel">
+            <label for="form-element-92876" class="ds44-formLabel">
+                <span class="ds44-labelTypePlaceholder">
+                    <span>Commentaire</span>
+                </span>
+            </label>
+            <input type="text" id="form-element-92876" name="form-element-92876" class="ds44-inpStd"
+                title="Champ standard" [(ngModel)]="commentaire" />
+            <button class="ds44-reset" type="button">
+                <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+                <span class="visually-hidden">Effacer le contenu saisi dans le champ : Commentaire</span>
+            </button>
+        </div>
+    </div>
+    <div class="btn-wrapper">
+        <button class="btn btn-big ds44-btnStd" [disabled]="addContactRun" type="submit">Enregistrer</button>
+    </div>
+</form>

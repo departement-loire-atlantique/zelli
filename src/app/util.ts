@@ -15,13 +15,9 @@ export class Util {
       return '/subTheme/' + content.id;
     }
 
-    if (content.class === 'generated.Contact') {
-      return '/contact/' + content.id;
-    }
-
     // TODO structures Lot 2
-    if (content.class === 'generated.Structure') {
-      return '/TODO/' + content.id;
+    if (content.class === 'generated.Contact') {
+      return '/contact/details/' + content.id;
     }
 
     if (content.class === 'com.jalios.jcms.FileDocument') {
