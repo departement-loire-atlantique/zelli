@@ -1,7 +1,6 @@
 import {
   AfterViewInit,
   Component,
-  OnInit,
   QueryList,
   ViewChildren,
 } from '@angular/core';

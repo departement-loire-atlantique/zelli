@@ -142,6 +142,17 @@ export const lbls: { [key: string]: lbl } = {
     lbl: 'Tu as beaucoup de choses à faire et tu ne veux rien oublier ? Crée tes alertes personnalisées !',
     propJcms: 'jcmsplugin.zelli.lbl.newAlert.subTitle',
   },
+
+  // --------------------
+  // Contact
+  contactCreateTitle: {
+    lbl: 'Ajouter un contact',
+    propJcms: 'jcmsplugin.zelli.lbl.contact.create.titre',
+  },
+  contactCreateSubTitle: {
+    lbl: 'Ici, tu peux créer et ajouter tous tes contacts utiles pour ne pas les oublier.',
+    propJcms: 'jcmsplugin.zelli.lbl.contact.create.sousTitre',
+  },
 };
 
 export interface lbl {

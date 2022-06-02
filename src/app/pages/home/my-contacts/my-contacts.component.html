@@ -2,10 +2,23 @@
   <app-page-title [curentCat]="this.curentCat"></app-page-title>
 </header>
 
-<app-main-menu></app-main-menu>
+<main class="p-contacts with-menu">
+  <app-loader *ngIf="isLoadingContacts" color="#0013b1"></app-loader>
 
-<app-loader *ngIf="true" color="#0013b1"></app-loader>
+  <ng-container *ngIf="!isLoadingContacts">
+    <button class="p-contacts__add btn btn-full" [routerLink]="['/contact/create']">Ajouter un contact</button>
 
-<main class="themes with-menu">
-  <p>TODO</p>
+    <!-- Pas de contacts -->
+    <section *ngIf="!isResult()" class="p-contacts__empty">
+      Tu peux enregistrer des contacts dans cet espace au fil de ta navigation
+      dans l'appli ou en cliquant sur le bouton "Ajouter un contact".
+    </section>
+
+    <!-- On a des contacts -->
+    <section *ngIf="isResult()" class="p-contacts__list">
+      <app-list [items]="result"></app-list>
+    </section>
+  </ng-container>
 </main>
+
+<app-main-menu></app-main-menu>

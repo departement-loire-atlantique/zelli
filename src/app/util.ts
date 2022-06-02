@@ -4,7 +4,7 @@ export class Util {
   /**
    *
    * @param content
-   * @returns L'url interne à l'application pour rendre le contenue
+   * @returns L'url interne à l'application pour rendre le contenu
    */
   public static buildUrlCotent(content: Content): string {
     if (content.class === 'generated.ArticleASE') {
@@ -16,8 +16,8 @@ export class Util {
     }
 
     // TODO structures Lot 2
-    if (content.class === 'generated.Structure') {
-      return '/TODO/' + content.id;
+    if (content.class === 'generated.Contact') {
+      return '/contact/details/' + content.id;
     }
 
     if (content.class === 'com.jalios.jcms.FileDocument') {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, map, mergeMap } from 'rxjs';
+import { Observable, map, mergeMap, of } from 'rxjs';
 
 import {
   Contact,
@@ -19,24 +19,32 @@ export class ContactDetailsService {
     return this._jcmsClient
       .get<ContactFromApi>(`data/${resourceId}`)
       .pipe(
-        mergeMap((contactFromApi) =>
-          this._jcmsClient
-            .get<LocationFromApi>(
-              `data/${contactFromApi.lieuDeRattachement.id}`
-            )
-            .pipe(
-              map((result) => ({
-                ...contactFromApi,
-                soustitre: result.soustitre,
-                chapo: result.chapo,
-                lieuDeRattachement: {
-                  ...result,
-                  city: result.commune.title,
-                },
-              }))
-            )
-        )
+        mergeMap((contactFromApi) => {
+          if (contactFromApi.lieuDeRattachement != undefined) {
+            return this._jcmsClient
+              .get<LocationFromApi>(
+                `data/${contactFromApi.lieuDeRattachement.id}`
+              )
+              .pipe(
+                map((result) => ({
+                  ...contactFromApi,
+                  soustitre: result.soustitre,
+                  chapo: result.chapo,
+                  lieuDeRattachement: {
+                    ...result,
+                    city: result.commune.title,
+                  },
+                }))
+              );
+          } else {
+            return of(contactFromApi);
+          }
+        })
       )
       .pipe(map((response) => mapContactFromApi(response)));
+  }
+
+  public createContact(contact: Contact) {
+    console.log('Contact a sauvegarder: ' + contact);
   }
 }
