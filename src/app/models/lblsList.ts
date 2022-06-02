@@ -131,6 +131,17 @@ export const lbls: { [key: string]: lbl } = {
     lbl: 'Pour te connecter, indique l’identifiant et le mot de passe que tu as choisis quand tu as créé ton compte.',
     propJcms: 'jcmsplugin.zelli.lbl.account.login.subTitle',
   },
+
+  // --------------------
+  // Contact
+  contactCreateTitle: {
+    lbl: 'Ajouter un contact',
+    propJcms: 'jcmsplugin.zelli.lbl.contact.create.titre',
+  },
+  contactCreateSubTitle: {
+    lbl: 'Ici, tu peux créer et ajouter tous tes contacts utiles pour ne pas les oublier.',
+    propJcms: 'jcmsplugin.zelli.lbl.contact.create.sousTitre',
+  },
 };
 
 export interface lbl {

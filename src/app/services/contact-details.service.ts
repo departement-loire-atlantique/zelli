@@ -43,4 +43,8 @@ export class ContactDetailsService {
       )
       .pipe(map((response) => mapContactFromApi(response)));
   }
+
+  public createContact(contact: Contact) {
+    console.log('Contact a sauvegarder: ' + contact);
+  }
 }

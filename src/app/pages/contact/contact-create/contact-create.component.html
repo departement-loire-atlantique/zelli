@@ -1,12 +1,10 @@
 <header>
     <app-back text="" picto="icon-cross icon--xlarge"></app-back>
-    <h1>Ajouter un contact</h1>
-    <div class="sub-title">
-        Ici, tu peux créer et ajouter tous tes contacts utiles pour ne pas les oublier.
-    </div>
-</header>
+    <h1>{{ lblService.getLbl('contactCreateTitle') }}</h1>
+    <div class="sub-title">{{ lblService.getLbl('contactCreateSubTitle') }}</div>
+    <div class="ds44-form__container"><sup aria-hidden="true">*</sup>{{ lblService.getLbl('accountCreateRequired') }}</div>
+  </header>
 
-<div><sup aria-hidden="true">*</sup>Champs obligatoire</div>
 <form (ngSubmit)="addContact()">
     <div class="ds44-form__container">
         <div class="ds44-posRel">
@@ -100,12 +98,7 @@
                     <span>Commentaire</span>
                 </span>
             </label>
-            <input type="text" id="form-element-92876" name="form-element-92876" class="ds44-inpStd"
-                title="Champ standard" [(ngModel)]="commentaire" />
-            <button class="ds44-reset" type="button">
-                <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
-                <span class="visually-hidden">Effacer le contenu saisi dans le champ : Commentaire</span>
-            </button>
+            <textarea rows="5" cols=1 id="form-element-92876" name="form-element-92876" class="ds44-inpStd" title="Champ standard" [(ngModel)]="commentaire"></textarea>
         </div>
     </div>
     <div class="btn-wrapper">
