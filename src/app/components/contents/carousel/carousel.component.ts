@@ -56,7 +56,7 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.itemSwiper?.changes.subscribe((_) => {
       this.buildCarousel();
-      this.pagerInit();
+      // this.pagerInit();
     });
   }
 
