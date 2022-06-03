@@ -94,6 +94,34 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'questions/:id',
+    loadChildren: () =>
+      import('./pages/home/questions/questions-by-themes/questions-by-themes.module').then(
+        (m) => m.QuestionsByThemesModule
+      ),
+  },
+  {
+    path: 'ask-questions/:id',
+    loadChildren: () =>
+      import('./pages/ask-question/ask-question.module').then(
+        (m) => m.AskQuestionModule
+      ),
+  }, 
+  {
+    path: 'ask-questions-form/:bool',
+    loadChildren: () =>
+      import('./pages/ask-question/ask-question-form/ask-question-form.module').then(
+        (m) => m.AskQuestionFormModule
+      ),
+  },
+  {
+    path: 'ask-questions-send',
+    loadChildren: () =>
+      import('./pages/ask-question/ask-question-send/ask-question-send.module').then(
+        (m) => m.AskQuestionSendModule
+      ),
+  },
+  {
     path: 'welcome',
     loadChildren: () =>
       import('./pages/welcome/welcome.module').then((m) => m.WelcomeModule),

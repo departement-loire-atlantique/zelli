@@ -2,10 +2,10 @@
 
 export const environment = {
   production: false,
-  urlJcms: 'http://localhost:8080/zelli/',
+  urlJcms: 'http://localhost:8080/ZELLI/',
   apiKey:
-    'djI7al8yOzE2Nzk1NjM3NjQ0OTI7R0VULDs7Mjg7JDJhJDA0JFFYQm1nTzhsdjVJRnphOXd3TnByNmVhODNrR05iaHdZY3J2dEhVR1pVZHBaaVRoVHk4SXZ5',
+    'djI7al8yOzE2ODU3NzcyNjkyNzQ7R0VULFBVVCxQT1NULERFTEVURSw7OzI4OyQyYSQwNCRPS1VBWjJsajFWckxvcWVYQzQ2Z3BlZHZsVmJvTWI4NnRSazlFWHF2MGFpQUh4WkdzYUxORw==',
   catNavMain: 'j_5',
-  catIntro: '',
-  catMainContent: '',
+  catIntro: 'j_6',
+  catMainContent: 'c_5137',
 };

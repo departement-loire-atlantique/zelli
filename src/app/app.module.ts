@@ -12,12 +12,15 @@ import { AppRoutingModule } from '@/app/app-routing.module';
 import { AppComponent } from '@/app/app.component';
 import { SharedModule } from '@/app/components/shared.module';
 
+import { FormsModule } from '@angular/forms'; 
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    FormsModule, 
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable

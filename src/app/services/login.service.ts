@@ -64,10 +64,10 @@ export class LoginService implements OnDestroy {
    * @returns true if is valid personal token (no API token)
    */
   public testToken(): boolean {
-    if (this._personalToken === environment.apiKey) {
-      this.clearPersonalToken();
-      return false;
-    }
+    // if (this._personalToken === environment.apiKey) {
+    //   this.clearPersonalToken();
+    //   return false;
+    // }
     this._jcms.get<Member>('WhoAmI').subscribe({
       next: (rep: Member) => {
         console.log(rep);

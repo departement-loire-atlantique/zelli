@@ -29,6 +29,10 @@ export class Util {
       return '/alert/' + content.id;
     }
 
+    if (content.class === 'generated.FaqAccueil') {
+      return '/questions/' + content.id;
+    }
+
     return '';
   }
 }

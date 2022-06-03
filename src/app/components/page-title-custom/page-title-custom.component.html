@@ -1,0 +1,27 @@
+<div *ngIf="mainCat" class="page-title">
+  <img class="img-page-head-bg" *ngIf="mainCat.image" [src]="mainCat.image" aria-hidden="true" />
+
+  <div class="page-topbar">
+
+    <app-back
+    text=""
+    picto="icon-arrow-left icon--xlarge">
+  </app-back>
+
+    <div class="profile-link">
+      <a *ngIf="login.isLogged && login.profil" [routerLink]="'/profile'">
+        <img [src]="getProfileImg()" alt="Profil" />
+      </a>
+    </div>
+  </div>
+
+  <div class="page-infos">
+    <div class="page-icon" aria-hidden="true">
+      <i [class]="'icon ' + mainCat.icon"></i>
+    </div>
+    <h1>{{ mainCat.title }}</h1>
+    <p *ngIf="secondaryCat && secondaryCat.subTitle">
+      {{ secondaryCat.subTitle }}
+    </p>
+  </div>
+</div>

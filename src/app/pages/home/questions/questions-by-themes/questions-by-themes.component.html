@@ -1,0 +1,25 @@
+<header>
+  <app-back
+    text=""
+    picto="icon-arrow-left icon--xlarge"
+    class="back-in-top"
+  ></app-back>
+
+  <div *ngIf="faqAccueil" class="theme-info">
+    <p *ngIf="faqAccueil">{{ getSurtitre() }} </p>
+    <img [src]="getIcon()" alt="icon" aria-hidden="true" class="small-icon" />
+    <h1 *ngIf="faqAccueil">{{ faqAccueil.title }}</h1>
+    <div *ngIf="faqAccueil" class="lbl-theme" [innerHTML]="faqAccueil.description"></div>
+  </div>
+</header>
+
+<app-main-menu></app-main-menu>
+
+<main class="themes with-menu">
+  <section *ngIf="faqEntry">
+  <app-collapser
+        [dataTitle]="getQuestionsTitle()"
+        [dataVal]="getAnswers()"
+      ></app-collapser>
+    </section>
+</main>
