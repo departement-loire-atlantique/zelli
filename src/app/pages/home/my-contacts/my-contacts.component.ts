@@ -36,15 +36,14 @@ export class MyContactsComponent extends APageHome implements OnInit {
 
   ngOnInit(): void {
     this.isLogged = this._login.isLogged;
-    this.isLoadingContacts = true;
-    this.getMyContacts();
     this.isLoadingContacts = false;
+    this.getMyContacts();
   }
 
   public getMyContacts(): void {
     this.result = undefined;
     this.pager = undefined;
-    this.researchRun = true;
+    this.isLoadingContacts = true;
     this.processResult(
       this._jcms.getPager<Content>('search', {
         params: {
@@ -69,7 +68,7 @@ export class MyContactsComponent extends APageHome implements OnInit {
           url: Util.buildUrlCotent(itContent),
         });
       }
-      this.researchRun = false;
+      this.isLoadingContacts = false;
       // TODO Focus for accessibility
     });
   }
