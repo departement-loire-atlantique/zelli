@@ -6,7 +6,7 @@
   <!-- Pas connecté -->
   <ng-container *ngIf="!isLogged" class="p-contacts__empty">
     Pour pouvoir créer ta propre liste de contacts, tu dois d’abord créer ton compte sur Zelli.
-    <button class="p-contacts__login btn btn-full" [routerLink]="['/account/login']">{{_lblService.getLbl('loginTitle')}}</button>
+    <button class="p-contacts__login btn btn-full" [routerLink]="['/account/create']">{{_lblService.getLbl('accountCreateTitle')}}</button>
   </ng-container>
 
 
