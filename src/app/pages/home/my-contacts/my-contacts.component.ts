@@ -48,7 +48,7 @@ export class MyContactsComponent extends APageHome implements OnInit {
     this.processResult(
       this._jcms.getPager<Content>('search', {
         params: {
-          types: ['Contact'],
+          types: ['Contact', 'FicheLieu'],
           exactType: true,
         },
       })

@@ -13,4 +13,19 @@ export class ContactDetailsComponent {
 
   @Input()
   noTitle = false;
+
+  public isContactlocation(): boolean {
+    if (
+      this.contact?.location?.building === undefined &&
+      this.contact?.location?.stairOrCorridor == undefined &&
+      this.contact?.location?.roadName === undefined &&
+      this.contact?.location?.cs === undefined &&
+      this.contact?.location?.postalCode === undefined &&
+      this.contact?.location?.city === undefined &&
+      this.contact?.location?.cedex === undefined
+    ) {
+      return false;
+    }
+    return true;
+  }
 }

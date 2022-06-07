@@ -17,9 +17,12 @@ export class ContactDetailsService {
 
   public getContacts(resourceId: string): Observable<Contact> {
     return this._jcmsClient
-      .get<ContactFromApi>(`data/${resourceId}`)
+      .get<any>(`data/${resourceId}`)
       .pipe(
         mergeMap((contactFromApi) => {
+          if (contactFromApi.class.includes('generated.FicheLieu')) {
+            contactFromApi.lieuDeRattachement = contactFromApi;
+          }
           if (contactFromApi.lieuDeRattachement != undefined) {
             return this._jcmsClient
               .get<LocationFromApi>(

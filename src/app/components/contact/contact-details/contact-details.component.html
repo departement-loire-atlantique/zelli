@@ -7,7 +7,7 @@
   >
 </app-heading>
 
-<div class="c-contact-details__line" *ngIf="contact?.location">
+<div class="c-contact-details__line" *ngIf="isContactlocation()">
   <app-icon name="marker"></app-icon>
   <div class="c-contact-details__sub-line">
     <span>{{
