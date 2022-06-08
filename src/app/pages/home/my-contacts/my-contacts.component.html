@@ -3,21 +3,33 @@
 </header>
 
 <main class="p-contacts with-menu">
-  <app-loader *ngIf="isLoadingContacts" color="#0013b1"></app-loader>
+  <!-- Pas connecté -->
+  <ng-container *ngIf="!isLogged" class="p-contacts__empty">
+    Pour pouvoir créer ta propre liste de contacts, tu dois d’abord créer ton compte sur Zelli.
+    <button class="p-contacts__login btn btn-full" [routerLink]="['/account/create']">{{_lblService.getLbl('accountCreateTitle')}}</button>
+  </ng-container>
 
-  <ng-container *ngIf="!isLoadingContacts">
-    <button class="p-contacts__add btn btn-full" [routerLink]="['/contact/create']">Ajouter un contact</button>
 
-    <!-- Pas de contacts -->
-    <section *ngIf="!isResult()" class="p-contacts__empty">
-      Tu peux enregistrer des contacts dans cet espace au fil de ta navigation
-      dans l'appli ou en cliquant sur le bouton "Ajouter un contact".
-    </section>
+  <ng-container *ngIf="isLogged">
+    <app-loader *ngIf="isLoadingContacts" color="#0013b1"></app-loader>
 
-    <!-- On a des contacts -->
-    <section *ngIf="isResult()" class="p-contacts__list">
-      <app-list [items]="result"></app-list>
-    </section>
+    <ng-container *ngIf="!isLoadingContacts">
+      <button class="p-contacts__add btn btn-full" [routerLink]="['/contact/create']">Ajouter un contact</button>
+
+      <!-- Pas de contacts -->
+      <section *ngIf="!isLogged" class="p-contacts__empty">
+        Tu peux enregistrer des contacts dans cet espace au fil de ta navigation
+        dans l'appli ou en cliquant sur le bouton "Ajouter un contact".
+      </section>
+
+      <!-- On a des contacts -->
+      <section *ngIf="displayResult()" class="p-contacts__list">
+        <app-list [items]="result"></app-list>
+        <button *ngIf="pager && pager.hasMore()" [disabled]="researchRun" (click)="moreResult()" class="btn btn-big" type="button" title="Afficher plus de contacts">
+          <span class="ds44-btnInnerText">Plus de contacts</span><i class="icon icon-long-arrow-right" aria-hidden="true"></i>
+        </button>
+      </section>
+    </ng-container>
   </ng-container>
 </main>
 

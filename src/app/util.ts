@@ -20,6 +20,10 @@ export class Util {
       return '/contact/details/' + content.id;
     }
 
+    if (content.class === 'generated.FicheLieu') {
+      return '/contact/details/' + content.id;
+    }
+
     if (content.class === 'com.jalios.jcms.FileDocument') {
       let fileDoc = content as any;
       return fileDoc.absDownloadUrl;
