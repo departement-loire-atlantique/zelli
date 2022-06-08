@@ -12,6 +12,8 @@ import { Category } from '@/app/models/jcms/category';
 import { Content } from '@/app/models/jcms/content';
 import { ListeDeContenus } from '@/app/models/jcms/listeDeContenus';
 import { FaqAccueil } from '@/app/models/jcms/faqAccueil';
+import { Observable, forkJoin } from 'rxjs';
+import { environment } from 'src/environments/environment.dev.jcms.R7'; //changer en fonction de l'env
 
 
 @Component({
@@ -28,7 +30,7 @@ export class QuestionsComponent extends APageHome implements OnInit {
   researchRun: boolean = false;
 
 
-  parentCategory = "rzelli_1394659"; //  bas non dépend des env ??? find cat by name? 
+  parentCategory = "rzelli_1394659"; //  cat explorer par thème
 
   constructor(_injector: Injector,
     private _catMng: CatsMngService,
@@ -64,62 +66,55 @@ export class QuestionsComponent extends APageHome implements OnInit {
       }).subscribe((pager: JcmsPager<ListeDeContenus>) => {
         this.pager = pager;
         const contents = pager.dataInPage;
-        this.initFaqList(contents[0]);
+        if (contents[0] && contents[0].contenus) {
+          let listFaq = this.getListFaq(contents[0].contenus);
+          listFaq.subscribe(dataArray => {
+            this.initFaqList(dataArray);
+          });
+        }
       });
 
     this.researchRun = false;
   }
 
   // initialise la liste de FAQ Accueil
-  private initFaqList(liste: ListeDeContenus) {
-    if(liste) {
-
-      let listeFaq: FaqAccueil[] = this.getListFaq(liste.contenus);
-
-      for (let faq of liste.contenus) {
-        let listeCat = this.getFaqCategories(faq.categories);
-        this.addItem(faq, listeCat);
+  private initFaqList(contenus: FaqAccueil[]) {
+    if (contenus) {
+      for (let faq of contenus) {
+        this.getListCategories(faq.categories).subscribe(dataArray => {
+          for (let i = 0; i < dataArray.length; i++) {
+            let idParent = JSON.parse(JSON.stringify(dataArray[i].parent))['id'];
+            if (idParent == this.parentCategory) {
+              this.addItem(faq, dataArray[i]);
+              break;
+            }
+          }
+        });
       }
     }
   }
 
   // get liste faq avec toutes les infos
   private getListFaq(contenus: FaqAccueil[]) {
-    let listeFaq: FaqAccueil[] = [];
-    if(contenus) {
-      for(let contenu of contenus) {
-        this._jcms
-        .get<FaqAccueil>('data/' + contenu.id)
-        .subscribe((faq: FaqAccueil) => {
-          listeFaq.push(faq); 
-        });
-      }
+    let observables: Observable<FaqAccueil>[] = [];
+    for (let contenu of contenus) {
+      observables.push(this._jcms.get<FaqAccueil>('data/' + contenu.id));
     }
-    return listeFaq;
+    return forkJoin(observables);
   }
 
-  // get cat theme faq
-  private getFaqCategories(list: Category[]): Category | undefined {
-    let faqTheme = undefined;
-    if(list) {
-      for(let idCat of list) {
-        this._jcms
-        .get<Category>('data/' + idCat)
-        .subscribe((cat: Category) => {
-          if (cat.parent == this.parentCategory) {
-            faqTheme = cat;
-          }
-        });
-      }
+  private getListCategories(list: Category[]) {
+    let observables: Observable<Category>[] = [];
+    for (let cat of list) {
+      observables.push(this._jcms.get<Category>('data/' + cat.id));
     }
-    return faqTheme;
-    
+    return forkJoin(observables);
   }
 
   // get l'image de la catégorie
   public getImgCategory(category?: Category) {
-    if (category && category.image) {
-      return category.image;
+    if (category && category.icon) {
+      return category.icon;
     }
     return "";
   }
@@ -131,7 +126,7 @@ export class QuestionsComponent extends APageHome implements OnInit {
     }
 
     this.result.push({
-      img: this.getImgCategory(catFaq),
+      img: environment.urlJcms + this.getImgCategory(catFaq),
       lbl: faq.title,
       url: Util.buildUrlCotent(faq),
     });
@@ -143,106 +138,3 @@ export class QuestionsComponent extends APageHome implements OnInit {
   }
 
 }
-
-
-
-// // get les catégories de la faq accueil
-  // private getFaqCategories(faqId: string): Category[] {
-  //   let listeCat: Category[] = [];
-  //   this._jcms
-  //     .get<FaqAccueil>('data/' + faqId)
-  //     .subscribe((faqComplete: FaqAccueil) => {
-  //       if (faqComplete?.categories) {
-  //         for (let itCat of faqComplete.categories) {
-  //           this._catMng.cat(itCat.id).subscribe((cat: Category) => {
-  //             listeCat.push(cat);
-  //             console.log(listeCat);
-  //           });
-  //         }
-  //       }
-  //     });
-  //   return listeCat;
-    
-  // }
-
-  // // get la catégorie du theme de la faq
-  // private getFaqThemeCategory(categories: Category[]): Category | undefined {
-  //   for(let cat of categories) {
-  //     if (cat.parent == this.parentCategory) {
-  //       return cat;
-  //     }
-  //   }
-  //   return undefined;
-  // }
-
-
-
-
-
-
-    // this.processResult(
-    //   this._jcms
-    //     .getPager<ListeDeContenus>('search', {
-    //       params: {
-    //         types: 'ListeDeContenus',
-    //         exactType: true,
-    //         exactCat: true,
-    //         catMode: 'and',
-    //         cids: [this.curentCat.id],
-    //         pageSize: 1,
-    //       },
-    //     })
-    // );
-
-
-//   public processResult(obs: Observable<JcmsPager<ListeDeContenus>>) {
-//     obs.subscribe((pager: JcmsPager<ListeDeContenus>) => {
-//       if (!this.listeFaqAccueil) {
-//         this.listeFaqAccueil = [];
-//       }
-
-
-//       this.pager = pager;
-//       const contents = pager.dataInPage;
-
-//       this.listeDeContenus = contents[0];
-
-//       // liste des thèmes de questions
-//       for (let faq of this.listeDeContenus.contenus) {
-//         this.listeFaqAccueil.push(faq);
-
-//         let title: string = faq.title;
-//         let img = "";
-
-//         this._jcms
-//           .get<FaqAccueil>('data/' + faq.id)
-//           .subscribe((faqComplete: FaqAccueil) => {
-//             if (faqComplete?.categories) {
-//               for (let itCat of faqComplete.categories) {
-//                 this._catMng.cat(itCat.id).subscribe((cat: Category) => {
-//                   if (cat.parent == this.parentCategory && cat.image) {
-//                     img = cat.image;
-//                     console.log(img);
-//                   }
-//                 });
-//               }
-//             }
-
-//             console.log(img);
-
-//             if (!this.result) {
-//               this.result = [];
-//             }
-//             // liste item
-//             this.result.push({
-//               img: img,
-//               lbl: title,
-//               url: Util.buildUrlCotent(faq),
-//             });
-//           });
-//       }
-//       this.researchRun = false;
-//     });
-//   }
-
-

@@ -15,7 +15,7 @@ export class AskQuestionFormComponent  {
     curentCat: Category | undefined;
     parentCat: Category | undefined;
 
-    tmp:string = "c_5290";
+    tmp:string = "rzelli_1394929"; // cat référent
 
     constructor(private _route: ActivatedRoute,
         private router: Router,

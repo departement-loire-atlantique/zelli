@@ -5,15 +5,13 @@
     class="back-in-top"
   ></app-back>
 
-  <div *ngIf="faqAccueil" class="theme-info">
+  <div *ngIf="faqAccueil" class="theme-info question-theme">
     <p *ngIf="faqAccueil">{{ getSurtitre() }} </p>
     <img [src]="getIcon()" alt="icon" aria-hidden="true" class="small-icon" />
     <h1 *ngIf="faqAccueil">{{ faqAccueil.title }}</h1>
     <div *ngIf="faqAccueil" class="lbl-theme" [innerHTML]="faqAccueil.description"></div>
   </div>
 </header>
-
-<app-main-menu></app-main-menu>
 
 <main class="themes with-menu">
   <section *ngIf="faqEntry">
@@ -22,4 +20,10 @@
         [dataVal]="getAnswers()"
       ></app-collapser>
     </section>
+
+    <a
+    class="btn btn-big"
+    [routerLink]="'/ask-questions/' + 'rzelli_1394928'" 
+    >Poser une question
+    </a>
 </main>

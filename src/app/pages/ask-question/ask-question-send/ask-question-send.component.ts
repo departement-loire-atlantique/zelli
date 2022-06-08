@@ -13,7 +13,7 @@ export class AskQuestionSendComponent  {
     curentCat: Category | undefined;
     parentCat: Category | undefined;
 
-    tmp:string = "c_5291";
+    tmp:string = "rzelli_1394930"; //cat envoie
 
     constructor(
         private _catMng: CatsMngService) {
