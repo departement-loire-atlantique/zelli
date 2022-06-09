@@ -1,19 +1,15 @@
-import { Component, Injector, OnInit } from '@angular/core';
-import { APageHome } from '@/app/models/aPageHome';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { Category } from '@/app/models/jcms/category';
 
-import { Observable } from 'rxjs';
 import { JcmsPager } from '@/app/core/jcmsPager';
-import { Content } from '@/app/models/jcms/content';
+import { environment } from 'src/environments/environment'; 
 
 import { Item } from '@/app/components/list/list.component';
-import { Util } from '@/app/util';
 
 import { FaqAccueil } from '@/app/models/jcms/faqAccueil';
 import { CatsMngService } from '@/app/services/cats-mng.service';
-import { CatsHomeMngService } from '@/app/services/cats-home-mng.service';
 import { FaqEntry } from '@/app/models/jcms/faqEntry';
 
 @Component({
@@ -31,46 +27,49 @@ export class QuestionsByThemesComponent implements OnInit {
     surtitre: string | undefined;
     icon: string | undefined;
 
+    parentCat = environment.catThemes; //cat explorer par theme
+    questionsCat = environment.catQuestions;
+    askQuestionCat = environment.catAskQuestionRef;
+    
+
+
     constructor(
-        private _route: ActivatedRoute, 
+        private _route: ActivatedRoute,
         private _catMng: CatsMngService,
-        private _catsHome: CatsHomeMngService,
         private _jcms: JcmsClientService) {
     }
 
     ngOnInit(): void {
         this._route.paramMap.subscribe((params) => {
-            const id = params.get('id');
+            const id = params.get('id')!;
             this._jcms
                 .get<FaqAccueil>('data/' + id)
                 .subscribe((faq: FaqAccueil) => {
                     this.faqAccueil = faq;
                     this.getCategories();
-                    this.getFaqEntry();
+                    this.getFaqEntry(id);
                 });
         });
     }
 
     // get les categories pour afficher surtitre et icon
     getCategories() {
-        if (this.faqAccueil?.categories) {
+        if (this.faqAccueil && this.faqAccueil.categories) {
             for (let itCat of this.faqAccueil.categories) {
                 this._catMng.cat(itCat.id).subscribe((cat: Category) => {
-
-                    if (this._catsHome.getCatFromUrl(cat.url)) { 
+                    if (cat.id == this.questionsCat) {
                         this.surtitre = cat.title;
-                    } else if (cat.icon) {
-                        this.icon = cat.icon; 
+                    } else if (cat.parent == this.parentCat && cat.icon) {
+                        this.icon = cat.icon;
                     }
-
                 });
             }
         }
     }
 
-    // get liste faq entrée (TODO trie sur catégorie avant boucle)
-    getFaqEntry() {
-        if (this.faqAccueil) {
+    // get liste faq entrée
+    getFaqEntry(id: string) {
+        if (this.faqAccueil && id) {
             this._jcms.getPager<FaqEntry>('search', {
                 params: {
                     types: 'FaqEntry',
@@ -83,11 +82,13 @@ export class QuestionsByThemesComponent implements OnInit {
 
                 this.pager = pager;
                 const contents = pager.dataInPage;
-
-                for (let itContent of contents) {
-                    if(itContent.faq && itContent.faq.id == this.faqAccueil?.id)
-                        this.faqEntry.push(itContent);
-                }
+                this.faqEntry = contents.filter(s => {
+                    if (s.faq && s.faq.id) {
+                        return s.faq.id == id;
+                    } else {
+                        return false;
+                    }
+                });
             });
 
         }
@@ -112,6 +113,33 @@ export class QuestionsByThemesComponent implements OnInit {
             (itFaqEntry: FaqEntry) => itFaqEntry.answer
         );
     }
+
+    public getAskQuestionCat() {
+      return this.askQuestionCat;
+    }
+
+    
+    // private swipeCoord?: [number, number];
+    // private swipeTime?: number;
+    // swipe(e: TouchEvent, when: string): void {
+    //     const coord: [number, number] = [e.changedTouches[0].clientX, e.changedTouches[0].clientY];
+    //     const time = new Date().getTime();
+      
+    //     if (when === 'start') {
+    //       this.swipeCoord = coord;
+    //       this.swipeTime = time;
+    //     } else if (when === 'end' && this.swipeCoord && this.swipeTime) {
+    //       const direction = [coord[0] - this.swipeCoord[0], coord[1] - this.swipeCoord[1]];
+    //       const duration = time - this.swipeTime;
+      
+    //       if (duration < 1000 //
+    //         && Math.abs(direction[0]) > 30 // Long enough
+    //         && Math.abs(direction[0]) > Math.abs(direction[1] * 3)) { // Horizontal enough
+    //           const swipe = direction[0] < 0 ? 'next' : 'previous';
+    //           // Do whatever you want with swipe
+    //       }
+    //     }
+    //   }
 }
 
 // pager + nb de questions a afficher

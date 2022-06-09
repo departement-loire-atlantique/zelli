@@ -10,6 +10,12 @@ export const environment = {
   catNavMain: 'catHome',
   catIntro: 'TODO',
   catMainContent: 'TODO',
+
+  catQuestions: '',
+  catThemes: '',
+  catAskQuestionRef: '',
+  catAskQuestionForm: '',
+  catAskQuestionSend: '',
 };
 
 /*

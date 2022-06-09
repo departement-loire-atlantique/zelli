@@ -13,8 +13,7 @@ import { Content } from '@/app/models/jcms/content';
 import { ListeDeContenus } from '@/app/models/jcms/listeDeContenus';
 import { FaqAccueil } from '@/app/models/jcms/faqAccueil';
 import { Observable, forkJoin } from 'rxjs';
-import { environment } from 'src/environments/environment.dev.jcms.R7'; //changer en fonction de l'env
-
+import { environment } from 'src/environments/environment'; 
 
 @Component({
   selector: 'app-questions',
@@ -30,16 +29,15 @@ export class QuestionsComponent extends APageHome implements OnInit {
   researchRun: boolean = false;
 
 
-  parentCategory = "rzelli_1394659"; //  cat explorer par thème
+  parentCategory = environment.catThemes; //  cat explorer par thème
+  askQuestionCat = environment.catAskQuestionForm;
 
   constructor(_injector: Injector,
-    private _catMng: CatsMngService,
     private _jcms: JcmsClientService) {
     super(_injector);
   }
 
   ngOnInit(): void {
-
     if (!this.curentCat) {
       return;
     }
@@ -60,7 +58,7 @@ export class QuestionsComponent extends APageHome implements OnInit {
           exactType: true,
           exactCat: true,
           catMode: 'and',
-          cids: [this.curentCat.id],
+          cids: this.curentCat.id,
           pageSize: 1,
         },
       }).subscribe((pager: JcmsPager<ListeDeContenus>) => {
@@ -80,12 +78,14 @@ export class QuestionsComponent extends APageHome implements OnInit {
   // initialise la liste de FAQ Accueil
   private initFaqList(contenus: FaqAccueil[]) {
     if (contenus) {
-      for (let faq of contenus) {
+      //for (let faq of contenus) {
+        for (let ind = 0; ind < contenus.length; ind++) {
+        let faq = contenus[ind];
         this.getListCategories(faq.categories).subscribe(dataArray => {
           for (let i = 0; i < dataArray.length; i++) {
             let idParent = JSON.parse(JSON.stringify(dataArray[i].parent))['id'];
             if (idParent == this.parentCategory) {
-              this.addItem(faq, dataArray[i]);
+              this.addItem(faq, ind, dataArray[i]);
               break;
             }
           }
@@ -103,6 +103,7 @@ export class QuestionsComponent extends APageHome implements OnInit {
     return forkJoin(observables);
   }
 
+  // get liste categories avec toutes les infos
   private getListCategories(list: Category[]) {
     let observables: Observable<Category>[] = [];
     for (let cat of list) {
@@ -120,12 +121,12 @@ export class QuestionsComponent extends APageHome implements OnInit {
   }
 
   // ajoute une faq accueil à la liste
-  private addItem(faq: FaqAccueil, catFaq?: Category) {
+  private addItem(faq: FaqAccueil, index: number, catFaq?: Category) {
     if (!this.result) {
       this.result = [];
     }
-
-    this.result.push({
+    
+    this.result.splice(index, 0, {
       img: environment.urlJcms + this.getImgCategory(catFaq),
       lbl: faq.title,
       url: Util.buildUrlCotent(faq),
@@ -135,6 +136,10 @@ export class QuestionsComponent extends APageHome implements OnInit {
   // retourne la liste d'items
   public getItems() {
     return this.result;
+  }
+
+  public getAskQuestionCat() {
+    return this.askQuestionCat;
   }
 
 }

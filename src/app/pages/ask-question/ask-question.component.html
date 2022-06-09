@@ -4,7 +4,9 @@
 
 
 <main class="themes with-menu">
-  <a class="btn btn-big" [routerLink]="'/ask-questions-form/' + 'true'">Oui</a>
-  <a class="btn btn-big" [routerLink]="'/ask-questions-form/' + 'false'">Non</a>
-
+  <div class="btn-wrapper">
+    <a class="btn" [routerLink]="'/ask-questions-form/' + 'true'">Oui</a>
+    <a class="btn" [routerLink]="'/ask-questions-form/' + 'false'">Non</a>
+  </div>
+  
 </main>

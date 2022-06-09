@@ -9,13 +9,13 @@
     <p *ngIf="faqAccueil">{{ getSurtitre() }} </p>
     <img [src]="getIcon()" alt="icon" aria-hidden="true" class="small-icon" />
     <h1 *ngIf="faqAccueil">{{ faqAccueil.title }}</h1>
-    <div *ngIf="faqAccueil" class="lbl-theme" [innerHTML]="faqAccueil.description"></div>
+    <p *ngIf="faqAccueil" class="lbl-theme desc" [innerHTML]="faqAccueil.description"></p>
   </div>
 </header>
 
-<main class="themes with-menu">
+<main class="themes with-menu question-collapser">
   <section *ngIf="faqEntry">
-  <app-collapser
+  <app-collapser 
         [dataTitle]="getQuestionsTitle()"
         [dataVal]="getAnswers()"
       ></app-collapser>
@@ -23,7 +23,11 @@
 
     <a
     class="btn btn-big"
-    [routerLink]="'/ask-questions/' + 'rzelli_1394928'" 
+    [routerLink]="'/ask-questions/' + getAskQuestionCat()"
     >Poser une question
     </a>
 </main>
+
+<!-- <div (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')" style="background-color: red ;">
+  App content here
+</div> -->

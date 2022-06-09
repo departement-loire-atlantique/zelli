@@ -1,4 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment'; 
 
 import { Category } from '@/app/models/jcms/category';
 import { CatsMngService } from '@/app/services/cats-mng.service';
@@ -13,7 +14,7 @@ export class AskQuestionSendComponent  {
     curentCat: Category | undefined;
     parentCat: Category | undefined;
 
-    tmp:string = "rzelli_1394930"; //cat envoie
+    tmp:string = environment.catAskQuestionSend; //cat envoie
 
     constructor(
         private _catMng: CatsMngService) {
