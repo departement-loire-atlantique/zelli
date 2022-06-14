@@ -101,7 +101,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'ask-questions/:id',
+    path: 'ask-questions',
     loadChildren: () =>
       import('./pages/ask-question/ask-question.module').then(
         (m) => m.AskQuestionModule

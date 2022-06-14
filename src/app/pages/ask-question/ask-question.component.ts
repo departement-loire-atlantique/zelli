@@ -1,6 +1,6 @@
-import { Component, Injector, OnInit } from '@angular/core'; 
+import { Component } from '@angular/core'; 
+import { environment } from 'src/environments/environment'; 
 
-import { ActivatedRoute } from '@angular/router';
 import { Category } from '@/app/models/jcms/category';
 import { CatsMngService } from '@/app/services/cats-mng.service';
 
@@ -13,15 +13,10 @@ export class AskQuestionComponent {
     curentCat: Category | undefined;
     parentCat: Category | undefined;
 
-    constructor(private _route: ActivatedRoute,
-        private _catMng: CatsMngService) {
-        const id = this._route.snapshot.paramMap.get('id');
+    tmp:string = environment.catAskQuestionRef; //cat referent
 
-        if (!id) {
-            return;
-        }
-
-        this._catMng.cat(id).subscribe((cat) => {
+    constructor(private _catMng: CatsMngService) {
+        this._catMng.cat(this.tmp).subscribe((cat) => {
             this.curentCat = cat;
             if(cat.parent)
                 this._catMng.cat(cat.parent).subscribe((parent) => (this.parentCat = parent));

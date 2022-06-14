@@ -1,6 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
-import { CatsMngService } from '@/app/services/cats-mng.service';
 
 import { JcmsPager } from '@/app/core/jcmsPager';
 
@@ -28,9 +27,7 @@ export class QuestionsComponent extends APageHome implements OnInit {
 
   researchRun: boolean = false;
 
-
   parentCategory = environment.catThemes; //  cat explorer par thème
-  askQuestionCat = environment.catAskQuestionForm;
 
   constructor(_injector: Injector,
     private _jcms: JcmsClientService) {
@@ -78,7 +75,6 @@ export class QuestionsComponent extends APageHome implements OnInit {
   // initialise la liste de FAQ Accueil
   private initFaqList(contenus: FaqAccueil[]) {
     if (contenus) {
-      //for (let faq of contenus) {
         for (let ind = 0; ind < contenus.length; ind++) {
         let faq = contenus[ind];
         this.getListCategories(faq.categories).subscribe(dataArray => {
@@ -136,10 +132,6 @@ export class QuestionsComponent extends APageHome implements OnInit {
   // retourne la liste d'items
   public getItems() {
     return this.result;
-  }
-
-  public getAskQuestionCat() {
-    return this.askQuestionCat;
   }
 
 }
