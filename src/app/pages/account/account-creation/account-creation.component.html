@@ -1,4 +1,4 @@
-<div *ngIf="!accountCreate" class="account-create full-bg-color">
+<form *ngIf="!accountCreate" class="account-create full-bg-color" data-is-ajax="true">
   <header>
     <app-back class="back-in-top color-w" (returnCustom)="prevStep()" [customProcess]="customReturn()" text=""
       picto="icon-arrow-left icon--xlarge">
@@ -156,7 +156,7 @@
       {{ lblBtnNext() }}
     </button>
   </footer>
-</div>
+</form>
 
 <div *ngIf="accountCreate" class="account-create-end">
   <img src="/assets/images/svg/illustration-reussite.svg" />

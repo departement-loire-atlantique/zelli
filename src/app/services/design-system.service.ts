@@ -14,17 +14,9 @@ declare class FormFieldInputDatepicker {}
 declare class FormFieldInputFile {}
 declare class FormFieldInputStandard {}
 declare class FormFieldInputTextarea {}
-declare class FormLayoutAbstract {
-  constructor(_: any);
-}
+declare class FormLayoutStandard {}
 declare class FormLayoutInline {}
 declare class FormLayoutObligationAlimentaire {}
-class FormLayoutStandard extends FormLayoutAbstract {
-  // Error DS init FormLayoutStandard
-  constructor() {
-    super('form');
-  }
-}
 
 @Injectable({
   providedIn: 'root',
