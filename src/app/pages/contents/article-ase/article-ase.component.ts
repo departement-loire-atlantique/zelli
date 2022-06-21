@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ArticleASE, LiensUtils } from 'src/app/models/jcms/articleASE';
+import { ArticleASE } from 'src/app/models/jcms/articleASE';
 import { JcmsClientService } from 'src/app/services/jcms-client.service';
 
 import { Item } from '@/app/components/list/list.component';
-import { ContactFromApi, mapContactFromApi } from '@/app/models/jcms/contact';
+import { ContactFromApi } from '@/app/models/jcms/contact';
 import { FaqEntry } from '@/app/models/jcms/faqEntry';
+import { Lien } from '@/app/models/jcms/lien';
 import { LabelMngService } from '@/app/services/label-mng.service';
+import { Util } from '@/app/util';
 
 @Component({
   selector: 'app-article-ase',
@@ -15,8 +17,6 @@ import { LabelMngService } from '@/app/services/label-mng.service';
 })
 export class ArticleASEComponent implements OnInit {
   article: ArticleASE | undefined;
-
-  liensUtils: LiensUtils | undefined;
 
   constructor(
     private _route: ActivatedRoute,
@@ -52,11 +52,18 @@ export class ArticleASEComponent implements OnInit {
       }
 
       // liens utils
-      this.liensUtils = new LiensUtils(
-        this.article.liensInternes,
-        this.article.liensExternes,
-        this.article.libelleLien
-      );
+      console.log(this.article.liensUtiles);
+      if (this.article.liensUtiles) {
+        for (let i = 0; i < this.article.liensUtiles.length; i++) {
+          this._jcms
+            .get<Lien>('data/' + this.article.liensUtiles[i].id)
+            .subscribe((lien: any) => {
+              if (this.article && this.article.liensUtiles) {
+                this.article.liensUtiles[i] = lien;
+              }
+            });
+        }
+      }
     }
   }
 
@@ -72,13 +79,15 @@ export class ArticleASEComponent implements OnInit {
     );
   }
 
-  public getItemForLiensUtiles(): Item[] {
+  public getItemForLien(): Item[] {
     let item: Item[] = [];
-    if (this.liensUtils) {
-      for (let itLien of this.liensUtils.liens) {
+    if (this.article && this.article.liensUtiles) {
+      for (let itLien of this.article.liensUtiles) {
         item.push({
-          lbl: itLien.lbl,
-          url: itLien.url,
+          lbl: itLien.texteAlternatif ? itLien.texteAlternatif : itLien.title,
+          url: itLien.lienInterne
+            ? Util.buildUrlCotent(itLien.lienInterne)
+            : itLien.lienExterne,
         });
       }
     }

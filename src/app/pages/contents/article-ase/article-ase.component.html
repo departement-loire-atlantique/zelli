@@ -63,7 +63,7 @@
     </section>
 
     <section
-      *ngIf="liensUtils && liensUtils.liens && liensUtils.liens.length > 0"
+      *ngIf="this.article.liensUtiles && this.article.liensUtiles.length > 0"
       class="liens-utils"
       role="liens-utils"
     >
@@ -72,7 +72,7 @@
       </app-heading>
 
       <app-list
-        [items]="getItemForLiensUtiles()"
+        [items]="getItemForLien()"
         cssClass="in-tuile"
       ></app-list>
     </section>
