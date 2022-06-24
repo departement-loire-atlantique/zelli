@@ -6,7 +6,6 @@ import {
 } from '@angular/core';
 
 import { DesignSystemService } from '@/app/services/design-system.service';
-import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
 import { LoginService } from '@/app/services/login.service';
 import { DateService } from '@/app/services/utils/date.service';
@@ -41,6 +40,13 @@ export class AccountCreationComponent implements AfterViewInit {
   pwdConfirm: string = '';
 
   accountCreate: boolean = false;
+  isPseudoError: boolean = false;
+  isDateError: boolean = false;
+  isPwdError: boolean = false;
+  errorMsg!: string;
+  pseudoErrorMsg: string = 'Ce pseudo est déjà pris';
+  dateErrorMsg: string = "La date n'est pas valide";
+  pwdErrorMsg: string = 'Les mots de passe sont différents';
 
   @ViewChildren('formDisplay')
   formDisplay: QueryList<any> | undefined;
@@ -73,6 +79,7 @@ export class AccountCreationComponent implements AfterViewInit {
         });
       }
     } else if (this.step === 2) {
+      console.log(this.dateYear + this.dateMonth + this.dateDay);
       if (this.dateYear && this.dateMonth && this.dateDay) {
         this.date = new Date(
           ~~this.dateYear,
@@ -87,13 +94,16 @@ export class AccountCreationComponent implements AfterViewInit {
         }
       } else {
         // TODO error DS
-        console.log("La date n'est pas valide");
+        this.errorMsg = this.dateErrorMsg;
+        this.isDateError = true;
       }
     } else if (this.step === 3) {
       if (this.pwd && this.pwdConfirm && this.pwd === this.pwdConfirm) {
         return true;
       } else {
         // TODO error DS
+        this.errorMsg = this.pwdErrorMsg;
+        this.isPwdError = true;
       }
     }
 
@@ -132,6 +142,8 @@ export class AccountCreationComponent implements AfterViewInit {
   }
 
   private callbackIsMemberNotExist(status: boolean, msg?: string): boolean {
+    this.errorMsg = this.pseudoErrorMsg;
+    this.isPseudoError = !status;
     if (status) {
       this.processNexStep();
       return false;
