@@ -178,14 +178,13 @@ export class LoginService implements OnDestroy {
             callback.func.call(callback.class, true);
           }
           // TODO error DS
+        } else {
+          callback?.func.call(callback.class, false);
         }
       },
       error: (error) => {
         // TODO error DS
-        console.log(error);
-        if (callback) {
-          callback.func.call(callback.class, false, error.error.status);
-        }
+        callback?.func.call(callback.class, false, error.error.status);
       },
     });
   }
