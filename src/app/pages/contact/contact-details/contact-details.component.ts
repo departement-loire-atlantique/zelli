@@ -23,6 +23,7 @@ export class PageContactDetailsComponent implements OnInit, OnDestroy {
 
   contactId?: string;
   contact?: Contact;
+  mail: string[] = [];
 
   isLoading = false;
   isError = false;
@@ -70,6 +71,11 @@ export class PageContactDetailsComponent implements OnInit, OnDestroy {
         },
         next: (data) => {
           this.contact = data;
+          if (typeof this.contact?.email === 'string') {
+            this.mail.push(this.contact.email);
+          } else {
+            this.mail = this.contact?.email;
+          }
           this.isLoading = false;
         },
       });
