@@ -1,5 +1,11 @@
 # Zelli
 
+<p>
+  <a href="https://app.travis-ci.com/github/departement-loire-atlantique/zelli">
+    <img src="https://api.travis-ci.com/departement-loire-atlantique/zelli.svg?branch=main" />
+  </a>
+</p>
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
 
 ## Getting started
