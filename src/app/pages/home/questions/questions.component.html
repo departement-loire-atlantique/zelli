@@ -4,8 +4,18 @@
 
 <app-main-menu></app-main-menu>
 
-<app-loader *ngIf="true" color="#0013b1"></app-loader>
-
 <main class="themes with-menu">
-  <p>TODO questions works!</p>
+  <app-list class="question-list" [items]="getItems()" [noSeparator]="true"></app-list>
+
+  <app-loader *ngIf="researchRun" color="#0013b1"></app-loader>
+
+  <div class="ask-question">
+    <h3>Tu n'as pas trouvé la réponse dans les questions fréquentes ?</h3>
+    <a
+    class="btn btn-big"
+    [routerLink]="'/ask-questions/'"
+    >Poser une question
+    </a>
+  </div>
+
 </main>
