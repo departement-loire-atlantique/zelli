@@ -1,5 +1,5 @@
-import { Component } from '@angular/core'; 
-import { environment } from 'src/environments/environment'; 
+import { Component } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 import { Category } from '@/app/models/jcms/category';
 import { CatsMngService } from '@/app/services/cats-mng.service';
@@ -15,6 +15,10 @@ export class AskQuestionComponent {
 
     tmp:string = environment.catAskQuestionRef; //cat referent
 
+    /**
+     * Initialise la catégorie "référent" et la catégorie "poser une question"
+     * @param _catMng le manager de catégories
+     */
     constructor(private _catMng: CatsMngService) {
         this._catMng.cat(this.tmp).subscribe((cat) => {
             this.curentCat = cat;

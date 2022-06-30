@@ -8,7 +8,7 @@ export interface ListeDeContenus extends Content {
 
     libelleTitre: string,
 
-    contenus: FaqAccueil[],
+    contenus: Content[],
 
     affichagePageAAidee: boolean
 }

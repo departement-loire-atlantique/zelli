@@ -1,10 +1,10 @@
 <header>
-  <app-page-title-custom [mainCat]="this.parentCat" [secondaryCat]="this.curentCat"></app-page-title-custom>
+  <app-page-title-custom [mainCat]="this.parentCat" [secondaryCat]="this.curentCat" [isProfile]="false"></app-page-title-custom>
 </header>
 
 
 <main class="themes with-menu">
-  <form #question="ngForm" (ngSubmit)="onClickSubmit(question.value)" >
+  <form ngNativeValidate #question="ngForm" (ngSubmit)="onClickSubmit(question.value)" >
     <div class="ds44-form__container question-input">
 
       <div class="ds44-posRel">

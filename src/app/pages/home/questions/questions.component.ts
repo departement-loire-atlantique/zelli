@@ -12,7 +12,7 @@ import { Content } from '@/app/models/jcms/content';
 import { ListeDeContenus } from '@/app/models/jcms/listeDeContenus';
 import { FaqAccueil } from '@/app/models/jcms/faqAccueil';
 import { Observable, forkJoin } from 'rxjs';
-import { environment } from 'src/environments/environment'; 
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-questions',
@@ -42,7 +42,9 @@ export class QuestionsComponent extends APageHome implements OnInit {
     this.initListeDeContenus();
   }
 
-  // get la liste de contenus pour la page questions
+  /**
+   * get la liste de contenus pour la page questions
+   */
   private initListeDeContenus() {
     if (!this.curentCat) {
       return;
@@ -72,14 +74,20 @@ export class QuestionsComponent extends APageHome implements OnInit {
     this.researchRun = false;
   }
 
-  // initialise la liste de FAQ Accueil
+  /**
+   * initialise la liste de FAQ Accueil
+   * @param contenus la liste de contenus
+   */
   private initFaqList(contenus: FaqAccueil[]) {
     if (contenus) {
-        for (let ind = 0; ind < contenus.length; ind++) {
+      for (let ind = 0; ind < contenus.length; ind++) {
         let faq = contenus[ind];
+
+        // liste des catégories de la FAQ
         this.getListCategories(faq.categories).subscribe(dataArray => {
           for (let i = 0; i < dataArray.length; i++) {
             let idParent = JSON.parse(JSON.stringify(dataArray[i].parent))['id'];
+            // ajoute si le parent est bien la cat parent
             if (idParent == this.parentCategory) {
               this.addItem(faq, ind, dataArray[i]);
               break;
@@ -90,8 +98,12 @@ export class QuestionsComponent extends APageHome implements OnInit {
     }
   }
 
-  // get liste faq avec toutes les infos
-  private getListFaq(contenus: FaqAccueil[]) {
+  /**
+   * Get la liste de faq avec toutes les infos
+   * @param contenus la liste de contenus
+   * @returns la liste des observables de FAQ Accueil
+   */
+  private getListFaq(contenus: Content[]) {
     let observables: Observable<FaqAccueil>[] = [];
     for (let contenu of contenus) {
       observables.push(this._jcms.get<FaqAccueil>('data/' + contenu.id));
@@ -99,8 +111,12 @@ export class QuestionsComponent extends APageHome implements OnInit {
     return forkJoin(observables);
   }
 
-  // get liste categories avec toutes les infos
-  private getListCategories(list: Category[]) {
+  /**
+   * Get la liste de categories avec toutes les infos
+   * @param list liste de contenus
+   * @returns liste d'observables de Category
+   */
+  private getListCategories(list: Content[]) {
     let observables: Observable<Category>[] = [];
     for (let cat of list) {
       observables.push(this._jcms.get<Category>('data/' + cat.id));
@@ -108,7 +124,11 @@ export class QuestionsComponent extends APageHome implements OnInit {
     return forkJoin(observables);
   }
 
-  // get l'image de la catégorie
+  /**
+   * Get l'image de la catégorie
+   * @param category la catégorie
+   * @returns l'image si présente
+   */
   public getImgCategory(category?: Category) {
     if (category && category.icon) {
       return category.icon;
@@ -116,12 +136,17 @@ export class QuestionsComponent extends APageHome implements OnInit {
     return "";
   }
 
-  // ajoute une faq accueil à la liste
+  /**
+   * Ajoute une FAQ Accueil à la liste
+   * @param faq la faq a ajouter
+   * @param index son index (pour l'ordre)
+   * @param catFaq et la catégorie de la FAQ (pour l'image)
+   */
   private addItem(faq: FaqAccueil, index: number, catFaq?: Category) {
     if (!this.result) {
       this.result = [];
     }
-    
+
     this.result.splice(index, 0, {
       img: environment.urlJcms + this.getImgCategory(catFaq),
       lbl: faq.title,
@@ -129,7 +154,10 @@ export class QuestionsComponent extends APageHome implements OnInit {
     });
   }
 
-  // retourne la liste d'items
+  /**
+   * Get la liste d'items
+   * @returns la liste d'items
+   */
   public getItems() {
     return this.result;
   }

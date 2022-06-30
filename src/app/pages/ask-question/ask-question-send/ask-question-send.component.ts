@@ -1,5 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment'; 
+import { environment } from 'src/environments/environment';
 
 import { Category } from '@/app/models/jcms/category';
 import { CatsMngService } from '@/app/services/cats-mng.service';
@@ -16,6 +16,10 @@ export class AskQuestionSendComponent  {
 
     tmp:string = environment.catAskQuestionSend; //cat envoie
 
+    /**
+     * Initialise la catégorie "envoie" et la catégorie "poser une question"
+     * @param _catMng le manager de catégories
+     */
     constructor(
         private _catMng: CatsMngService) {
         this._catMng.cat(this.tmp).subscribe((cat) => {

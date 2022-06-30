@@ -13,11 +13,17 @@ import { environment } from '@/environments/environment';
   styleUrls: ['./page-title-custom.component.less'],
 })
 export class PageTitleCustomComponent implements OnDestroy {
-  
+
   @Input()
   mainCat: Category | undefined;
   @Input()
   secondaryCat: Category | undefined;
+
+  @Input()
+  isProfile: boolean = true;
+
+  @Input()
+  title: string | undefined;
 
   profil: Member | undefined;
   profilObs: Subscription;
@@ -37,5 +43,11 @@ export class PageTitleCustomComponent implements OnDestroy {
       return environment.urlJcms + this.profil.photo;
     }
     return 'assets/images/svg/icone-profil.svg';
+  }
+
+  public getTitle() {
+    if(this.title)
+      return this.title
+    return this.mainCat?.title;
   }
 }

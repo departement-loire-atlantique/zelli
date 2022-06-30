@@ -5,7 +5,7 @@
 <app-main-menu></app-main-menu>
 
 <main class="themes with-menu">
-  <app-list class="question-list" [items]="getItems()"></app-list>
+  <app-list class="question-list" [items]="getItems()" [noSeparator]="true"></app-list>
 
   <app-loader *ngIf="researchRun" color="#0013b1"></app-loader>
 
@@ -13,9 +13,9 @@
     <h3>Tu n'as pas trouvé la réponse dans les questions fréquentes ?</h3>
     <a
     class="btn btn-big"
-    [routerLink]="'/ask-questions/'" 
+    [routerLink]="'/ask-questions/'"
     >Poser une question
     </a>
   </div>
-  
+
 </main>
