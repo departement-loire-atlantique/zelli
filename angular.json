@@ -32,7 +32,9 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              "src/combined-service-worker.js",
+              "src/firebase-messaging-sw.js"
             ],
             "styles": ["src/styles.less"],
             "scripts": [],
@@ -64,6 +66,8 @@
                 "src/favicon.ico",
                 "src/assets",
                 "src/manifest.webmanifest",
+                "src/combined-service-worker.js",
+                "src/firebase-messaging-sw.js",
                 {
                   "glob": "**/*",
                   "input": "src/assets/",
@@ -96,6 +100,8 @@
                 "src/favicon.ico",
                 "src/assets",
                 "src/manifest.webmanifest",
+                "src/combined-service-worker.js",
+                "src/firebase-messaging-sw.js",
                 {
                   "glob": "**/*",
                   "input": "src/assets/",
@@ -128,6 +134,8 @@
                 "src/favicon.ico",
                 "src/assets",
                 "src/manifest.webmanifest",
+                "src/combined-service-worker.js",
+                "src/firebase-messaging-sw.js",
                 {
                   "glob": "**/*",
                   "input": "src/assets/",
@@ -216,7 +224,9 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              "src/combined-service-worker.js",
+              "src/firebase-messaging-sw.js"
             ],
             "styles": ["src/styles.less"],
             "scripts": []
