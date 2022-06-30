@@ -31,7 +31,6 @@ export class AppComponent implements OnInit {
     getToken(messaging, { vapidKey: environment.firebase.vapidKey })
       .then((currentToken) => {
         if (currentToken) {
-          console.log('Hurraaa!!! we got the token.....');
           console.log(currentToken);
         } else {
           console.log(
@@ -60,7 +59,7 @@ export class AppComponent implements OnInit {
           payload?.notification?.title || 'Notification Title',
           {
             body: payload?.notification?.body,
-            icon: 'http://i.stack.imgur.com/Jzjhz.png?s=48&g=1',
+            icon: payload?.notification?.image,
             dir: 'auto',
           }
         );
