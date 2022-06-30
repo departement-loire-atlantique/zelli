@@ -1,6 +1,8 @@
 import {
   AfterViewInit,
   Component,
+  ElementRef,
+  Input,
   QueryList,
   ViewChildren,
 } from '@angular/core';
@@ -32,20 +34,18 @@ export class AccountCreationComponent implements AfterViewInit {
   pseudo: string = '';
 
   date: Date | undefined;
-  dateDay: string = '';
-  dateMonth: string = '';
-  dateYear: string = '';
+  @Input() dateDay!: string;
+  @Input() dateMonth!: string;
+  @Input() dateYear!: string;
 
   pwd: string = '';
   pwdConfirm: string = '';
 
   accountCreate: boolean = false;
-  isPseudoError: boolean = false;
-  isDateError: boolean = false;
-  isPwdError: boolean = false;
+  isError: boolean = false;
   errorMsg!: string;
   pseudoErrorMsg: string = 'Ce pseudo est déjà pris';
-  dateErrorMsg: string = "La date n'est pas valide";
+  dateErrorMsg: string = 'La date est postérieure à la date du jour';
   pwdErrorMsg: string = 'Les mots de passe sont différents';
 
   @ViewChildren('formDisplay')
@@ -55,7 +55,8 @@ export class AccountCreationComponent implements AfterViewInit {
     public lblService: LabelMngService,
     private _utilDate: DateService,
     public _login: LoginService,
-    private _ds: DesignSystemService
+    private _ds: DesignSystemService,
+    private elByClassName: ElementRef
   ) {}
 
   ngAfterViewInit(): void {
@@ -79,31 +80,44 @@ export class AccountCreationComponent implements AfterViewInit {
         });
       }
     } else if (this.step === 2) {
-      console.log(this.dateYear + this.dateMonth + this.dateDay);
       if (this.dateYear && this.dateMonth && this.dateDay) {
+        // field manual
         this.date = new Date(
           ~~this.dateYear,
           ~~this.dateMonth - 1,
           ~~this.dateDay
         );
-
-        if (this._utilDate.testDate(this.date)) {
-          return true;
-        } else {
-          // TODO error DS
-        }
       } else {
-        // TODO error DS
-        this.errorMsg = this.dateErrorMsg;
-        this.isDateError = true;
+        // field by Design System
+        const dateInput = (<HTMLElement>this.elByClassName.nativeElement)
+          .querySelector('.ds44-input-value')!
+          .getAttribute('value');
+        if (dateInput) {
+          this.date = new Date(
+            ~~dateInput!.substring(0, 4),
+            ~~dateInput!.substring(5, 7) - 1,
+            ~~dateInput!.substring(8, 10)
+          );
+        }
       }
+      /* Gestion des erreurs custom */
+      if (!this.date) {
+        console.debug('Mauvais format de date');
+      } else if (this.date > new Date()) {
+        this.errorMsg = this.dateErrorMsg;
+        this.isError = true;
+      } else {
+        return true;
+      }
+      this.dateDay = '';
+      this.dateMonth = '';
+      this.dateYear = '';
     } else if (this.step === 3) {
       if (this.pwd && this.pwdConfirm && this.pwd === this.pwdConfirm) {
         return true;
       } else {
-        // TODO error DS
         this.errorMsg = this.pwdErrorMsg;
-        this.isPwdError = true;
+        this.isError = true;
       }
     }
 
@@ -113,6 +127,7 @@ export class AccountCreationComponent implements AfterViewInit {
 
   public nextStep() {
     this.loading = true;
+    this.isError = false;
 
     if (!this.validStep()) {
       return;
@@ -143,7 +158,7 @@ export class AccountCreationComponent implements AfterViewInit {
 
   private callbackIsMemberNotExist(status: boolean, msg?: string): boolean {
     this.errorMsg = this.pseudoErrorMsg;
-    this.isPseudoError = !status;
+    this.isError = !status;
     if (status) {
       this.processNexStep();
       return false;

@@ -23,8 +23,8 @@
       <app-icon name="phone"></app-icon>
     </a>
     <a
-      *ngIf="contact?.email"
-      href="mailto:{{ contact?.email }}"
+      *ngIf="mail"
+      href="mailto:{{ mail[0] }}"
       target="_blank"
       rel="noopener noreferrer"
       class="p-contact__actions__item"

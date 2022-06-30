@@ -152,7 +152,7 @@
 
       <div *ngSwitchDefault>Error</div>
 
-    <div class="ds44-field-information ds44-error" *ngIf="isPwdError && errorMsg">
+    <div class="ds44-field-information ds44-error" *ngIf="isError && errorMsg">
       <ul class="ds44-field-information-list ds44-list">
         <li class="ds44-field-information-error" tabindex="-1">
           <i class="icon icon-attention icon--sizeM" aria-hidden="true"></i>
@@ -167,7 +167,7 @@
   </main>
 
   <footer>
-    <button class="btn btn-big" (click)="nextStep()" [disabled]="loading">
+    <button class="btn btn-full" (click)="nextStep()" [disabled]="loading">
       {{ lblBtnNext() }}
     </button>
   </footer>

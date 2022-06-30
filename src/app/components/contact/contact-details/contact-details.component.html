@@ -39,10 +39,13 @@
   <a href="tel:{{ contact?.phoneNumber }}">{{ contact?.phoneNumber }}</a>
 </div>
 
-<div class="c-contact-details__line" *ngIf="contact?.email">
-  <app-icon name="mail"></app-icon>
-  <a href="mailto:{{ contact?.email }}">{{ contact?.email }}</a>
-</div>
+<span *ngFor="let itMail of mail">
+  <div class="c-contact-details__line" *ngIf="itMail">
+    <app-icon name="mail"></app-icon>
+    <a href="mailto:{{ itMail }}">{{ itMail }}</a>
+  </div>
+</span>
+
 
 <div class="c-contact-details__line" *ngIf="contact?.location?.website">
   <app-icon name="link"></app-icon>
