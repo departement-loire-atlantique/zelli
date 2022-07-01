@@ -1,20 +1,22 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, Injectable, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { JcmsPager } from '@/app/core/jcmsPager';
 import { Content } from '@/app/models/jcms/content';
 import { DesignSystemService } from '@/app/services/design-system.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
+import { SharedService } from '@/app/services/shared-service.service';
 import { Util } from '@/app/util';
 
 import { Item } from '../../components/list/list.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-research',
   templateUrl: './research.component.html',
   styleUrls: ['./research.component.less'],
 })
-export class ResearchComponent implements AfterViewInit {
+export class ResearchComponent implements AfterViewInit, OnInit, OnDestroy {
   text: string = '';
 
   researchRun: boolean = false;
@@ -25,11 +27,27 @@ export class ResearchComponent implements AfterViewInit {
 
   constructor(
     private _jcms: JcmsClientService,
-    private _ds: DesignSystemService
-  ) {}
+    private _ds: DesignSystemService,
+    private sharedService: SharedService,
+    private _router: Router
+  ) { }
+
+  ngOnInit(): void {
+    this.result = this.sharedService.variable ? this.sharedService.variable : null;
+  }
+
+  ngOnDestroy(): void {
+    this.sharedService.variable = this.result;
+  }
 
   ngAfterViewInit(): void {
     this._ds.initForm();
+  }
+
+  public resetSearch() {
+    this.result = undefined;
+    this.sharedService.variable = undefined;
+    this._router.navigate(['/themes/']);
   }
 
   public research(): void {
@@ -106,3 +124,4 @@ export class ResearchComponent implements AfterViewInit {
     }
   }
 }
+

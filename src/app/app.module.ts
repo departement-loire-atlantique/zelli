@@ -12,7 +12,8 @@ import { AppRoutingModule } from '@/app/app-routing.module';
 import { AppComponent } from '@/app/app.component';
 import { SharedModule } from '@/app/components/shared.module';
 
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
+import { SharedService } from './services/shared-service.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +21,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule, 
+    FormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
@@ -30,6 +31,7 @@ import { FormsModule } from '@angular/forms';
     SharedModule,
   ],
   providers: [
+    SharedService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: MockBackendInterceptor,
