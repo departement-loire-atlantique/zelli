@@ -8,6 +8,6 @@
 
 <main class="age with-menu">
 
-  <app-collapser [dataTitle]="titleCollaps" [dataItems]="itemsCollaps"></app-collapser>
+    <app-collapser *ngIf="!loading" [dataTitle]="titleCollaps" [dataItems]="itemsCollaps"></app-collapser>
 
 </main>

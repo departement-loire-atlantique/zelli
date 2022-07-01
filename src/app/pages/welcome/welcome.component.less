@@ -1,0 +1,42 @@
+@import "/src/theme/importDep.less";
+
+:host {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+MAIN {
+  flex: 1;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .welcome-text {
+    text-align: center;
+    padding: 0 50px 14px;
+
+    H1 {
+      margin-bottom: 30px;
+    }
+
+    .desc {
+      color: @blue-dark;
+    }
+  }
+
+  .link-later {
+    text-align: center;
+    color: @blue;
+  }
+}
+
+FOOTER {
+  border-top: 0px;
+  padding: 25px 42px;
+
+  A {
+    color: @blue;
+  }
+}

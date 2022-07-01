@@ -1,0 +1,29 @@
+<header>
+  <app-back
+    text=""
+    picto="icon-arrow-left icon--xlarge"
+    class="back-in-top"
+  ></app-back>
+
+  <div *ngIf="faqAccueil" class="theme-info question-theme">
+    <p *ngIf="faqAccueil">{{ getSurtitre() }} </p>
+    <img [src]="getIcon()" alt="icon" aria-hidden="true" class="small-icon" />
+    <h1 *ngIf="faqAccueil">{{ faqAccueil.title }}</h1>
+    <p *ngIf="faqAccueil" class="lbl-theme desc" [innerHTML]="faqAccueil.description"></p>
+  </div>
+</header>
+
+<main class="themes with-menu question-collapser">
+  <section *ngIf="faqEntry">
+  <app-collapser 
+        [dataTitle]="getQuestionsTitle()"
+        [dataVal]="getAnswers()"
+      ></app-collapser>
+    </section>
+
+    <a
+    class="btn btn-big"
+    [routerLink]="'/ask-questions/'"
+    >Poser une question
+    </a>
+</main>

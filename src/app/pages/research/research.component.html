@@ -1,15 +1,14 @@
 
 <header>
-  <app-back text="" picto="icon-cross icon--xlarge"></app-back>
+  <app-back class="back-in-top right" text="" picto="icon-cross icon--xlarge" [customProcess]="true" (returnCustom)="resetSearch()"></app-back>
 
   <h1>Recherche</h1>
   <div class="sub-title">
-    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
-    magna
+
   </div>
 </header>
 
-<form (ngSubmit)="research()">
+<form (ngSubmit)="research()" data-is-ajax="true">
 
   <div class="ds44-form__container">
 
@@ -37,7 +36,7 @@
   </h3>
 
   <app-list [items]="result"></app-list>
-  
+
   <app-loader *ngIf="researchRun" color="#0013b1"></app-loader>
 
   <button *ngIf="pager && pager.hasMore()" [disabled]="researchRun" (click)="moreResult()" class="btn btn-big" type="button" title="Afficher plus de résultat">

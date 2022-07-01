@@ -5,6 +5,7 @@
   <li *ngFor="let itItem of items" [class.with-separator]="!noSeparator">
     <ng-template #content>
       <span class="lbl-link-wrapper">
+        <span *ngIf="itItem.prefix" class="lbl-prefix">{{ itItem.prefix }}</span>
         <img *ngIf="itItem.img" [src]="itItem.img" aria-hidden="true" />
         <span class="lbl-link" [class.is--bold]="isBold">{{ itItem.lbl }}</span>
       </span>

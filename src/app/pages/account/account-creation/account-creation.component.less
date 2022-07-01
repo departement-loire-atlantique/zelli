@@ -1,0 +1,73 @@
+@import "/src/theme/importDep.less";
+
+.account-create {
+
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  HEADER {
+    H1 {
+      margin: 55px 70px 0;
+    }
+  }
+
+  MAIN {
+    .step-infos {
+      margin: 0 20px 25px;
+
+      .step-num {
+        font-size: 17px;
+      }
+
+      // .step-title {
+      //   font-size: 17px;
+      // }
+    }
+
+    .curent-step {
+      margin: 0 20px;
+
+      .ds44-field-information {
+        * {
+          color: @white;
+        }
+
+        .ds44-iconInnerText {
+          color: @blue-dark;
+        }
+
+        .icon-attention {
+          color: @error;
+        }
+
+      }
+
+      .step-date {
+        text-align: initial;
+      }
+
+      .step-pwd {
+        > .ds44-posRel {
+          margin-bottom: 25px;
+        }
+      }
+    }
+
+
+  }
+
+  FOOTER {
+    border: none;
+    padding: 0 18px 21px;
+  }
+}
+
+.account-create-end {
+  text-align: center;
+
+  .create-end-msg {
+    margin: 0 50px;
+  }
+}

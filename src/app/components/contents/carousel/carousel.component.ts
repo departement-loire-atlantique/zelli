@@ -8,14 +8,10 @@ import {
 } from '@angular/core';
 
 import { Carousel, CarouselElement } from '@/app/models/jcms/carousel';
+import { DesignSystemService } from '@/app/services/design-system.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 
 import { environment } from '@/environments/environment';
-
-/**
- * Class JS du DS 44
- */
-declare class CarouselStandard {}
 
 @Component({
   selector: 'app-carousel',
@@ -41,7 +37,10 @@ export class CarouselComponent implements OnInit, AfterViewInit {
 
   curentSlide: number = 1;
 
-  constructor(private _jcms: JcmsClientService) {}
+  constructor(
+    private _jcms: JcmsClientService,
+    private _ds: DesignSystemService
+  ) {}
 
   ngOnInit(): void {
     if (!this.carousel && this.id) {
@@ -57,7 +56,7 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.itemSwiper?.changes.subscribe((_) => {
       this.buildCarousel();
-      this.pagerInit();
+      // this.pagerInit();
     });
   }
 
@@ -82,7 +81,7 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   }
 
   public buildCarousel() {
-    new CarouselStandard();
+    this._ds.initCarousel();
   }
 
   public pagerInit() {

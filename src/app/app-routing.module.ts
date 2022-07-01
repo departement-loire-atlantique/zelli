@@ -63,7 +63,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'contacts',
+    path: 'contact',
     loadChildren: () =>
       import('./pages/contact/contact.module').then((m) => m.ContactModule),
   },
@@ -77,6 +77,84 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/home/documents/documents.module').then(
         (m) => m.DocumentsModule
+      ),
+  },
+  {
+    path: 'mycontacts',
+    loadChildren: () =>
+      import('./pages/home/my-contacts/my-contacts.module').then(
+        (m) => m.MyContactsModule
+      ),
+  },
+  {
+    path: 'questions',
+    loadChildren: () =>
+      import('./pages/home/questions/questions.module').then(
+        (m) => m.QuestionsModule
+      ),
+  },
+  {
+    path: 'questions/:id',
+    loadChildren: () =>
+      import(
+        './pages/home/questions/questions-by-themes/questions-by-themes.module'
+      ).then((m) => m.QuestionsByThemesModule),
+  },
+  {
+    path: 'ask-questions',
+    loadChildren: () =>
+      import('./pages/ask-question/ask-question.module').then(
+        (m) => m.AskQuestionModule
+      ),
+  },
+  {
+    path: 'ask-questions-form/:bool',
+    loadChildren: () =>
+      import(
+        './pages/ask-question/ask-question-form/ask-question-form.module'
+      ).then((m) => m.AskQuestionFormModule),
+  },
+  {
+    path: 'ask-questions-send',
+    loadChildren: () =>
+      import(
+        './pages/ask-question/ask-question-send/ask-question-send.module'
+      ).then((m) => m.AskQuestionSendModule),
+  },
+  {
+    path: 'welcome',
+    loadChildren: () =>
+      import('./pages/welcome/welcome.module').then((m) => m.WelcomeModule),
+  },
+  {
+    path: 'account/create',
+    loadChildren: () =>
+      import('./pages/account/account-creation/account-creation.module').then(
+        (m) => m.AccountCreationModule
+      ),
+  },
+  {
+    path: 'account/login',
+    loadChildren: () =>
+      import('./pages/account/login/login.module').then((m) => m.LoginModule),
+  },
+  {
+    path: 'profile',
+    loadChildren: () =>
+      import('./pages/profile/profile.module').then((m) => m.ProfileModule),
+  },
+  {
+    path: 'newAlert',
+    loadChildren: () =>
+      import('./pages/new-alert/new-alert.module').then(
+        (m) => m.NewAlertModule
+      ),
+  },
+  {
+    path: 'alert/:id',
+    loadChildren: () =>
+      import('./pages/new-alert/new-alert.module').then(
+        (m) => m.NewAlertModule
       ),
   },
   {

@@ -1,37 +1,23 @@
+import { HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 
+import { lbl, lbls } from '../models/lblsList';
 import { JcmsClientService } from './jcms-client.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LabelMngService {
-  private _lbls: { [key: string]: lbl } = {};
+  private _lbls: { [key: string]: lbl } = lbls;
+
+  obsLbls: { [key: string]: Observable<any> } = {};
 
   constructor(private _jcms: JcmsClientService) {
-    this._lbls['lblBaseline'] = {
-      lbl: "Ton guide vers la majorité et l'autonomie",
-      propJcms: 'jcmsplugin.zelli.lbl.baseline',
-    };
-
-    this._lbls['lblTrieur'] = {
-      lbl: 'Les documents à garder dans ton trieur',
-      propJcms: 'jcmsplugin.zelli.lbl.btn.contenu.trieur',
-    };
-
-    this._lbls['lblMotsComp'] = {
-      lbl: 'Les mots compliqués',
-      propJcms: 'jcmsplugin.zelli.lbl.mots.compliques',
-    };
-
-    this._lbls['lblLiensUtiles'] = {
-      lbl: 'Les liens utiles',
-      propJcms: 'jcmsplugin.zelli.lbl.liens.utiles',
-    };
+    this.obsLbls = this.initAllLbl();
   }
 
-  public initAllLbl(): any {
+  private initAllLbl(): { [key: string]: Observable<any> } {
     let rep: any = {};
     for (let key in this._lbls) {
       rep[key] = this.updateLbl(this._lbls[key]);
@@ -40,29 +26,48 @@ export class LabelMngService {
   }
 
   public updateLbl(lbl: lbl): Observable<any> {
-    const obs = this._jcms.get('plugins/zelli/prop/' + lbl.propJcms);
-    obs.subscribe((rep: any) => (lbl.lbl = rep.value));
+    const obs = this._jcms.get('plugins/zelli/prop/' + lbl.propJcms).pipe(
+      catchError((error) => {
+        return of(null);
+      })
+    );
+    obs.subscribe((rep: any) => {
+      if (rep) {
+        lbl.lbl = rep.value;
+      }
+    });
     return obs;
   }
 
+  public getLbl(idLbl: string): string {
+    return this._lbls[idLbl]?.lbl;
+  }
+
   public lblBaseline(): string {
-    return this._lbls['lblBaseline'].lbl;
+    return this.getLbl('lblBaseline');
   }
 
   public lblDocTrieur(): string {
-    return this._lbls['lblTrieur'].lbl;
+    return this.getLbl('lblTrieur');
   }
 
   public lblMotComp(): string {
-    return this._lbls['lblMotsComp'].lbl;
+    return this.getLbl('lblMotsComp');
   }
 
   public lblLiensUtiles(): string {
-    return this._lbls['lblLiensUtiles'].lbl;
+    return this.getLbl('lblLiensUtiles');
   }
-}
 
-interface lbl {
-  lbl: string;
-  propJcms: string;
+  public lblTitleWelcome(): string {
+    return this.getLbl('lblTitleWelcome');
+  }
+
+  public lblDescWelcome(): string {
+    return this.getLbl('lblDescWelcome');
+  }
+
+  public lblWelcomeFooter(): string {
+    return this.getLbl('lblWelcomeFooter');
+  }
 }

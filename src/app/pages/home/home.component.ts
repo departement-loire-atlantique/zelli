@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, combineLatest, combineLatestAll } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { Category } from 'src/app/models/jcms/category';
 import { CatsHomeMngService } from 'src/app/services/cats-home-mng.service';
 import { CatsMngService } from 'src/app/services/cats-mng.service';
@@ -61,7 +61,7 @@ export class HomeComponent implements OnInit {
       catsHom.subscribe(); // pre run
 
       // lbl
-      const lbl: any = this._lblMng.initAllLbl();
+      const lbl: any = this._lblMng.obsLbls;
       allObs = Object.assign({}, allObs, lbl);
 
       setTimeout(() => {
@@ -81,11 +81,11 @@ export class HomeComponent implements OnInit {
           sessionStorage.setItem('_appInit', JSON.stringify(this._appInit));
 
           // redirect
-          this._router.navigate(['/intro']);
+          this._router.navigate(['/welcome']);
         });
       }, 5000);
     } else {
-      this._router.navigate(['/intro']);
+      this._router.navigate(['/welcome']);
     }
   }
 
