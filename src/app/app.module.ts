@@ -14,6 +14,8 @@ import { AppRoutingModule } from '@/app/app-routing.module';
 import { AppComponent } from '@/app/app.component';
 import { SharedModule } from '@/app/components/shared.module';
 
+import { SharedService } from './services/shared-service.service';
+
 initializeApp(environment.firebase);
 
 @NgModule({
@@ -30,6 +32,7 @@ initializeApp(environment.firebase);
     SharedModule,
   ],
   providers: [
+    SharedService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: MockBackendInterceptor,
