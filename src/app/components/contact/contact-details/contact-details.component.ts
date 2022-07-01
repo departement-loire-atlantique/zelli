@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { Contact } from '@/app/models/jcms/contact';
 
@@ -7,7 +7,17 @@ import { Contact } from '@/app/models/jcms/contact';
   templateUrl: './contact-details.component.html',
   styleUrls: ['./contact-details.component.less'],
 })
-export class ContactDetailsComponent {
+export class ContactDetailsComponent implements OnInit {
+  mail: string[] = [];
+
+  ngOnInit(): void {
+    if (typeof this.contact?.email === 'string') {
+      this.mail.push(this.contact.email);
+    } else {
+      this.mail = this.contact?.email || [];
+    }
+  }
+
   @Input()
   contact?: Partial<Contact>;
 

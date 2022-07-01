@@ -1,6 +1,8 @@
 import {
   AfterViewInit,
   Component,
+  ElementRef,
+  Input,
   QueryList,
   ViewChildren,
 } from '@angular/core';
@@ -8,7 +10,6 @@ import {
 import { DesignSystemService } from '@/app/services/design-system.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
 import { LoginService } from '@/app/services/login.service';
-import { DateService } from '@/app/services/utils/date.service';
 
 @Component({
   selector: 'app-account-creation',
@@ -32,30 +33,34 @@ export class AccountCreationComponent implements AfterViewInit {
   pseudo: string = '';
 
   date: Date | undefined;
-  dateDay: string = '';
-  dateMonth: string = '';
-  dateYear: string = '';
+  @Input() dateDay!: string;
+  @Input() dateMonth!: string;
+  @Input() dateYear!: string;
 
   pwd: string = '';
   pwdConfirm: string = '';
 
   accountCreate: boolean = false;
-  isPseudoError: boolean = false;
-  isDateError: boolean = false;
-  isPwdError: boolean = false;
+  isError: boolean = false;
   errorMsg!: string;
-  pseudoErrorMsg: string = 'Ce pseudo est déjà pris';
-  dateErrorMsg: string = "La date n'est pas valide";
-  pwdErrorMsg: string = 'Les mots de passe sont différents';
+  pseudoErrorMsg: string =
+    'Oups ! cet identifiant existe déjà dans zelli, merci d’en imaginer un autre';
+  pseudoAccentErrorMsg: string =
+    'Oups ! Merci de saisir ton prenom ou pseudo sans accent';
+  dateErrorMsg: string = 'La date est postérieure à la date du jour';
+  pwdErrorMsg: string =
+    'Oups ! Tu n’as pas saisi la même chose dans les deux champs';
+  pwdSpaceErrorMsg: string =
+    'Oups ! Merci de saisir ton mot de passe sans espace (nous te recommandons de choisir un mot de passe avec au moins 12 caractères, avec des lettres, des chiffres et des caractères spéciaux comme le !)';
 
   @ViewChildren('formDisplay')
   formDisplay: QueryList<any> | undefined;
 
   constructor(
     public lblService: LabelMngService,
-    private _utilDate: DateService,
     public _login: LoginService,
-    private _ds: DesignSystemService
+    private _ds: DesignSystemService,
+    private elByClassName: ElementRef
   ) {}
 
   ngAfterViewInit(): void {
@@ -70,40 +75,71 @@ export class AccountCreationComponent implements AfterViewInit {
    * @returns true if current step is ok
    */
   public validStep(): boolean {
+    this.isError = false;
+    this.errorMsg = '';
+    console.log(this.isError);
     if (this.step === 1) {
       if (this.pseudo) {
         this.loading = true;
-        this._login.isMemberNotExist(this.pseudo, {
-          class: this,
-          func: this.callbackIsMemberNotExist,
-        });
+
+        /* Error accent */
+        const rExp: RegExp = /[À-ú]/;
+        if (rExp.test(this.pseudo)) {
+          this.errorMsg = this.pseudoAccentErrorMsg;
+          this.isError = true;
+        } else {
+          /* Pseudo exists */
+          this._login.isMemberNotExist(this.pseudo, {
+            class: this,
+            func: this.callbackIsMemberNotExist,
+          });
+        }
       }
     } else if (this.step === 2) {
-      console.log(this.dateYear + this.dateMonth + this.dateDay);
       if (this.dateYear && this.dateMonth && this.dateDay) {
+        // field manual
         this.date = new Date(
           ~~this.dateYear,
           ~~this.dateMonth - 1,
           ~~this.dateDay
         );
-
-        if (this._utilDate.testDate(this.date)) {
-          return true;
-        } else {
-          // TODO error DS
+      } else {
+        // field by Design System
+        const dateInput = (<HTMLElement>this.elByClassName.nativeElement)
+          .querySelector('.ds44-input-value')!
+          .getAttribute('value');
+        if (dateInput) {
+          this.date = new Date(
+            ~~dateInput!.substring(0, 4),
+            ~~dateInput!.substring(5, 7) - 1,
+            ~~dateInput!.substring(8, 10)
+          );
         }
-      } else {
-        // TODO error DS
-        this.errorMsg = this.dateErrorMsg;
-        this.isDateError = true;
       }
-    } else if (this.step === 3) {
-      if (this.pwd && this.pwdConfirm && this.pwd === this.pwdConfirm) {
-        return true;
+      /* Error custom date*/
+      if (!this.date) {
+        console.debug('Mauvais format de date');
+      } else if (this.date > new Date()) {
+        this.errorMsg = this.dateErrorMsg;
+        this.isError = true;
       } else {
-        // TODO error DS
+        return true;
+      }
+      this.dateDay = '';
+      this.dateMonth = '';
+      this.dateYear = '';
+    } else if (this.step === 3) {
+      /* Error space */
+      const rExp: RegExp = /\s/;
+      if (rExp.test(this.pwd)) {
+        this.errorMsg = this.pwdSpaceErrorMsg;
+        this.isError = true;
+      } else if (this.pwd !== this.pwdConfirm) {
+        /* Error field different */
         this.errorMsg = this.pwdErrorMsg;
-        this.isPwdError = true;
+        this.isError = true;
+      } else if (this.pwd && this.pwdConfirm) {
+        return true;
       }
     }
 
@@ -111,16 +147,22 @@ export class AccountCreationComponent implements AfterViewInit {
     return false;
   }
 
+  /**
+   *  button 'suivant'
+   * @returns
+   */
   public nextStep() {
     this.loading = true;
-
     if (!this.validStep()) {
       return;
     }
-
     this.processNexStep();
   }
 
+  /**
+   * Next step
+   * @returns
+   */
   private processNexStep() {
     // if end => create account
     if (this.step >= this.maxStep) {
@@ -142,12 +184,12 @@ export class AccountCreationComponent implements AfterViewInit {
   }
 
   private callbackIsMemberNotExist(status: boolean, msg?: string): boolean {
-    this.errorMsg = this.pseudoErrorMsg;
-    this.isPseudoError = !status;
     if (status) {
       this.processNexStep();
       return false;
     }
+    this.errorMsg = this.pseudoErrorMsg;
+    this.isError = !status;
     return true;
   }
 

@@ -3,7 +3,6 @@ import { Observable, map, mergeMap, of } from 'rxjs';
 
 import {
   Contact,
-  ContactFromApi,
   LocationFromApi,
   mapContactFromApi,
 } from '@/app/models/jcms/contact';
@@ -22,6 +21,8 @@ export class ContactDetailsService {
         mergeMap((contactFromApi) => {
           if (contactFromApi.class.includes('generated.FicheLieu')) {
             contactFromApi.lieuDeRattachement = contactFromApi;
+            contactFromApi.adresseMail =
+              contactFromApi.lieuDeRattachement.email;
           }
           if (contactFromApi.lieuDeRattachement != undefined) {
             return this._jcmsClient

@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { initializeApp } from 'firebase/app';
@@ -21,6 +22,7 @@ initializeApp(environment.firebase);
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    FormsModule,
     ServiceWorkerModule.register('combined-service-worker.js', {
       enabled: true,
       registrationStrategy: 'registerImmediately',
