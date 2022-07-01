@@ -33,11 +33,13 @@ export class ResearchComponent implements AfterViewInit, OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.result = this.sharedService.variable ? this.sharedService.variable : null;
+    this.result = this.sharedService.variable[0] ? this.sharedService.variable[0] : null;
+    this.pager = this.sharedService.variable[1] ? this.sharedService.variable[1] : null;
   }
 
   ngOnDestroy(): void {
-    this.sharedService.variable = this.result;
+    this.sharedService.variable[0] = this.result;
+    this.sharedService.variable[1] = this.pager;
   }
 
   ngAfterViewInit(): void {
@@ -46,7 +48,7 @@ export class ResearchComponent implements AfterViewInit, OnInit, OnDestroy {
 
   public resetSearch() {
     this.result = undefined;
-    this.sharedService.variable = undefined;
+    this.sharedService.variable = [];
     this._router.navigate(['/themes/']);
   }
 
