@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
       .then((currentToken) => {
         if (currentToken) {
           console.log(currentToken);
+          this._login.firebaseToken = currentToken;
         } else {
           console.log(
             'No registration token available. Request permission to generate one.'
