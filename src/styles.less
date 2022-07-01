@@ -40,7 +40,9 @@ H3 {
 }
 
 .full-bg-color {
-  H1 {
+  H1,
+  H2,
+  H3 {
     color: @white;
   }
 
@@ -68,6 +70,10 @@ MAIN {
 
   .btn {
     flex: 1;
+
+    + .btn {
+      margin-top: 5px;
+    }
   }
 }
 .btn {
@@ -93,6 +99,12 @@ MAIN {
     margin: 20px;
   }
 
+  &.btn-full {
+    margin: 0;
+    display: block;
+    width: 100%;
+  }
+
   &.btn-light {
     background: @white;
     color: @blue;
@@ -103,6 +115,10 @@ MAIN {
       color: @white;
     }
   }
+
+  + .btn {
+    margin-top: 0;
+  }
 }
 .btn-link {
   color: @blue;
@@ -111,8 +127,14 @@ MAIN {
 }
 //-------------------
 
-APP-BACK.back-in-top {
-  color: @blue;
-  margin-left: 25px;
-  position: absolute;
+// form
+.full-bg-color {
+  .ds44-form__container {
+    color: #000;
+  }
+  .ds44-formLabel.ds44-moveLabel {
+    .ds44-labelTypePlaceholder SPAN {
+      color: @white;
+    }
+  }
 }

@@ -1,0 +1,185 @@
+<header>
+  <app-back class="back-in-top right" text="" picto="icon-cross icon--xlarge"></app-back>
+  <div class="photo">
+    <img [src]="getProfileImg()" alt="Photo" aria-hidden="true" />
+
+    <button (click)="toggleEditPhoto()" class="btn-link btn-edit-photo" type="button" data-target="#overlay-edit-photo"
+      data-js="ds44-modal" title="Edition de la photo">
+      <i class="icon icon-panne icon--large" aria-hidden="true"></i>
+    </button>
+    <section class="ds44-modal-container" id="overlay-edit-photo" aria-hidden="true" role="dialog" aria-modal="true"
+      aria-labelledby="overlay-edit-photo-title">
+      <div class="ds44-modal-box">
+        <button (click)="toggleEditPhoto()" id="edit-photo-close"
+          class="ds44-btnOverlay--modale ds44-btnOverlay--closeOverlay" type="button"
+          title="Fermer la boîte de dialogue : Edition de la photo" data-js="ds44-modal-action-close">
+          <i class="icon icon-cross icon--xlarge" aria-hidden="true"></i>
+          <span class="ds44-btnInnerText--bottom">Fermer</span>
+        </button>
+        <h2 id="overlay-edit-photo-title" class="">Edition de la photo</h2>
+        <div class="ds44-modal-gab">
+          <form *ngIf="editPhoto" (ngSubmit)="subEditPhoto()" data-is-ajax="true">
+            <div class="ds44-form__container">
+              <div class="ds44-posRel">
+                <label for="form-photo" class="ds44-formLabel">
+                  <span class="ds44-labelTypePlaceholder">
+                    <span>Photo<sup aria-hidden="true">*</sup>
+                    </span>
+                  </span>
+                </label>
+
+                <div class="ds44-file__shape ds44-inpStd">
+                  <input (change)="onChangeFile($event)" type="file" id="form-photo" name="form-photo"
+                    title="Photo - obligatoire" data-file-extensions="png,jpg,jpeg" accept=".png,.jpg,.jpeg" required
+                    aria-describedby="explanation-form-photo" />
+                  <div id="file-display-form-photo" class="ds44-fileDisplay"></div>
+                </div>
+                <button class="ds44-reset" type="button">
+                  <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+                  <span class="visually-hidden">
+                    Effacer le contenu saisi dans le champ : Photo
+                  </span>
+                </button>
+
+                <span class="ds44-file" aria-hidden="true">
+                  <i class="icon icon-directory icon--medium" aria-hidden="true"></i>
+                </span>
+              </div>
+            </div>
+
+            <button #formEndDisplay class="btn btn-big" type="submit">Sauvegarder</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <h1>Mon profil</h1>
+</header>
+<main>
+
+  <section class="infos-section">
+    <div class="title-section">
+      <h2>Mes informations</h2>
+      <button (click)="toggleEditInfos()" class="btn-link btn-edit-info" type="button" title="Edition des informations">
+        <i class="icon icon-panne icon--large" aria-hidden="true"></i>
+      </button>
+    </div>
+    <form class="infos" (ngSubmit)="editInfo()" data-is-ajax="true">
+      <div class="infos-grid">
+        <div>
+          Pseudo
+        </div>
+        <div>
+          {{ profil?.login }}
+        </div>
+
+        <div>
+          Email
+        </div>
+        <div>
+          <span *ngIf="!edit">{{ profil?.email }}</span>
+          <div *ngIf="edit" class="ds44-form__container">
+            <div class="ds44-posRel">
+              <label for="form-email" class="ds44-formLabel">
+                <span class="ds44-labelTypePlaceholder">
+                  <span>Email</span>
+                </span>
+              </label>
+
+              <input type="text" id="form-email" name="form-email" class="ds44-inpStd" title="Email"
+                autocomplete="email" [(ngModel)]="email" />
+
+              <button class="ds44-reset" type="button">
+                <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+                <span class="visually-hidden">Effacer le contenu saisi dans le champ : Email</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          Téléphone
+        </div>
+        <div>
+          <span *ngIf="!edit">{{ profil?.phone }}</span>
+          <div *ngIf="edit" class="ds44-form__container">
+            <div class="ds44-posRel">
+              <label for="form-phone" class="ds44-formLabel">
+                <span class="ds44-labelTypePlaceholder">
+                  <span>Téléphone</span>
+                </span>
+              </label>
+
+              <input type="text" id="form-phone" name="form-phone" class="ds44-inpStd" title="Téléphone"
+                autocomplete="tel-national" [(ngModel)]="phone" />
+
+              <button class="ds44-reset" type="button">
+                <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+                <span class="visually-hidden">Effacer le contenu saisi dans le champ : Téléphone</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          Adresse
+        </div>
+        <div>
+          <span *ngIf="!edit">{{ profil?.address }}</span>
+          <div *ngIf="edit" class="ds44-form__container">
+            <div class="ds44-posRel">
+              <label for="form-address" class="ds44-formLabel">
+                <span class="ds44-labelTypePlaceholder">
+                  <span>Adresse</span>
+                </span>
+              </label>
+
+              <input type="text" id="form-address" name="form-address" class="ds44-inpStd ds44-js-field-address"
+                aria-autocomplete="list" autocomplete="off" aria-expanded="false"
+                data-url="https://api-adresse.data.gouv.fr/search/?limit=5&citycode=44109" title="Adresse"
+                data-mode="free-text" [(ngModel)]="address" />
+
+              <button class="ds44-reset" type="button">
+                <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>
+                <span class="visually-hidden">Effacer le contenu saisi dans le champ : Adresse</span>
+              </button>
+
+              <div class="ds44-autocomp-container hidden">
+                <div class="ds44-autocomp-list">
+                  <ul class="ds44-list" role="listbox"></ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          Date de naissance
+        </div>
+        <div>
+          {{ profil?.dateNaissance }}
+        </div>
+
+      </div>
+      <button #formEndDisplay *ngIf="edit" class="btn btn-big" type="submit">Sauvegarder</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Mes alertes</h2>
+
+    <div *ngIf="!loadAlert && !alertes">
+      Tu n’as pas créé d’alerte pour l’instant
+    </div>
+
+    <app-list class="no-padding" [items]="alertes"></app-list>
+
+    <app-loader *ngIf="loadAlert" color="#0013b1"></app-loader>
+    <button *ngIf="pagerAlertes && pagerAlertes.hasMore()" [disabled]="loadAlert" (click)="moreAlertes()"
+      class="btn btn-big" type="button" title="Afficher plus d'alertes'">
+      <span class="ds44-btnInnerText">Plus d'alertes</span>
+    </button>
+    <a class="btn btn-big btn-light" [routerLink]="'/newAlert'">Créer une alerte</a>
+  </section>
+</main>

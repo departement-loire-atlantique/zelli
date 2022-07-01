@@ -1,0 +1,63 @@
+@import "/src/theme/importDep.less";
+
+HEADER {
+  margin-top: 15px;
+  margin-bottom: 50px;
+  text-align: center;
+
+  .photo {
+    IMG {
+      border-radius: 50%;
+      width: 75px;
+      height: 75px;
+      object-fit: cover;
+    }
+
+    .btn-edit-photo {
+      position: absolute;
+      height: 75px;
+    }
+  }
+
+}
+
+MAIN {
+  SECTION {
+    margin: 0 20px 30px;
+
+    H2 {
+      text-align: unset;
+    }
+
+    &.infos-section {
+      .title-section {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .btn-edit-info {
+          padding: 0;
+          margin: 0;
+        }
+      }
+
+      .infos-grid {
+        display: grid;
+        grid: auto-flow / 1fr 2fr;
+
+        > DIV {
+          margin-bottom: 15px;
+        }
+
+        > :nth-child(2n+1) {
+          color: #46474E;
+        }
+
+        > :nth-child(2n) {
+          font-size: 18px;
+          color: @blue-dark;
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 /**
  * This component should be used to go back to the previous page.
@@ -31,12 +31,26 @@ export class BackComponent {
   @Input()
   picto: string = 'icon-arrow-left';
 
+  /**
+   * true if return processed by parent.
+   * setup "returnCustom" output.
+   */
+  @Input()
+  customProcess: boolean = false;
+
+  @Output()
+  returnCustom: EventEmitter<string> = new EventEmitter<string>();
+
   constructor(private _location: Location) {}
 
   /**
    * @ignore
    */
   back() {
-    this._location.back();
+    if (this.customProcess) {
+      this.returnCustom.emit('return');
+    } else {
+      this._location.back();
+    }
   }
 }

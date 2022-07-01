@@ -6,11 +6,11 @@ import { Contact } from '@/app/models/jcms/contact';
 import { ContactDetailsService } from '@/app/services/contact-details.service';
 
 @Component({
-  selector: 'app-page-contact',
-  templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.less'],
+  selector: 'app-page-contact-details',
+  templateUrl: './contact-details.component.html',
+  styleUrls: ['./contact-details.component.less'],
 })
-export class PageContactComponent implements OnInit, OnDestroy {
+export class PageContactDetailsComponent implements OnInit, OnDestroy {
   @Input()
   fromContactPage = false;
 
@@ -23,6 +23,7 @@ export class PageContactComponent implements OnInit, OnDestroy {
 
   contactId?: string;
   contact?: Contact;
+  mail: string[] = [];
 
   isLoading = false;
   isError = false;
@@ -70,6 +71,11 @@ export class PageContactComponent implements OnInit, OnDestroy {
         },
         next: (data) => {
           this.contact = data;
+          if (typeof this.contact?.email === 'string') {
+            this.mail.push(this.contact.email);
+          } else {
+            this.mail = this.contact?.email;
+          }
           this.isLoading = false;
         },
       });

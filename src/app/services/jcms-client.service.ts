@@ -35,16 +35,30 @@ export class JcmsClientService {
     return new JcmsPager<T>(this, endpoint, option).get();
   }
 
-  post(endpoint: string, body: any, option?: OptionHttp): Observable<any> {
+  post(endpoint: string, body?: any, option?: OptionHttp): Observable<any> {
     return this.http.post(this._url + endpoint, body, option);
   }
 
-  put(endpoint: string, body: any, option?: OptionHttp): Observable<any> {
+  put(endpoint: string, body?: any, option?: OptionHttp): Observable<any> {
     return this.http.put(this._url + endpoint, body, option);
   }
 
   delete(endpoint: string, option?: OptionHttp): Observable<any> {
     return this.http.delete(this._url + endpoint, option);
+  }
+
+  /**
+   *
+   * @param params  format {'key': val, 'key2': val2}
+   */
+  public encodeParamForBody(params: { [key: string]: any }): string {
+    let urlEncodedDataPairs = [];
+    for (let name in params) {
+      urlEncodedDataPairs.push(
+        encodeURIComponent(name) + '=' + encodeURIComponent(params[name])
+      );
+    }
+    return urlEncodedDataPairs.join('&').replace(/%20/g, '+');
   }
 }
 

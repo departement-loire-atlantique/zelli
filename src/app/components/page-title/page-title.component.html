@@ -5,7 +5,11 @@
 
     <app-research-btn></app-research-btn>
 
-    <!-- TODO profil -->
+    <div class="profile-link">
+      <a *ngIf="login.isLogged && login.profil" [routerLink]="'/profile'">
+        <img [src]="getProfileImg()" alt="Profil" />
+      </a>
+    </div>
   </div>
 
   <div class="page-infos">

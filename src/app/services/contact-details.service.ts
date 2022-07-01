@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, map, mergeMap } from 'rxjs';
+import { Observable, map, mergeMap, of } from 'rxjs';
 
 import {
   Contact,
-  ContactFromApi,
   LocationFromApi,
   mapContactFromApi,
 } from '@/app/models/jcms/contact';
@@ -17,26 +16,39 @@ export class ContactDetailsService {
 
   public getContacts(resourceId: string): Observable<Contact> {
     return this._jcmsClient
-      .get<ContactFromApi>(`data/${resourceId}`)
+      .get<any>(`data/${resourceId}`)
       .pipe(
-        mergeMap((contactFromApi) =>
-          this._jcmsClient
-            .get<LocationFromApi>(
-              `data/${contactFromApi.lieuDeRattachement.id}`
-            )
-            .pipe(
-              map((result) => ({
-                ...contactFromApi,
-                soustitre: result.soustitre,
-                chapo: result.chapo,
-                lieuDeRattachement: {
-                  ...result,
-                  city: result.commune.title,
-                },
-              }))
-            )
-        )
+        mergeMap((contactFromApi) => {
+          if (contactFromApi.class.includes('generated.FicheLieu')) {
+            contactFromApi.lieuDeRattachement = contactFromApi;
+            contactFromApi.adresseMail =
+              contactFromApi.lieuDeRattachement.email;
+          }
+          if (contactFromApi.lieuDeRattachement != undefined) {
+            return this._jcmsClient
+              .get<LocationFromApi>(
+                `data/${contactFromApi.lieuDeRattachement.id}`
+              )
+              .pipe(
+                map((result) => ({
+                  ...contactFromApi,
+                  soustitre: result.soustitre,
+                  chapo: result.chapo,
+                  lieuDeRattachement: {
+                    ...result,
+                    city: result.commune ? result.commune.title : '',
+                  },
+                }))
+              );
+          } else {
+            return of(contactFromApi);
+          }
+        })
       )
       .pipe(map((response) => mapContactFromApi(response)));
+  }
+
+  public createContact(contact: Contact) {
+    console.log('Contact a sauvegarder: ' + contact);
   }
 }

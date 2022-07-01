@@ -14,8 +14,8 @@
   </div>
   <div class="p-contact__actions">
     <a
-      *ngIf="contact?.phoneNumber"
-      href="tel:{{ contact?.phoneNumber }}"
+      *ngIf="contact && contact.phoneNumber && contact.phoneNumber[0]"
+      href="tel:{{ contact.phoneNumber[0] }}"
       target="_blank"
       rel="noopener noreferrer"
       class="p-contact__actions__item"
@@ -23,8 +23,8 @@
       <app-icon name="phone"></app-icon>
     </a>
     <a
-      *ngIf="contact?.email"
-      href="mailto:{{ contact?.email }}"
+      *ngIf="mail && mail[0]"
+      href="mailto:{{ mail[0] }}"
       target="_blank"
       rel="noopener noreferrer"
       class="p-contact__actions__item"
@@ -32,7 +32,7 @@
       <app-icon name="mail"></app-icon>
     </a>
     <a
-      *ngIf="contact?.location"
+      *ngIf="contact?.location?.title"
       href="https://www.google.com/maps/search/?api=1&query={{
         getContactLocation()
       }}"

@@ -15,6 +15,7 @@ import { IconComponent } from '@/app/components/icon/icon.component';
 import { LoaderComponent } from '@/app/components/loader/loader.component';
 import { MainMenuComponent } from '@/app/components/main-menu/main-menu.component';
 import { NextLinkComponent } from '@/app/components/next-link/next-link.component';
+import { PageTitleCustomComponent } from '@/app/components/page-title-custom/page-title-custom.component';
 import { PageTitleComponent } from '@/app/components/page-title/page-title.component';
 import { PaginationComponent } from '@/app/components/pagination/pagination.component';
 import { ThemeHeaderComponent } from '@/app/components/theme-header/theme-header.component';
@@ -28,6 +29,7 @@ import { ResearchBtnComponent } from './research-btn/research-btn.component';
     MainMenuComponent,
     LoaderComponent,
     PageTitleComponent,
+    PageTitleCustomComponent,
     BackComponent,
     ThemeHeaderComponent,
     HasHelpedComponent,
@@ -50,6 +52,7 @@ import { ResearchBtnComponent } from './research-btn/research-btn.component';
     MainMenuComponent,
     LoaderComponent,
     PageTitleComponent,
+    PageTitleCustomComponent,
     BackComponent,
     ThemeHeaderComponent,
     HasHelpedComponent,

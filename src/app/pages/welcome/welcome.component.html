@@ -1,0 +1,21 @@
+<main>
+  <div class="welcome-text">
+    <h1>{{ lblService.lblTitleWelcome() }}</h1>
+    <div class="desc">
+      {{ lblService.lblDescWelcome() }}
+    </div>
+  </div>
+  <a class="btn btn-big" [routerLink]="'/account/create'">
+    Créer mon compte
+  </a>
+  <a class="btn btn-big btn-light" [routerLink]="'/account/login'">
+    Me connecter
+  </a>
+  <a class="link-later" [routerLink]="'/intro'">
+    Plus tard
+  </a>
+</main>
+<footer *ngIf="dataInFooter">
+  {{ lblService.lblWelcomeFooter() }}
+  <a [routerLink]="getLinkInFooter()">{{ dataInFooter.title }}</a>
+</footer>
