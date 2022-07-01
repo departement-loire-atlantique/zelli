@@ -24,7 +24,10 @@ export class Util {
       return '/contact/details/' + content.id;
     }
 
-    if (content.class === 'com.jalios.jcms.FileDocument') {
+    if (
+      content.class === 'com.jalios.jcms.FileDocument' ||
+      content.class === 'com.jalios.jcms.DBFileDocument'
+    ) {
       let fileDoc = content as any;
       return fileDoc.absDownloadUrl;
     }

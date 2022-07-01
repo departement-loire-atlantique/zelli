@@ -45,8 +45,14 @@ export class ResearchComponent implements AfterViewInit {
       this._jcms.getPager<Content>('search', {
         params: {
           text: this.text,
-          types: ['SousthemeASE', 'ArticleASE', 'Contact', 'FileDocument'],
-          exactType: true,
+          types: [
+            'SousthemeASE',
+            'ArticleASE',
+            'Contact',
+            'FicheLieu',
+            'FileDocument',
+            'DBFileDocument',
+          ],
         },
       })
     );
@@ -64,7 +70,10 @@ export class ResearchComponent implements AfterViewInit {
       for (let itContent of contents) {
         let title: string = itContent.title;
 
-        if (itContent.class === 'com.jalios.jcms.FileDocument') {
+        if (
+          itContent.class === 'com.jalios.jcms.FileDocument' ||
+          itContent.class === 'com.jalios.jcms.DBFileDocument'
+        ) {
           const fileDoc = itContent as any;
 
           const type: string = (fileDoc.contentType as string).split('/')[1];
