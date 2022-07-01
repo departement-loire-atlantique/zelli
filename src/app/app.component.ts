@@ -42,6 +42,7 @@ export class AppComponent implements OnInit {
         console.log('An error occurred while retrieving token. ', err);
       });
   }
+
   listen() {
     const messaging = getMessaging();
     onMessage(messaging, (payload) => {
@@ -59,7 +60,9 @@ export class AppComponent implements OnInit {
           payload?.notification?.title || 'Notification Title',
           {
             body: payload?.notification?.body,
-            icon: payload?.notification?.image,
+            icon: payload?.notification?.image
+              ? payload?.notification?.image
+              : 'src/assets/icons/icon-72x72.png',
             dir: 'auto',
           }
         );
