@@ -8,6 +8,6 @@ import { AskQuestionSendComponent } from './ask-question-send.component';
 
 @NgModule({
   declarations: [AskQuestionSendComponent],
-  imports: [CommonModule, AskQuestionSendRoutingComponent, SharedModule]
+  imports: [CommonModule, AskQuestionSendRoutingComponent, SharedModule],
 })
 export class AskQuestionSendModule {}

@@ -1,8 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 
 import { ErrorInterceptor } from '@/app/Interceptors/error.interceptor';
@@ -12,7 +14,7 @@ import { AppRoutingModule } from '@/app/app-routing.module';
 import { AppComponent } from '@/app/app.component';
 import { SharedModule } from '@/app/components/shared.module';
 
-import { FormsModule } from '@angular/forms'; 
+initializeApp(environment.firebase);
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,12 +22,10 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule, 
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-      // Register the ServiceWorker as soon as the app is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000',
+    FormsModule,
+    ServiceWorkerModule.register('combined-service-worker.js', {
+      enabled: true,
+      registrationStrategy: 'registerImmediately',
     }),
     SharedModule,
   ],

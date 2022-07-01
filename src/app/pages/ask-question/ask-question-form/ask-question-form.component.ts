@@ -1,12 +1,12 @@
+import { formatDate } from '@angular/common';
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
-import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '@/app/models/jcms/category';
 import { Member } from '@/app/models/jcms/member';
 import { CatsMngService } from '@/app/services/cats-mng.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
-import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-questions',
@@ -14,7 +14,6 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./ask-question-form.component.less'],
 })
 export class AskQuestionFormComponent {
-
   curentCat: Category | undefined;
   parentCat: Category | undefined;
 
@@ -26,24 +25,28 @@ export class AskQuestionFormComponent {
    * Vérifie que l'utilisateur a bien répondu à la question du référent
    * @param _catMng le manager de catégories
    */
-  constructor(private _route: ActivatedRoute,
+  constructor(
+    private _route: ActivatedRoute,
     private router: Router,
     private _catMng: CatsMngService,
-    private _jcms: JcmsClientService) {
+    private _jcms: JcmsClientService
+  ) {
     this.ref = this._route.snapshot.paramMap.get('bool');
 
     if (!this.ref) {
       return;
     }
 
-    if (!(this.ref == "true" || this.ref == "false")) {
+    if (!(this.ref == 'true' || this.ref == 'false')) {
       this.router.navigate(['/questions/']);
     }
 
     this._catMng.cat(this.tmp).subscribe((cat) => {
       this.curentCat = cat;
       if (cat.parent)
-        this._catMng.cat(cat.parent).subscribe((parent) => (this.parentCat = parent));
+        this._catMng
+          .cat(cat.parent)
+          .subscribe((parent) => (this.parentCat = parent));
     });
   }
 
@@ -52,23 +55,19 @@ export class AskQuestionFormComponent {
    * @param result les champs envoyé lors de l'appuie du bouton du formulaire
    */
   public onClickSubmit(result: any) {
-
-    if (result.question != "") {
-
+    if (result.question != '') {
       // enregistre la question
       const options = {
-        title: "Question",
+        title: 'Question',
         question: result.question,
-        referent: (this.ref == "true") ? true : false,
+        referent: this.ref == 'true' ? true : false,
       };
 
-      let typeName: string = "QuestionZelli";
+      let typeName: string = 'QuestionZelli';
 
       let urlEncodedDataQuestion = this._jcms.encodeParamForBody(options);
       this._jcms.post('data/' + typeName, urlEncodedDataQuestion).subscribe();
       this.router.navigate(['/ask-questions-send/']);
     }
-
   }
-
 }

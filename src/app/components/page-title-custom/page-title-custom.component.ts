@@ -13,7 +13,6 @@ import { environment } from '@/environments/environment';
   styleUrls: ['./page-title-custom.component.less'],
 })
 export class PageTitleCustomComponent implements OnDestroy {
-
   @Input()
   mainCat: Category | undefined;
   @Input()
@@ -46,8 +45,7 @@ export class PageTitleCustomComponent implements OnDestroy {
   }
 
   public getTitle() {
-    if(this.title)
-      return this.title
+    if (this.title) return this.title;
     return this.mainCat?.title;
   }
 }

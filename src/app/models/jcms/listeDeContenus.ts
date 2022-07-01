@@ -1,14 +1,13 @@
-import { Content } from "./content";
-import { FaqAccueil } from "./faqAccueil";
+import { Content } from './content';
+import { FaqAccueil } from './faqAccueil';
 
 /**
  * Représente le type JCMS "ListeDeContenus"
  */
 export interface ListeDeContenus extends Content {
+  libelleTitre: string;
 
-    libelleTitre: string,
+  contenus: Content[];
 
-    contenus: Content[],
-
-    affichagePageAAidee: boolean
+  affichagePageAAidee: boolean;
 }

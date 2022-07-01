@@ -22,6 +22,8 @@ export class LoginService implements OnDestroy {
   private _profil: Member | undefined;
   public profil: Observable<Member | undefined>;
 
+  public firebaseToken: string = '';
+
   constructor(private _router: Router, private _jcms: JcmsClientService) {
     this._profilSubject = new BehaviorSubject<Member | undefined>(undefined);
     this.profil = this._profilSubject.asObservable();
@@ -64,10 +66,10 @@ export class LoginService implements OnDestroy {
    * @returns true if is valid personal token (no API token)
    */
   public testToken(): boolean {
-    // if (this._personalToken === environment.apiKey) {
-    //   this.clearPersonalToken();
-    //   return false;
-    // }
+    if (this._personalToken === environment.apiKey) {
+      this.clearPersonalToken();
+      return false;
+    }
     this._jcms.get<Member>('WhoAmI').subscribe({
       next: (rep: Member) => {
         console.log(rep);
@@ -76,6 +78,9 @@ export class LoginService implements OnDestroy {
 
         // if rep == token ok
         this._isLogged = true;
+
+        // send firebase Token
+        this.sendFirebaseToken();
       },
       error: (error) => {
         console.log(error);
@@ -119,6 +124,10 @@ export class LoginService implements OnDestroy {
           this.savePersonalToken(
             reponseJson.substring(index + 2, reponseJson.length - 2)
           );
+
+          // send firebase Token
+          this.sendFirebaseToken();
+
           if (callback) {
             callback.func.call(callback.class, true);
           }
@@ -151,6 +160,10 @@ export class LoginService implements OnDestroy {
           this.savePersonalToken(
             reponseJson.substring(index + 2, reponseJson.length - 2)
           );
+
+          // send firebase Token
+          this.sendFirebaseToken();
+
           if (callback) {
             callback.func.call(callback.class, true);
           }
@@ -215,5 +228,29 @@ export class LoginService implements OnDestroy {
           this.testToken(); // For update local member infos
         });
     }
+  }
+
+  private sendFirebaseToken() {
+    if (!this.firebaseToken) {
+      return;
+    }
+
+    if (this._profil) {
+      this.sendFirebaseTokenForMbr(this._profil);
+    } else {
+      this.profil.subscribe((mbr: Member | undefined) => {
+        if (mbr) {
+          this.sendFirebaseTokenForMbr(mbr);
+        }
+      });
+    }
+  }
+  private sendFirebaseTokenForMbr(mbr: Member) {
+    const data = {
+      extraDBValues: this.firebaseToken,
+      extraDBKeys: 'extradb.Member.jcmsplugin.zelli.firebase.token',
+    };
+    const urlEncodedData = this._jcms.encodeParamForBody(data);
+    this._jcms.post('data/' + mbr.id, urlEncodedData).subscribe();
   }
 }

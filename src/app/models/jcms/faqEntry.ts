@@ -10,5 +10,5 @@ export interface FaqEntry extends Content {
    */
   answer: string;
   faq: FaqAccueil;
-  order: number,
+  order: number;
 }

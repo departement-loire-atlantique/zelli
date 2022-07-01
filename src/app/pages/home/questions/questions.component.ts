@@ -1,18 +1,16 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { JcmsClientService } from '@/app/services/jcms-client.service';
-
-import { JcmsPager } from '@/app/core/jcmsPager';
+import { Observable, forkJoin } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 import { Item } from '@/app/components/list/list.component';
-import { Util } from '@/app/util';
-
+import { JcmsPager } from '@/app/core/jcmsPager';
 import { APageHome } from '@/app/models/aPageHome';
 import { Category } from '@/app/models/jcms/category';
 import { Content } from '@/app/models/jcms/content';
-import { ListeDeContenus } from '@/app/models/jcms/listeDeContenus';
 import { FaqAccueil } from '@/app/models/jcms/faqAccueil';
-import { Observable, forkJoin } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { ListeDeContenus } from '@/app/models/jcms/listeDeContenus';
+import { JcmsClientService } from '@/app/services/jcms-client.service';
+import { Util } from '@/app/util';
 
 @Component({
   selector: 'app-questions',
@@ -20,7 +18,6 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./questions.component.less'],
 })
 export class QuestionsComponent extends APageHome implements OnInit {
-
   listeDeContenus: ListeDeContenus | undefined;
   pager: JcmsPager<Content> | undefined;
   result: Item[] | undefined;
@@ -29,8 +26,7 @@ export class QuestionsComponent extends APageHome implements OnInit {
 
   parentCategory = environment.catThemes; //  cat explorer par thème
 
-  constructor(_injector: Injector,
-    private _jcms: JcmsClientService) {
+  constructor(_injector: Injector, private _jcms: JcmsClientService) {
     super(_injector);
   }
 
@@ -60,12 +56,13 @@ export class QuestionsComponent extends APageHome implements OnInit {
           cids: this.curentCat.id,
           pageSize: 1,
         },
-      }).subscribe((pager: JcmsPager<ListeDeContenus>) => {
+      })
+      .subscribe((pager: JcmsPager<ListeDeContenus>) => {
         this.pager = pager;
         const contents = pager.dataInPage;
         if (contents[0] && contents[0].contenus) {
           let listFaq = this.getListFaq(contents[0].contenus);
-          listFaq.subscribe(dataArray => {
+          listFaq.subscribe((dataArray) => {
             this.initFaqList(dataArray);
           });
         }
@@ -84,9 +81,11 @@ export class QuestionsComponent extends APageHome implements OnInit {
         let faq = contenus[ind];
 
         // liste des catégories de la FAQ
-        this.getListCategories(faq.categories).subscribe(dataArray => {
+        this.getListCategories(faq.categories).subscribe((dataArray) => {
           for (let i = 0; i < dataArray.length; i++) {
-            let idParent = JSON.parse(JSON.stringify(dataArray[i].parent))['id'];
+            let idParent = JSON.parse(JSON.stringify(dataArray[i].parent))[
+              'id'
+            ];
             // ajoute si le parent est bien la cat parent
             if (idParent == this.parentCategory) {
               this.addItem(faq, ind, dataArray[i]);
@@ -133,7 +132,7 @@ export class QuestionsComponent extends APageHome implements OnInit {
     if (category && category.icon) {
       return category.icon;
     }
-    return "";
+    return '';
   }
 
   /**
@@ -161,5 +160,4 @@ export class QuestionsComponent extends APageHome implements OnInit {
   public getItems() {
     return this.result;
   }
-
 }

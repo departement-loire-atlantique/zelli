@@ -7,7 +7,9 @@ export default {
   component: PageTitleCustomComponent,
 } as Meta;
 
-const Template: Story<PageTitleCustomComponent> = (args: PageTitleCustomComponent) => ({
+const Template: Story<PageTitleCustomComponent> = (
+  args: PageTitleCustomComponent
+) => ({
   props: args,
 });
 

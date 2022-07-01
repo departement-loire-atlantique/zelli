@@ -9,7 +9,7 @@ import { FaqEntry } from '@/app/models/jcms/faqEntry';
 import { LabelMngService } from '@/app/services/label-mng.service';
 
 @Component({
-  selector: 'app-article-ase', 
+  selector: 'app-article-ase',
   templateUrl: './article-ase.component.html',
   styleUrls: ['./article-ase.component.less'],
 })

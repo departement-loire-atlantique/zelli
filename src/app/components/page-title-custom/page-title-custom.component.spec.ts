@@ -8,9 +8,8 @@ describe('PageTitleCustomComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PageTitleCustomComponent ]
-    })
-    .compileComponents();
+      declarations: [PageTitleCustomComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

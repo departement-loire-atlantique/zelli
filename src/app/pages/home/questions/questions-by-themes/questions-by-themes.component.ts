@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { JcmsClientService } from '@/app/services/jcms-client.service';
-import { Category } from '@/app/models/jcms/category';
-
-import { JcmsPager } from '@/app/core/jcmsPager';
 import { environment } from 'src/environments/environment';
 
 import { Item } from '@/app/components/list/list.component';
-
+import { JcmsPager } from '@/app/core/jcmsPager';
+import { Category } from '@/app/models/jcms/category';
 import { FaqAccueil } from '@/app/models/jcms/faqAccueil';
-import { CatsMngService } from '@/app/services/cats-mng.service';
 import { FaqEntry } from '@/app/models/jcms/faqEntry';
+import { CatsMngService } from '@/app/services/cats-mng.service';
+import { JcmsClientService } from '@/app/services/jcms-client.service';
 
 @Component({
   selector: 'app-questions',
@@ -18,7 +16,6 @@ import { FaqEntry } from '@/app/models/jcms/faqEntry';
   styleUrls: ['./questions-by-themes.component.less'],
 })
 export class QuestionsByThemesComponent implements OnInit {
-
   pager: JcmsPager<FaqEntry> | undefined;
   faqAccueil: FaqAccueil | undefined;
   faqEntry: FaqEntry[] | undefined;
@@ -30,12 +27,11 @@ export class QuestionsByThemesComponent implements OnInit {
   parentCat = environment.catThemes; //cat explorer par theme
   questionsCat = environment.catQuestions;
 
-
   constructor(
     private _route: ActivatedRoute,
     private _catMng: CatsMngService,
-    private _jcms: JcmsClientService) {
-  }
+    private _jcms: JcmsClientService
+  ) {}
 
   /**
    * Initialise la FAQ de la page et sa catégorie
@@ -43,13 +39,11 @@ export class QuestionsByThemesComponent implements OnInit {
   ngOnInit(): void {
     this._route.paramMap.subscribe((params) => {
       const id = params.get('id')!;
-      this._jcms
-        .get<FaqAccueil>('data/' + id)
-        .subscribe((faq: FaqAccueil) => {
-          this.faqAccueil = faq;
-          this.getCategories();
-          this.getFaqEntry(id);
-        });
+      this._jcms.get<FaqAccueil>('data/' + id).subscribe((faq: FaqAccueil) => {
+        this.faqAccueil = faq;
+        this.getCategories();
+        this.getFaqEntry(id);
+      });
     });
   }
 
@@ -76,29 +70,30 @@ export class QuestionsByThemesComponent implements OnInit {
    */
   private getFaqEntry(id: string) {
     if (this.faqAccueil && id) {
-      this._jcms.getPager<FaqEntry>('search', {
-        params: {
-          types: 'FaqEntry',
-          exactType: true,
-        },
-      }).subscribe((pager: JcmsPager<FaqEntry>) => {
-        if (!this.faqEntry) {
-          this.faqEntry = [];
-        }
-
-        this.pager = pager;
-        const contents = pager.dataInPage;
-
-        // liste des faq entrée qui appartiennent à la faq accueil
-        this.faqEntry = contents.filter(s => {
-          if (s.faq && s.faq.id) {
-            return s.faq.id == id;
-          } else {
-            return false;
+      this._jcms
+        .getPager<FaqEntry>('search', {
+          params: {
+            types: 'FaqEntry',
+            exactType: true,
+          },
+        })
+        .subscribe((pager: JcmsPager<FaqEntry>) => {
+          if (!this.faqEntry) {
+            this.faqEntry = [];
           }
-        });
-      });
 
+          this.pager = pager;
+          const contents = pager.dataInPage;
+
+          // liste des faq entrée qui appartiennent à la faq accueil
+          this.faqEntry = contents.filter((s) => {
+            if (s.faq && s.faq.id) {
+              return s.faq.id == id;
+            } else {
+              return false;
+            }
+          });
+        });
     }
   }
 
@@ -123,9 +118,7 @@ export class QuestionsByThemesComponent implements OnInit {
    * @returns la liste de question
    */
   public getQuestionsTitle(): string[] | undefined {
-    return this.faqEntry?.map(
-      (itFaqEntry: FaqEntry) => itFaqEntry.title
-    );
+    return this.faqEntry?.map((itFaqEntry: FaqEntry) => itFaqEntry.title);
   }
 
   /**
@@ -133,9 +126,6 @@ export class QuestionsByThemesComponent implements OnInit {
    * @returns la liste de réponses
    */
   public getAnswers(): string[] | undefined {
-    return this.faqEntry?.map(
-      (itFaqEntry: FaqEntry) => itFaqEntry.answer
-    );
+    return this.faqEntry?.map((itFaqEntry: FaqEntry) => itFaqEntry.answer);
   }
-
 }
