@@ -36,7 +36,7 @@ export class ContactDetailsService {
                   chapo: result.chapo,
                   lieuDeRattachement: {
                     ...result,
-                    city: result.commune.title,
+                    city: result.commune ? result.commune.title : '',
                   },
                 }))
               );

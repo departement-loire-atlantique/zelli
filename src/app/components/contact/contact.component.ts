@@ -59,7 +59,7 @@ export class ContactComponent implements OnInit, OnDestroy {
 
   getContactsForListing(): Item[] {
     return this.contacts.map((contact) => ({
-      url: `/contacts/${contact.id}`,
+      url: `/contact/details/${contact.id}`,
       lbl: contact.title,
     }));
   }

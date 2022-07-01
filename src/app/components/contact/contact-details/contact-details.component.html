@@ -34,7 +34,7 @@
   </div>
 </div>
 
-<div class="c-contact-details__line" *ngIf="contact?.phoneNumber">
+<div class="c-contact-details__line" *ngIf="contact && contact.phoneNumber && contact.phoneNumber[0]">
   <app-icon name="phone"></app-icon>
   <a href="tel:{{ contact?.phoneNumber }}">{{ contact?.phoneNumber }}</a>
 </div>
@@ -47,10 +47,10 @@
 </span>
 
 
-<div class="c-contact-details__line" *ngIf="contact?.location?.website">
+<div class="c-contact-details__line" *ngIf="contact && contact.location && contact.location.website && contact.location.website[0]">
   <app-icon name="link"></app-icon>
   <a
-    href="https://{{ contact?.location?.website }}"
+    href="https://{{ contact.location.website[0] }}"
     target="_blank"
     rel="noopener noreferrer"
   >
