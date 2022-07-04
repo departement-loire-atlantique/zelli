@@ -1,6 +1,6 @@
 <div class="c-video">
   <iframe
-    class="c-video-player"
+    [class]="'c-video-player ' + squarePlayer()"
     *ngIf="!isLoadingVideo && videoUrl"
     [hidden]="isLoadingIframe"
     (load)="handleOnLoad()"

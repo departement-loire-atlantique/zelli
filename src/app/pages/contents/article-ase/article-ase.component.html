@@ -39,6 +39,7 @@
         *ngFor="let itVideo of article.video; index as i"
         [id]="itVideo.id"
         [text]="article.videoTexte ? article.videoTexte[i] : undefined"
+        [squareFormat]="true"
       >
       </app-video>
     </div>
