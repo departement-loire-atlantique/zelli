@@ -67,6 +67,7 @@
       *ngIf="verifLiensUtiles()"
       class="liens-utils"
       role="liens-utils"
+      [style]="'background-color:' + getColor()"
     >
       <app-heading icon="👇">
         {{ lblMng.lblLiensUtiles() }}

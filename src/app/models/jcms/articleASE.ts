@@ -8,6 +8,8 @@ import { Lien } from './lien';
  *
  */
 export interface ArticleASE extends Content {
+  categories: Content[];
+
   picto: string | undefined;
 
   /**

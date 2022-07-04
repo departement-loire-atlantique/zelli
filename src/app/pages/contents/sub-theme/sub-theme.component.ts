@@ -92,8 +92,8 @@ export class SubThemeComponent implements OnInit {
       // }
       this.subTheme = subTheme;
 
-      for (let cat of subTheme.categories) {
-        this._catMng.cat(cat.id).subscribe((cat) => {
+      for (let itCat of subTheme.categories) {
+        this._catMng.cat(itCat.id).subscribe((cat) => {
           if (cat.parent) {
             this._catMng.cat(cat.parent).subscribe((catParent) => {
               if (catParent.parent == environment.catThemes)

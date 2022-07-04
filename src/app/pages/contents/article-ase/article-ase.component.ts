@@ -9,6 +9,9 @@ import { FaqEntry } from '@/app/models/jcms/faqEntry';
 import { Lien } from '@/app/models/jcms/lien';
 import { LabelMngService } from '@/app/services/label-mng.service';
 import { Util } from '@/app/util';
+import { Category } from '@/app/models/jcms/category';
+import { CatsMngService } from '@/app/services/cats-mng.service';
+import { environment } from '@/environments/environment';
 
 @Component({
   selector: 'app-article-ase',
@@ -17,12 +20,14 @@ import { Util } from '@/app/util';
 })
 export class ArticleASEComponent implements OnInit {
   article: ArticleASE | undefined;
+  color: string | undefined;
 
   constructor(
     private _route: ActivatedRoute,
     private _jcms: JcmsClientService,
+    private _catMng: CatsMngService,
     public lblMng: LabelMngService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this._route.paramMap.subscribe((params) => {
@@ -38,6 +43,7 @@ export class ArticleASEComponent implements OnInit {
 
   private getAllContent(): any {
     if (this.article) {
+      this.getCurrentCat();
       // Mot compliqués
       if (this.article.motsCompliques) {
         for (let i = 0; i < this.article.motsCompliques.length; i++) {
@@ -63,6 +69,21 @@ export class ArticleASEComponent implements OnInit {
               }
             });
         }
+      }
+    }
+  }
+
+  public getCurrentCat() {
+    if (this.article && this.article.categories && this.article.categories.length > 0) {
+      for (let itCat of this.article.categories) {
+        this._catMng.cat(itCat.id).subscribe((cat) => {
+          if (cat.parent) {
+            this._catMng.cat(cat.parent).subscribe((catParent) => {
+              if (catParent.parent == environment.catThemes)
+                this.color = catParent.color;
+            });
+          }
+        });
       }
     }
   }
@@ -99,20 +120,24 @@ export class ArticleASEComponent implements OnInit {
   }
 
   public verifLiensUtiles() {
-    if(this.article && this.article.liensUtiles && this.article.liensUtiles.length > 0)
+    if (this.article && this.article.liensUtiles && this.article.liensUtiles.length > 0)
       return this.article.liensUtiles;
     return undefined;
   }
 
   public verifMotCompliques() {
-    if(this.article && this.article.motsCompliques && this.article.motsCompliques.length > 0)
+    if (this.article && this.article.motsCompliques && this.article.motsCompliques.length > 0)
       return this.article.motsCompliques;
     return undefined;
   }
 
   public verifContact() {
-    if(this.article && this.article.fichesStructures && this.article.fichesStructures.length > 0)
+    if (this.article && this.article.fichesStructures && this.article.fichesStructures.length > 0)
       return this.article.fichesStructures;
     return undefined;
+  }
+
+  public getColor() {
+    return this.color;
   }
 }
