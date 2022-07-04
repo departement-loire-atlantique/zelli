@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '@/app/components/shared.module';
 import { PageContactDetailsComponent } from '@/app/pages/contact/contact-details/contact-details.component';
 import { PageNotFoundComponent } from '@/app/pages/errors/page-not-found/page-not-found.component';
+import { SanitizeHtmlPipe } from '@/app/pipes/sanitize-html.pipe';
 
 import { ContactCreateComponent } from './contact-create/contact-create.component';
 
@@ -25,7 +26,11 @@ const routes: Routes = [
     SharedModule,
     FormsModule,
   ],
-  declarations: [PageContactDetailsComponent, ContactCreateComponent],
-  exports: [RouterModule],
+  declarations: [
+    PageContactDetailsComponent,
+    ContactCreateComponent,
+    SanitizeHtmlPipe,
+  ],
+  exports: [RouterModule, SanitizeHtmlPipe],
 })
 export class ContactModule {}

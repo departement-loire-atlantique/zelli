@@ -63,6 +63,6 @@
   <div
   *ngIf="contact?.location?.description"
   class="p-contact__description"
-  [innerHtml]="contact?.location?.description"
+  [innerHtml]="contact?.location?.description! | sanitizeHtml"
 ></div>
 </div>
