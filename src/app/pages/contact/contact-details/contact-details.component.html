@@ -59,4 +59,10 @@
     class="p-contact__description"
     [innerHtml]="contact?.description"
   ></div>
+
+  <div
+  *ngIf="contact?.location?.description"
+  class="p-contact__description"
+  [innerHtml]="contact?.location?.description"
+></div>
 </div>

@@ -26,6 +26,7 @@ export type Location = {
   city: string;
   cedex: string;
   website: string[];
+  description: string;
 };
 
 export type LocationFromApi = {
@@ -130,6 +131,7 @@ export const mapContactFromApi = (contact: ContactFromApi): Contact => {
       cedex: contact.lieuDeRattachement?.cedex2
         ? `CEDEX ${contact.lieuDeRattachement.cedex2}`
         : undefined,
+      description: contact.lieuDeRattachement.description,
     },
   };
 };
