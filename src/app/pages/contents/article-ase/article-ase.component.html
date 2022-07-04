@@ -49,7 +49,7 @@
 
   <div class="secondary-content">
     <section
-      *ngIf="article.motsCompliques"
+      *ngIf="verifMotCompliques()"
       class="mots-compliques"
       role="mots-compliques"
     >
@@ -64,7 +64,7 @@
     </section>
 
     <section
-      *ngIf="this.article.liensUtiles && this.article.liensUtiles.length > 0"
+      *ngIf="verifLiensUtiles()"
       class="liens-utils"
       role="liens-utils"
     >
@@ -78,7 +78,7 @@
       ></app-list>
     </section>
 
-    <section class="contacts" *ngIf="article.fichesStructures">
+    <section class="contacts" *ngIf="verifContact()">
       <app-contact
         name="Les contacts"
         [contactIds]="getContactsForListDisplay(article.fichesStructures)"

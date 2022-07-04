@@ -97,4 +97,22 @@ export class ArticleASEComponent implements OnInit {
   getContactsForListDisplay(contacts: Pick<ContactFromApi, 'id'>[]) {
     return contacts.map((contact) => contact.id);
   }
+
+  public verifLiensUtiles() {
+    if(this.article && this.article.liensUtiles && this.article.liensUtiles.length > 0)
+      return this.article.liensUtiles;
+    return undefined;
+  }
+
+  public verifMotCompliques() {
+    if(this.article && this.article.motsCompliques && this.article.motsCompliques.length > 0)
+      return this.article.motsCompliques;
+    return undefined;
+  }
+
+  public verifContact() {
+    if(this.article && this.article.fichesStructures && this.article.fichesStructures.length > 0)
+      return this.article.fichesStructures;
+    return undefined;
+  }
 }
