@@ -6,4 +6,23 @@ export const environment = {
   catNavMain: 'c_5020',
   catIntro: 'c_5051',
   catMainContent: 'c_5057',
+  
+  catQuestions: 'c_5048',
+  catThemes: 'j_6',
+  catAskQuestionRef: 'c_6287',
+  catAskQuestionForm: 'c_6288',
+  catAskQuestionSend: 'c_6289',
+
+  firebase: {
+    apiKey: 'AIzaSyD3n-pKkHumsQnVovVgf_FpEBYbKKWDhx8',
+    authDomain: 'zelli-local.firebaseapp.com',
+    projectId: 'zelli-local',
+    storageBucket: 'zelli-local.appspot.com',
+    messagingSenderId: '308279147291',
+    appId: '1:308279147291:web:ffddaba7cfdfb3b39cf1be',
+    measurementId: 'G-WH4LC8SL31',
+
+    vapidKey:
+      'BKu5WfJU0SoDOojTZ0b-tUIZbOBQK9pNsVKDiySdTPMd-8e2sSoYKT_ee10jR86hWgTTl10XsFBXJZenGfsng3w',
+  },
 };
