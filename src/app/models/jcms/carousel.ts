@@ -1,7 +1,7 @@
 import { Content } from "./content";
 
 /**
- * 
+ *
  */
 export interface Carousel extends Content {
 
@@ -37,7 +37,7 @@ export interface CarouselElement extends Content {
 
   linkTitle: string | undefined,
 
-  internalLink: string | undefined,
+  internalLink: Content | undefined,
 
   externalLink: string | undefined,
 
