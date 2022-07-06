@@ -119,22 +119,21 @@ export class ArticleASEComponent implements OnInit {
     return contacts.map((contact) => contact.id);
   }
 
+  public verifTitreDesc() {
+    return (this.article && this.article.titreDescription && this.article.titreDescription.length > 0)
+  }
+
   public verifLiensUtiles() {
-    if (this.article && this.article.liensUtiles && this.article.liensUtiles.length > 0)
-      return this.article.liensUtiles;
-    return undefined;
+    return (this.article && this.article.liensUtiles && this.article.liensUtiles.length > 0)
+
   }
 
   public verifMotCompliques() {
-    if (this.article && this.article.motsCompliques && this.article.motsCompliques.length > 0)
-      return this.article.motsCompliques;
-    return undefined;
+    return (this.article && this.article.motsCompliques && this.article.motsCompliques.length > 0)
   }
 
   public verifContact() {
-    if (this.article && this.article.fichesStructures && this.article.fichesStructures.length > 0)
-      return this.article.fichesStructures;
-    return undefined;
+    return (this.article && this.article.fichesStructures && this.article.fichesStructures.length > 0)
   }
 
   public getColor() {
