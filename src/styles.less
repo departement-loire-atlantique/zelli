@@ -20,6 +20,7 @@ H1 {
 
   text-align: center;
 }
+
 H2 {
   font-family: Muli;
   font-size: 23px;
@@ -31,6 +32,7 @@ H2 {
   display: block;
   text-align: center;
 }
+
 H3 {
   font-family: Muli;
   font-size: 23px;
@@ -39,7 +41,15 @@ H3 {
   margin-right: 18px;
 }
 
+H4 {
+  font-family: Muli;
+  font-size: 20px;
+  font-weight: 700;
+  color: @blue-grey;
+}
+
 .full-bg-color {
+
   H1,
   H2,
   H3 {
@@ -71,11 +81,12 @@ MAIN {
   .btn {
     flex: 1;
 
-    + .btn {
+    +.btn {
       margin-top: 5px;
     }
   }
 }
+
 .btn {
   background: @blue;
   color: @white;
@@ -116,15 +127,17 @@ MAIN {
     }
   }
 
-  + .btn {
+  +.btn {
     margin-top: 0;
   }
 }
+
 .btn-link {
   color: @blue;
   padding: 16px;
   font-weight: bold;
 }
+
 //-------------------
 
 // form
@@ -132,9 +145,59 @@ MAIN {
   .ds44-form__container {
     color: #000;
   }
+
   .ds44-formLabel.ds44-moveLabel {
     .ds44-labelTypePlaceholder SPAN {
       color: @white;
     }
   }
+}
+
+//-------------------
+
+//wysiwyg
+.wysiwyg {
+
+  H3 {
+    margin-left: 0;
+  }
+
+  p {
+    align-items: center;
+    font-size: 18px;
+
+    // btn wysiwyg
+    .ds44-btnStd {
+      background: @white;
+      color: @blue;
+      border: 1px solid @blue;
+      font-size: 18px;
+      padding: 16px;
+      margin: 25px;
+      display: block;
+      border-radius: 50px;
+      text-align: center;
+
+      &:hover {
+        background: @blue;
+        color: @white;
+        cursor: pointer;
+        box-shadow: none;
+      }
+    }
+
+    .ds44-btn--contextual {
+      background: @blue  !important;
+      color: @white;
+
+      &:hover {
+        background: @white  !important;
+        color: @blue;
+        border-color: @blue;
+        cursor: pointer;
+        box-shadow: none;
+      }
+    }
+  }
+
 }

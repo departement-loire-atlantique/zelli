@@ -9,8 +9,8 @@
 <main>
 
   <app-loader *ngIf="!subThemes" color="#0013b1"></app-loader>
-  
-  <app-list [items]="getItemForList()" [isBold]="true"></app-list>
+
+  <app-list [items]="this.result" [isBold]="true"></app-list>
 
   <div *ngIf="curentCat && curentCat.idContentTrieur">
     <a

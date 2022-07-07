@@ -1,26 +1,40 @@
 <div class="c-video">
-  <iframe
-    class="c-video-player"
-    *ngIf="!isLoadingVideo && videoUrl"
-    [hidden]="isLoadingIframe"
+
+  <div onclick="this.nextElementSibling.style.display='block'; this.style.display='none'">
+    <img
+    *ngIf="video && video.previewPictureUrl"
+    [class]="'c-video-player ' + squarePlayer()"
+    [src]="video.previewPictureUrl"
+    style="cursor:pointer" />
+  </div>
+  <div style="display:none">
+    <iframe [class]="'c-video-player ' + squarePlayer()"
+      *ngIf="!isLoadingVideo && videoUrl"
+      [hidden]="isLoadingIframe"
+        (load)="handleOnLoad()"
+        [src]="videoUrl "
+        [title]="video?.title"
+        allow='autoplay'
+        frameBorder="0"
+        allowfullscreen>
+      </iframe>
+  </div>
+
+  <!-- <iframe [class]="'c-video-player ' + squarePlayer()"
+  *ngIf="!isLoadingVideo && videoUrl"
+  [hidden]="isLoadingIframe"
     (load)="handleOnLoad()"
-    [src]="videoUrl"
+    [src]="videoUrl "
     [title]="video?.title"
+    allow='autoplay'
     frameBorder="0"
-    allowfullscreen
-  ></iframe>
+    allowfullscreen>
+  </iframe> -->
 
-  <app-alert
-    *ngIf="!isLoadingVideo && !videoUrl"
-    status="error"
-    description="Un problème est survenu lors du chargement de la vidéo."
-  ></app-alert>
+  <app-alert *ngIf="!isLoadingVideo && !videoUrl" status="error"
+    description="Un problème est survenu lors du chargement de la vidéo."></app-alert>
 
-  <app-loader
-    class="c-video-loader"
-    *ngIf="isLoadingIframe || isLoadingVideo"
-    color="#0013b1"
-  ></app-loader>
+  <app-loader class="c-video-loader" *ngIf="isLoadingIframe || isLoadingVideo" color="#0013b1"></app-loader>
 
   <div *ngIf="text" class="c-video-text">
     <app-hidden-text [text]="text"></app-hidden-text>

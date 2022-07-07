@@ -29,7 +29,7 @@ export class SubThemeComponent implements OnInit {
     private _router: Router,
     private _catMng: CatsMngService,
     private _jcms: JcmsClientService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this._route.paramMap.subscribe((params) => {
@@ -77,16 +77,27 @@ export class SubThemeComponent implements OnInit {
   private initSubTheme(subTheme: SubThemeASE | undefined) {
     if (subTheme) {
       // TODO bug jalios #27121
-      subTheme.navigation = (subTheme as any).categories[0];
+      // subTheme.navigation = (subTheme as any).categories[1];
 
+
+      // if (subTheme.navigation) {
+      //   // OPTI ?
+      //   this._catMng.cat(subTheme.navigation.id).subscribe((cat) => {
+      //     if (cat.parent) {
+      //       this._catMng.cat(cat.parent).subscribe((catParent) => {
+      //         subTheme.navigation = catParent;
+      //       });
+      //     }
+      //   });
+      // }
       this.subTheme = subTheme;
 
-      if (subTheme.navigation) {
-        // OPTI ?
-        this._catMng.cat(subTheme.navigation.id).subscribe((cat) => {
+      for (let itCat of subTheme.categories) {
+        this._catMng.cat(itCat.id).subscribe((cat) => {
           if (cat.parent) {
             this._catMng.cat(cat.parent).subscribe((catParent) => {
-              subTheme.navigation = catParent;
+              if (catParent.parent == environment.catThemes)
+                subTheme.navigation = catParent;
             });
           }
         });

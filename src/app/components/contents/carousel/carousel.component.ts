@@ -12,6 +12,7 @@ import { DesignSystemService } from '@/app/services/design-system.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 
 import { environment } from '@/environments/environment';
+import { Util } from '@/app/util';
 
 @Component({
   selector: 'app-carousel',
@@ -106,5 +107,15 @@ export class CarouselComponent implements OnInit, AfterViewInit {
         node.classList.add('obs-curent');
         this._obsPager?.observe(node, { attributes: true });
       });
+  }
+
+  public getLink(res: CarouselElement) {
+    if(res.externalLink) {
+      return res.externalLink;
+    } else if(res.internalLink) {
+      return Util.buildUrlCotent(res.internalLink)
+    } else {
+      return undefined;
+    }
   }
 }

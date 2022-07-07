@@ -3,18 +3,12 @@
   <div *ngIf="article" class="atu-title">{{ article.title }}</div>
   <div *ngIf="article" class="actu-nav">
     <span *ngIf="article.contenuPrecedent">
-      <a
-        [routerLink]="'/article/' + article.contenuPrecedent.id"
-        title="Contenu précédent"
-      >
+      <a [routerLink]="'/article/' + article.contenuPrecedent.id" title="Contenu précédent">
         <i class="icon icon-left icon--xlarge" aria-hidden="true"></i>
       </a>
     </span>
     <span *ngIf="article.contenuSuivant">
-      <a
-        [routerLink]="'/article/' + article.contenuSuivant.id"
-        title="Contenu suivant"
-      >
+      <a [routerLink]="'/article/' + article.contenuSuivant.id" title="Contenu suivant">
         <i class="icon icon-right icon--xlarge" aria-hidden="true"></i>
       </a>
     </span>
@@ -23,76 +17,63 @@
 <main *ngIf="article">
   <section>
     <div *ngIf="article.diaporama">
-      <app-carousel
-        *ngFor="let itCarousel of article.diaporama; index as i"
-        [id]="itCarousel.id"
-        [text]="article.diaporamaTexte ? article.diaporamaTexte[i] : undefined"
-      >
+      <app-carousel *ngFor="let itCarousel of article.diaporama; index as i" [id]="itCarousel.id"
+        [text]="article.diaporamaTexte ? article.diaporamaTexte[i] : undefined">
       </app-carousel>
     </div>
 
-    <div
-      *ngIf="article.video"
-      class="ds44-flex ds44-flex-container-column ds44-flex-align-center"
-    >
-      <app-video
-        *ngFor="let itVideo of article.video; index as i"
-        [id]="itVideo.id"
-        [text]="article.videoTexte ? article.videoTexte[i] : undefined"
-      >
+    <div *ngIf="article.video" class="ds44-flex ds44-flex-container-column ds44-flex-align-center">
+      <app-video *ngFor="let itVideo of article.video; index as i" [id]="itVideo.id"
+        [text]="article.videoTexte ? article.videoTexte[i] : undefined" [squareFormat]="true">
       </app-video>
     </div>
   </section>
 
   <span class="icon icon-arrow-down separator-icon" aria-hidden="true"></span>
 
+
   <div class="secondary-content">
-    <section
-      *ngIf="article.motsCompliques"
-      class="mots-compliques"
-      role="mots-compliques"
-    >
+
+    <div *ngIf="verifTitreDesc()" class="article-content">
+      <section *ngFor="let desc of article.titreDescription; index as i">
+        <app-heading>
+          {{ desc }}
+        </app-heading>
+        <p *ngIf="article.description && article.description[i]" [innerHtml]="article.description[i]"></p>
+      </section>
+    </div>
+
+    <section *ngIf="verifMotCompliques()" class="mots-compliques" role="mots-compliques">
       <app-heading icon="🤔">
         {{ lblMng.lblMotComp() }}
       </app-heading>
 
-      <app-collapser
-        [dataTitle]="getMotCompliquesTitle()"
-        [dataVal]="getMotCompliquesVar()"
-      ></app-collapser>
+      <app-collapser [dataTitle]="getMotCompliquesTitle()" [dataVal]="getMotCompliquesVar()"></app-collapser>
     </section>
 
-    <section
-      *ngIf="this.article.liensUtiles && this.article.liensUtiles.length > 0"
-      class="liens-utils"
-      role="liens-utils"
-    >
+    <section *ngIf="verifLiensUtiles()" class="liens-utils" role="liens-utils"
+      [style]="'background-color:' + getColor()">
       <app-heading icon="👇">
         {{ lblMng.lblLiensUtiles() }}
       </app-heading>
 
-      <app-list
-        [items]="getItemForLien()"
-        cssClass="in-tuile"
-      ></app-list>
+      <app-list [items]="getItemForLien()" cssClass="in-tuile"></app-list>
     </section>
 
-    <section class="contacts" *ngIf="article.fichesStructures">
-      <app-contact
-        name="Les contacts"
-        [contactIds]="getContactsForListDisplay(article.fichesStructures)"
-      >
+    <section class="contacts" *ngIf="verifContact()">
+      <app-contact name="Les contacts" [contactIds]="getContactsForListDisplay(article.fichesStructures)">
       </app-contact>
     </section>
+
+    <section class="libre-content">
+      <p *ngIf="article.saisieLibre" [innerHtml]="article.saisieLibre"></p>
+    </section>
   </div>
+
 </main>
 
 <app-has-helped *ngIf="article && article.affichagePageAAidee"></app-has-helped>
 
 <!-- TODO: Remplacer le titre "title" par la valeur renseignée sur Jalios -->
-<app-next-link
-  *ngIf="article?.contenuSuivant"
-  title="Page suivante"
-  [description]="article?.contenuSuivant?.title"
-  [link]="'/article/' + article?.contenuSuivant?.id"
-></app-next-link>
+<app-next-link *ngIf="article?.contenuSuivant" title="Page suivante" [description]="article?.contenuSuivant?.title"
+  [link]="'/article/' + article?.contenuSuivant?.id"></app-next-link>
