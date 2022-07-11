@@ -77,4 +77,8 @@ export class VideoComponent implements OnInit, OnDestroy {
       return 'square-format'
     return '';
   }
+
+  checkURL(url: string) {
+    return(url.match(/\.(jpeg|jpg|gif|png|svg|webp)$/) != null);
+  }
 }

@@ -15,6 +15,7 @@ export const environment = {
   catAskQuestionRef: '',
   catAskQuestionForm: '',
   catAskQuestionSend: '',
+  catExcludeSearch: '',
   firebase: {
     apiKey: 'AIzaSyD3n-pKkHumsQnVovVgf_FpEBYbKKWDhx8',
     authDomain: 'zelli-local.firebaseapp.com',

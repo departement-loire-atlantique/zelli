@@ -11,11 +11,14 @@ export const environment = {
   catNavMain: 'rzelli_1394658',
   catIntro: 'rzelli_1394827',
   catMainContent: 'c_1154085',
+
   catQuestions: 'rzelli_1394678',
   catThemes: 'rzelli_1394659',
   catAskQuestionRef: 'rzelli_1394928',
   catAskQuestionForm: 'rzelli_1394929',
   catAskQuestionSend: 'rzelli_1394930',
+  catExcludeSearch: 'p2_902693',
+
   firebase: {
     apiKey: 'AIzaSyD3n-pKkHumsQnVovVgf_FpEBYbKKWDhx8',
     authDomain: 'zelli-local.firebaseapp.com',
