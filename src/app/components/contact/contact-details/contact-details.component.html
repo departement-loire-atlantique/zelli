@@ -36,24 +36,36 @@
 
 <div class="c-contact-details__line" *ngIf="contact && contact.phoneNumber && contact.phoneNumber[0]">
   <app-icon name="phone"></app-icon>
-  <a href="tel:{{ contact?.phoneNumber }}">{{ contact?.phoneNumber }}</a>
+  <ul class="ds44-list">
+    <li *ngFor="let itTel of contact.phoneNumber">
+      <a href="tel:{{ itTel }}">{{ itTel }}</a>
+    </li>
+  </ul>
+
 </div>
 
-<span *ngFor="let itMail of mail">
-  <div class="c-contact-details__line" *ngIf="itMail">
-    <app-icon name="mail"></app-icon>
-    <a href="mailto:{{ itMail }}">{{ itMail }}</a>
-  </div>
-</span>
+<div class="c-contact-details__line" *ngIf="mail && mail[0]">
+  <app-icon name="mail"></app-icon>
+  <ul class="ds44-list">
+    <li *ngFor="let itMail of mail">
+      <a href="mailto:{{ itMail }}">{{ itMail }}</a>
+    </li>
+  </ul>
+</div>
 
 
 <div class="c-contact-details__line" *ngIf="contact && contact.location && contact.location.website && contact.location.website[0]">
   <app-icon name="link"></app-icon>
-  <a
-    href="https://{{ contact.location.website[0] }}"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    {{ contact?.location?.website }}
-  </a>
+  <ul class="ds44-list">
+    <li *ngFor="let itWeb of contact.location.website">
+      <a
+        href="{{ itWeb }}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Site internet
+        <!-- ZEL-42 => Remplacer l’url par le libellé Site internet -->
+      </a>
+    </li>
+  </ul>
 </div>

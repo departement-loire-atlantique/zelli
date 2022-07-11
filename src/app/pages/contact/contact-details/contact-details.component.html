@@ -32,7 +32,7 @@
       <app-icon name="mail"></app-icon>
     </a>
     <a
-      *ngIf="contact?.location?.title"
+      *ngIf="getContactLocation()"
       href="https://www.google.com/maps/search/?api=1&query={{
         getContactLocation()
       }}"

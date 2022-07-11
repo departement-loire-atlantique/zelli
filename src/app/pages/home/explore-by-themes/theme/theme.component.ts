@@ -10,6 +10,8 @@ import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
 import { Util } from '@/app/util';
 
+import { environment } from '@/environments/environment';
+
 @Component({
   selector: 'app-theme',
   templateUrl: './theme.component.html',
@@ -35,6 +37,7 @@ export class ThemeComponent {
     this._catMng.cat(id).subscribe((cat) => (this.curentCat = cat));
     this._catMng.catsChildren(id).subscribe((cats) => {
       this.subThemes = cats;
+      this.result = this.getItemForList();
       for (let c in cats) {
         this.setListItem(cats[c], c);
       }
@@ -46,7 +49,8 @@ export class ThemeComponent {
       .get('search', {
         params: {
           exactCat: true,
-          cids: subTheme.id,
+          catMode: 'and',
+          cids: [subTheme.id, environment.catMainContent],
         },
       })
       .pipe(map((rep: any): Content[] => rep.dataSet))
@@ -67,13 +71,13 @@ export class ThemeComponent {
         }
 
         if (isSubTheme) {
-          this.result.splice(Number(ind), 0, {
+          this.result.splice(Number(ind), 1, {
             lbl: subTheme.title,
             url: '/subTheme/fromCat/' + subTheme.id,
           });
         } else if (firstContent) {
-          this.result.splice(Number(ind), 0, {
-            lbl: firstContent.title,
+          this.result.splice(Number(ind), 1, {
+            lbl: subTheme.title, // conservation du titre de la cat
             url: Util.buildUrlCotent(firstContent),
           });
         }

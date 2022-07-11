@@ -26,16 +26,16 @@ export class ContactDetailsComponent implements OnInit {
 
   public isContactlocation(): boolean {
     if (
-      this.contact?.location?.building === undefined &&
-      this.contact?.location?.stairOrCorridor == undefined &&
-      this.contact?.location?.roadName === undefined &&
-      this.contact?.location?.cs === undefined &&
-      this.contact?.location?.postalCode === undefined &&
-      this.contact?.location?.city === undefined &&
-      this.contact?.location?.cedex === undefined
+      this.contact?.location?.building ||
+      this.contact?.location?.stairOrCorridor ||
+      this.contact?.location?.roadName ||
+      this.contact?.location?.cs ||
+      this.contact?.location?.postalCode ||
+      this.contact?.location?.city ||
+      this.contact?.location?.cedex
     ) {
-      return false;
+      return true;
     }
-    return true;
+    return false;
   }
 }

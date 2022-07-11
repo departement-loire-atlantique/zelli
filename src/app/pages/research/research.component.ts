@@ -15,6 +15,8 @@ import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { SharedService } from '@/app/services/shared-service.service';
 import { Util } from '@/app/util';
 
+import { environment } from '@/environments/environment';
+
 import { Item } from '../../components/list/list.component';
 
 @Component({
@@ -75,6 +77,7 @@ export class ResearchComponent implements AfterViewInit, OnInit, OnDestroy {
       this._jcms.getPager<Content>('search', {
         params: {
           text: this.text,
+          cidsOff: environment.catExcludeSearch,
           types: [
             'SousthemeASE',
             'ArticleASE',
