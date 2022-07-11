@@ -1,8 +1,8 @@
 <div class="c-video">
 
-  <div *ngIf="getPreviewPicture(); else no_image">
+  <div *ngIf="video && video.previewPictureUrl && checkURL(video.previewPictureUrl); else no_image">
     <div onclick="this.nextElementSibling.style.display='block'; this.style.display='none'">
-      <img *ngIf="video && video.previewPictureUrl"
+      <img
       [class]="'c-video-player ' + squarePlayer()"
       [src]="video.previewPictureUrl"
       style="cursor:pointer" />

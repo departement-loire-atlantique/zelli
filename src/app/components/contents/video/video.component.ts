@@ -78,13 +78,7 @@ export class VideoComponent implements OnInit, OnDestroy {
     return '';
   }
 
-  getPreviewPicture() {
-    if(this.video && this.video.previewPictureUrl)
-      return this.checkURL(this.video.previewPictureUrl) ? this.video.previewPictureUrl : undefined;
-    return undefined
-  }
-
-  private checkURL(url: string) {
-    return(url.match(/\.(jpeg|jpg|gif|png|ico)$/) != null);
+  checkURL(url: string) {
+    return(url.match(/\.(jpeg|jpg|gif|png|svg|webp)$/) != null);
   }
 }
