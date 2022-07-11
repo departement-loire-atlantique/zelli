@@ -17,6 +17,9 @@ export class VideoComponent implements OnInit, OnDestroy {
   @Input()
   text?: string;
 
+  @Input()
+  squareFormat: boolean = false;
+
   video?: Video;
 
   isLoadingVideo = false;
@@ -67,5 +70,10 @@ export class VideoComponent implements OnInit, OnDestroy {
 
   handleOnLoad(): void {
     this.isLoadingIframe = false;
+  }
+
+  squarePlayer() {
+    if (this.squareFormat) return 'square-format';
+    return '';
   }
 }

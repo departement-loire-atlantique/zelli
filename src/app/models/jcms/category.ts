@@ -26,6 +26,8 @@ export interface Category {
 
   image: string;
 
+  color: string;
+
   /**
    * Url interne à l'app
    */

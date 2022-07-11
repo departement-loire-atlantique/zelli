@@ -72,6 +72,7 @@ export class CatsMngService {
         ? dataRep.extraDataMap['extra.Category.jcmsplugin.zelli.contenu.trieur']
         : '', // TODO sup rzelli_1394737 (bug JCMS)
       parent: dataRep.parent ? dataRep.parent.id : undefined,
+      color: dataRep.color,
     };
   }
 }

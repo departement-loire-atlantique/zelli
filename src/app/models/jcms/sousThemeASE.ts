@@ -1,19 +1,20 @@
-import { Category } from "./category";
-import { Content } from "./content";
+import { Category } from './category';
+import { Content } from './content';
 
 /**
  * Représente le type JCMS "Sous-thème ASE"
  */
 export interface SubThemeASE extends Content {
-  
-  chapo: string,
-  
+  chapo: string;
+
   /**
    * ArticleASE ou Structure
    */
-  contenu: Content[],
+  contenu: Content[];
 
-  affichagePageAAidee: boolean,
+  categories: Content[];
 
-  navigation: Category | undefined
+  affichagePageAAidee: boolean;
+
+  navigation: Category | undefined;
 }
