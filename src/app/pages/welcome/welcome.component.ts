@@ -31,9 +31,11 @@ export class WelcomeComponent implements OnInit {
     this._jcms
       .get<any>('plugins/zelli/prop/jcmsplugin.zelli.lbl.welcome.footer.link')
       .subscribe((rep: any) => {
-        this._jcms.get<Content>('data/' + rep.value).subscribe((rep) => {
-          this.dataInFooter = rep;
-        });
+        if (rep.value) {
+          this._jcms.get<Content>('data/' + rep.value).subscribe((rep) => {
+            this.dataInFooter = rep;
+          });
+        }
       });
   }
 
