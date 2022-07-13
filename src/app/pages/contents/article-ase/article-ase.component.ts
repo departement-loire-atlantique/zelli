@@ -4,13 +4,14 @@ import { ArticleASE } from 'src/app/models/jcms/articleASE';
 import { JcmsClientService } from 'src/app/services/jcms-client.service';
 
 import { Item } from '@/app/components/list/list.component';
+import { Category } from '@/app/models/jcms/category';
 import { ContactFromApi } from '@/app/models/jcms/contact';
 import { FaqEntry } from '@/app/models/jcms/faqEntry';
 import { Lien } from '@/app/models/jcms/lien';
+import { CatsMngService } from '@/app/services/cats-mng.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
 import { Util } from '@/app/util';
-import { Category } from '@/app/models/jcms/category';
-import { CatsMngService } from '@/app/services/cats-mng.service';
+
 import { environment } from '@/environments/environment';
 
 @Component({
@@ -27,7 +28,7 @@ export class ArticleASEComponent implements OnInit {
     private _jcms: JcmsClientService,
     private _catMng: CatsMngService,
     public lblMng: LabelMngService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this._route.paramMap.subscribe((params) => {
@@ -58,7 +59,6 @@ export class ArticleASEComponent implements OnInit {
       }
 
       // liens utils
-      console.log(this.article.liensUtiles);
       if (this.article.liensUtiles) {
         for (let i = 0; i < this.article.liensUtiles.length; i++) {
           this._jcms
@@ -74,7 +74,11 @@ export class ArticleASEComponent implements OnInit {
   }
 
   public getCurrentCat() {
-    if (this.article && this.article.categories && this.article.categories.length > 0) {
+    if (
+      this.article &&
+      this.article.categories &&
+      this.article.categories.length > 0
+    ) {
       for (let itCat of this.article.categories) {
         this._catMng.cat(itCat.id).subscribe((cat) => {
           if (cat.parent) {
@@ -120,20 +124,35 @@ export class ArticleASEComponent implements OnInit {
   }
 
   public verifTitreDesc() {
-    return (this.article && this.article.titreDescription && this.article.titreDescription.length > 0)
+    return (
+      this.article &&
+      this.article.titreDescription &&
+      this.article.titreDescription.length > 0
+    );
   }
 
   public verifLiensUtiles() {
-    return (this.article && this.article.liensUtiles && this.article.liensUtiles.length > 0)
-
+    return (
+      this.article &&
+      this.article.liensUtiles &&
+      this.article.liensUtiles.length > 0
+    );
   }
 
   public verifMotCompliques() {
-    return (this.article && this.article.motsCompliques && this.article.motsCompliques.length > 0)
+    return (
+      this.article &&
+      this.article.motsCompliques &&
+      this.article.motsCompliques.length > 0
+    );
   }
 
   public verifContact() {
-    return (this.article && this.article.fichesStructures && this.article.fichesStructures.length > 0)
+    return (
+      this.article &&
+      this.article.fichesStructures &&
+      this.article.fichesStructures.length > 0
+    );
   }
 
   public getColor() {
