@@ -4,7 +4,7 @@
 
   <h1>Recherche</h1>
   <div class="sub-title">
-
+    {{ lblService.getLbl('searchSubTitle') }}
   </div>
 </header>
 
@@ -14,7 +14,9 @@
 
     <div class="ds44-posRel">
       <label for="form-element-92873" class="ds44-formLabel"><span class="ds44-labelTypePlaceholder"><span>Ta
-            recherche<sup aria-hidden="true">*</sup></span></span></label>
+            recherche<sup aria-hidden="true">*</sup>
+          </span></span>
+      </label>
 
       <input type="text" id="form-element-92873" name="form-element-92873" class="ds44-inpStd"
         title="Champ standard - obligatoire" required [(ngModel)]="text"/>
