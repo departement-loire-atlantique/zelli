@@ -44,7 +44,7 @@ export class ArticleASEComponent implements OnInit {
 
   private getAllContent(): any {
     if (this.article) {
-      this.getCurrentCat();
+      this.findColor();
       // Mot compliqués
       if (this.article.motsCompliques) {
         for (let i = 0; i < this.article.motsCompliques.length; i++) {
@@ -59,7 +59,6 @@ export class ArticleASEComponent implements OnInit {
       }
 
       // liens utils
-      console.log(this.article.liensUtiles);
       if (this.article.liensUtiles) {
         for (let i = 0; i < this.article.liensUtiles.length; i++) {
           this._jcms
@@ -74,22 +73,17 @@ export class ArticleASEComponent implements OnInit {
     }
   }
 
-  public getCurrentCat() {
+  public findColor() {
     if (
       this.article &&
       this.article.categories &&
       this.article.categories.length > 0
     ) {
-      for (let itCat of this.article.categories) {
-        this._catMng.cat(itCat.id).subscribe((cat) => {
-          if (cat.parent) {
-            this._catMng.cat(cat.parent).subscribe((catParent) => {
-              if (catParent.parent == environment.catThemes)
-                this.color = catParent.color;
-            });
-          }
+      this._jcms
+        .get('plugins/zelli/themeColor/' + this.article.id)
+        .subscribe((rep: any) => {
+          this.color = rep.color;
         });
-      }
     }
   }
 

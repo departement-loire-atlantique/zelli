@@ -153,6 +153,13 @@ export const lbls: { [key: string]: lbl } = {
     lbl: 'Ici, tu peux créer et ajouter tous tes contacts utiles pour ne pas les oublier.',
     propJcms: 'jcmsplugin.zelli.lbl.contact.create.sousTitre',
   },
+
+  // --------------------
+  // Searh
+  searchSubTitle: {
+    lbl: '',
+    propJcms: 'jcmsplugin.zelli.lbl.search.subTitle',
+  },
 };
 
 export interface lbl {

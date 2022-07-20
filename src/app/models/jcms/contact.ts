@@ -131,7 +131,7 @@ export const mapContactFromApi = (contact: ContactFromApi): Contact => {
       cedex: contact.lieuDeRattachement?.cedex2
         ? `CEDEX ${contact.lieuDeRattachement.cedex2}`
         : undefined,
-      description: contact.lieuDeRattachement.description,
+      description: contact.lieuDeRattachement?.description,
     },
   };
 };

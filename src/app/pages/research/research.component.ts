@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  Injectable,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -12,6 +6,7 @@ import { JcmsPager } from '@/app/core/jcmsPager';
 import { Content } from '@/app/models/jcms/content';
 import { DesignSystemService } from '@/app/services/design-system.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
+import { LabelMngService } from '@/app/services/label-mng.service';
 import { SharedService } from '@/app/services/shared-service.service';
 import { Util } from '@/app/util';
 
@@ -37,6 +32,7 @@ export class ResearchComponent implements AfterViewInit, OnInit, OnDestroy {
     private _jcms: JcmsClientService,
     private _ds: DesignSystemService,
     private sharedService: SharedService,
+    public lblService: LabelMngService,
     private _router: Router
   ) {}
 
@@ -119,6 +115,7 @@ export class ResearchComponent implements AfterViewInit, OnInit, OnDestroy {
           url: Util.buildUrlCotent(itContent),
         });
       }
+
       this.researchRun = false;
 
       // TODO Focus for accessibility
