@@ -154,10 +154,10 @@ export const lbls: { [key: string]: lbl } = {
     propJcms: 'jcmsplugin.zelli.lbl.contact.create.sousTitre',
   },
 
-   // --------------------
+  // --------------------
   // Searh
   searchSubTitle: {
-    lbl: 'Lorem ipsum',
+    lbl: '',
     propJcms: 'jcmsplugin.zelli.lbl.search.subTitle',
   },
 };
