@@ -1,20 +1,16 @@
-import {
-  AfterViewInit,
-  Component,
-  Injectable,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, forkJoin, merge, zip, map } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { JcmsPager } from '@/app/core/jcmsPager';
 import { Content } from '@/app/models/jcms/content';
 import { DesignSystemService } from '@/app/services/design-system.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
+import { LabelMngService } from '@/app/services/label-mng.service';
 import { SharedService } from '@/app/services/shared-service.service';
 import { Util } from '@/app/util';
-import { LabelMngService } from '@/app/services/label-mng.service';
+
+import { environment } from '@/environments/environment';
 
 import { Item } from '../../components/list/list.component';
 
@@ -73,39 +69,22 @@ export class ResearchComponent implements AfterViewInit, OnInit, OnDestroy {
 
     this.researchRun = true;
 
-    let search$ = this._jcms.getPager<Content>('search', {
-      params: {
-        text: this.text,
-        types: [
-          'SousthemeASE',
-          'ArticleASE',
-          'Contact',
-          'FicheLieu',
-          'FileDocument',
-          'DBFileDocument',
-        ],
-        searchInDB: true,
-      },
-    });
-
-    // let searchDoc$ = this._jcms.getPager<Content>('search', {
-    //   params: {
-    //     text: this.text,
-    //     types: [
-    //       'FileDocument',
-    //       'DBFileDocument',
-    //     ],
-    //     documentKinds: [ 'pdf'],
-    //   },
-    // });
-
-    // let merge$ = zip(searchType$, searchDoc$)
-    //   .pipe(map(x => x[0].concat(x[1])));
-
-    // let test$ = merge(searchDoc$, searchType$)
-
-    //  this.processResult2(merge$);
-     this.processResult(search$);
+    this.processResult(
+      this._jcms.getPager<Content>('search', {
+        params: {
+          text: this.text,
+          cidsOff: environment.catExcludeSearch,
+          types: [
+            'SousthemeASE',
+            'ArticleASE',
+            'Contact',
+            'FicheLieu',
+            'FileDocument',
+            'DBFileDocument',
+          ],
+        },
+      })
+    );
   }
 
   public processResult(obs: Observable<JcmsPager<Content>>) {
