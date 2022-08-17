@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Alerte, AlerteApi } from '@/app/models/jcms/alerte';
@@ -38,7 +38,8 @@ export class NewAlertComponent implements OnInit, AfterViewInit {
     private _jcms: JcmsClientService,
     private _location: Location,
     private _route: ActivatedRoute,
-    private _ds: DesignSystemService
+    private _ds: DesignSystemService,
+    private elByClassName: ElementRef
   ) {}
 
   ngOnInit(): void {
@@ -76,10 +77,24 @@ export class NewAlertComponent implements OnInit, AfterViewInit {
   public newAlert() {
     this.process = true;
 
-    if (!this.subject || !this.dateYear || !this.dateMonth || !this.dateDay) {
+    // Test subject
+    if (!this.subject) {
       // TODO error DS
       this.process = false;
       return;
+    }
+
+    // Test Date
+    if (!this.dateYear || !this.dateMonth || !this.dateDay) {
+      // field by Design System
+      const dateInput = (<HTMLElement>this.elByClassName.nativeElement)
+        .querySelector('#new-alert-date .ds44-input-value')!
+        .getAttribute('value');
+      if (dateInput) {
+        this.dateYear = dateInput.substring(0, 4);
+        this.dateMonth = dateInput.substring(5, 7);
+        this.dateDay = dateInput.substring(8, 10);
+      }
     }
 
     if (
@@ -93,6 +108,7 @@ export class NewAlertComponent implements OnInit, AfterViewInit {
       return;
     }
 
+    // Create event
     this._event = new Alerte(
       this.subject,
       this.dateDay,
