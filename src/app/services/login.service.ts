@@ -53,6 +53,7 @@ export class LoginService implements OnDestroy {
   }
 
   private savePersonalToken(token: string) {
+    this._personalToken = token;
     localStorage.setItem(this._keyPersoToken, token);
   }
 
