@@ -125,6 +125,7 @@ export class LoginService implements OnDestroy {
           this.savePersonalToken(
             reponseJson.substring(index + 2, reponseJson.length - 2)
           );
+          this._isLogged = true;
 
           // send firebase Token
           this.sendFirebaseToken();
