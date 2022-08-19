@@ -14,3 +14,18 @@ export interface Member extends Content {
 
   address: string;
 }
+
+export function mapApiToMember(mbrApi: any): Member {
+  return {
+    id: mbrApi.id,
+    title: mbrApi.login,
+    class: mbrApi.class,
+    login: mbrApi.login,
+    dateNaissance:
+      mbrApi.extraDataMap['extra.Member.jcmsplugin.zelli.datenaissance'],
+    email: mbrApi.email,
+    photo: mbrApi.photo,
+    phone: mbrApi.phone,
+    address: mbrApi.address,
+  };
+}
