@@ -3,6 +3,7 @@ import { Content } from '@angular/compiler/src/render3/r3_ast';
 import {
   AfterViewInit,
   Component,
+  ElementRef,
   OnInit,
   QueryList,
   ViewChildren,
@@ -49,7 +50,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     public login: LoginService,
     private _jcms: JcmsClientService,
     private _datePipe: DatePipe,
-    private _ds: DesignSystemService
+    private _ds: DesignSystemService,
+    private elByClassName: ElementRef
   ) {}
 
   ngOnInit(): void {
@@ -109,6 +111,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   public editInfo() {
     this.edit = false; // TODO if ok
+
+    const addrField = (<HTMLElement>this.elByClassName.nativeElement)
+      .querySelector('.field-address .ds44-input-value')!
+      .getAttribute('value');
+    if (addrField || addrField === '') {
+      this.address = addrField;
+    }
+
     this.login.updateInfos({
       email: this.email,
       phone: this.phone,
