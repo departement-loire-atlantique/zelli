@@ -160,6 +160,17 @@ export const lbls: { [key: string]: lbl } = {
     lbl: '',
     propJcms: 'jcmsplugin.zelli.lbl.search.subTitle',
   },
+
+  // --------------------
+  // pwd Reset
+  pwdResetTitle: {
+    lbl: 'Réinitialisation du mot de passe',
+    propJcms: 'jcmsplugin.zelli.lbl.account.pwdReset.title',
+  },
+  pwdResetSubTitle: {
+    lbl: '',
+    propJcms: 'jcmsplugin.zelli.lbl.account.pwdReset.subTitle',
+  },
 };
 
 export interface lbl {
