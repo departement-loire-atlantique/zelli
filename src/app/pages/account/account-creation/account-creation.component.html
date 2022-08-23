@@ -182,7 +182,7 @@
       {{ lblService.getLbl('accountCreateEndDesc') }}
     </div>
   </div>
-  <a class="btn btn-big" [routerLink]="'/profile'">
+  <a class="btn btn-big" [routerLink]="'/profile'" [queryParams]="{fromCreate: true}">
     {{ lblService.getLbl('accountCreateEndBtnProfil') }}
   </a>
   <a class="btn btn-big btn-light" [routerLink]="'/intro'">

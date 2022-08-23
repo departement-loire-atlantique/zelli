@@ -8,6 +8,7 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { Item } from '@/app/components/list/list.component';
@@ -29,6 +30,8 @@ import { environment } from '@/environments/environment';
 export class ProfileComponent implements OnInit, AfterViewInit {
   profil?: Member;
 
+  fromCreate: boolean = false;
+
   edit: boolean = false;
   //field
   email: string = '';
@@ -48,13 +51,19 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   constructor(
     public login: LoginService,
+    private _route: ActivatedRoute,
     private _jcms: JcmsClientService,
     private _datePipe: DatePipe,
     private _ds: DesignSystemService,
-    private elByClassName: ElementRef
+    private elByClassName: ElementRef,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
+    this._route.queryParamMap.subscribe((params) => {
+      this.fromCreate = JSON.parse(params.get('fromCreate') || 'false');
+    });
+
     this.login.profil.subscribe((rep) => {
       this.profil = rep;
       this.email = rep && rep.email ? rep.email : '';
@@ -156,5 +165,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     if (this.pagerAlertes) {
       this.processAlertesResult(this.pagerAlertes.next());
     }
+  }
+
+  // --------------
+
+  public returnFromCreate() {
+    this._router.navigate(['/themes/']);
   }
 }
