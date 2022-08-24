@@ -32,4 +32,15 @@
       <button class="btn btn-big" [disabled]="process" type="submit">Valider</button>
     </div>
   </form>
+
+  <app-loader *ngIf="process" color="#0013b1"></app-loader>
+
+  <div *ngIf="resetOk" class="msg-reset">
+    {{ lblService.getLbl('pwdResetIsOk') }}
+  </div>
+
+  <div *ngIf="error" class="msg-reset">
+    {{ lblService.getLbl('pwdResetIsKo') }}
+  </div>
+
 </main>

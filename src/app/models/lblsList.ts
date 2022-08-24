@@ -171,6 +171,14 @@ export const lbls: { [key: string]: lbl } = {
     lbl: '',
     propJcms: 'jcmsplugin.zelli.lbl.account.pwdReset.subTitle',
   },
+  pwdResetIsOk: {
+    lbl: "Le nouveau mot de passe va être envoyé par mail ou par SMS. Si tu n'as pas saisi une de ces deux informations dans ton profil, contacte un administrateur.",
+    propJcms: 'jcmsplugin.zelli.lbl.account.pwdReset.is.ok',
+  },
+  pwdResetIsKo: {
+    lbl: 'Une erreur est survenue. Merci de contacter un administrateur.',
+    propJcms: 'jcmsplugin.zelli.lbl.account.pwdReset.is.ko',
+  },
 };
 
 export interface lbl {
