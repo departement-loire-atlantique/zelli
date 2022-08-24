@@ -1,0 +1,46 @@
+<header>
+  <app-back class="back-in-top" text="" picto="icon-arrow-left icon--xlarge">
+  </app-back>
+  <h1>
+    {{ lblService.getLbl('pwdResetTitle') }}
+  </h1>
+  <div class="sub-title">
+    {{ lblService.getLbl('pwdResetSubTitle') }}
+  </div>
+</header>
+
+<main>
+  <form (ngSubmit)="reset()" data-is-ajax="true">
+
+    <div class="ds44-form__container">
+      <div class="ds44-posRel">
+        <label for="input-pseudo" class="ds44-formLabel">
+          <span class="ds44-labelTypePlaceholder">
+            <span>{{ lblService.getLbl('accountCreateS1Field') }}<sup aria-hidden="true">*</sup></span>
+          </span>
+        </label>
+        <input [(ngModel)]="pseudo" id="input-pseudo" type="text" name="pseudo" class="ds44-inpStd"
+          [title]="lblService.getLbl('accountCreateS1Field') + ' - obligatoire'" required />
+        <button class="ds44-reset" type="button">
+          <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i><span class="visually-hidden">
+            {{ lblService.getLbl('accountCreateSupField') }} {{ lblService.getLbl('accountCreateS1Field') }}</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="btn-wrapper">
+      <button class="btn btn-big" [disabled]="process" type="submit">Valider</button>
+    </div>
+  </form>
+
+  <app-loader *ngIf="process" color="#0013b1"></app-loader>
+
+  <div *ngIf="resetOk" class="msg-reset">
+    {{ lblService.getLbl('pwdResetIsOk') }}
+  </div>
+
+  <div *ngIf="error" class="msg-reset">
+    {{ lblService.getLbl('pwdResetIsKo') }}
+  </div>
+
+</main>

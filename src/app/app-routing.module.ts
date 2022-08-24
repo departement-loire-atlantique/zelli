@@ -158,6 +158,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'pwd-reset',
+    loadChildren: () =>
+      import('./pages/pwd-reset/pwd-reset.module').then(
+        (m) => m.PwdResetModule
+      ),
+  },
+  {
     path: '**',
     loadChildren: () =>
       import('./pages/errors/page-not-found/page-not-found.module').then(
@@ -168,7 +175,10 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, scrollPositionRestoration: 'enabled' }),
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules,
+      scrollPositionRestoration: 'enabled',
+    }),
   ],
   exports: [RouterModule],
 })
