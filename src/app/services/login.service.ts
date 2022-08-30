@@ -1,11 +1,11 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 
 import { environment } from '@/environments/environment';
 
-import { Member } from '../models/jcms/member';
+import { Member, mapApiToMember } from '../models/jcms/member';
 import { JcmsClientService } from './jcms-client.service';
 
 @Injectable({
@@ -53,6 +53,7 @@ export class LoginService implements OnDestroy {
   }
 
   private savePersonalToken(token: string) {
+    this._personalToken = token;
     localStorage.setItem(this._keyPersoToken, token);
   }
 
@@ -70,27 +71,34 @@ export class LoginService implements OnDestroy {
       this.clearPersonalToken();
       return false;
     }
-    this._jcms.get<Member>('WhoAmI').subscribe({
-      next: (rep: Member) => {
-        console.log(rep);
+    this._jcms
+      .get<Member>('WhoAmI', {
+        params: {
+          related: 'extraDataMap',
+        },
+      })
+      .pipe(map((rep: any): Member => mapApiToMember(rep)))
+      .subscribe({
+        next: (rep: Member) => {
+          console.debug(rep);
 
-        this.setProfil(rep);
+          this.setProfil(rep);
 
-        // if rep == token ok
-        this._isLogged = true;
+          // if rep == token ok
+          this._isLogged = true;
 
-        // send firebase Token
-        this.sendFirebaseToken();
-      },
-      error: (error) => {
-        console.log(error);
-        // test type error (offline | disconnected)
-        // if error == token ko
-        this.clearPersonalToken();
+          // send firebase Token
+          this.sendFirebaseToken();
+        },
+        error: (error) => {
+          console.log(error);
+          // test type error (offline | disconnected)
+          // if error == token ko
+          this.clearPersonalToken();
 
-        this._router.navigate(['/welcome']);
-      },
-    });
+          this._router.navigate(['/welcome']);
+        },
+      });
     return true; // test async
   }
 
@@ -124,6 +132,7 @@ export class LoginService implements OnDestroy {
           this.savePersonalToken(
             reponseJson.substring(index + 2, reponseJson.length - 2)
           );
+          this.testToken();
 
           // send firebase Token
           this.sendFirebaseToken();
@@ -160,6 +169,7 @@ export class LoginService implements OnDestroy {
           this.savePersonalToken(
             reponseJson.substring(index + 2, reponseJson.length - 2)
           );
+          this.testToken();
 
           // send firebase Token
           this.sendFirebaseToken();

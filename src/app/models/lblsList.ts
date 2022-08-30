@@ -100,7 +100,7 @@ export const lbls: { [key: string]: lbl } = {
     propJcms: 'jcmsplugin.zelli.lbl.account.create.step3.pwdF',
   },
   accountCreateS3FieldPwdConfirm: {
-    lbl: 'Confirmes ton mot de passe',
+    lbl: 'Confirme ton mot de passe',
     propJcms: 'jcmsplugin.zelli.lbl.account.create.step3.pwdConfirm',
   },
   // END
@@ -159,6 +159,25 @@ export const lbls: { [key: string]: lbl } = {
   searchSubTitle: {
     lbl: '',
     propJcms: 'jcmsplugin.zelli.lbl.search.subTitle',
+  },
+
+  // --------------------
+  // pwd Reset
+  pwdResetTitle: {
+    lbl: 'Réinitialisation du mot de passe',
+    propJcms: 'jcmsplugin.zelli.lbl.account.pwdReset.title',
+  },
+  pwdResetSubTitle: {
+    lbl: '',
+    propJcms: 'jcmsplugin.zelli.lbl.account.pwdReset.subTitle',
+  },
+  pwdResetIsOk: {
+    lbl: "Le nouveau mot de passe va être envoyé par mail ou par SMS. Si tu n'as pas saisi une de ces deux informations dans ton profil, contacte un administrateur.",
+    propJcms: 'jcmsplugin.zelli.lbl.account.pwdReset.is.ok',
+  },
+  pwdResetIsKo: {
+    lbl: 'Une erreur est survenue. Merci de contacter un administrateur.',
+    propJcms: 'jcmsplugin.zelli.lbl.account.pwdReset.is.ko',
   },
 };
 

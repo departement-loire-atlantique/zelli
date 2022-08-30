@@ -45,7 +45,13 @@ export class VideoComponent implements OnInit, OnDestroy {
         .subscribe({
           next: (res) => {
             this.video = res;
-            this.videoUrl = this.getSanitizedUrl(this.video.videoUrl);
+            let videoUrlStr = this.video.videoUrl;
+            if (videoUrlStr && videoUrlStr.includes('?')) {
+              videoUrlStr += '&rel=0';
+            } else {
+              videoUrlStr += '?rel=0';
+            }
+            this.videoUrl = this.getSanitizedUrl(videoUrlStr);
             this.previewPictureUrl = this.getSanitizedUrl(
               this.video.previewPictureUrl
             );
