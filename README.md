@@ -2,7 +2,7 @@
 
 <p>
   <a href="https://app.travis-ci.com/github/departement-loire-atlantique/zelli">
-    <img src="https://api.travis-ci.com/departement-loire-atlantique/zelli.svg?branch=main" />
+    <img src="https://api.travis-ci.com/departement-loire-atlantique/zelli.svg?branch=master" />
   </a>
 </p>
 
