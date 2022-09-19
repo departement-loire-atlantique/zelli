@@ -52,6 +52,8 @@ export class AccountCreationComponent implements AfterViewInit {
     'Oups ! Tu n’as pas saisi la même chose dans les deux champs';
   pwdSpaceErrorMsg: string =
     'Oups ! Merci de saisir ton mot de passe sans espace (nous te recommandons de choisir un mot de passe avec au moins 12 caractères, avec des lettres, des chiffres et des caractères spéciaux comme le !)';
+  pwdStrongErrorMsg: string =
+    'Oups ! Merci de saisir un mot de passe plus fort (nous te recommandons de choisir un mot de passe avec au moins 12 caractères, avec des lettres, des chiffres et des caractères spéciaux comme le !)';
 
   @ViewChildren('formDisplay')
   formDisplay: QueryList<any> | undefined;
@@ -131,14 +133,23 @@ export class AccountCreationComponent implements AfterViewInit {
     } else if (this.step === 3) {
       /* Error space */
       const rExp: RegExp = /\s/;
+      const strongPwd: RegExp =
+        /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{12,})/;
+
       if (rExp.test(this.pwd)) {
+        //espace
         this.errorMsg = this.pwdSpaceErrorMsg;
         this.isError = true;
       } else if (this.pwd !== this.pwdConfirm) {
+        //pas pareil
         /* Error field different */
         this.errorMsg = this.pwdErrorMsg;
         this.isError = true;
-      } else if (this.pwd && this.pwdConfirm) {
+      } else if (!strongPwd.test(this.pwd)) {
+        //pas assez fort
+        this.isError = true;
+        this.errorMsg = this.pwdStrongErrorMsg;
+      } else if (strongPwd.test(this.pwd) && strongPwd.test(this.pwdConfirm)) {
         return true;
       }
     }
