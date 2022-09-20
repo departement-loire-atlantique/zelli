@@ -63,6 +63,15 @@
       </label>
     </div>
 
+    <div class="ds44-field-information ds44-error" *ngIf="loginError">
+      <ul class="ds44-field-information-list ds44-list">
+        <li class="ds44-field-information-error" tabindex="-1">
+          <i class="icon icon-attention icon--sizeM" aria-hidden="true"></i>
+          <span class="ds44-iconInnerText">{{ loginErrorMsg }}</span>
+        </li>
+      </ul>
+    </div>
+
     <app-loader *ngIf="process" color="#0013b1"></app-loader>
 
     <div class="btn-wrapper">
@@ -75,4 +84,5 @@
       Tu as oublié ton mot de passe ?
     </a>
   </div>
+
 </main>

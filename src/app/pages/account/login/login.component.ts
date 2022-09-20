@@ -18,6 +18,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   process: boolean = false;
 
+  loginError: boolean = false;
+  loginErrorMsg: string =
+    'Oups ! Ton pseudo et ton mot de passe ne correspondent pas.';
+
   constructor(
     private _router: Router,
     public lblService: LabelMngService,
@@ -36,6 +40,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   public login() {
+    this.loginError = false;
     this.process = true;
 
     let error: boolean = false;
@@ -65,7 +70,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
       this._router.navigate(['/intro']);
       return;
     }
+    this.loginError = true;
     // TODO error DS
-    console.error('login KO : ' + msg);
+    // console.error('login KO : ' + msg);
   }
 }
