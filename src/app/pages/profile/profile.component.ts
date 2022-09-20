@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
 import {
+  AfterViewChecked,
   AfterViewInit,
   Component,
   ElementRef,
@@ -18,6 +19,7 @@ import { Member } from '@/app/models/jcms/member';
 import { DesignSystemService } from '@/app/services/design-system.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LoginService } from '@/app/services/login.service';
+import { FormInput } from '@/app/services/utils/form-input.service';
 import { Util } from '@/app/util';
 
 import { environment } from '@/environments/environment';
@@ -27,7 +29,9 @@ import { environment } from '@/environments/environment';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.less'],
 })
-export class ProfileComponent implements OnInit, AfterViewInit {
+export class ProfileComponent
+  implements OnInit, AfterViewInit, AfterViewChecked
+{
   profil?: Member;
 
   fromCreate: boolean = false;
@@ -56,8 +60,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     private _datePipe: DatePipe,
     private _ds: DesignSystemService,
     private elByClassName: ElementRef,
-    private _router: Router
+    private _router: Router,
+    private _formInput: FormInput
   ) {}
+
+  ngAfterViewChecked(): void {
+    this._formInput.getAllInputCSS();
+  }
 
   ngOnInit(): void {
     this._route.queryParamMap.subscribe((params) => {

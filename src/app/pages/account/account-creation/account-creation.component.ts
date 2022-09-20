@@ -1,4 +1,5 @@
 import {
+  AfterViewChecked,
   AfterViewInit,
   Component,
   ElementRef,
@@ -10,13 +11,16 @@ import {
 import { DesignSystemService } from '@/app/services/design-system.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
 import { LoginService } from '@/app/services/login.service';
+import { FormInput } from '@/app/services/utils/form-input.service';
 
 @Component({
   selector: 'app-account-creation',
   templateUrl: './account-creation.component.html',
   styleUrls: ['./account-creation.component.less'],
 })
-export class AccountCreationComponent implements AfterViewInit {
+export class AccountCreationComponent
+  implements AfterViewInit, AfterViewChecked
+{
   step: number = 1;
 
   maxStep: number = 3;
@@ -62,8 +66,12 @@ export class AccountCreationComponent implements AfterViewInit {
     public lblService: LabelMngService,
     public _login: LoginService,
     private _ds: DesignSystemService,
-    private elByClassName: ElementRef
+    private elByClassName: ElementRef,
+    private _formInput: FormInput
   ) {}
+  ngAfterViewChecked(): void {
+    this._formInput.getAllInputCSS();
+  }
 
   ngAfterViewInit(): void {
     this._ds.initForm();
