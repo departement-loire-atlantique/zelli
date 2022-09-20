@@ -1,7 +1,11 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { APageHome } from 'src/app/models/aPageHome';
 import { Category } from 'src/app/models/jcms/category';
+import { CatsHomeMngService } from 'src/app/services/cats-home-mng.service';
 import { CatsMngService } from 'src/app/services/cats-mng.service';
+import { environment } from 'src/environments/environment';
+
+import { DateService } from '@/app/services/utils/date.service';
 
 @Component({
   selector: 'app-explore-by-themes',
@@ -10,8 +14,14 @@ import { CatsMngService } from 'src/app/services/cats-mng.service';
 })
 export class ExploreByThemesComponent extends APageHome implements OnInit {
   themes: Category[];
+  lastUpdateDateKey: string = '_lastUpdateCat';
 
-  constructor(_injector: Injector, private _catMng: CatsMngService) {
+  constructor(
+    _injector: Injector,
+    private _catMng: CatsMngService,
+    private _catHomeMng: CatsHomeMngService,
+    private _dateUtil: DateService
+  ) {
     super(_injector);
     this.themes = [];
   }
@@ -21,10 +31,33 @@ export class ExploreByThemesComponent extends APageHome implements OnInit {
       return;
     }
 
+    //themes
     this._catMng
       .catsChildren(this.curentCat.id)
       .subscribe((cats: Category[]) => {
         this.themes = cats;
+      });
+
+    //cat menu
+    let dateToday = new Date(Date.now());
+    let dateSaved = localStorage.getItem(this.lastUpdateDateKey);
+    if (dateSaved) {
+      if (this._dateUtil.dayDiff(dateToday, new Date(dateSaved)) > 7) {
+        //si diff > 7 jours on update les cats
+        localStorage.setItem(this.lastUpdateDateKey, dateToday.toString());
+        this.updateHomeCat();
+      }
+    } else {
+      localStorage.setItem(this.lastUpdateDateKey, dateToday.toString());
+      this.updateHomeCat();
+    }
+  }
+
+  private updateHomeCat() {
+    this._catMng
+      .catsChildren(environment.catNavMain)
+      .subscribe((res: Category[]) => {
+        this._catHomeMng.setAllCats(res);
       });
   }
 }
