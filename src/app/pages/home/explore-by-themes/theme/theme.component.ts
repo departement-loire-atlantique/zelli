@@ -97,10 +97,21 @@ export class ThemeComponent {
           };
         } else if (redirect) {
           //item qui redirige vers une autre rubrique
-          this.result[ind] = {
-            lbl: subTheme.title,
-            url: '/subTheme/fromCat/' + redirect.category,
-          };
+          switch (redirect.status) {
+            case 'category':
+              this.result[ind] = {
+                lbl: subTheme.title,
+                url: '/subTheme/fromCat/' + redirect.category,
+              };
+              break;
+
+            case 'content':
+              this.result[ind] = {
+                lbl: subTheme.title,
+                url: Util.buildUrlCotent(redirect.content),
+              };
+              break;
+          }
         } else if (article) {
           //item redirige vers article
           this.result[ind] = {
