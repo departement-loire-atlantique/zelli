@@ -1,4 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { LabelMngService } from 'src/app/services/label-mng.service';
 
@@ -8,6 +9,7 @@ import { APageHome } from '@/app/models/aPageHome';
 import { Content } from '@/app/models/jcms/content';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LoginService } from '@/app/services/login.service';
+import { TitlePage } from '@/app/services/utils/title-page.service';
 import { Util } from '@/app/util';
 
 @Component({
@@ -29,9 +31,12 @@ export class MyContactsComponent extends APageHome implements OnInit {
     _injector: Injector,
     private _jcms: JcmsClientService,
     private _login: LoginService,
-    public _lblService: LabelMngService
+    public _lblService: LabelMngService,
+    private titleService: Title,
+    titlePage: TitlePage
   ) {
     super(_injector);
+    this.titleService.setTitle(titlePage.getTitle('Mes contacts'));
   }
 
   ngOnInit(): void {

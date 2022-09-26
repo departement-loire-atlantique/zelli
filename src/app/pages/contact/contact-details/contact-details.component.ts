@@ -1,9 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription, map } from 'rxjs';
 
 import { Contact } from '@/app/models/jcms/contact';
 import { ContactDetailsService } from '@/app/services/contact-details.service';
+import { TitlePage } from '@/app/services/utils/title-page.service';
 
 @Component({
   selector: 'app-page-contact-details',
@@ -30,8 +32,12 @@ export class PageContactDetailsComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private contactDetailsService: ContactDetailsService
-  ) {}
+    private contactDetailsService: ContactDetailsService,
+    private titleService: Title,
+    titlePage: TitlePage
+  ) {
+    this.titleService.setTitle(titlePage.getTitle('Détail contact'));
+  }
 
   ngOnInit(): void {
     this.init();

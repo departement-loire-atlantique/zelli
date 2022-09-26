@@ -1,9 +1,11 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 
 import { DesignSystemService } from '@/app/services/design-system.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
+import { TitlePage } from '@/app/services/utils/title-page.service';
 
 @Component({
   selector: 'app-pwd-reset',
@@ -22,8 +24,12 @@ export class PwdResetComponent implements OnInit, AfterViewInit {
     private _route: ActivatedRoute,
     public lblService: LabelMngService,
     private _ds: DesignSystemService,
-    private _jcms: JcmsClientService
-  ) {}
+    private _jcms: JcmsClientService,
+    private titleService: Title,
+    titlePage: TitlePage
+  ) {
+    this.titleService.setTitle(titlePage.getTitle('Reset mot de passe'));
+  }
 
   ngOnInit(): void {
     this._route.queryParamMap.subscribe((params) => {

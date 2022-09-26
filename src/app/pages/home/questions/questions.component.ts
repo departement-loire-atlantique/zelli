@@ -1,4 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Observable, forkJoin } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -10,6 +11,7 @@ import { Content } from '@/app/models/jcms/content';
 import { FaqAccueil } from '@/app/models/jcms/faqAccueil';
 import { ListeDeContenus } from '@/app/models/jcms/listeDeContenus';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
+import { TitlePage } from '@/app/services/utils/title-page.service';
 import { Util } from '@/app/util';
 
 @Component({
@@ -26,8 +28,14 @@ export class QuestionsComponent extends APageHome implements OnInit {
 
   parentCategory = environment.catThemes; //  cat explorer par thème
 
-  constructor(_injector: Injector, private _jcms: JcmsClientService) {
+  constructor(
+    _injector: Injector,
+    private _jcms: JcmsClientService,
+    private titleService: Title,
+    titlePage: TitlePage
+  ) {
     super(_injector);
+    this.titleService.setTitle(titlePage.getTitle('Questions'));
   }
 
   ngOnInit(): void {

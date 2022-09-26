@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 
@@ -9,6 +10,7 @@ import { Content } from '@/app/models/jcms/content';
 import { SubThemeASE } from '@/app/models/jcms/sousThemeASE';
 import { CatsMngService } from '@/app/services/cats-mng.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
+import { TitlePage } from '@/app/services/utils/title-page.service';
 import { Util } from '@/app/util';
 
 import { environment } from '@/environments/environment';
@@ -28,8 +30,12 @@ export class SubThemeComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router,
     private _catMng: CatsMngService,
-    private _jcms: JcmsClientService
-  ) { }
+    private _jcms: JcmsClientService,
+    private titleService: Title,
+    titlePage: TitlePage
+  ) {
+    this.titleService.setTitle(titlePage.getTitle('Sous-thème'));
+  }
 
   ngOnInit(): void {
     this._route.paramMap.subscribe((params) => {
@@ -78,7 +84,6 @@ export class SubThemeComponent implements OnInit {
     if (subTheme) {
       // TODO bug jalios #27121
       // subTheme.navigation = (subTheme as any).categories[1];
-
 
       // if (subTheme.navigation) {
       //   // OPTI ?

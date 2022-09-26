@@ -1,5 +1,5 @@
 <div class="ds44-collapser_element">
-  <button class="btn btn-light btn-big ds44-collapser_button" (click)="onClick($event)">
+  <button class="btn btn-light btn-big ds44-collapser_button" [attr.aria-expanded]="ariaExpanded" (click)="onClick($event)">
     <span>
       {{ btnLbl }}
     </span>

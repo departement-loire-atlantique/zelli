@@ -1,15 +1,17 @@
 <header>
   <app-back text="" picto="icon-arrow-left icon--xlarge"></app-back>
-  <div *ngIf="article" class="atu-title">{{ article.title }}</div>
+  <h1 *ngIf="article" class="atu-title">{{ article.title }}</h1>
   <div *ngIf="article" class="actu-nav">
     <span *ngIf="article.contenuPrecedent">
       <a [routerLink]="'/article/' + article.contenuPrecedent.id" title="Contenu précédent">
         <i class="icon icon-left icon--xlarge" aria-hidden="true"></i>
+        <span class="visually-hidden">Contenu précédent</span>
       </a>
     </span>
     <span *ngIf="article.contenuSuivant">
       <a [routerLink]="'/article/' + article.contenuSuivant.id" title="Contenu suivant">
         <i class="icon icon-right icon--xlarge" aria-hidden="true"></i>
+        <span class="visually-hidden">Contenu suivant</span>
       </a>
     </span>
   </div>
@@ -43,7 +45,7 @@
       </section>
     </div>
 
-    <section *ngIf="verifMotCompliques()" class="mots-compliques" role="mots-compliques">
+    <section *ngIf="verifMotCompliques()" class="mots-compliques">
       <app-heading icon="🤔">
         {{ lblMng.lblMotComp() }}
       </app-heading>
@@ -51,7 +53,7 @@
       <app-collapser [dataTitle]="getMotCompliquesTitle()" [dataVal]="getMotCompliquesVar()"></app-collapser>
     </section>
 
-    <section *ngIf="verifLiensUtiles()" class="liens-utils" role="liens-utils"
+    <section *ngIf="verifLiensUtiles()" class="liens-utils"
       [style]="'background-color:' + getColor()">
       <app-heading icon="👇">
         {{ lblMng.lblLiensUtiles() }}

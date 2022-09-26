@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Observable, combineLatest } from 'rxjs';
 import { Category } from 'src/app/models/jcms/category';
@@ -8,6 +9,7 @@ import { LabelMngService } from 'src/app/services/label-mng.service';
 import { environment } from 'src/environments/environment';
 
 import { JcmsClientService } from '@/app/services/jcms-client.service';
+import { TitlePage } from '@/app/services/utils/title-page.service';
 
 @Component({
   selector: 'app-home',
@@ -30,8 +32,11 @@ export class HomeComponent implements OnInit {
     private _jcms: JcmsClientService,
     private _catMng: CatsMngService,
     private _catHomeMng: CatsHomeMngService,
-    private _lblMng: LabelMngService
+    private _lblMng: LabelMngService,
+    private titleService: Title,
+    titlePage: TitlePage
   ) {
+    this.titleService.setTitle(titlePage.getTitle('Home'));
     this._appInit = JSON.parse(sessionStorage.getItem('_appInit') || 'false');
 
     this.logoUrl = JSON.parse(

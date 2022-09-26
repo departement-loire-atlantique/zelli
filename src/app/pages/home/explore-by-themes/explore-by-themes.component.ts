@@ -1,4 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { APageHome } from 'src/app/models/aPageHome';
 import { Category } from 'src/app/models/jcms/category';
 import { CatsHomeMngService } from 'src/app/services/cats-home-mng.service';
@@ -6,6 +7,7 @@ import { CatsMngService } from 'src/app/services/cats-mng.service';
 import { environment } from 'src/environments/environment';
 
 import { DateService } from '@/app/services/utils/date.service';
+import { TitlePage } from '@/app/services/utils/title-page.service';
 
 @Component({
   selector: 'app-explore-by-themes',
@@ -20,9 +22,12 @@ export class ExploreByThemesComponent extends APageHome implements OnInit {
     _injector: Injector,
     private _catMng: CatsMngService,
     private _catHomeMng: CatsHomeMngService,
-    private _dateUtil: DateService
+    private _dateUtil: DateService,
+    private titleService: Title,
+    titlePage: TitlePage
   ) {
     super(_injector);
+    this.titleService.setTitle(titlePage.getTitle('Explorer par thèmes'));
     this.themes = [];
   }
 

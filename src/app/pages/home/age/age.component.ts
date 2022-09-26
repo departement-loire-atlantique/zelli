@@ -1,4 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { map } from 'rxjs';
 
 import { Item } from '@/app/components/list/list.component';
@@ -7,6 +8,7 @@ import { Category } from '@/app/models/jcms/category';
 import { Content } from '@/app/models/jcms/content';
 import { CatsMngService } from '@/app/services/cats-mng.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
+import { TitlePage } from '@/app/services/utils/title-page.service';
 import { Util } from '@/app/util';
 
 import { environment } from '@/environments/environment';
@@ -28,9 +30,12 @@ export class AgeComponent extends APageHome implements OnInit {
   constructor(
     _injector: Injector,
     private _catMng: CatsMngService,
-    private _jcms: JcmsClientService
+    private _jcms: JcmsClientService,
+    private titleService: Title,
+    titlePage: TitlePage
   ) {
     super(_injector);
+    this.titleService.setTitle(titlePage.getTitle('A chaque âge'));
     this.ages = [];
     this.titleCollaps = [];
     this.itemsCollaps = [];

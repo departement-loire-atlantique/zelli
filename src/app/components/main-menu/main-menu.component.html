@@ -3,6 +3,7 @@
     <li
       *ngFor="let itMenuItem of menuItems"
       [class]="this.isActive(itMenuItem.url) ? 'active' : ''"
+      [attr.aria-current]="this.isActive(itMenuItem.url) ? true : false"
     >
       <a [routerLink]="itMenuItem.url">
         <span [class]="'icon ' + itMenuItem.icon" aria-hidden="true"></span>

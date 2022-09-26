@@ -1,9 +1,9 @@
 <main>
   <div class="welcome-text">
     <h1>{{ lblService.lblTitleWelcome() }}</h1>
-    <div class="desc">
+    <p class="desc">
       {{ lblService.lblDescWelcome() }}
-    </div>
+    </p>
   </div>
   <a class="btn btn-big" [routerLink]="'/account/create'">
     Créer mon compte
@@ -11,7 +11,7 @@
   <a class="btn btn-big btn-light" [routerLink]="'/account/login'">
     Me connecter
   </a>
-  <a class="link-later" [routerLink]="'/intro'">
+  <a class="link-later" [routerLink]="'/intro'" aria-label="Accéder directement aux contenus">
     Plus tard
   </a>
 </main>

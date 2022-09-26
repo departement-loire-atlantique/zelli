@@ -1,9 +1,11 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { DesignSystemService } from '@/app/services/design-system.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
 import { LoginService } from '@/app/services/login.service';
+import { TitlePage } from '@/app/services/utils/title-page.service';
 
 @Component({
   selector: 'app-login',
@@ -26,8 +28,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private _router: Router,
     public lblService: LabelMngService,
     private _login: LoginService,
-    private _ds: DesignSystemService
-  ) {}
+    private _ds: DesignSystemService,
+    private titleService: Title,
+    titlePage: TitlePage
+  ) {
+    this.titleService.setTitle(titlePage.getTitle('Me connecter'));
+  }
 
   ngOnInit(): void {
     if (this._login.isLogged) {

@@ -1,6 +1,6 @@
 <div class="c-heading">
   <div *ngIf="icon" aria-hidden="true" class="c-heading__icon">{{ icon }}</div>
-  <div class="c-heading__title" [class.is--bold]="!options?.noBold">
+  <h2 class="c-heading__title" [class.is--bold]="!options?.noBold">
     <ng-content></ng-content>
-  </div>
+  </h2>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleASE } from 'src/app/models/jcms/articleASE';
 import { JcmsClientService } from 'src/app/services/jcms-client.service';
@@ -10,6 +11,7 @@ import { FaqEntry } from '@/app/models/jcms/faqEntry';
 import { Lien } from '@/app/models/jcms/lien';
 import { CatsMngService } from '@/app/services/cats-mng.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
+import { TitlePage } from '@/app/services/utils/title-page.service';
 import { Util } from '@/app/util';
 
 import { environment } from '@/environments/environment';
@@ -27,8 +29,12 @@ export class ArticleASEComponent implements OnInit {
     private _route: ActivatedRoute,
     private _jcms: JcmsClientService,
     private _catMng: CatsMngService,
-    public lblMng: LabelMngService
-  ) {}
+    public lblMng: LabelMngService,
+    private titleService: Title,
+    titlePage: TitlePage
+  ) {
+    this.titleService.setTitle(titlePage.getTitle('Article'));
+  }
 
   ngOnInit(): void {
     this._route.paramMap.subscribe((params) => {

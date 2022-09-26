@@ -7,11 +7,13 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import { DesignSystemService } from '@/app/services/design-system.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
 import { LoginService } from '@/app/services/login.service';
 import { FormInput } from '@/app/services/utils/form-input.service';
+import { TitlePage } from '@/app/services/utils/title-page.service';
 
 @Component({
   selector: 'app-account-creation',
@@ -67,8 +69,12 @@ export class AccountCreationComponent
     public _login: LoginService,
     private _ds: DesignSystemService,
     private elByClassName: ElementRef,
-    private _formInput: FormInput
-  ) {}
+    private _formInput: FormInput,
+    private titleService: Title,
+    titlePage: TitlePage
+  ) {
+    this.titleService.setTitle(titlePage.getTitle('Créer mon compte'));
+  }
   ngAfterViewChecked(): void {
     this._formInput.getAllInputCSS();
   }
@@ -142,7 +148,7 @@ export class AccountCreationComponent
       /* Error space */
       const rExp: RegExp = /\s/;
       const strongPwd: RegExp =
-        /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{12,})/;
+        /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{12,})/; // enlever (?=.*[A-Z]) si pas maj necessaire
 
       if (rExp.test(this.pwd)) {
         //espace
@@ -232,5 +238,17 @@ export class AccountCreationComponent
     if (this.step > 1) {
       this.step--;
     }
+  }
+
+  public getHiddenTextBackBtn() {
+    if (this.step)
+      return (
+        'Retourner à la page précédente : étape ' +
+        this.step +
+        ' sur ' +
+        this.maxStep
+      );
+
+    return 'Retourner à la page précédente';
   }
 }

@@ -1,4 +1,5 @@
-<a (click)="back()" [title]="titleLink" class="back-btn">
+<button type="button" (click)="back()" [title]="titleLink" class="back-btn" id="back-btn">
   <i *ngIf="picto" [class]="'icon ' + picto" aria-hidden="true"></i>
   <span aria-hidden="true"> {{ text }}</span>
-</a>
+  <span class="visually-hidden"> {{ hiddenText }} </span>
+</button>

@@ -1,5 +1,5 @@
 <header>
-  <app-back class="back-in-top" text="" picto="icon-arrow-left icon--xlarge">
+  <app-back class="back-in-top" text="" hiddenText="Page précédente : bienvenue sur Zelli" picto="icon-arrow-left icon--xlarge">
   </app-back>
   <h1>
     {{ lblService.getLbl('pwdResetTitle') }}
@@ -7,6 +7,9 @@
   <div class="sub-title">
     {{ lblService.getLbl('pwdResetSubTitle') }}
   </div>
+  <p class="mandatory-field">
+    * champs obligatoires
+  </p>
 </header>
 
 <main>
@@ -16,11 +19,17 @@
       <div class="ds44-posRel">
         <label for="input-pseudo" class="ds44-formLabel">
           <span class="ds44-labelTypePlaceholder">
-            <span>{{ lblService.getLbl('accountCreateS1Field') }}<sup aria-hidden="true">*</sup></span>
+            <span>{{ lblService.getLbl('accountCreateS1Field') }}<sup>*</sup></span>
           </span>
         </label>
-        <input [(ngModel)]="pseudo" id="input-pseudo" type="text" name="pseudo" class="ds44-inpStd"
-          [title]="lblService.getLbl('accountCreateS1Field') + ' - obligatoire'" required />
+        <input [(ngModel)]="pseudo"
+          id="input-pseudo"
+          type="text"
+          name="pseudo"
+          class="ds44-inpStd"
+          [title]="lblService.getLbl('accountCreateS1Field') + ' - obligatoire'"
+          required
+          autocomplete="given-name"/>
         <button class="ds44-reset" type="button">
           <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i><span class="visually-hidden">
             {{ lblService.getLbl('accountCreateSupField') }} {{ lblService.getLbl('accountCreateS1Field') }}</span>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
 
@@ -9,6 +10,7 @@ import { Redirection } from '@/app/models/jcms/redirection';
 import { CatsMngService } from '@/app/services/cats-mng.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
+import { TitlePage } from '@/app/services/utils/title-page.service';
 import { Util } from '@/app/util';
 
 import { environment } from '@/environments/environment';
@@ -27,8 +29,11 @@ export class ThemeComponent {
     private _route: ActivatedRoute,
     private _catMng: CatsMngService,
     public lblMng: LabelMngService,
-    private _jcms: JcmsClientService
+    private _jcms: JcmsClientService,
+    private titleService: Title,
+    titlePage: TitlePage
   ) {
+    this.titleService.setTitle(titlePage.getTitle('Thème'));
     const id = this._route.snapshot.paramMap.get('id');
 
     if (!id) {

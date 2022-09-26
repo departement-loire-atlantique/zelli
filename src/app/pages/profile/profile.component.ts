@@ -9,6 +9,7 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -20,6 +21,7 @@ import { DesignSystemService } from '@/app/services/design-system.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LoginService } from '@/app/services/login.service';
 import { FormInput } from '@/app/services/utils/form-input.service';
+import { TitlePage } from '@/app/services/utils/title-page.service';
 import { Util } from '@/app/util';
 
 import { environment } from '@/environments/environment';
@@ -61,8 +63,12 @@ export class ProfileComponent
     private _ds: DesignSystemService,
     private elByClassName: ElementRef,
     private _router: Router,
-    private _formInput: FormInput
-  ) {}
+    private _formInput: FormInput,
+    private titleService: Title,
+    titlePage: TitlePage
+  ) {
+    this.titleService.setTitle(titlePage.getTitle('Profil'));
+  }
 
   ngAfterViewChecked(): void {
     this._formInput.getAllInputCSS();
