@@ -1,4 +1,4 @@
-<header>
+<header role="banner" >
   <app-back
     text=""
     picto="icon-arrow-left icon--xlarge"
@@ -15,7 +15,7 @@
 
 <app-loader *ngIf="!subTheme" color="#0013b1"></app-loader>
 
-<main *ngIf="subTheme">
+<main role="main" *ngIf="subTheme">
 
   <app-list [items]="getItemForList()"></app-list>
 

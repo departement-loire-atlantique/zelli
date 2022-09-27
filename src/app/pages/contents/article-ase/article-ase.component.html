@@ -1,22 +1,22 @@
-<header>
+<header role="banner" >
   <app-back text="" picto="icon-arrow-left icon--xlarge"></app-back>
   <h1 *ngIf="article" class="atu-title">{{ article.title }}</h1>
   <div *ngIf="article" class="actu-nav">
     <span *ngIf="article.contenuPrecedent">
-      <a [routerLink]="'/article/' + article.contenuPrecedent.id" title="Contenu précédent">
+      <a [routerLink]="'/article/' + article.contenuPrecedent.id" [title]="'Contenu précédent | ' + article.contenuPrecedent.title">
         <i class="icon icon-left icon--xlarge" aria-hidden="true"></i>
         <span class="visually-hidden">Contenu précédent</span>
       </a>
     </span>
     <span *ngIf="article.contenuSuivant">
-      <a [routerLink]="'/article/' + article.contenuSuivant.id" title="Contenu suivant">
+      <a [routerLink]="'/article/' + article.contenuSuivant.id" [title]="'Contenu suivant | ' + article.contenuSuivant.title">
         <i class="icon icon-right icon--xlarge" aria-hidden="true"></i>
         <span class="visually-hidden">Contenu suivant</span>
       </a>
     </span>
   </div>
 </header>
-<main *ngIf="article">
+<main role="main" *ngIf="article">
   <section>
     <div *ngIf="article.diaporama">
       <app-carousel *ngFor="let itCarousel of article.diaporama; index as i" [id]="itCarousel.id"

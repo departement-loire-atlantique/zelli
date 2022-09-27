@@ -15,7 +15,7 @@
     Plus tard
   </a>
 </main>
-<footer *ngIf="dataInFooter">
+<footer role="contentinfo"  *ngIf="dataInFooter">
   {{ lblService.lblWelcomeFooter() }}
   <a [routerLink]="getLinkInFooter()">{{ dataInFooter.title }}</a>
 </footer>

@@ -1,12 +1,12 @@
-<header>
+<header role="banner" >
   <app-page-title-custom [mainCat]="this.parentCat" [secondaryCat]="this.curentCat"></app-page-title-custom>
 </header>
 
 
-<main class="themes with-menu">
+<main role="main" class="themes with-menu">
   <div class="btn-wrapper">
     <a class="btn" [routerLink]="'/ask-questions-form/' + 'true'">Oui</a>
     <a class="btn" [routerLink]="'/ask-questions-form/' + 'false'">Non</a>
   </div>
-  
+
 </main>

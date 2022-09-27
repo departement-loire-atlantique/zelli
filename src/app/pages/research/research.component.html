@@ -1,5 +1,5 @@
 
-<header>
+<header role="banner" >
   <app-back class="back-in-top right" text="" picto="icon-cross icon--xlarge" [customProcess]="true" (returnCustom)="resetSearch()"></app-back>
 
   <h1>Recherche</h1>
@@ -8,7 +8,7 @@
   </div>
 </header>
 
-<form (ngSubmit)="research()" data-is-ajax="true">
+<form (ngSubmit)="research()" data-is-ajax="true" role="search">
 
   <div class="ds44-form__container">
 

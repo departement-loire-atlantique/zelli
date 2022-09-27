@@ -1,4 +1,4 @@
-<header>
+<header role="banner" >
   <app-back
     text=""
     picto="icon-arrow-left icon--xlarge"
@@ -13,9 +13,9 @@
   </div>
 </header>
 
-<main class="themes with-menu question-collapser">
+<main role="main" class="themes with-menu question-collapser">
   <section *ngIf="faqEntry">
-  <app-collapser 
+  <app-collapser
         [dataTitle]="getQuestionsTitle()"
         [dataVal]="getAnswers()"
       ></app-collapser>

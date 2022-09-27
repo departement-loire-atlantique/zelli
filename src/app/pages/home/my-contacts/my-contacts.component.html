@@ -1,8 +1,8 @@
-<header>
+<header role="banner" >
   <app-page-title [curentCat]="this.curentCat"></app-page-title>
 </header>
 
-<main class="p-contacts with-menu">
+<main role="main" class="p-contacts with-menu">
   <!-- Pas connecté -->
   <ng-container *ngIf="!isLogged" class="p-contacts__empty">
     Pour pouvoir créer ta propre liste de contacts, tu dois d’abord créer ton compte sur Zelli.
