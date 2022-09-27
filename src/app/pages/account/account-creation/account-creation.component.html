@@ -7,9 +7,9 @@
     <div><sup aria-hidden="true">*</sup>{{ lblService.getLbl('accountCreateRequired') }}</div>
   </header>
 
-  <main>
+  <main role="main">
     <div class="step-infos">
-      <div class="step-num">{{ step }} / {{ maxStep }}</div>
+      <p class="step-num">{{ step }} / {{ maxStep }}</p>
       <h2 class="step-title">
         {{ lblService.getLbl(titleByStep[step - 1]) }}
       </h2>
@@ -100,7 +100,7 @@
           </div>
           <div class="ds44-field-information" aria-live="polite">
             <p id="explanation-date-birth" class="indication-aide">
-              Ex : 04/05/1977
+              Exemple : 04/05/1977
             </p>
           </div>
         </div>

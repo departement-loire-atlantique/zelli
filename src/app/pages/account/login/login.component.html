@@ -4,15 +4,15 @@
   <h1>
     {{ lblService.getLbl('loginTitle') }}
   </h1>
-  <div class="sub-title">
+  <p class="sub-title">
     {{ lblService.getLbl('loginSubTitle') }}
-  </div>
+  </p>
   <p class="mandatory-field">
     * champs obligatoires
   </p>
 </header>
 
-<main>
+<main role="main">
   <form (ngSubmit)="login()" data-is-ajax="true">
 
     <div class="ds44-form__container">
@@ -86,12 +86,10 @@
     </div>
 
     <div class="ds44-field-information ds44-error" *ngIf="loginError">
-      <ul class="ds44-field-information-list ds44-list">
-        <li class="ds44-field-information-error" tabindex="-1">
-          <i class="icon icon-attention icon--sizeM" aria-hidden="true"></i>
-          <span class="ds44-iconInnerText">{{ loginErrorMsg }}</span>
-        </li>
-      </ul>
+      <p class="indication-erreur">
+        <i class="icon icon-attention icon--sizeM" aria-hidden="true"></i>
+        <span class="ds44-iconInnerText">{{ loginErrorMsg }}</span>
+      </p>
     </div>
 
     <app-loader *ngIf="process" color="#0013b1"></app-loader>

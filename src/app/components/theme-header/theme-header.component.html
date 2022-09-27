@@ -1,6 +1,6 @@
 <div *ngIf="catTheme" class="theme-info">
-  <img [src]="catTheme.icon" alt="icon" aria-hidden="true" class="{{ big ? '' : 'small-icon'}}" />
+  <img [src]="catTheme.icon" alt="" aria-hidden="true" class="{{ big ? '' : 'small-icon'}}" />
 
   <h1 *ngIf="big">{{ catTheme.title }}</h1>
-  <div *ngIf="!big" class="lbl-theme">{{ catTheme.title }}</div>
+  <p *ngIf="!big" class="lbl-theme">{{ catTheme.title }}</p>
 </div>
