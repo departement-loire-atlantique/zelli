@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleASE } from 'src/app/models/jcms/articleASE';
 import { Category } from 'src/app/models/jcms/category';
 import { CatsMngService } from 'src/app/services/cats-mng.service';
 import { JcmsClientService } from 'src/app/services/jcms-client.service';
+
+import { TitlePage } from '@/app/services/utils/title-page.service';
 
 @Component({
   selector: 'app-keep-doc',
@@ -17,8 +20,14 @@ export class KeepDocComponent implements OnInit {
   constructor(
     private _route: ActivatedRoute,
     private _jcms: JcmsClientService,
-    private _catMng: CatsMngService
-  ) {}
+    private _catMng: CatsMngService,
+    private titleService: Title,
+    titlePage: TitlePage
+  ) {
+    this.titleService.setTitle(
+      titlePage.getTitle('Documents à garder dans ton trieur')
+    );
+  }
 
   ngOnInit(): void {
     this._route.paramMap.subscribe((params) => {

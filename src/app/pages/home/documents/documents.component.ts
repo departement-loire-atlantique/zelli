@@ -1,9 +1,11 @@
 import { Component, Injector, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { map } from 'rxjs';
 
 import { APageHome } from '@/app/models/aPageHome';
 import { Video, VideoApi, mapVideoToUi } from '@/app/models/jcms/video';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
+import { TitlePage } from '@/app/services/utils/title-page.service';
 
 import { environment } from '@/environments/environment';
 
@@ -15,8 +17,14 @@ import { environment } from '@/environments/environment';
 export class DocumentsComponent extends APageHome implements OnInit {
   video: Video | undefined;
 
-  constructor(_injector: Injector, private _jcms: JcmsClientService) {
+  constructor(
+    _injector: Injector,
+    private _jcms: JcmsClientService,
+    private titleService: Title,
+    titlePage: TitlePage
+  ) {
     super(_injector);
+    this.titleService.setTitle(titlePage.getTitle('Mes documents'));
   }
 
   ngOnInit(): void {

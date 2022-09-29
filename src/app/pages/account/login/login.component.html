@@ -1,15 +1,18 @@
-<header>
-  <app-back class="back-in-top" text="" picto="icon-arrow-left icon--xlarge">
+<header role="banner" >
+  <app-back class="back-in-top" text="" hiddenText="Page précédente : bienvenue sur Zelli" picto="icon-arrow-left icon--xlarge">
   </app-back>
   <h1>
     {{ lblService.getLbl('loginTitle') }}
   </h1>
-  <div class="sub-title">
+  <p class="sub-title">
     {{ lblService.getLbl('loginSubTitle') }}
-  </div>
+  </p>
+  <p class="mandatory-field">
+    * champs obligatoires
+  </p>
 </header>
 
-<main>
+<main role="main">
   <form (ngSubmit)="login()" data-is-ajax="true">
 
     <div class="ds44-form__container">
@@ -19,8 +22,14 @@
             <span>{{ lblService.getLbl('accountCreateS1Field') }}<sup aria-hidden="true">*</sup></span>
           </span>
         </label>
-        <input [(ngModel)]="pseudo" id="input-pseudo" type="text" name="pseudo" class="ds44-inpStd"
-          [title]="lblService.getLbl('accountCreateS1Field') + ' - obligatoire'" required />
+        <input [(ngModel)]="pseudo"
+          id="input-pseudo"
+          type="text"
+          name="pseudo"
+          class="ds44-inpStd"
+          [title]="lblService.getLbl('accountCreateS1Field') + ' - obligatoire'"
+          required
+          autocomplete="given-name"/>
         <button class="ds44-reset" type="button">
           <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i><span class="visually-hidden">
             {{ lblService.getLbl('accountCreateSupField') }} {{ lblService.getLbl('accountCreateS1Field') }}</span>
@@ -32,14 +41,20 @@
       <div class="ds44-posRel">
         <label for="pwd" class="ds44-formLabel">
           <span class="ds44-labelTypePlaceholder">
-            <span>{{ lblService.getLbl('accountCreateS3FieldPwd') }}<sup aria-hidden="true">*</sup>
+            <span>{{ lblService.getLbl('accountCreateS3FieldPwd') }}<sup>*</sup>
             </span>
           </span>
         </label>
 
-        <input [(ngModel)]="pwd" type="password" id="pwd" name="pwd" class="ds44-inpStd"
-          [title]="lblService.getLbl('accountCreateS3FieldPwd') + ' - obligatoire'" required
-          autocomplete="current-password" aria-describedby="explanation-pwd" />
+        <input [(ngModel)]="pwd"
+          type="password"
+          id="pwd"
+          name="pwd"
+          class="ds44-inpStd"
+          [title]="lblService.getLbl('accountCreateS3FieldPwd') + ' - obligatoire'"
+          required
+          autocomplete="current-password"
+          aria-describedby="explanation-pwd" />
 
         <button class="ds44-showPassword" type="button">
           <i class="icon icon-visuel icon--sizeL" aria-hidden="true"></i>
@@ -56,11 +71,25 @@
     </div>
 
     <div class="ds44-form__container ds44-checkBox-radio_list ">
-      <input [(ngModel)]="saveLogin" [ngModelOptions]="{standalone: true}" type="checkbox" id="name-check-saveLogin-m"
-        name="saveLogin" value="yes" class="ds44-checkbox" required aria-describedby="mandatory-message-saveLogin" />
+      <input [(ngModel)]="saveLogin"
+        [ngModelOptions]="{standalone: true}"
+        type="checkbox"
+        id="name-check-saveLogin-m"
+        name="saveLogin"
+        value="yes"
+        class="ds44-checkbox"
+        required
+        aria-describedby="mandatory-message-saveLogin"/>
       <label for="name-check-saveLogin-m" class="ds44-boxLabel" id="name-check-label-saveLogin-m">
         Retenir le mot de passe
       </label>
+    </div>
+
+    <div class="ds44-field-information ds44-error" *ngIf="loginError">
+      <p class="indication-erreur">
+        <i class="icon icon-attention icon--sizeM" aria-hidden="true"></i>
+        <span class="ds44-iconInnerText">{{ loginErrorMsg }}</span>
+      </p>
     </div>
 
     <app-loader *ngIf="process" color="#0013b1"></app-loader>
@@ -75,4 +104,5 @@
       Tu as oublié ton mot de passe ?
     </a>
   </div>
+
 </main>

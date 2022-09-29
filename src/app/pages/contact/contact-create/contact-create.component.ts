@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import { Contact } from '@/app/models/jcms/contact';
 import { ContactDetailsService } from '@/app/services/contact-details.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
+import { TitlePage } from '@/app/services/utils/title-page.service';
 
 @Component({
   selector: 'app-contact-create',
@@ -12,8 +14,12 @@ import { LabelMngService } from '@/app/services/label-mng.service';
 export class ContactCreateComponent implements OnInit {
   constructor(
     private _contactDetailsService: ContactDetailsService,
-    public lblService: LabelMngService
-  ) {}
+    public lblService: LabelMngService,
+    private titleService: Title,
+    titlePage: TitlePage
+  ) {
+    this.titleService.setTitle(titlePage.getTitle('Ajouter un contact'));
+  }
 
   contact!: Contact;
   addContactRun!: boolean;

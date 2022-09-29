@@ -1,4 +1,4 @@
-<header>
+<header role="banner" >
   <app-back
     text=""
     picto="icon-arrow-left icon--xlarge"
@@ -7,16 +7,16 @@
   <app-theme-header *ngIf="subTheme" [catTheme]="subTheme.navigation" [big]="false"></app-theme-header>
   <div *ngIf="subTheme" class="head-sub-theme">
     <h1>{{ subTheme.title }}</h1>
-    <div class="chapo">
+    <p class="chapo">
       {{ subTheme.chapo }}
-    </div>
+    </p>
   </div>
 </header>
 
 <app-loader *ngIf="!subTheme" color="#0013b1"></app-loader>
 
-<main *ngIf="subTheme">
-  
+<main role="main" *ngIf="subTheme">
+
   <app-list [items]="getItemForList()"></app-list>
 
   <app-has-helped *ngIf="subTheme.affichagePageAAidee"></app-has-helped>

@@ -1,4 +1,4 @@
-<header>
+<header role="banner" >
   <app-page-title [curentCat]="this.curentCat"></app-page-title>
 </header>
 
@@ -6,7 +6,7 @@
 
 <app-loader *ngIf="loading" color="#0013b1"></app-loader>
 
-<main class="age with-menu">
+<main role="main" class="age with-menu">
 
     <app-collapser *ngIf="!loading" [dataTitle]="titleCollaps" [dataItems]="itemsCollaps"></app-collapser>
 

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { Content } from '@/app/models/jcms/content';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
 import { LoginService } from '@/app/services/login.service';
+import { TitlePage } from '@/app/services/utils/title-page.service';
 import { Util } from '@/app/util';
 
 @Component({
@@ -19,8 +21,12 @@ export class WelcomeComponent implements OnInit {
     private _router: Router,
     private _jcms: JcmsClientService,
     public lblService: LabelMngService,
-    private _login: LoginService
-  ) {}
+    private _login: LoginService,
+    private titleService: Title,
+    titlePage: TitlePage
+  ) {
+    this.titleService.setTitle(titlePage.getTitle('Welcome'));
+  }
 
   ngOnInit(): void {
     if (this._login.isLogged) {

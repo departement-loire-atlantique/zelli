@@ -13,9 +13,8 @@
         [hidden]="isLoadingIframe"
           (load)="handleOnLoad()"
           [src]="videoUrl "
-          [title]="video.title"
+          [title]="'video-' + video.title"
           allow='autoplay'
-          frameBorder="0"
           allowfullscreen>
         </iframe>
     </div>
@@ -27,9 +26,8 @@
     [hidden]="isLoadingIframe"
       (load)="handleOnLoad()"
       [src]="videoUrl "
-      [title]="video?.title"
+      [title]="'video-' + video?.title"
       allow='autoplay'
-      frameBorder="0"
       allowfullscreen>
     </iframe>
   </ng-template>

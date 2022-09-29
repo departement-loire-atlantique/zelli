@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 /**
  * This component should be used to go back to the previous page.
@@ -9,7 +9,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: './back.component.html',
   styleUrls: ['./back.component.less'],
 })
-export class BackComponent {
+export class BackComponent implements OnInit {
   /**
    * Text du lien de retour.
    * Default: Retour
@@ -23,6 +23,13 @@ export class BackComponent {
    */
   @Input()
   titleLink: string = 'Retour à la page précédente';
+
+  /**
+   * Text du lien de retour.
+   * Default: Retour
+   */
+  @Input()
+  hiddenText: string = '';
 
   /**
    * icon du lien.
@@ -42,6 +49,10 @@ export class BackComponent {
   returnCustom: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private _location: Location) {}
+
+  ngOnInit(): void {
+    document.getElementById('back-btn')?.focus();
+  }
 
   /**
    * @ignore

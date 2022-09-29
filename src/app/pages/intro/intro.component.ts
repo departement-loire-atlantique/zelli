@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { DateService } from 'src/app/services/utils/date.service';
 
 import { Category } from '@/app/models/jcms/category';
 import { CatsMngService } from '@/app/services/cats-mng.service';
+import { TitlePage } from '@/app/services/utils/title-page.service';
 
 import { environment } from '@/environments/environment';
 
@@ -22,8 +24,11 @@ export class IntroComponent implements OnInit {
   constructor(
     private _router: Router,
     private _dateUtil: DateService,
-    private _catMng: CatsMngService
+    private _catMng: CatsMngService,
+    private titleService: Title,
+    titlePage: TitlePage
   ) {
+    this.titleService.setTitle(titlePage.getTitle('Intro'));
     const strDate = JSON.parse(localStorage.getItem('_lastAccess') || '{}');
     this._lastAccess = new Date(strDate);
   }

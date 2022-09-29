@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -8,6 +9,7 @@ import { DesignSystemService } from '@/app/services/design-system.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
 import { SharedService } from '@/app/services/shared-service.service';
+import { TitlePage } from '@/app/services/utils/title-page.service';
 import { Util } from '@/app/util';
 
 import { environment } from '@/environments/environment';
@@ -33,8 +35,12 @@ export class ResearchComponent implements AfterViewInit, OnInit, OnDestroy {
     private _ds: DesignSystemService,
     private sharedService: SharedService,
     public lblService: LabelMngService,
-    private _router: Router
-  ) {}
+    private _router: Router,
+    private titleService: Title,
+    titlePage: TitlePage
+  ) {
+    this.titleService.setTitle(titlePage.getTitle('Recherche'));
+  }
 
   ngOnInit(): void {
     this.result = this.sharedService.variable[0]

@@ -6,6 +6,7 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
+import { Observable, combineLatest } from 'rxjs';
 
 import { Carousel, CarouselElement } from '@/app/models/jcms/carousel';
 import { DesignSystemService } from '@/app/services/design-system.service';
@@ -38,6 +39,8 @@ export class CarouselComponent implements OnInit, AfterViewInit {
 
   curentSlide: number = 1;
 
+  isElementLoading: boolean = true;
+
   constructor(
     private _jcms: JcmsClientService,
     private _ds: DesignSystemService
@@ -65,24 +68,29 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     if (!this.carousel || !this.carousel.elements1) {
       return;
     }
+    const fullElements: Observable<CarouselElement>[] = [];
+
     for (let i = 0; i < this.carousel.elements1.length; i++) {
       let item = this.carousel.elements1[i];
 
       // array init with empty item (for order)
       this.elements.push(undefined);
-
-      this._jcms
-        .get<CarouselElement>('data/' + item.id)
-        .subscribe((res: CarouselElement) => {
-          // TODO service fix img link
-          res.imageMobile = environment.urlJcms + res.imageMobile;
-          this.elements[i] = res;
-        });
+      fullElements[i] = this._jcms.get<CarouselElement>('data/' + item.id);
     }
-  }
 
-  public buildCarousel() {
-    this._ds.initCarousel();
+    combineLatest(fullElements).subscribe((reps) => {
+      for (let i = 0; i < reps.length; i++) {
+        let itRep: CarouselElement = reps[i];
+        itRep.imageMobile = environment.urlJcms + itRep.imageMobile;
+        this.elements[i] = itRep;
+      }
+
+      this.itemSwiper?.changes.subscribe((_) => {
+        this.buildCarousel();
+      });
+
+      this.isElementLoading = false;
+    });
   }
 
   public pagerInit() {
@@ -117,5 +125,9 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     } else {
       return undefined;
     }
+  }
+
+  buildCarousel() {
+    this._ds.initCarousel();
   }
 }

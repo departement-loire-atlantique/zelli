@@ -1,4 +1,5 @@
 import {
+  AfterViewChecked,
   AfterViewInit,
   Component,
   ElementRef,
@@ -6,17 +7,22 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import { DesignSystemService } from '@/app/services/design-system.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
 import { LoginService } from '@/app/services/login.service';
+import { FormInput } from '@/app/services/utils/form-input.service';
+import { TitlePage } from '@/app/services/utils/title-page.service';
 
 @Component({
   selector: 'app-account-creation',
   templateUrl: './account-creation.component.html',
   styleUrls: ['./account-creation.component.less'],
 })
-export class AccountCreationComponent implements AfterViewInit {
+export class AccountCreationComponent
+  implements AfterViewInit, AfterViewChecked
+{
   step: number = 1;
 
   maxStep: number = 3;
@@ -52,6 +58,8 @@ export class AccountCreationComponent implements AfterViewInit {
     'Oups ! Tu n’as pas saisi la même chose dans les deux champs';
   pwdSpaceErrorMsg: string =
     'Oups ! Merci de saisir ton mot de passe sans espace (nous te recommandons de choisir un mot de passe avec au moins 12 caractères, avec des lettres, des chiffres et des caractères spéciaux comme le !)';
+  pwdStrongErrorMsg: string =
+    'Oups ! Merci de saisir un mot de passe plus fort (nous te recommandons de choisir un mot de passe avec au moins 12 caractères, avec des lettres, des chiffres et des caractères spéciaux comme le !)';
 
   @ViewChildren('formDisplay')
   formDisplay: QueryList<any> | undefined;
@@ -60,8 +68,16 @@ export class AccountCreationComponent implements AfterViewInit {
     public lblService: LabelMngService,
     public _login: LoginService,
     private _ds: DesignSystemService,
-    private elByClassName: ElementRef
-  ) {}
+    private elByClassName: ElementRef,
+    private _formInput: FormInput,
+    private titleService: Title,
+    titlePage: TitlePage
+  ) {
+    this.titleService.setTitle(titlePage.getTitle('Créer mon compte'));
+  }
+  ngAfterViewChecked(): void {
+    this._formInput.getAllInputCSS();
+  }
 
   ngAfterViewInit(): void {
     this._ds.initForm();
@@ -131,14 +147,23 @@ export class AccountCreationComponent implements AfterViewInit {
     } else if (this.step === 3) {
       /* Error space */
       const rExp: RegExp = /\s/;
+      const strongPwd: RegExp =
+        /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{12,})/; // enlever (?=.*[A-Z]) si pas maj necessaire
+
       if (rExp.test(this.pwd)) {
+        //espace
         this.errorMsg = this.pwdSpaceErrorMsg;
         this.isError = true;
       } else if (this.pwd !== this.pwdConfirm) {
+        //pas pareil
         /* Error field different */
         this.errorMsg = this.pwdErrorMsg;
         this.isError = true;
-      } else if (this.pwd && this.pwdConfirm) {
+      } else if (!strongPwd.test(this.pwd)) {
+        //pas assez fort
+        this.isError = true;
+        this.errorMsg = this.pwdStrongErrorMsg;
+      } else if (strongPwd.test(this.pwd) && strongPwd.test(this.pwdConfirm)) {
         return true;
       }
     }
@@ -213,5 +238,17 @@ export class AccountCreationComponent implements AfterViewInit {
     if (this.step > 1) {
       this.step--;
     }
+  }
+
+  public getHiddenTextBackBtn() {
+    if (this.step)
+      return (
+        'Retourner à la page précédente : étape ' +
+        this.step +
+        ' sur ' +
+        this.maxStep
+      );
+
+    return 'Retourner à la page précédente';
   }
 }

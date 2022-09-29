@@ -1,7 +1,7 @@
 <app-alert *ngIf="error" status="error" description="Un problème est survenu à la récupération des informations">
 </app-alert>
 
-<header>
+<header role="banner" >
   <app-page-title [curentCat]="this.curentCat"></app-page-title>
 </header>
 
@@ -9,7 +9,7 @@
 
 <app-loader *ngIf="themes.length <= 0" color="#0013b1"></app-loader>
 
-<main class="themes with-menu">
+<main role="main" class="themes with-menu">
   <div *ngFor="let itTheme of themes" class="theme">
     <a [routerLink]="['/theme', itTheme.id]">
       <img [src]="itTheme.image" [alt]="itTheme.title" />

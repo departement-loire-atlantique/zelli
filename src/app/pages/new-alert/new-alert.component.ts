@@ -1,11 +1,13 @@
 import { Location } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 
 import { Alerte, AlerteApi } from '@/app/models/jcms/alerte';
 import { DesignSystemService } from '@/app/services/design-system.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
+import { TitlePage } from '@/app/services/utils/title-page.service';
 
 @Component({
   selector: 'app-new-alert',
@@ -39,8 +41,12 @@ export class NewAlertComponent implements OnInit, AfterViewInit {
     private _location: Location,
     private _route: ActivatedRoute,
     private _ds: DesignSystemService,
-    private elByClassName: ElementRef
-  ) {}
+    private elByClassName: ElementRef,
+    private titleService: Title,
+    titlePage: TitlePage
+  ) {
+    this.titleService.setTitle(titlePage.getTitle('Alerte'));
+  }
 
   ngOnInit(): void {
     this._route.paramMap.subscribe((params) => {

@@ -12,6 +12,13 @@ HEADER {
     color: @blue-dark;
     margin: 0 20px;
   }
+
+  .mandatory-field {
+    text-align: center;
+    color: @light-black;
+    margin: 20px 0;
+    font-size: 1.3rem;
+  }
 }
 
 MAIN {
@@ -21,10 +28,18 @@ MAIN {
     > .ds44-posRel {
       margin-bottom: 25px;
     }
-    
+
     .btn {
       margin-left: 0;
       margin-right: 0;
+    }
+  }
+
+  .indication-erreur {
+    padding: 1.5rem;
+    font-size: 0.875em;
+    .icon {
+      color: @error;
     }
   }
 

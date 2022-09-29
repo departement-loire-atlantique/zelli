@@ -1,11 +1,11 @@
-<header>
+<header role="banner" >
   <app-back class="back-in-top right" text="" picto="icon-cross icon--xlarge"></app-back>
   <h1>{{ lblService.getLbl('newAlertTitle') }}</h1>
   <div>
     {{ lblService.getLbl('newAlertSubTitle') }}
   </div>
 </header>
-<main>
+<main role="main">
   <div class="info-form">* Champs obligatoires</div>
   <form (ngSubmit)="newAlert()" data-is-ajax="true">
 
@@ -104,7 +104,7 @@
       </label>
     </div>
 
-    <button class="btn btn-big" [disabled]="process" type="submit">Créer l’alerte</button>
+    <button class="btn btn-full" [disabled]="process" type="submit">Créer l’alerte</button>
     <app-loader *ngIf="process" color="#0013b1"></app-loader>
   </form>
 </main>

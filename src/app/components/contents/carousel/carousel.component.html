@@ -1,4 +1,5 @@
-<div *ngIf="carousel" class="c-carousel">
+<app-loader *ngIf="carousel && isElementLoading"></app-loader>
+<div *ngIf="carousel && !isElementLoading" class="c-carousel">
   <div class="mod--hidden ds44-list swipper-carousel-wrap ds44-posRel" data-nb-visible-slides="1"
     [attr.data-swiper-title]="carousel.titre">
     <div class="swiper-container">

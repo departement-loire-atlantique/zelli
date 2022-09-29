@@ -1,9 +1,9 @@
-<header>
+<header role="banner" >
   <app-page-title-custom [mainCat]="this.parentCat" [secondaryCat]="this.curentCat" [isProfile]="false"></app-page-title-custom>
 </header>
 
 
-<main class="themes with-menu">
+<main role="main" class="themes with-menu">
   <form ngNativeValidate #question="ngForm" (ngSubmit)="onClickSubmit(question.value)" >
     <div class="ds44-form__container question-input">
 

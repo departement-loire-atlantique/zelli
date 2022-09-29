@@ -1,4 +1,4 @@
-<header>
+<header role="banner" >
   <app-back class="back-in-top right" text="" picto="icon-cross icon--xlarge" [customProcess]="fromCreate"
     (returnCustom)="returnFromCreate()"></app-back>
   <div class="photo">
@@ -6,7 +6,7 @@
 
     <button (click)="toggleEditPhoto()" class="btn-link btn-edit-photo" type="button" data-target="#overlay-edit-photo"
       data-js="ds44-modal" title="Edition de la photo">
-      <i class="icon icon-panne icon--large" aria-hidden="true"></i>
+      <i class="icon icon-edit icon--large" aria-hidden="true"></i>
     </button>
     <section class="ds44-modal-container" id="overlay-edit-photo" aria-hidden="true" role="dialog" aria-modal="true"
       aria-labelledby="overlay-edit-photo-title">
@@ -57,13 +57,13 @@
   </div>
   <h1>Mon profil</h1>
 </header>
-<main>
+<main role="main">
 
   <section class="infos-section">
     <div class="title-section">
       <h2>Mes informations</h2>
       <button (click)="toggleEditInfos()" class="btn-link btn-edit-info" type="button" title="Edition des informations">
-        <i class="icon icon-panne icon--large" aria-hidden="true"></i>
+        <i class="icon icon-edit icon--large" aria-hidden="true"></i>
       </button>
     </div>
     <form class="infos" (ngSubmit)="editInfo()" data-is-ajax="true">
@@ -163,7 +163,7 @@
         </div>
 
       </div>
-      <button #formEndDisplay *ngIf="edit" class="btn btn-big" type="submit">Sauvegarder</button>
+      <button #formEndDisplay *ngIf="edit" class="btn btn-full" type="submit">Sauvegarder</button>
     </form>
   </section>
 

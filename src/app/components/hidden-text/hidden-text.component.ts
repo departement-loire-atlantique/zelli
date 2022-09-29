@@ -14,6 +14,7 @@ export class HiddenTextComponent implements OnInit {
   @Input()
   text: string | undefined;
 
+  ariaExpanded = false;
   btnLbl: string = HiddenTextComponent._readMore;
 
   constructor(private _ds: DesignSystemService) {}
@@ -30,8 +31,10 @@ export class HiddenTextComponent implements OnInit {
     ) as HTMLInputElement;
 
     if (lblBtn.getAttribute('aria-expanded') === 'true') {
+      this.ariaExpanded = false;
       this.btnLbl = HiddenTextComponent._readMore;
     } else {
+      this.ariaExpanded = true;
       this.btnLbl = HiddenTextComponent._readLess;
     }
   }
