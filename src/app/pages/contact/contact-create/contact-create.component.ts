@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 import { Contact } from '@/app/models/jcms/contact';
 import { ContactDetailsService } from '@/app/services/contact-details.service';
+import { DesignSystemService } from '@/app/services/design-system.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
 import { TitlePage } from '@/app/services/utils/title-page.service';
 
@@ -11,11 +12,12 @@ import { TitlePage } from '@/app/services/utils/title-page.service';
   templateUrl: './contact-create.component.html',
   styleUrls: ['./contact-create.component.less'],
 })
-export class ContactCreateComponent implements OnInit {
+export class ContactCreateComponent implements OnInit, AfterViewInit {
   constructor(
     private _contactDetailsService: ContactDetailsService,
     public lblService: LabelMngService,
     private titleService: Title,
+    private _ds: DesignSystemService,
     titlePage: TitlePage
   ) {
     this.titleService.setTitle(titlePage.getTitle('Ajouter un contact'));
@@ -39,6 +41,10 @@ export class ContactCreateComponent implements OnInit {
     this.email = '';
     this.adresse = '';
     this.commentaire = '';
+  }
+
+  ngAfterViewInit(): void {
+    this._ds.initForm();
   }
 
   public addContact(): void {
