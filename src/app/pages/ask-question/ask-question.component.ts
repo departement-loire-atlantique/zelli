@@ -4,6 +4,8 @@ import { environment } from 'src/environments/environment';
 
 import { Category } from '@/app/models/jcms/category';
 import { CatsMngService } from '@/app/services/cats-mng.service';
+import { LabelMngService } from '@/app/services/label-mng.service';
+import { LoginService } from '@/app/services/login.service';
 import { TitlePage } from '@/app/services/utils/title-page.service';
 
 @Component({
@@ -14,6 +16,7 @@ import { TitlePage } from '@/app/services/utils/title-page.service';
 export class AskQuestionComponent {
   curentCat: Category | undefined;
   parentCat: Category | undefined;
+  isLogged: boolean = false;
 
   tmp: string = environment.catAskQuestionRef; //cat referent
 
@@ -24,9 +27,12 @@ export class AskQuestionComponent {
   constructor(
     private _catMng: CatsMngService,
     private titleService: Title,
+    private _login: LoginService,
+    public _lblService: LabelMngService,
     titlePage: TitlePage
   ) {
     this.titleService.setTitle(titlePage.getTitle('Poser une question'));
+    this.isLogged = this._login.isLogged;
 
     this._catMng.cat(this.tmp).subscribe((cat) => {
       this.curentCat = cat;
