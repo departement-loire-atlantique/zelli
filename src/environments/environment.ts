@@ -11,6 +11,7 @@ export const environment = {
   catIntro: 'TODO',
   catMainContent: 'TODO',
   catQuestions: '',
+  catContact: '',
   catThemes: '',
   catAskQuestionRef: '',
   catAskQuestionForm: '',

@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 import { Contact } from '@/app/models/jcms/contact';
+import { FicheContact } from '@/app/models/jcms/ficheContact';
 import { ContactDetailsService } from '@/app/services/contact-details.service';
 import { DesignSystemService } from '@/app/services/design-system.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
@@ -24,6 +25,7 @@ export class ContactCreateComponent implements OnInit, AfterViewInit {
   }
 
   contact!: Contact;
+  ficheContact?: FicheContact;
   addContactRun!: boolean;
   // Fields
   nom!: string;
@@ -48,18 +50,21 @@ export class ContactCreateComponent implements OnInit, AfterViewInit {
   }
 
   public addContact(): void {
-    console.log(this.contact.lastname);
     if (!this.nom) {
       return;
     }
+
     this.addContactRun = true;
 
-    this.contact.lastname = this.nom;
-    this.contact.phoneNumber = [this.telmobile + this.telfixe];
-    this.contact.email = this.email;
-    this.contact.location.roadName = this.adresse;
-    this.contact.subTitle = this.commentaire;
+    this.ficheContact = new FicheContact(
+      this.nom,
+      this.telmobile,
+      this.telfixe,
+      this.email,
+      this.adresse,
+      this.commentaire
+    );
 
-    this._contactDetailsService.createContact(this.contact);
+    this._contactDetailsService.createContact(this.ficheContact);
   }
 }
