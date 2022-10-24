@@ -1,5 +1,11 @@
 import { Location } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
+import {
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+} from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 
@@ -7,6 +13,7 @@ import { Alerte, AlerteApi } from '@/app/models/jcms/alerte';
 import { DesignSystemService } from '@/app/services/design-system.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
+import { FormInput } from '@/app/services/utils/form-input.service';
 import { TitlePage } from '@/app/services/utils/title-page.service';
 
 @Component({
@@ -14,7 +21,9 @@ import { TitlePage } from '@/app/services/utils/title-page.service';
   templateUrl: './new-alert.component.html',
   styleUrls: ['./new-alert.component.less'],
 })
-export class NewAlertComponent implements OnInit, AfterViewInit {
+export class NewAlertComponent
+  implements OnInit, AfterViewInit, AfterViewChecked
+{
   private _isUpdate: boolean = false;
   private _idAlertUpdate: string = '';
 
@@ -28,6 +37,8 @@ export class NewAlertComponent implements OnInit, AfterViewInit {
   dateYear: string = '';
 
   comment: string = '';
+
+  btnAddAlerte: string = "Créer l'alerte";
 
   addCalendar: boolean = false;
 
@@ -43,6 +54,7 @@ export class NewAlertComponent implements OnInit, AfterViewInit {
     private _ds: DesignSystemService,
     private elByClassName: ElementRef,
     private titleService: Title,
+    private _formInput: FormInput,
     titlePage: TitlePage
   ) {
     this.titleService.setTitle(titlePage.getTitle('Alerte'));
@@ -52,6 +64,7 @@ export class NewAlertComponent implements OnInit, AfterViewInit {
     this._route.paramMap.subscribe((params) => {
       const idParam = params.get('id');
       if (idParam) {
+        this.btnAddAlerte = "Modifier l'alerte";
         this._isUpdate = true;
         this._idAlertUpdate = idParam;
         this._jcms.get<AlerteApi>('data/' + idParam).subscribe((rep) => {
@@ -78,6 +91,10 @@ export class NewAlertComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this._ds.initForm();
+  }
+
+  ngAfterViewChecked(): void {
+    this._formInput.getAllInputCSS();
   }
 
   public newAlert() {
