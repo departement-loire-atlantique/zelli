@@ -38,6 +38,7 @@ export class NewAlertComponent
 
   comment: string = '';
 
+  titleAlerte = this.lblService.getLbl('newAlertTitle');
   btnAddAlerte: string = "Créer l'alerte";
 
   addCalendar: boolean = false;
@@ -65,6 +66,8 @@ export class NewAlertComponent
       const idParam = params.get('id');
       if (idParam) {
         this.btnAddAlerte = "Modifier l'alerte";
+        this.titleAlerte = 'Modifier une alerte';
+
         this._isUpdate = true;
         this._idAlertUpdate = idParam;
         this._jcms.get<AlerteApi>('data/' + idParam).subscribe((rep) => {
