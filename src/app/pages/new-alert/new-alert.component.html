@@ -100,7 +100,8 @@
       <input [(ngModel)]="sendAlert" [ngModelOptions]="{standalone: true}" type="checkbox" id="name-check-sendAlert-m"
         name="sendAlert" value="true" class="ds44-checkbox" required aria-describedby="mandatory-message-sendAlert" />
       <label for="name-check-sendAlert-m" class="ds44-boxLabel" id="name-check-label-sendAlert-m">
-        J’accepte de recevoir des notifications sur mon smartphone (lire les conditions d’utilisation)
+        J’accepte de recevoir des notifications sur mon smartphone
+        <a [routerLink]="getLink()">(lire les conditions d’utilisation)</a>
       </label>
     </div>
 

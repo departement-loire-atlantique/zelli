@@ -10,11 +10,13 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 
 import { Alerte, AlerteApi } from '@/app/models/jcms/alerte';
+import { Content } from '@/app/models/jcms/content';
 import { DesignSystemService } from '@/app/services/design-system.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
 import { FormInput } from '@/app/services/utils/form-input.service';
 import { TitlePage } from '@/app/services/utils/title-page.service';
+import { Util } from '@/app/util';
 
 @Component({
   selector: 'app-new-alert',
@@ -28,6 +30,7 @@ export class NewAlertComponent
   private _idAlertUpdate: string = '';
 
   private _event?: Alerte;
+  private _pageConditions?: Content;
 
   //fields
   subject: string = '';
@@ -90,6 +93,19 @@ export class NewAlertComponent
         });
       }
     });
+
+    // get page conditions utilisation
+    this._jcms
+      .get<any>(
+        'plugins/zelli/prop/jcmsplugin.zelli.lbl.newAlert.conditions.link'
+      )
+      .subscribe((rep: any) => {
+        if (rep.value) {
+          this._jcms.get<Content>('data/' + rep.value).subscribe((rep) => {
+            this._pageConditions = rep;
+          });
+        }
+      });
   }
 
   ngAfterViewInit() {
@@ -181,5 +197,12 @@ export class NewAlertComponent
     if (blob) {
       window.open(window.URL.createObjectURL(blob));
     }
+  }
+
+  public getLink() {
+    if (this._pageConditions) {
+      return Util.buildUrlCotent(this._pageConditions);
+    }
+    return '';
   }
 }
