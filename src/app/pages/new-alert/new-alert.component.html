@@ -105,7 +105,12 @@
       </label>
     </div>
 
+    <app-alert *ngIf="alerteError" status="error" [description]=alerteErrorMsg>
+    </app-alert>
+
     <button class="btn btn-full" [disabled]="process" type="submit">{{ btnAddAlerte }}</button>
     <app-loader *ngIf="process" color="#0013b1"></app-loader>
   </form>
+
+
 </main>

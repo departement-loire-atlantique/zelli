@@ -50,6 +50,10 @@ export class NewAlertComponent
 
   process: boolean = false;
 
+  alerteError: boolean = false;
+
+  alerteErrorMsg?: string;
+
   constructor(
     public lblService: LabelMngService,
     private _jcms: JcmsClientService,
@@ -118,6 +122,7 @@ export class NewAlertComponent
 
   public newAlert() {
     this.process = true;
+    this.alerteError = false;
 
     // Test subject
     if (!this.subject) {
@@ -143,24 +148,26 @@ export class NewAlertComponent
       new Date() >=
       new Date(~~this.dateYear, ~~this.dateMonth - 1, ~~this.dateDay)
     ) {
-      console.error('Sélectionner une date de rappel dans le future ');
+      this.alerteErrorMsg = 'Sélectionner une date de rappel dans le future ';
+      this.alerteError = true;
 
+      this.dateYear, this.dateMonth, (this.dateDay = '');
       // TODO error DS
       this.process = false;
-      return;
+      // return;
+    } else {
+      // Create event
+      this._event = new Alerte(
+        this.subject,
+        this.dateDay,
+        this.dateMonth,
+        this.dateYear,
+        this.comment,
+        this.sendAlert
+      );
+
+      this.saveAlert();
     }
-
-    // Create event
-    this._event = new Alerte(
-      this.subject,
-      this.dateDay,
-      this.dateMonth,
-      this.dateYear,
-      this.comment,
-      this.sendAlert
-    );
-
-    this.saveAlert();
   }
 
   private saveAlert() {
