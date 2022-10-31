@@ -49,14 +49,18 @@ export class MyContactsComponent extends APageHome implements OnInit {
     this.result = undefined;
     this.pager = undefined;
     this.isLoadingContacts = true;
-    this.processResult(
-      this._jcms.getPager<Content>('search', {
-        params: {
-          types: ['Contact', 'FicheLieu'],
-          exactType: true,
-        },
-      })
-    );
+    let idMember = this._login.getProfilId();
+    if (idMember) {
+      this.processResult(
+        this._jcms.getPager<Content>('search', {
+          params: {
+            types: ['Contact', 'FicheLieu'],
+            exactType: true,
+            mids: idMember,
+          },
+        })
+      );
+    }
   }
 
   public processResult(obs: Observable<JcmsPager<Content>>) {
