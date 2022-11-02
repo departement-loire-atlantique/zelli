@@ -1,4 +1,5 @@
 import { Location } from '@angular/common';
+import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, map, mergeMap, of } from 'rxjs';
@@ -60,9 +61,15 @@ export class ContactDetailsService {
     if (contact) {
       let endpoint = 'data/FicheLieu';
       const options = contact.buildForSendApi();
-      let urlEncodedData = this._jcmsClient.encodeParamForBody(options);
+      // let urlEncodedData = this._jcmsClient.encodeParamForBody(options);
 
-      this._jcmsClient.post(endpoint, urlEncodedData).subscribe({
+      const params = new HttpParams({
+        fromObject: options,
+      });
+      console.log(params);
+      console.log(params.toString());
+
+      this._jcmsClient.post(endpoint, params).subscribe({
         next: (rep) => {
           if (rep) {
             console.log('contact ajouté !');
