@@ -65,4 +65,7 @@
   class="p-contact__description"
   [innerHtml]="contact?.location?.description! | sanitizeHtml"
 ></div>
+
+  <button *ngIf="isLogged" class="btn btn-full" (click)="addContact()">Ajouter à mes contacts</button>
+  <button *ngIf="!isLogged" class="btn btn-full" disabled>Ajouter à mes contacts</button>
 </div>

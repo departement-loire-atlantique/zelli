@@ -57,17 +57,17 @@ export class ContactDetailsService {
   }
 
   public createContact(contact: FicheContact) {
-    console.log('Contact a sauvegarder: ' + contact);
-
     if (contact) {
-      let urlEncodedData = this._jcmsClient.encodeParamForBody(
-        contact.buildForSendApi()
-      );
-      console.log(contact.buildForSendApi());
       let endpoint = 'data/FicheLieu';
+      const options = contact.buildForSendApi();
+      let urlEncodedData = this._jcmsClient.encodeParamForBody(options);
+
       this._jcmsClient.post(endpoint, urlEncodedData).subscribe({
         next: (rep) => {
-          this.router.navigate(['/contact/']);
+          if (rep) {
+            console.log('contact ajouté !');
+            this.router.navigate(['/mycontacts/']);
+          }
         },
         error: (error) => {
           console.error(error);

@@ -1,3 +1,5 @@
+import { environment } from '@/environments/environment';
+
 export type Contact = {
   id: string;
   title: string;
@@ -133,5 +135,64 @@ export const mapContactFromApi = (contact: ContactFromApi): Contact => {
         : undefined,
       description: contact.lieuDeRattachement?.description,
     },
+  };
+};
+
+export const buildForSendApi = (c: LocationFromApi) => {
+  return {
+    categorieDeNavigation: environment.catContact,
+    title: c.title,
+    soustitre: c.soustitre,
+    chapo: c.chapo,
+    etageCouloirEscalier: c.etageCouloirEscalier,
+    entreeBatimentImmeuble: c.entreeBatimentImmeuble,
+    ndeVoie: c.ndeVoie,
+    libelleDeVoie: c.libelleDeVoie,
+    lieudit: c.lieudit,
+    codePostal: c.codePostal,
+    // commune: { id: c.commune?.id, title: c.commune?.title },
+    libelleAutreAdresse: c.libelleAutreAdresse,
+    etageCouloirEscalier2: c.etageCouloirEscalier,
+    entreeBatimentImmeuble2: c.entreeBatimentImmeuble2,
+    ndeVoie2: c.ndeVoie2,
+    libelleDeVoie2: c.libelleDeVoie2,
+    lieudit2: c.lieudit2,
+    codePostal2: c.codePostal2,
+    cs2: c.cs2,
+    cedex2: c.cedex2,
+    telephone: c.telephone,
+    email: c.email,
+    siteInternet: c.siteInternet,
+    plusDeDetailInterneDBID: c.plusDeDetailInterneDBID,
+    plusDeDetailExterne: c.plusDeDetailExterne,
+    texteAlternatifLien: c.texteAlternatifLien,
+    complementTypeDacces: c.complementTypeDacces,
+    pourQui: c.pourQui,
+    modalitesDaccueil: c.modalitesDaccueil,
+    horairesEtAcces: c.horairesEtAcces,
+    transportsEnCommun: c.transportsEnCommun,
+    parkings: c.parkings,
+    description: c.description,
+    lienDeLaPageFacebook: c.lienDeLaPageFacebook,
+    lienDeLaPageInstagram: c.lienDeLaPageInstagram,
+    toutesLesCommunesDuDepartement: c.toutesLesCommunesDuDepartement,
+    arretsDeTransportsEnCommunAccess: c.arretsDeTransportsEnCommunAccess,
+    presenceDunePlacePMRSurLespacePu: c.presenceDunePlacePMRSurLespacePu,
+    presenceDunePlacePMRDansLERP: c.presenceDunePlacePMRDansLERP,
+    visiophone: c.visiophone,
+    sonnette: c.sonnette,
+    signaletiqueDirectionnelle: c.signaletiqueDirectionnelle,
+    entreeDePlainpied: c.entreeDePlainpied,
+    portesAutomatiques: c.portesAutomatiques,
+    rampeFixe: c.rampeFixe,
+    rampeAmovible: c.rampeAmovible,
+    ascenseurMontecharge: c.ascenseurMontecharge,
+    presenceDePersonnelALaccueil: c.presenceDePersonnelALaccueil,
+    personnelDaccueilFormeAuxDiffere: c.personnelDaccueilFormeAuxDiffere,
+    personnelDaccueilFormeALaLangueD: c.personnelDaccueilFormeALaLangueD,
+    siOuiHorairesDePresence: c.siOuiHorairesDePresence,
+    planningDeMiseEnAccessibiliteDuS: c.planningDeMiseEnAccessibiliteDuS,
+    informationsComplementaires: c.informationsComplementaires,
+    externalLinkSet: c.externalLinkSet,
   };
 };

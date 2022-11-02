@@ -27,10 +27,11 @@ export class FicheContact {
   public buildForSendApi() {
     return {
       title: this.nom,
+      chapo: this.commentaire,
+      libelleDeVoie: this.adresse,
       categorieDeNavigation: [environment.catContact],
-      firstname: this.nom,
-      phoneNumber: [this.telMobile, this.telFixe],
-      email: this.email,
+      telephone: [this.telMobile, this.telFixe],
+      email: [this.email],
     };
   }
 }

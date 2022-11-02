@@ -1,11 +1,21 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription, map } from 'rxjs';
 
-import { Contact } from '@/app/models/jcms/contact';
+import {
+  Contact,
+  ContactFromApi,
+  LocationFromApi,
+  buildForSendApi,
+  mapContactFromApi,
+} from '@/app/models/jcms/contact';
 import { ContactDetailsService } from '@/app/services/contact-details.service';
+import { JcmsClientService } from '@/app/services/jcms-client.service';
+import { LoginService } from '@/app/services/login.service';
 import { TitlePage } from '@/app/services/utils/title-page.service';
+
+import { environment } from '@/environments/environment';
 
 @Component({
   selector: 'app-page-contact-details',
@@ -27,11 +37,16 @@ export class PageContactDetailsComponent implements OnInit, OnDestroy {
   contact?: Contact;
   mail: string[] = [];
 
+  isLogged!: boolean;
+
   isLoading = false;
   isError = false;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
+    private _jcms: JcmsClientService,
+    private _login: LoginService,
     private contactDetailsService: ContactDetailsService,
     private titleService: Title,
     titlePage: TitlePage
@@ -40,6 +55,7 @@ export class PageContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.isLogged = this._login.isLogged;
     this.init();
   }
 
@@ -107,5 +123,27 @@ export class PageContactDetailsComponent implements OnInit, OnDestroy {
     ]
       .join(' ')
       .trim();
+  }
+
+  addContact() {
+    this._jcms.get<Contact>('data/' + this.contactId).subscribe((res: any) => {
+      let contact = res as LocationFromApi;
+      const options = buildForSendApi(contact);
+      let typeName: string = 'FicheLieu';
+      let urlEncodedDataQuestion = this._jcms.encodeParamForBody(options);
+
+      this._jcms.post('data/' + typeName, urlEncodedDataQuestion).subscribe({
+        // ajouter verif de double chez l'utilisateur
+        next: (rep) => {
+          if (rep) {
+            console.log('contact ajouté !');
+            this.router.navigate(['/mycontacts/']);
+          }
+        },
+        error: () => {
+          console.log("erreur lors de l'ajout d'un contact");
+        },
+      });
+    });
   }
 }
