@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
@@ -128,11 +129,16 @@ export class PageContactDetailsComponent implements OnInit, OnDestroy {
   addContact() {
     this._jcms.get<Contact>('data/' + this.contactId).subscribe((res: any) => {
       let contact = res as LocationFromApi;
-      const options = buildForSendApi(contact);
       let typeName: string = 'FicheLieu';
-      let urlEncodedDataQuestion = this._jcms.encodeParamForBody(options);
+      const options = buildForSendApi(contact);
 
-      this._jcms.post('data/' + typeName, urlEncodedDataQuestion).subscribe({
+      const params = new HttpParams({
+        fromObject: options,
+      });
+      console.log(params);
+      console.log(params.toString());
+
+      this._jcms.post('data/' + typeName, params).subscribe({
         // ajouter verif de double chez l'utilisateur
         next: (rep) => {
           if (rep) {
