@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 import { Contact } from '@/app/models/jcms/contact';
+import { FicheContact } from '@/app/models/jcms/ficheContact';
 import { ContactDetailsService } from '@/app/services/contact-details.service';
+import { DesignSystemService } from '@/app/services/design-system.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
 import { TitlePage } from '@/app/services/utils/title-page.service';
 
@@ -11,17 +13,19 @@ import { TitlePage } from '@/app/services/utils/title-page.service';
   templateUrl: './contact-create.component.html',
   styleUrls: ['./contact-create.component.less'],
 })
-export class ContactCreateComponent implements OnInit {
+export class ContactCreateComponent implements OnInit, AfterViewInit {
   constructor(
     private _contactDetailsService: ContactDetailsService,
     public lblService: LabelMngService,
     private titleService: Title,
+    private _ds: DesignSystemService,
     titlePage: TitlePage
   ) {
     this.titleService.setTitle(titlePage.getTitle('Ajouter un contact'));
   }
 
   contact!: Contact;
+  ficheContact?: FicheContact;
   addContactRun!: boolean;
   // Fields
   nom!: string;
@@ -41,19 +45,26 @@ export class ContactCreateComponent implements OnInit {
     this.commentaire = '';
   }
 
+  ngAfterViewInit(): void {
+    this._ds.initForm();
+  }
+
   public addContact(): void {
-    console.log(this.contact.lastname);
     if (!this.nom) {
       return;
     }
+
     this.addContactRun = true;
 
-    this.contact.lastname = this.nom;
-    this.contact.phoneNumber = [this.telmobile + this.telfixe];
-    this.contact.email = this.email;
-    this.contact.location.roadName = this.adresse;
-    this.contact.subTitle = this.commentaire;
+    this.ficheContact = new FicheContact(
+      this.nom,
+      this.telmobile,
+      this.telfixe,
+      this.email,
+      this.adresse,
+      this.commentaire
+    );
 
-    this._contactDetailsService.createContact(this.contact);
+    this._contactDetailsService.createContact(this.ficheContact);
   }
 }

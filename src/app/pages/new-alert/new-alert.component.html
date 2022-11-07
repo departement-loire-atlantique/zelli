@@ -1,6 +1,6 @@
 <header role="banner" >
   <app-back class="back-in-top right" text="" picto="icon-cross icon--xlarge"></app-back>
-  <h1>{{ lblService.getLbl('newAlertTitle') }}</h1>
+  <h1>{{ titleAlerte }}</h1>
   <div>
     {{ lblService.getLbl('newAlertSubTitle') }}
   </div>
@@ -100,11 +100,17 @@
       <input [(ngModel)]="sendAlert" [ngModelOptions]="{standalone: true}" type="checkbox" id="name-check-sendAlert-m"
         name="sendAlert" value="true" class="ds44-checkbox" required aria-describedby="mandatory-message-sendAlert" />
       <label for="name-check-sendAlert-m" class="ds44-boxLabel" id="name-check-label-sendAlert-m">
-        J’accepte de recevoir des notifications sur mon smartphone (lire les conditions d’utilisation)
+        J’accepte de recevoir des notifications sur mon smartphone
+        <a [routerLink]="getLink()">(lire les conditions d’utilisation)</a>
       </label>
     </div>
 
-    <button class="btn btn-full" [disabled]="process" type="submit">Créer l’alerte</button>
+    <app-alert *ngIf="alerteError" status="error" [description]=alerteErrorMsg>
+    </app-alert>
+
+    <button class="btn btn-full" [disabled]="process" type="submit">{{ btnAddAlerte }}</button>
     <app-loader *ngIf="process" color="#0013b1"></app-loader>
   </form>
+
+
 </main>

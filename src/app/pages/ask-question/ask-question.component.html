@@ -4,9 +4,19 @@
 
 
 <main role="main" class="themes with-menu">
-  <div class="btn-wrapper">
-    <a class="btn" [routerLink]="'/ask-questions-form/' + 'true'">Oui</a>
-    <a class="btn" [routerLink]="'/ask-questions-form/' + 'false'">Non</a>
-  </div>
+
+  <!-- Pas connecté -->
+  <ng-container *ngIf="!isLogged" class="p-contacts__empty">
+    Pour pouvoir poser ta question, tu dois d’abord créer ton compte sur Zelli.
+    <button class="p-contacts__login btn btn-full" [routerLink]="['/account/create']">{{_lblService.getLbl('accountCreateTitle')}}</button>
+    <button class="p-contacts__login btn btn-full" [routerLink]="['/account/login']">{{_lblService.getLbl('loginTitle')}}</button>
+  </ng-container>
+
+  <ng-container *ngIf="isLogged">
+    <div class="btn-wrapper">
+      <a class="btn" [routerLink]="'/ask-questions-form/' + 'true'">Oui</a>
+      <a class="btn" [routerLink]="'/ask-questions-form/' + 'false'">Non</a>
+    </div>
+  </ng-container>
 
 </main>

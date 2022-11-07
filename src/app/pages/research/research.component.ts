@@ -80,14 +80,7 @@ export class ResearchComponent implements AfterViewInit, OnInit, OnDestroy {
         params: {
           text: this.text,
           cidsOff: environment.catExcludeSearch,
-          types: [
-            'SousthemeASE',
-            'ArticleASE',
-            'Contact',
-            'FicheLieu',
-            'FileDocument',
-            'DBFileDocument',
-          ],
+          types: ['SousthemeASE', 'ArticleASE', 'Contact', 'FicheLieu'],
         },
       })
     );

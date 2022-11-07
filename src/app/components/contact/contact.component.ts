@@ -58,9 +58,20 @@ export class ContactComponent implements OnInit, OnDestroy {
   }
 
   getContactsForListing(): Item[] {
-    return this.contacts.map((contact) => ({
-      url: `/contact/details/${contact.id}`,
-      lbl: contact.title,
-    }));
+    // return this.contacts.map((contact) => ({
+    //   url: `/contact/details/${contact.id}`,
+    //   lbl: contact.title,
+    // }));
+
+    let item: Item[] = [];
+    if (this.contacts) {
+      for (let contact of this.contacts) {
+        item.push({
+          url: `/contact/details/${contact.id}`,
+          lbl: contact.title,
+        });
+      }
+    }
+    return item;
   }
 }

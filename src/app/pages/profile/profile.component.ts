@@ -91,7 +91,7 @@ export class ProfileComponent
         params: {
           types: ['AlerteZelli'],
           exactType: true,
-          pstatus: 2,
+          // pstatus: 2,
           // TODO filtre edate
         },
       })

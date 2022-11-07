@@ -1,3 +1,5 @@
+import { environment } from '@/environments/environment';
+
 export type Contact = {
   id: string;
   title: string;
@@ -133,5 +135,26 @@ export const mapContactFromApi = (contact: ContactFromApi): Contact => {
         : undefined,
       description: contact.lieuDeRattachement?.description,
     },
+  };
+};
+
+export const buildForSendApi = (c: LocationFromApi) => {
+  return {
+    categorieDeNavigation: environment.catContact,
+    title: c.title,
+    soustitre: c.soustitre,
+    chapo: c.chapo,
+    etageCouloirEscalier: c.etageCouloirEscalier,
+    entreeBatimentImmeuble: c.entreeBatimentImmeuble,
+    ndeVoie: c.ndeVoie,
+    libelleDeVoie: c.libelleDeVoie,
+    lieudit: c.lieudit,
+    codePostal: c.codePostal,
+    // commune: { id: c.commune?.id, title: c.commune?.title },
+    cs2: c.cs2,
+    cedex2: c.cedex2,
+    telephone: c.telephone,
+    email: c.email,
+    siteInternet: c.siteInternet,
   };
 };

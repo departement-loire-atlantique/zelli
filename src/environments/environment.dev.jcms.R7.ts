@@ -13,6 +13,7 @@ export const environment = {
   catMainContent: 'c_1154085',
 
   catQuestions: 'rzelli_1394678',
+  catContact: 'c_5088', //'rzelli_1394677',
   catThemes: 'rzelli_1394659',
   catAskQuestionRef: 'rzelli_1394928',
   catAskQuestionForm: 'rzelli_1394929',

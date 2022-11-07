@@ -62,6 +62,10 @@ export class LoginService implements OnDestroy {
     this._profilSubject.next(mbr);
   }
 
+  public getProfilId() {
+    return this._profil?.id;
+  }
+
   /**
    * & update this.member
    * @returns true if is valid personal token (no API token)

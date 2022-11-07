@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleASE } from 'src/app/models/jcms/articleASE';
+import { Content } from 'src/app/models/jcms/content';
 import { JcmsClientService } from 'src/app/services/jcms-client.service';
 
 import { Item } from '@/app/components/list/list.component';
@@ -118,6 +119,10 @@ export class ArticleASEComponent implements OnInit {
       }
     }
     return item;
+  }
+
+  public buildUrlCotent(content: Content): string {
+    return Util.buildUrlCotent(content);
   }
 
   getContactsForListDisplay(contacts: Pick<ContactFromApi, 'id'>[]) {
