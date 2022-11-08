@@ -1,8 +1,9 @@
 <section class="has-helped-wrapper">
   <h2>Est-ce que cette page t’a aidé ?</h2>
+  <p *ngIf="clicked"> Merci d’avoir laissé ton avis ! </p>
   <div class="btn-wrapper">
-    <button
-      class="btn btn-light"
+    <button [disabled]="clicked" (click)="actionMethod(1); clicked = true;"
+      [class]="'btn btn-light' + css1"
       type="button"
       aria-pressed="false"
       aria-label="Oui, cette page m'a été utile"
@@ -10,8 +11,8 @@
       <span class="ds44-btnInnerText">Oui</span>
       <app-icon name="like"></app-icon>
     </button>
-    <button
-      class="btn btn-light"
+    <button [disabled]="clicked" (click)="actionMethod(2); clicked = true;"
+    [class]="'btn btn-light' + css2"
       type="button"
       aria-pressed="false"
       aria-label="Non, cette page ne m'a pas été utile"
