@@ -34,7 +34,8 @@
               "src/assets",
               "src/manifest.webmanifest",
               "src/combined-service-worker.js",
-              "src/firebase-messaging-sw.js"
+              "src/firebase-messaging-sw.js",
+              "src/.htaccess"
             ],
             "styles": ["src/styles.less"],
             "scripts": [],
@@ -68,6 +69,7 @@
                 "src/manifest.webmanifest",
                 "src/combined-service-worker.js",
                 "src/firebase-messaging-sw.js",
+                "src/.htaccess",
                 {
                   "glob": "**/*",
                   "input": "src/assets/",
@@ -102,6 +104,7 @@
                 "src/manifest.webmanifest",
                 "src/combined-service-worker.js",
                 "src/firebase-messaging-sw.js",
+                "src/.htaccess",
                 {
                   "glob": "**/*",
                   "input": "src/assets/",
@@ -136,6 +139,7 @@
                 "src/manifest.webmanifest",
                 "src/combined-service-worker.js",
                 "src/firebase-messaging-sw.js",
+                "src/.htaccess",
                 {
                   "glob": "**/*",
                   "input": "src/assets/",
@@ -226,7 +230,8 @@
               "src/assets",
               "src/manifest.webmanifest",
               "src/combined-service-worker.js",
-              "src/firebase-messaging-sw.js"
+              "src/firebase-messaging-sw.js",
+              "src/.htaccess"
             ],
             "styles": ["src/styles.less"],
             "scripts": []
