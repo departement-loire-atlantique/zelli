@@ -54,12 +54,16 @@ export class QuestionsByThemesComponent implements OnInit {
     if (this.faqAccueil && this.faqAccueil.categories) {
       for (let itCat of this.faqAccueil.categories) {
         this._catMng.cat(itCat.id).subscribe((cat: Category) => {
-          if (cat.id == this.questionsCat) {
-            this.surtitre = cat.title;
-          } else if (cat.parent == this.parentCat && cat.icon) {
+          if (cat.parent == this.parentCat && cat.blob) {
             this.icon = cat.blob;
           }
         });
+
+        this._catMng
+          .cat(environment.catQuestions)
+          .subscribe((cat: Category) => {
+            this.surtitre = cat.title;
+          });
       }
     }
   }
