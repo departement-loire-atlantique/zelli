@@ -26,6 +26,8 @@ export interface Category {
 
   image: string;
 
+  blob: string;
+
   color: string;
 
   /**

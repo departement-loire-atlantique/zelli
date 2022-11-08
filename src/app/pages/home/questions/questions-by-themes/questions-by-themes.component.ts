@@ -57,7 +57,7 @@ export class QuestionsByThemesComponent implements OnInit {
           if (cat.id == this.questionsCat) {
             this.surtitre = cat.title;
           } else if (cat.parent == this.parentCat && cat.icon) {
-            this.icon = cat.icon;
+            this.icon = cat.blob;
           }
         });
       }

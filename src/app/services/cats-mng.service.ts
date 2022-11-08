@@ -52,7 +52,7 @@ export class CatsMngService {
       );
   }
 
-  private mapToCat(dataRep: any): Category {
+  public mapToCat(dataRep: any): Category {
     return {
       id: dataRep.id,
       title: dataRep.name,
@@ -66,13 +66,17 @@ export class CatsMngService {
         dataRep.image && dataRep.image.startsWith('upload')
           ? environment.urlJcms + dataRep.image
           : dataRep.image,
+      blob: dataRep.extraDataMap
+        ? environment.urlJcms +
+          dataRep.extraDataMap['extra.Category.jcmsplugin.zelli.blob']
+        : '',
       url: dataRep.friendlyURLSet ? dataRep.friendlyURLSet[0] : '',
       order: dataRep.order,
       idContentTrieur: dataRep.extraDataMap
         ? dataRep.extraDataMap['extra.Category.jcmsplugin.zelli.contenu.trieur']
         : '', // TODO sup rzelli_1394737 (bug JCMS)
       parent: dataRep.parent ? dataRep.parent.id : undefined,
-      color: dataRep.color
+      color: dataRep.color,
     };
   }
 }
