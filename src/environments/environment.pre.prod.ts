@@ -7,6 +7,7 @@ export const environment = {
   catIntro: 'c_5051',
   catMainContent: 'c_5057',
   catQuestions: 'c_5048',
+  catContact: 'c_5047',
   catThemes: 'c_5021',
   catAskQuestionRef: 'c_6287',
   catAskQuestionForm: 'c_6288',
