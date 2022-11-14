@@ -8,7 +8,7 @@ install:
   - npm install -g @angular/cli
 
 jobs:
-  stages:
+  include:
     - stage: pre-production
     if: branch = master
     script:
