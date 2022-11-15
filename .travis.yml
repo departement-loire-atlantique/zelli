@@ -30,7 +30,7 @@ jobs:
         tags: true
   - stage: production  
     script:
-    - npm lint
+    - npm run lint
     - ng build -c production
     - cd dist/zelli
     - zip -r "${TRAVIS_BUILD_DIR}/zelli_${TRAVIS_TAG}.zip" *  
