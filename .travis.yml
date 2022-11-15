@@ -15,7 +15,7 @@ jobs:
   include:
   - stage: pre-production
     script:
-    - npm lint
+    - npm run lint
     - ng build -c pre-production
     - cd dist/zelli
     - zip -r "${TRAVIS_BUILD_DIR}/zelli_${TRAVIS_TAG}-preprod.zip" *  
