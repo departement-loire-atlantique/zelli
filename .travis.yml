@@ -35,5 +35,3 @@ jobs:
       file_glob: true
       file: "${TRAVIS_BUILD_DIR}/*.zip"
       skip_cleanup: true
-      on:
-        tags: true
