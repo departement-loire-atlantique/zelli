@@ -9,21 +9,20 @@ install:
 
 stages:
   - static-code-analyse
-  - build
-  - deploy
+  - build-deploy
   
 jobs:
   include:
   - stage: static-code-analyse
     script:
     - npm run lint
-  - stage: build
+  - stage: build-deploy
     script: ng build -c pre-production --output-path dist/zelli/preprod 
     script: ng build -c production --output-path dist/zelli/prod
     script:
-    - cd dist/zelli/preprod
+    - cd "${TRAVIS_BUILD_DIR}/dist/zelli/preprod"
     - zip -r "${TRAVIS_BUILD_DIR}/zelli_${TRAVIS_TAG}-preprod.zip" * 
-    - cd dist/zelli/prod
+    - cd "${TRAVIS_BUILD_DIR}/dist/zelli/prod"
     - zip -r "${TRAVIS_BUILD_DIR}/zelli_${TRAVIS_TAG}.zip" * 
     deploy:
       provider: releases
