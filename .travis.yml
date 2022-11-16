@@ -9,8 +9,7 @@ install:
 
 stages:
   - static-code-analyse
-  - build-for-pre-production
-  - build-for-production
+  - build
   - deploy
   
 jobs:
@@ -18,19 +17,15 @@ jobs:
   - stage: static-code-analyse
     script:
     - npm run lint
-  - stage: build-for-pre-production
+  - stage: build
     script:    
-    - ng build -c pre-production
-    - cd dist/zelli
+    - ng build -c pre-production --output-path dist/zelli/preprod
+    - cd dist/zelli/preprod
     - zip -r "${TRAVIS_BUILD_DIR}/zelli_${TRAVIS_TAG}-preprod.zip" * 
-    - rm -fr *
-  - stage: build-for-production
-    install: skip
     script:
-    - ng build -c production
-    - cd dist/zelli
+    - ng build -c production --output-path dist/zelli/prod
+    - cd dist/zelli/prod
     - zip -r "${TRAVIS_BUILD_DIR}/zelli_${TRAVIS_TAG}.zip" *  
-    - rm -fr *
   - stage: deploy
     script: skip
     deploy:
