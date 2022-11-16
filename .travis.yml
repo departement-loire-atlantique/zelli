@@ -8,16 +8,16 @@ install:
   - npm install -g @angular/cli
 
 stages:
-  - static-code-analyse
-  - build-deploy-preprod
-  - build-deploy-prod
+  - analyse-code
+  - build-release-preprod
+  - build-release-prod
   
 jobs:
   include:
-  - stage: static-code-analyse
+  - stage: analyse-code
     script:
     - npm run lint
-  - stage: build-deploy-preprod
+  - stage: build-release-preprod
     script: 
     - ng build -c pre-production
     - cd dist/zelli
@@ -31,7 +31,7 @@ jobs:
       skip_cleanup: true
       on:
         branch: updating-build-file-adding-stages
-  - stage: build-deploy-prod
+  - stage: build-release-prod
     script: 
     - ng build -c production
     - cd dist/zelli
