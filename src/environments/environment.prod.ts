@@ -1,10 +1,18 @@
 export const environment = {
   production: true,
   urlJcms: 'https://zelli.loire-atlantique.fr/',
-  apiKey: '',
-  catNavMain: 'TODO',
-  catIntro: 'TODO',
-  catMainContent: 'c_1154085',
+  apiKey:
+    'djI7Y181MDE4OzE2ODUwMjM0OTI0MTc7R0VULFBVVCxQT1NULERFTEVURSw7OzUwOyQyYSQwNCRGR0lWY2tJbmRQT3BSc00vUUlBcExPU0RxQjFqcTF2aU9DajN1OExiSjMvTkNkOE1RbmxGeQ==',
+  catNavMain: 'c_5020',
+  catIntro: 'c_5051',
+  catMainContent: 'c_5057',
+  catQuestions: 'c_5048',
+  catContact: 'c_5047',
+  catThemes: 'c_5021',
+  catAskQuestionRef: 'c_6287',
+  catAskQuestionForm: 'c_6288',
+  catAskQuestionSend: 'c_6289',
+  catExcludeSearch: 'c_6732',
   firebase: {
     apiKey: 'AIzaSyD3n-pKkHumsQnVovVgf_FpEBYbKKWDhx8',
     authDomain: 'zelli-local.firebaseapp.com',
