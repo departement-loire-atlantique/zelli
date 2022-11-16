@@ -26,7 +26,6 @@ jobs:
     - rm -fr *
   - stage: build-for-production
     script:
-    - f test -d "dist/zelli"]; then rm -fr dist/zelli/* fi
     - ng build -c production
     - cd dist/zelli
     - zip -r "${TRAVIS_BUILD_DIR}/zelli_${TRAVIS_TAG}.zip" *  
