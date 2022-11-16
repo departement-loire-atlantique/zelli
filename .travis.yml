@@ -16,7 +16,6 @@ stages:
 jobs:
   include:
   - stage: static-code-analyse
-    install: skip
     script:
     - npm run lint
   - stage: build-for-pre-production
