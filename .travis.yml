@@ -8,17 +8,20 @@ install:
   - npm install -g @angular/cli
 
 stages:
-  - pre-production
-  - production
+  - analyse-code
+  - build-release-preprod
+  - build-release-prod
   
 jobs:
   include:
-  - stage: pre-production
+  - stage: analyse-code
     script:
     - npm run lint
+  - stage: build-release-preprod
+    script: 
     - ng build -c pre-production
     - cd dist/zelli
-    - zip -r "${TRAVIS_BUILD_DIR}/zelli_${TRAVIS_TAG}-preprod.zip" *  
+    - zip -r "${TRAVIS_BUILD_DIR}/zelli_${TRAVIS_TAG}-preprod.zip" * 
     deploy:
       provider: releases
       api_key:
@@ -28,12 +31,11 @@ jobs:
       skip_cleanup: true
       on:
         tags: true
-  - stage: production  
-    script:
-    - npm run lint
+  - stage: build-release-prod
+    script: 
     - ng build -c production
     - cd dist/zelli
-    - zip -r "${TRAVIS_BUILD_DIR}/zelli_${TRAVIS_TAG}.zip" *  
+    - zip -r "${TRAVIS_BUILD_DIR}/zelli_${TRAVIS_TAG}.zip" * 
     deploy:
       provider: releases
       api_key:
@@ -43,8 +45,4 @@ jobs:
       skip_cleanup: true
       on:
         tags: true
-
-
-
-
-    
+       
