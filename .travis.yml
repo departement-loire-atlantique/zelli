@@ -30,7 +30,7 @@ jobs:
       file: "${TRAVIS_BUILD_DIR}/*.zip"
       skip_cleanup: true
       on:
-        branch: updating-build-file-adding-stages
+        tags: true
   - stage: build-release-prod
     script: 
     - ng build -c production
@@ -44,5 +44,5 @@ jobs:
       file: "${TRAVIS_BUILD_DIR}/*.zip"
       skip_cleanup: true
       on:
-        branch: updating-build-file-adding-stages
+        tags: true
        
