@@ -148,7 +148,7 @@ export class NewAlertComponent
       new Date() >=
       new Date(~~this.dateYear, ~~this.dateMonth - 1, ~~this.dateDay)
     ) {
-      this.alerteErrorMsg = 'Sélectionner une date de rappel dans le future ';
+      this.alerteErrorMsg = 'Sélectionner une date de rappel dans le futur';
       this.alerteError = true;
 
       this.dateYear, this.dateMonth, (this.dateDay = '');
