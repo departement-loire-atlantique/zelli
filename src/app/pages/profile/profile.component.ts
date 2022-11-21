@@ -52,6 +52,9 @@ export class ProfileComponent
   alertes: Item[] | undefined;
   pagerAlertes: JcmsPager<AlerteApi> | undefined;
 
+  updateError: boolean = false;
+  updateErrorMsg?: string;
+
   @ViewChildren('formEndDisplay')
   formEndDisplay: QueryList<any> | undefined;
 
@@ -130,6 +133,7 @@ export class ProfileComponent
   }
 
   public toggleEditInfos() {
+    this.updateError = false;
     this.edit = !this.edit;
   }
 
@@ -143,11 +147,23 @@ export class ProfileComponent
       this.address = addrField;
     }
 
-    this.login.updateInfos({
+    let updateLogin = this.login.updateInfos({
       email: this.email,
       phone: this.phone,
       address: this.address,
     });
+
+    if (updateLogin)
+      updateLogin.subscribe({
+        next: () => {
+          this.login.testToken(); // For update local member infos
+        },
+        error: (e) => {
+          this.updateError = true;
+          this.updateErrorMsg =
+            'Il existe déjà un compte avec cet adresse mail';
+        },
+      });
   }
 
   // --------------
