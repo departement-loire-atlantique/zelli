@@ -58,6 +58,8 @@ export class ProfileComponent
   @ViewChildren('formEndDisplay')
   formEndDisplay: QueryList<any> | undefined;
 
+  featAlert: boolean = environment.features.customAlerts;
+
   constructor(
     public login: LoginService,
     private _route: ActivatedRoute,
@@ -90,7 +92,7 @@ export class ProfileComponent
     });
 
     let idMember = this.login.getProfilId();
-    if (idMember) {
+    if (idMember && this.featAlert) {
       this.processAlertesResult(
         this._jcms.getPager<AlerteApi>('search', {
           params: {

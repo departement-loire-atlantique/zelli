@@ -26,6 +26,8 @@ export class ArticleASEComponent implements OnInit {
   article: ArticleASE | undefined;
   color: string | undefined;
 
+  featContact: boolean = environment.features.contacts;
+
   constructor(
     private _route: ActivatedRoute,
     private _jcms: JcmsClientService,
@@ -155,6 +157,7 @@ export class ArticleASEComponent implements OnInit {
 
   public verifContact() {
     return (
+      this.featContact &&
       this.article &&
       this.article.fichesStructures &&
       this.article.fichesStructures.length > 0

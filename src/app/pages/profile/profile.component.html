@@ -170,7 +170,7 @@
     </form>
   </section>
 
-  <section>
+  <section *ngIf="featAlert">
     <h2>Mes alertes</h2>
 
     <div *ngIf="!loadAlert && !alertes">
