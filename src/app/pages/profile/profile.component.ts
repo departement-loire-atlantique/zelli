@@ -161,7 +161,7 @@ export class ProfileComponent
         error: (e) => {
           this.updateError = true;
           this.updateErrorMsg =
-            'Il existe déjà un compte avec cet adresse mail';
+            'Il existe déjà un compte avec cette adresse mail.';
         },
       });
   }
