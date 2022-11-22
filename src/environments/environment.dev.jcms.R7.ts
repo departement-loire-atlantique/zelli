@@ -2,7 +2,7 @@
 
 export const environment = {
   production: false,
-  urlJcms: 'http://10.1.12.82/',
+  urlJcms: 'http://admin-rec-zelli.loire-atlantique.fr',
   apiKey:
     'djI7cnplbGxpXzEzOTQ2NTM7MTY4ODQ1NTU4NjkxNTtHRVQsUFVULFBPU1QsREVMRVRFLDs7MTg7JDJhJDA0JG5Od0IzdENpbHZqaFdvd0lFZzZGRmV0dkFoLmpkWmo2RXZXY2gzWHg0Tk8zQk9Qbmg0ZGZp',
   // urlJcms: 'https://cd44.nantes.trsb.net/',
