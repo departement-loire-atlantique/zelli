@@ -14,15 +14,15 @@ export const environment = {
   catAskQuestionSend: 'c_6289',
   catExcludeSearch: 'c_6732',
   firebase: {
-    apiKey: 'AIzaSyD3n-pKkHumsQnVovVgf_FpEBYbKKWDhx8',
-    authDomain: 'zelli-local.firebaseapp.com',
-    projectId: 'zelli-local',
-    storageBucket: 'zelli-local.appspot.com',
-    messagingSenderId: '308279147291',
-    appId: '1:308279147291:web:ffddaba7cfdfb3b39cf1be',
-    measurementId: 'G-WH4LC8SL31',
+    apiKey: 'AIzaSyBvxgz4krx7lkor3MBJXwCW0DMXUWpQFi4',
+    authDomain: 'zelli-740a4.firebaseapp.com',
+    projectId: 'zelli-740a4',
+    storageBucket: 'zelli-740a4.appspot.com',
+    messagingSenderId: '531858185893',
+    appId: '1:531858185893:web:ae62fc267871a78811774c',
+    measurementId: 'G-MD67YGW81M',
 
     vapidKey:
-      'BKu5WfJU0SoDOojTZ0b-tUIZbOBQK9pNsVKDiySdTPMd-8e2sSoYKT_ee10jR86hWgTTl10XsFBXJZenGfsng3w',
+      'BBnnYtbvBAtvBiqBvtmGOZVAwpf9Mehd4ghrxf9fg3HPyl-uP-0ZNpYQWae5WRQiyNPIYhk7e3iYg22DrDETZdM',
   },
 };
