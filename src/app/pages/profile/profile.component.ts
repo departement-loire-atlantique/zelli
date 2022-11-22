@@ -89,16 +89,20 @@ export class ProfileComponent
       this.address = rep && rep.address ? rep.address : '';
     });
 
-    this.processAlertesResult(
-      this._jcms.getPager<AlerteApi>('search', {
-        params: {
-          types: ['AlerteZelli'],
-          exactType: true,
-          // pstatus: 2,
-          // TODO filtre edate
-        },
-      })
-    );
+    let idMember = this.login.getProfilId();
+    if (idMember) {
+      this.processAlertesResult(
+        this._jcms.getPager<AlerteApi>('search', {
+          params: {
+            types: ['AlerteZelli'],
+            exactType: true,
+            pstatus: 2,
+            mids: idMember,
+            // TODO filtre edate
+          },
+        })
+      );
+    }
   }
 
   ngAfterViewInit(): void {
