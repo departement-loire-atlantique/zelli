@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, forkJoin, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { Item } from '@/app/components/list/list.component';
@@ -10,6 +10,7 @@ import { Category } from '@/app/models/jcms/category';
 import { Content } from '@/app/models/jcms/content';
 import { FaqAccueil } from '@/app/models/jcms/faqAccueil';
 import { ListeDeContenus } from '@/app/models/jcms/listeDeContenus';
+import { CatsMngService } from '@/app/services/cats-mng.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { TitlePage } from '@/app/services/utils/title-page.service';
 import { Util } from '@/app/util';
@@ -31,6 +32,7 @@ export class QuestionsComponent extends APageHome implements OnInit {
   constructor(
     _injector: Injector,
     private _jcms: JcmsClientService,
+    private _catsMng: CatsMngService,
     private titleService: Title,
     titlePage: TitlePage
   ) {
@@ -91,9 +93,7 @@ export class QuestionsComponent extends APageHome implements OnInit {
         // liste des catégories de la FAQ
         this.getListCategories(faq.categories).subscribe((dataArray) => {
           for (let i = 0; i < dataArray.length; i++) {
-            let idParent = JSON.parse(JSON.stringify(dataArray[i].parent))[
-              'id'
-            ];
+            let idParent = dataArray[i].parent;
             // ajoute si le parent est bien la cat parent
             if (idParent == this.parentCategory) {
               this.addItem(faq, ind, dataArray[i]);
@@ -126,21 +126,17 @@ export class QuestionsComponent extends APageHome implements OnInit {
   private getListCategories(list: Content[]) {
     let observables: Observable<Category>[] = [];
     for (let cat of list) {
-      observables.push(this._jcms.get<Category>('data/' + cat.id));
+      observables.push(
+        this._jcms
+          .get<Category>('data/' + cat.id, {
+            params: {
+              related: 'extraDataMap',
+            },
+          })
+          .pipe(map((rep: any): Category => this._catsMng.mapToCat(rep)))
+      );
     }
     return forkJoin(observables);
-  }
-
-  /**
-   * Get l'image de la catégorie
-   * @param category la catégorie
-   * @returns l'image si présente
-   */
-  public getImgCategory(category?: Category) {
-    if (category && category.icon) {
-      return category.icon;
-    }
-    return '';
   }
 
   /**
@@ -155,7 +151,7 @@ export class QuestionsComponent extends APageHome implements OnInit {
     }
 
     this.result.splice(index, 0, {
-      img: environment.urlJcms + this.getImgCategory(catFaq),
+      img: catFaq?.blob,
       lbl: faq.title,
       url: Util.buildUrlCotent(faq),
     });

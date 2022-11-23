@@ -163,11 +163,14 @@
         </div>
 
       </div>
+
+      <app-alert *ngIf="updateError" status="error" [description]=updateErrorMsg></app-alert>
+
       <button #formEndDisplay *ngIf="edit" class="btn btn-full" type="submit">Sauvegarder</button>
     </form>
   </section>
 
-  <section>
+  <section *ngIf="featAlert">
     <h2>Mes alertes</h2>
 
     <div *ngIf="!loadAlert && !alertes">

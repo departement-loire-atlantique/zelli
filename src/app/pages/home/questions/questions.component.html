@@ -5,9 +5,10 @@
 <app-main-menu></app-main-menu>
 
 <main role="main" class="themes with-menu">
+  <app-loader *ngIf="researchRun" color="#0013b1"></app-loader>
+
   <app-list class="question-list" [items]="getItems()" [noSeparator]="true"></app-list>
 
-  <app-loader *ngIf="researchRun" color="#0013b1"></app-loader>
 
   <div class="ask-question">
     <h3>Tu n'as pas trouvé la réponse dans les questions fréquentes ?</h3>

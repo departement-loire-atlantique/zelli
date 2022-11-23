@@ -7,7 +7,7 @@
   <app-theme-header [catTheme]="catTheme" [big]="false"></app-theme-header>
   <h1 *ngIf="article">{{ article.title }}</h1>
 </header>
-<main role="main" *ngIf="article">
+<main role="main" class="list" *ngIf="article">
   <app-collapser
     [dataTitle]="article.titreDescription"
     [dataVal]="article.description"

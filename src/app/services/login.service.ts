@@ -1,7 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { BehaviorSubject, EMPTY, Observable, catchError, map } from 'rxjs';
 
 import { environment } from '@/environments/environment';
 
@@ -236,11 +236,9 @@ export class LoginService implements OnDestroy {
     if (this.isLogged && this._profil && params) {
       let urlEncodedData = this._jcms.encodeParamForBody(params);
 
-      this._jcms
-        .post('data/' + this._profil.id, urlEncodedData)
-        .subscribe((rep) => {
-          this.testToken(); // For update local member infos
-        });
+      return this._jcms.post('data/' + this._profil.id, urlEncodedData);
+    } else {
+      return undefined;
     }
   }
 

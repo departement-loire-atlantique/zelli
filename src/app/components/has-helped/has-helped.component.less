@@ -9,6 +9,10 @@
     text-align: center;
   }
 
+  p {
+    text-align: center;
+  }
+
   button {
     display: flex;
     align-items: center;
@@ -22,7 +26,12 @@
       margin-left: 1rem;
     }
 
-    &:hover {
+    .active {
+      background-color: @blue;
+      color: @white;
+    }
+
+    &:hover:enabled {
       background-color: @blue;
       color: @white;
     }
