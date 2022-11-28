@@ -27,6 +27,8 @@ export class PageContactDetailsComponent implements OnInit, OnDestroy {
   @Input()
   fromContactPage = false;
 
+  featContact: boolean = environment.features.contacts;
+
   contactId$ = this.route.paramMap.pipe(
     map((params: ParamMap) => params.get('contactId') ?? undefined)
   );
