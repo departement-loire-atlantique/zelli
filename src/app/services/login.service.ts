@@ -78,7 +78,7 @@ export class LoginService implements OnDestroy {
     this._jcms
       .get<Member>('WhoAmI', {
         params: {
-          related: 'extraDataMap',
+          related: ['extraDataMap', 'extraDBDataMap'],
         },
       })
       .pipe(map((rep: any): Member => mapApiToMember(rep)))
