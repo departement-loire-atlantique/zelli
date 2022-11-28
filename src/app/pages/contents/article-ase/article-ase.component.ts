@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleASE } from 'src/app/models/jcms/articleASE';
 import { Content } from 'src/app/models/jcms/content';
 import { JcmsClientService } from 'src/app/services/jcms-client.service';
@@ -32,9 +32,11 @@ export class ArticleASEComponent implements OnInit {
     private _catMng: CatsMngService,
     public lblMng: LabelMngService,
     private titleService: Title,
-    titlePage: TitlePage
+    titlePage: TitlePage,
+    private _router: Router
   ) {
     this.titleService.setTitle(titlePage.getTitle('Article'));
+    this._router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit(): void {
