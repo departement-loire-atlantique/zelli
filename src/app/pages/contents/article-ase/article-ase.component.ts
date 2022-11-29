@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleASE } from 'src/app/models/jcms/articleASE';
 import { Content } from 'src/app/models/jcms/content';
 import { JcmsClientService } from 'src/app/services/jcms-client.service';
@@ -26,17 +26,17 @@ export class ArticleASEComponent implements OnInit {
   article: ArticleASE | undefined;
   color: string | undefined;
 
-  featContact: boolean = environment.features.contacts;
-
   constructor(
     private _route: ActivatedRoute,
     private _jcms: JcmsClientService,
     private _catMng: CatsMngService,
     public lblMng: LabelMngService,
     private titleService: Title,
-    titlePage: TitlePage
+    titlePage: TitlePage,
+    private _router: Router
   ) {
     this.titleService.setTitle(titlePage.getTitle('Article'));
+    this._router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit(): void {
@@ -157,7 +157,6 @@ export class ArticleASEComponent implements OnInit {
 
   public verifContact() {
     return (
-      this.featContact &&
       this.article &&
       this.article.fichesStructures &&
       this.article.fichesStructures.length > 0

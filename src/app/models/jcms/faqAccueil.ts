@@ -1,4 +1,3 @@
-import { Category } from './category';
 import { Content } from './content';
 
 /**
@@ -7,4 +6,5 @@ import { Content } from './content';
 export interface FaqAccueil extends Content {
   description: string;
   categories: Content[];
+  allReferrerSet: Content[];
 }

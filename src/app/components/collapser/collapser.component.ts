@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 
 import { DesignSystemService } from '@/app/services/design-system.service';
 
@@ -9,7 +15,7 @@ import { Item } from '../list/list.component';
   templateUrl: './collapser.component.html',
   styleUrls: ['./collapser.component.less'],
 })
-export class CollapserComponent implements AfterViewInit {
+export class CollapserComponent implements AfterViewInit, OnChanges {
   @Input()
   dataTitle: string[] | undefined;
 
@@ -25,6 +31,10 @@ export class CollapserComponent implements AfterViewInit {
   constructor(private _ds: DesignSystemService) {}
 
   ngAfterViewInit(): void {
+    this._ds.initCollapser();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
     this._ds.initCollapser();
   }
 

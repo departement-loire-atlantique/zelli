@@ -21,8 +21,9 @@ export function mapApiToMember(mbrApi: any): Member {
     title: mbrApi.login,
     class: mbrApi.class,
     login: mbrApi.login,
-    dateNaissance:
-      mbrApi.extraDataMap['extradb.Member.jcmsplugin.zelli.datenaissance'],
+    dateNaissance: mbrApi.extraDataMap
+      ? mbrApi.extraDataMap['extra.Member.jcmsplugin.zelli.datenaissance']
+      : '',
     email: mbrApi.email,
     photo: mbrApi.photo,
     phone: mbrApi.phone,
