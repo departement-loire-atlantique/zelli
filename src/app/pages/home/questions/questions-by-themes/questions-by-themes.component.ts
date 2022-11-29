@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, combineLatest } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { Item } from '@/app/components/list/list.component';
@@ -39,11 +40,17 @@ export class QuestionsByThemesComponent implements OnInit {
   ngOnInit(): void {
     this._route.paramMap.subscribe((params) => {
       const id = params.get('id')!;
-      this._jcms.get<FaqAccueil>('data/' + id).subscribe((faq: FaqAccueil) => {
-        this.faqAccueil = faq;
-        this.getCategories();
-        this.getFaqEntry(id);
-      });
+      this._jcms
+        .get<FaqAccueil>('data/' + id, {
+          params: {
+            related: 'allReferrerSet',
+          },
+        })
+        .subscribe((faq: FaqAccueil) => {
+          this.faqAccueil = faq;
+          this.getCategories();
+          this.getFaqEntry(id);
+        });
     });
   }
 
@@ -74,30 +81,23 @@ export class QuestionsByThemesComponent implements OnInit {
    */
   private getFaqEntry(id: string) {
     if (this.faqAccueil && id) {
-      this._jcms
-        .getPager<FaqEntry>('search', {
-          params: {
-            types: 'FaqEntry',
-            exactType: true,
-          },
-        })
-        .subscribe((pager: JcmsPager<FaqEntry>) => {
-          if (!this.faqEntry) {
-            this.faqEntry = [];
+      let obs: Observable<FaqEntry>[] = [];
+      if (!this.faqEntry) {
+        this.faqEntry = [];
+      }
+
+      for (const itRef of this.faqAccueil.allReferrerSet) {
+        if (itRef && itRef.class === 'generated.FaqEntry') {
+          obs.push(this._jcms.get<FaqEntry>('data/' + itRef.id));
+        }
+      }
+      combineLatest(obs).subscribe((faqEntryArray: FaqEntry[]) => {
+        for (const itFaqEntry of faqEntryArray) {
+          if (this.faqEntry) {
+            this.faqEntry.push(itFaqEntry);
           }
-
-          this.pager = pager;
-          const contents = pager.dataInPage;
-
-          // liste des faq entrée qui appartiennent à la faq accueil
-          this.faqEntry = contents.filter((s) => {
-            if (s.faq && s.faq.id) {
-              return s.faq.id == id;
-            } else {
-              return false;
-            }
-          });
-        });
+        }
+      });
     }
   }
 
