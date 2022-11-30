@@ -37,6 +37,7 @@ export class AccountCreationComponent
 
   // field
   pseudo: string = '';
+  email: string = '';
 
   date: Date | undefined;
   @Input() dateDay!: string;
@@ -57,9 +58,9 @@ export class AccountCreationComponent
   pwdErrorMsg: string =
     'Oups ! Tu n’as pas saisi la même chose dans les deux champs';
   pwdSpaceErrorMsg: string =
-    'Oups ! Merci de saisir ton mot de passe sans espace (nous te recommandons de choisir un mot de passe avec au moins 12 caractères, avec des lettres, des chiffres et des caractères spéciaux comme le !)';
+    'Oups ! Merci de saisir ton mot de passe sans espace (nous te recommandons de choisir un mot de passe avec au moins 8 caractères, avec des lettres, des chiffres et des caractères spéciaux comme le !)';
   pwdStrongErrorMsg: string =
-    'Oups ! Merci de saisir un mot de passe plus fort (nous te recommandons de choisir un mot de passe avec au moins 12 caractères, avec des lettres, des chiffres et des caractères spéciaux comme le !)';
+    'Oups ! Merci de saisir un mot de passe plus fort (nous te recommandons de choisir un mot de passe avec au moins 8 caractères, avec des lettres, des chiffres et des caractères spéciaux comme le !)';
 
   @ViewChildren('formDisplay')
   formDisplay: QueryList<any> | undefined;
@@ -93,9 +94,9 @@ export class AccountCreationComponent
   public validStep(): boolean {
     this.isError = false;
     this.errorMsg = '';
-    console.log(this.isError);
+
     if (this.step === 1) {
-      if (this.pseudo) {
+      if (this.pseudo && this.email && this._ds.isEmail(this.email)) {
         this.loading = true;
 
         /* Error accent */
@@ -105,7 +106,7 @@ export class AccountCreationComponent
           this.isError = true;
         } else {
           /* Pseudo exists */
-          this._login.isMemberNotExist(this.pseudo, {
+          this._login.isMemberNotExist(this.pseudo, this.email, {
             class: this,
             func: this.callbackIsMemberNotExist,
           });
@@ -148,7 +149,7 @@ export class AccountCreationComponent
       /* Error space */
       const rExp: RegExp = /\s/;
       const strongPwd: RegExp =
-        /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{12,})/; // enlever (?=.*[A-Z]) si pas maj necessaire
+        /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/; // enlever (?=.*[A-Z]) si pas maj necessaire
 
       if (rExp.test(this.pwd)) {
         //espace
@@ -213,7 +214,7 @@ export class AccountCreationComponent
       this.processNexStep();
       return false;
     }
-    this.errorMsg = this.pseudoErrorMsg;
+    this.errorMsg = msg ? msg : this.pseudoErrorMsg;
     this.isError = !status;
     return true;
   }

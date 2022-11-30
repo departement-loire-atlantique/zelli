@@ -59,6 +59,7 @@ export class ProfileComponent
   formEndDisplay: QueryList<any> | undefined;
 
   featAlert: boolean = environment.features.customAlerts;
+  featEditPhoto: boolean = environment.features.editPhoto;
 
   constructor(
     public login: LoginService,
@@ -145,6 +146,15 @@ export class ProfileComponent
 
   public editInfo() {
     this.edit = false; // TODO if ok
+
+    if (!this.email || !this._ds.isEmail(this.email)) {
+      this.edit = true;
+      return;
+    }
+    if (this.phone && !this._ds.isPhone(this.phone)) {
+      this.edit = true;
+      return;
+    }
 
     const addrField = (<HTMLElement>this.elByClassName.nativeElement)
       .querySelector('.field-address .ds44-input-value')!

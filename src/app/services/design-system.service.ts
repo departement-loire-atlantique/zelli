@@ -3,6 +3,10 @@ import { Injectable } from '@angular/core';
 /**
  * Class JS du DS 44
  */
+declare class MiscForm {
+  static isEmail(email: string): boolean;
+  static isPhone(number: string): boolean;
+}
 declare class CollapserStandard {}
 declare class CarouselStandard {}
 declare class OverlayStandard {
@@ -48,5 +52,13 @@ export class DesignSystemService {
     new FormLayoutInline();
     new FormLayoutObligationAlimentaire();
     new FormLayoutStandard();
+  }
+
+  public isEmail(email: string): boolean {
+    return MiscForm.isEmail(email);
+  }
+
+  public isPhone(number: string): boolean {
+    return MiscForm.isPhone(number);
   }
 }

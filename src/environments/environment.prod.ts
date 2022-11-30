@@ -28,5 +28,6 @@ export const environment = {
   features: {
     contacts: false,
     customAlerts: false,
+    editPhoto: false,
   },
 };
