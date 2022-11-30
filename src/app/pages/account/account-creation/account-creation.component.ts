@@ -37,6 +37,7 @@ export class AccountCreationComponent
 
   // field
   pseudo: string = '';
+  email: string = '';
 
   date: Date | undefined;
   @Input() dateDay!: string;
@@ -93,9 +94,9 @@ export class AccountCreationComponent
   public validStep(): boolean {
     this.isError = false;
     this.errorMsg = '';
-    console.log(this.isError);
+
     if (this.step === 1) {
-      if (this.pseudo) {
+      if (this.pseudo && this.email && this._ds.isEmail(this.email)) {
         this.loading = true;
 
         /* Error accent */
@@ -105,7 +106,7 @@ export class AccountCreationComponent
           this.isError = true;
         } else {
           /* Pseudo exists */
-          this._login.isMemberNotExist(this.pseudo, {
+          this._login.isMemberNotExist(this.pseudo, this.email, {
             class: this,
             func: this.callbackIsMemberNotExist,
           });
@@ -213,7 +214,7 @@ export class AccountCreationComponent
       this.processNexStep();
       return false;
     }
-    this.errorMsg = this.pseudoErrorMsg;
+    this.errorMsg = msg ? msg : this.pseudoErrorMsg;
     this.isError = !status;
     return true;
   }

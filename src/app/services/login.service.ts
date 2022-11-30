@@ -196,24 +196,34 @@ export class LoginService implements OnDestroy {
 
   public isMemberNotExist(
     pseudo: string,
+    email?: string,
     callback?: { class: any; func: (status: boolean, msg?: string) => any }
   ) {
-    this._jcms.get('plugins/zelli/member/notexist/' + pseudo).subscribe({
-      next: (rep: any) => {
-        if (JSON.stringify(rep).includes('success')) {
-          if (callback) {
-            callback.func.call(callback.class, true);
+    this._jcms
+      .get('plugins/zelli/member/notexist/' + pseudo, {
+        params: {
+          email: email ? email : '',
+        },
+      })
+      .subscribe({
+        next: (rep: any) => {
+          let noError = true;
+          let errorMsg = 'Oups ! ';
+          if (rep?.pseudo?.status === 'ko') {
+            noError = false;
+            errorMsg += rep.pseudo.msg ? rep.pseudo.msg : '';
           }
+          if (rep?.email?.status === 'ko') {
+            noError = false;
+            errorMsg += rep.email.msg ? rep.email.msg : '';
+          }
+          callback?.func.call(callback.class, noError, errorMsg);
+        },
+        error: (error) => {
           // TODO error DS
-        } else {
-          callback?.func.call(callback.class, false);
-        }
-      },
-      error: (error) => {
-        // TODO error DS
-        callback?.func.call(callback.class, false, error.error.status);
-      },
-    });
+          callback?.func.call(callback.class, false, error.error.status);
+        },
+      });
   }
 
   public updatePhoto(file: File) {
