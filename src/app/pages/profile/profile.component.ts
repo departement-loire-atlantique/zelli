@@ -59,6 +59,7 @@ export class ProfileComponent
   formEndDisplay: QueryList<any> | undefined;
 
   featAlert: boolean = environment.features.customAlerts;
+  featEditPhoto: boolean = environment.features.editPhoto;
 
   constructor(
     public login: LoginService,

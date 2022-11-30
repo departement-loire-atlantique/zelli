@@ -4,7 +4,7 @@
   <div class="photo">
     <img [src]="getProfileImg()" alt="Photo" aria-hidden="true" />
 
-    <button (click)="toggleEditPhoto()" class="btn-link btn-edit-photo" type="button" data-target="#overlay-edit-photo"
+    <button *ngIf="featEditPhoto" (click)="toggleEditPhoto()" class="btn-link btn-edit-photo" type="button" data-target="#overlay-edit-photo"
       data-js="ds44-modal" title="Edition de la photo">
       <i class="icon icon-edit icon--large" aria-hidden="true"></i>
     </button>
