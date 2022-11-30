@@ -84,12 +84,12 @@
             <div class="ds44-posRel">
               <label for="form-email" class="ds44-formLabel">
                 <span class="ds44-labelTypePlaceholder">
-                  <span>Email</span>
+                  <span>Email<sup aria-hidden="true">*</sup></span>
                 </span>
               </label>
 
-              <input type="text" id="form-email" name="form-email" class="ds44-inpStd" title="Email"
-                autocomplete="email" [(ngModel)]="email" />
+              <input type="text" id="form-email" name="form-email" class="ds44-inpStd" title="Email - obligatoire"
+                autocomplete="email" [(ngModel)]="email" data-required="true"/>
 
               <button class="ds44-reset" type="button">
                 <i class="icon icon-cross icon--sizeL" aria-hidden="true"></i>

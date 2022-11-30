@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
  */
 declare class MiscForm {
   static isEmail(email: string): boolean;
+  static isPhone(number: string): boolean;
 }
 declare class CollapserStandard {}
 declare class CarouselStandard {}
@@ -55,5 +56,9 @@ export class DesignSystemService {
 
   public isEmail(email: string): boolean {
     return MiscForm.isEmail(email);
+  }
+
+  public isPhone(number: string): boolean {
+    return MiscForm.isPhone(number);
   }
 }
