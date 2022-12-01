@@ -156,12 +156,14 @@ export class LoginService implements OnDestroy {
 
   public createMember(
     pseudo: string,
+    email: string,
     dateNaissance: string,
     pwd: string,
     callback?: { class: any; func: (status: boolean, msg?: string) => any }
   ) {
     let body = new URLSearchParams();
     body.set('login', Buffer.from(pseudo).toString('base64'));
+    body.set('email', Buffer.from(email).toString('base64'));
     body.set('dateNaissance', dateNaissance);
     body.set('pwd', Buffer.from(pwd).toString('base64'));
 

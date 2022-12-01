@@ -194,6 +194,7 @@ export class AccountCreationComponent
     if (this.step >= this.maxStep) {
       this._login.createMember(
         this.pseudo,
+        this.email,
         this.date === undefined ? '' : this.date.getTime().toString(),
         this.pwd,
         {
