@@ -58,9 +58,9 @@ export class AccountCreationComponent
   pwdErrorMsg: string =
     'Oups ! Tu n’as pas saisi la même chose dans les deux champs';
   pwdSpaceErrorMsg: string =
-    'Oups ! Merci de saisir ton mot de passe sans espace (nous te recommandons de choisir un mot de passe avec au moins 8 caractères, avec des lettres, des chiffres et des caractères spéciaux comme le !)';
+    'Oups ! Merci de saisir ton mot de passe sans espace (nous te recommandons de choisir un mot de passe avec au moins 8 caractères, avec des lettres majuscules et minuscules, des chiffres et des caractères spéciaux comme le !)';
   pwdStrongErrorMsg: string =
-    'Oups ! Merci de saisir un mot de passe plus fort (nous te recommandons de choisir un mot de passe avec au moins 8 caractères, avec des lettres, des chiffres et des caractères spéciaux comme le !)';
+    'Oups ! Merci de saisir un mot de passe plus fort (nous te recommandons de choisir un mot de passe avec au moins 8 caractères, des lettres majuscules et minuscules, des chiffres et des caractères spéciaux comme le !)';
 
   @ViewChildren('formDisplay')
   formDisplay: QueryList<any> | undefined;
