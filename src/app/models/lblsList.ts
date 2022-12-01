@@ -54,7 +54,7 @@ export const lbls: { [key: string]: lbl } = {
   },
   // step 1
   accountCreateStep1: {
-    lbl: 'Saisis ton prénom ou un pseudo',
+    lbl: 'Saisis ton prénom ou un pseudo, ainsi que ton email',
     propJcms: 'jcmsplugin.zelli.lbl.account.create.step1',
   },
   accountCreateS1Field: {
