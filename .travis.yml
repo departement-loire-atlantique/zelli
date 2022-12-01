@@ -1,0 +1,63 @@
+language: node_js
+
+node_js:
+  - 16
+
+install:
+  - npm install
+  - npm install -g @angular/cli
+
+stages:
+  - analyse-code
+  - build-release-preprod
+  - build-release-recette
+  - build-release-prod
+  
+jobs:
+  include:
+  - stage: analyse-code
+    script:
+    - npm run lint
+  - stage: build-release-preprod
+    script: 
+    - ng build -c pre-production
+    - cd dist/zelli
+    - zip -r "${TRAVIS_BUILD_DIR}/zelli_${TRAVIS_TAG}-preprod.zip" * 
+    deploy:
+      provider: releases
+      api_key:
+        secure: nA8aGmUCuHQTtZMruuqZyPxDKKPsNLJK8RN3NA0EXhr2SpP1o+3bYZz/uLDXkGMqethGrKDc3taoc/epwGchQa0/OBPcvXRXygVG+gfIP7crQQmESDg4fP3HZnOlayvyLc4exWE3YgZlt7slEvvYgoQLswSzJQXrw1hdA/K7urk93cPyL/x/mg6y5xV43585a7W1M8bkuQNVe9rK5F3F7Gk+tLXE/BK8ebxMusP1QSw58ZkXFxr/Y4WNQFbX9X9PTjgtgbwLr/glqQn/ifqQfyub4sELCIQYGaw+a8U5fz7z/XYxM4gXEhxVRVqhnM1Gm5DicN/ziQXOrTU+s39sZJCsKorGKqRsv1gx0oudl9YFbmlW205rBzAHiNe9GheWJ+xx2AP16v/p1Fn6/Bu285JT7Q1VfB9xwgEN7LvcFWSdcGywbsq2/+DJFfYMumpZR0TAp8DlfW+QZaoOoEfdEd61K71aaQfUR1bhHcd7eQwOWCg7qe07/CkOc0SHQSea/7RncYR6bcZXSipKPIblosAN0Pn/bvWZvhIMTxoT4Y1lsYOoOHvkmLBClriWZgAA4T8oH2NEQb1jHUCuxdixORFgI2hURMOxGJ93zxgqI0ttXQfhYqrS3EvnbRaSY7VmSfRUkV8yH4ntNK0rE/dv0h1iCWpCo4Tt3ctPGSVv278=
+      file_glob: true
+      file: "${TRAVIS_BUILD_DIR}/*.zip"
+      skip_cleanup: true
+      on:
+        tags: true
+  - stage: build-release-recette
+    script: 
+    - ng build -c R7
+    - cd dist/zelli
+    - zip -r "${TRAVIS_BUILD_DIR}/zelli_${TRAVIS_TAG}-recette.zip" * 
+    deploy:
+      provider: releases
+      api_key:
+        secure: nA8aGmUCuHQTtZMruuqZyPxDKKPsNLJK8RN3NA0EXhr2SpP1o+3bYZz/uLDXkGMqethGrKDc3taoc/epwGchQa0/OBPcvXRXygVG+gfIP7crQQmESDg4fP3HZnOlayvyLc4exWE3YgZlt7slEvvYgoQLswSzJQXrw1hdA/K7urk93cPyL/x/mg6y5xV43585a7W1M8bkuQNVe9rK5F3F7Gk+tLXE/BK8ebxMusP1QSw58ZkXFxr/Y4WNQFbX9X9PTjgtgbwLr/glqQn/ifqQfyub4sELCIQYGaw+a8U5fz7z/XYxM4gXEhxVRVqhnM1Gm5DicN/ziQXOrTU+s39sZJCsKorGKqRsv1gx0oudl9YFbmlW205rBzAHiNe9GheWJ+xx2AP16v/p1Fn6/Bu285JT7Q1VfB9xwgEN7LvcFWSdcGywbsq2/+DJFfYMumpZR0TAp8DlfW+QZaoOoEfdEd61K71aaQfUR1bhHcd7eQwOWCg7qe07/CkOc0SHQSea/7RncYR6bcZXSipKPIblosAN0Pn/bvWZvhIMTxoT4Y1lsYOoOHvkmLBClriWZgAA4T8oH2NEQb1jHUCuxdixORFgI2hURMOxGJ93zxgqI0ttXQfhYqrS3EvnbRaSY7VmSfRUkV8yH4ntNK0rE/dv0h1iCWpCo4Tt3ctPGSVv278=
+      file_glob: true
+      file: "${TRAVIS_BUILD_DIR}/*.zip"
+      skip_cleanup: true
+      on:
+        tags: true
+  - stage: build-release-prod
+    script: 
+    - ng build -c production
+    - cd dist/zelli
+    - zip -r "${TRAVIS_BUILD_DIR}/zelli_${TRAVIS_TAG}.zip" * 
+    deploy:
+      provider: releases
+      api_key:
+        secure: nA8aGmUCuHQTtZMruuqZyPxDKKPsNLJK8RN3NA0EXhr2SpP1o+3bYZz/uLDXkGMqethGrKDc3taoc/epwGchQa0/OBPcvXRXygVG+gfIP7crQQmESDg4fP3HZnOlayvyLc4exWE3YgZlt7slEvvYgoQLswSzJQXrw1hdA/K7urk93cPyL/x/mg6y5xV43585a7W1M8bkuQNVe9rK5F3F7Gk+tLXE/BK8ebxMusP1QSw58ZkXFxr/Y4WNQFbX9X9PTjgtgbwLr/glqQn/ifqQfyub4sELCIQYGaw+a8U5fz7z/XYxM4gXEhxVRVqhnM1Gm5DicN/ziQXOrTU+s39sZJCsKorGKqRsv1gx0oudl9YFbmlW205rBzAHiNe9GheWJ+xx2AP16v/p1Fn6/Bu285JT7Q1VfB9xwgEN7LvcFWSdcGywbsq2/+DJFfYMumpZR0TAp8DlfW+QZaoOoEfdEd61K71aaQfUR1bhHcd7eQwOWCg7qe07/CkOc0SHQSea/7RncYR6bcZXSipKPIblosAN0Pn/bvWZvhIMTxoT4Y1lsYOoOHvkmLBClriWZgAA4T8oH2NEQb1jHUCuxdixORFgI2hURMOxGJ93zxgqI0ttXQfhYqrS3EvnbRaSY7VmSfRUkV8yH4ntNK0rE/dv0h1iCWpCo4Tt3ctPGSVv278=
+      file_glob: true
+      file: "${TRAVIS_BUILD_DIR}/*.zip"
+      skip_cleanup: true
+      on:
+        tags: true
+       

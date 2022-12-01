@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   urlJcms: 'https://admin-zelli.loire-atlantique.fr/',
   apiKey:
-    'djI7Y181MDE4OzE3MDA3MzIxMjEwOTg7R0VULFBVVCxQT1NULERFTEVURSw7OzUwOyQyYSQwNCQvWWlZNjc4aThPTmpneU5CRVJ3L1BPdG55NldiVGVIY1gzaXRwem1Xb0RDWS56bUZ6Y01BRw==',
+    'djI7Y181MDE4OzE3MDA4MzY3ODIxNTM7R0VULFBVVCxQT1NULERFTEVURSw7Lio7NDQ7JDJhJDA0JHpLaEZ3MWFQTTEyVW83TnBrUmVqMk94bW5IR2o1U1VKVThETzMxVHlnNzBIdk0xSHZwYjB5',
   catNavMain: 'c_5020',
   catIntro: 'c_5051',
   catMainContent: 'c_5057',
