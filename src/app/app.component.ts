@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
+import packageJson from 'package.json';
 import { environment } from 'src/environments/environment';
 
 import { LoginService } from './services/login.service';
@@ -17,6 +18,7 @@ export class AppComponent implements OnInit {
       console.log('===== DEV MODE =====');
       console.log('Url jcms : ' + environment.urlJcms);
     }
+    console.log(packageJson.name + ' V' + packageJson.version);
   }
 
   ngOnInit(): void {
