@@ -18,7 +18,7 @@
       <button class="p-contacts__add btn btn-full" [routerLink]="['/contact/create']">Ajouter un contact</button>
 
       <!-- Pas de contacts -->
-      <section *ngIf="!isLogged" class="p-contacts__empty">
+      <section *ngIf="!displayResult()" class="p-contacts__empty">
         Tu peux enregistrer des contacts dans cet espace au fil de ta navigation
         dans l'appli ou en cliquant sur le bouton "Ajouter un contact".
       </section>
