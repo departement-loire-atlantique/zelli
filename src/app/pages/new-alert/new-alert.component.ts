@@ -132,21 +132,23 @@ export class NewAlertComponent
     }
 
     // Test Date
-    if (!this.dateYear || !this.dateMonth || !this.dateDay) {
-      // field by Design System
-      const dateInput = (<HTMLElement>this.elByClassName.nativeElement)
-        .querySelector('#new-alert-date .ds44-input-value')!
-        .getAttribute('value');
-      if (dateInput) {
-        this.dateYear = dateInput.substring(0, 4);
-        this.dateMonth = dateInput.substring(5, 7);
-        this.dateDay = dateInput.substring(8, 10);
-      }
+    // field by Design System
+    const dateInput = (<HTMLElement>this.elByClassName.nativeElement)
+      .querySelector('#new-alert-date .ds44-input-value')!
+      .getAttribute('value');
+
+    if (dateInput) {
+      this.dateYear = dateInput.substring(0, 4);
+      this.dateMonth = dateInput.substring(5, 7);
+      this.dateDay = dateInput.substring(8, 10);
     }
 
     if (
+      !this.dateYear ||
+      !this.dateMonth ||
+      !this.dateDay ||
       new Date() >=
-      new Date(~~this.dateYear, ~~this.dateMonth - 1, ~~this.dateDay)
+        new Date(~~this.dateYear, ~~this.dateMonth - 1, ~~this.dateDay)
     ) {
       this.alerteErrorMsg = 'Sélectionner une date de rappel dans le futur';
       this.alerteError = true;
