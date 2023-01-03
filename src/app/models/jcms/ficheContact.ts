@@ -32,6 +32,7 @@ export class FicheContact {
       categorieDeNavigation: [environment.catContact],
       telephone: [this.telMobile, this.telFixe],
       email: [this.email],
+      internalWf: 'workflow_user_zelli',
     };
   }
 }
