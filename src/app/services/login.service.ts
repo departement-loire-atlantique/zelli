@@ -24,6 +24,8 @@ export class LoginService implements OnDestroy {
 
   public firebaseToken: string = '';
 
+  private tmp = true;
+
   constructor(private _router: Router, private _jcms: JcmsClientService) {
     this._profilSubject = new BehaviorSubject<Member | undefined>(undefined);
     this.profil = this._profilSubject.asObservable();
@@ -269,7 +271,18 @@ export class LoginService implements OnDestroy {
       });
     }
   }
+
   private sendFirebaseTokenForMbr(mbr: Member) {
+    // TODO test date
+    console.log('TEST : ');
+
+    if (!this.tmp) {
+      console.log('no send');
+      return;
+    }
+    console.log('send');
+    this.tmp = false;
+
     const data = {
       extraDBValues: this.firebaseToken,
       extraDBKeys: 'extradb.Member.jcmsplugin.zelli.firebase.token',
