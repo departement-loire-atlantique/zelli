@@ -43,6 +43,7 @@ export class PageContactDetailsComponent implements OnInit, OnDestroy {
   isLogged!: boolean;
 
   isLoading = false;
+  disabled = false; // disable btn add
   isError = false;
 
   constructor(
@@ -129,29 +130,21 @@ export class PageContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   addContact() {
-    this._jcms.get<Contact>('data/' + this.contactId).subscribe((res: any) => {
-      let contact = res as LocationFromApi;
-      let typeName: string = 'FicheLieu';
-      const options = buildForSendApi(contact);
-
-      const params = new HttpParams({
-        fromObject: options,
-      });
-      console.log(params);
-      console.log(params.toString());
-
-      this._jcms.post('data/' + typeName, params).subscribe({
-        // ajouter verif de double chez l'utilisateur
+    this.disabled = true;
+    const params = new HttpParams({
+      fromObject: { id: this.contactId || '' },
+    });
+    this._jcms
+      .post('plugins/zelli/contact/' + this.contactId, params)
+      .subscribe({
         next: (rep) => {
-          if (rep) {
-            console.log('contact ajouté !');
-            this.router.navigate(['/mycontacts/']);
-          }
+          console.log('contact ajouté !');
+          // this.router.navigate(['/mycontacts/']);
         },
         error: () => {
+          this.disabled = false;
           console.log("erreur lors de l'ajout d'un contact");
         },
       });
-    });
   }
 }
