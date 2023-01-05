@@ -30,8 +30,8 @@ export class FicheContact {
       chapo: this.commentaire,
       libelleDeVoie: this.adresse,
       categorieDeNavigation: [environment.catContact],
-      telephone: [this.telMobile, this.telFixe],
-      email: [this.email],
+      telephone: [this.telMobile, this.telFixe, '', '', ''], // "" => for multi lang jcms
+      email: [this.email, '', '', ''], // "" => for multi lang jcms
       internalWf: 'workflow_user_zelli',
     };
   }
