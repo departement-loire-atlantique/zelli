@@ -58,17 +58,14 @@ export class ContactComponent implements OnInit, OnDestroy {
   }
 
   getContactsForListing(): Item[] {
-    // return this.contacts.map((contact) => ({
-    //   url: `/contact/details/${contact.id}`,
-    //   lbl: contact.title,
-    // }));
-
     let item: Item[] = [];
     if (this.contacts) {
-      for (let contact of this.contacts) {
-        item.push({
-          url: `/contact/details/${contact.id}`,
-          lbl: contact.title,
+      // keep contact order
+      for (let pas = 0; pas < this.contacts.length; pas++) {
+        let index = this.contactIds.indexOf(this.contacts[pas].id);
+        item.splice(index, 0, {
+          url: `/contact/details/${this.contacts[pas].id}`,
+          lbl: this.contacts[pas].title,
         });
       }
     }
