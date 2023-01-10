@@ -165,6 +165,11 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'reponse/:id',
+    loadChildren: () =>
+      import('./pages/reponse/reponse.module').then((m) => m.ReponseModule),
+  },
+  {
     path: '**',
     loadChildren: () =>
       import('./pages/errors/page-not-found/page-not-found.module').then(
