@@ -50,7 +50,7 @@ export class ReponseComponent implements OnInit {
     });
     this._jcms.post('plugins/zelli/question/repInteraction', body).subscribe({
       next: (rep) => {
-        this._router.navigate(['/questions/']);
+        this._router.navigate(['/']);
       },
       error: (err) => {
         this.processSend = false;

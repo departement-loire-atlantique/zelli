@@ -63,9 +63,6 @@ export class AppComponent implements OnInit {
           payload?.notification?.title || 'Notification Title',
           {
             body: payload?.notification?.body,
-            icon: payload?.notification?.image
-              ? payload?.notification?.image
-              : 'src/assets/icons/icon-72x72.png',
             dir: 'auto',
           }
         );
