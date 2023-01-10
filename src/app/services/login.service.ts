@@ -7,6 +7,7 @@ import { environment } from '@/environments/environment';
 
 import { Member, mapApiToMember } from '../models/jcms/member';
 import { JcmsClientService } from './jcms-client.service';
+import { DateService } from './utils/date.service';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,19 @@ export class LoginService implements OnDestroy {
 
   public firebaseToken: string = '';
 
-  constructor(private _router: Router, private _jcms: JcmsClientService) {
+  private _lastUpdateFirebaseToken?: Date;
+
+  constructor(
+    private _router: Router,
+    private _jcms: JcmsClientService,
+    private _dateUtil: DateService
+  ) {
+    let dateJsonFromStorage = localStorage.getItem('_lastUpdateFirebaseToken');
+    if (dateJsonFromStorage) {
+      const strDate = JSON.parse(dateJsonFromStorage);
+      this._lastUpdateFirebaseToken = new Date(strDate);
+    }
+
     this._profilSubject = new BehaviorSubject<Member | undefined>(undefined);
     this.profil = this._profilSubject.asObservable();
 
@@ -269,12 +282,40 @@ export class LoginService implements OnDestroy {
       });
     }
   }
+
   private sendFirebaseTokenForMbr(mbr: Member) {
+    //Test
+    let dateToday = new Date(Date.now());
+    if (
+      this._lastUpdateFirebaseToken &&
+      this._dateUtil.dayDiff(dateToday, this._lastUpdateFirebaseToken) < 5
+    ) {
+      return;
+    }
+    this.saveLastUpdateFirebaseToken(false);
+
     const data = {
       extraDBValues: this.firebaseToken,
       extraDBKeys: 'extradb.Member.jcmsplugin.zelli.firebase.token',
     };
     const urlEncodedData = this._jcms.encodeParamForBody(data);
-    this._jcms.post('data/' + mbr.id, urlEncodedData).subscribe();
+    this._jcms.post('data/' + mbr.id, urlEncodedData).subscribe({
+      error: (err) => {
+        this.saveLastUpdateFirebaseToken(true);
+      },
+    });
+  }
+
+  private saveLastUpdateFirebaseToken(clear: boolean): void {
+    if (clear) {
+      localStorage.removeItem('_lastUpdateFirebaseToken');
+      this._lastUpdateFirebaseToken = undefined;
+    } else {
+      localStorage.setItem(
+        '_lastUpdateFirebaseToken',
+        JSON.stringify(new Date())
+      );
+      this._lastUpdateFirebaseToken = new Date();
+    }
   }
 }
