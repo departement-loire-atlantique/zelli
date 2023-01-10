@@ -85,9 +85,9 @@ export class CarouselComponent implements OnInit, AfterViewInit {
         this.elements[i] = itRep;
       }
 
-      this.itemSwiper?.changes.subscribe((_) => {
-        this.buildCarousel();
-      });
+      // this.itemSwiper?.changes.subscribe((_) => {
+      //   this.buildCarousel();
+      // });
 
       this.isElementLoading = false;
     });

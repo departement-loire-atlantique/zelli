@@ -66,6 +66,6 @@
   [innerHtml]="contact?.location?.description! | sanitizeHtml"
 ></div>
 
-  <button *ngIf="featContact && isLogged" class="btn btn-full" (click)="addContact()">Ajouter à mes contacts</button>
-  <button *ngIf="featContact && !isLogged" class="btn btn-full" disabled>Ajouter à mes contacts</button>
+  <button *ngIf="featContact && isLogged && !disabled" class="btn btn-full" (click)="addContact()">Ajouter à mes contacts</button>
+  <button *ngIf="featContact && (!isLogged || disabled)" class="btn btn-full" disabled>Ajouter à mes contacts</button>
 </div>

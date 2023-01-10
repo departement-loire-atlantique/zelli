@@ -52,13 +52,7 @@ export class MyContactsComponent extends APageHome implements OnInit {
     let idMember = this._login.getProfilId();
     if (idMember) {
       this.processResult(
-        this._jcms.getPager<Content>('search', {
-          params: {
-            types: ['Contact', 'FicheLieu'],
-            exactType: true,
-            mids: idMember,
-          },
-        })
+        this._jcms.getPager<Content>('plugins/zelli/myContact')
       );
     }
   }

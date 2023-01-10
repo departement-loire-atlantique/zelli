@@ -66,8 +66,6 @@ export class ContactDetailsService {
       const params = new HttpParams({
         fromObject: options,
       });
-      console.log(params);
-      console.log(params.toString());
 
       this._jcmsClient.post(endpoint, params).subscribe({
         next: (rep) => {

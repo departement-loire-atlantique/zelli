@@ -1,0 +1,44 @@
+<header role="banner">
+  <app-page-title-custom [mainCat]="this.cat" title="Réponse à ta question"></app-page-title-custom>
+</header>
+
+<main role="main" class="themes with-menu">
+  <app-loader *ngIf="loading" color="#0013b1"></app-loader>
+
+  <ng-container *ngIf="!loading">
+
+    <ng-container *ngIf="this.quest">
+      <section class="question">
+        <h4>Ta question : </h4>
+        <div class="wysiwyg">
+          <p>
+            {{ this.quest.question }}
+          </p>
+        </div>
+      </section>
+
+      <section class="reponse">
+        <h4>La réponse : </h4>
+        <div class="wysiwyg">
+          <p>
+            {{ this.quest.reponse }}
+          </p>
+        </div>
+      </section>
+
+
+      <section class="retour">
+        <h2>Est-ce que cette réponse t’a aidé ?</h2>
+        <div class="btn-wrapper">
+          <button class="btn" (click)="sendAAide(true)" [disabled]="processSend">
+            Oui
+          </button>
+          <button class="btn" (click)="sendAAide(false)" [disabled]="processSend">
+            Non
+          </button>
+        </div>
+      </section>
+    </ng-container>
+  </ng-container>
+
+</main>
