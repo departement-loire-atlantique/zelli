@@ -30,8 +30,8 @@ export const environment = {
       'BKu5WfJU0SoDOojTZ0b-tUIZbOBQK9pNsVKDiySdTPMd-8e2sSoYKT_ee10jR86hWgTTl10XsFBXJZenGfsng3w',
   },
   features: {
-    contacts: false,
-    customAlerts: false,
-    editPhoto: false,
+    contacts: true,
+    customAlerts: true,
+    editPhoto: true,
   },
 };

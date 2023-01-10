@@ -26,8 +26,8 @@ export const environment = {
       'BBnnYtbvBAtvBiqBvtmGOZVAwpf9Mehd4ghrxf9fg3HPyl-uP-0ZNpYQWae5WRQiyNPIYhk7e3iYg22DrDETZdM',
   },
   features: {
-    contacts: false,
-    customAlerts: false,
-    editPhoto: false,
+    contacts: true,
+    customAlerts: true,
+    editPhoto: true,
   },
 };
