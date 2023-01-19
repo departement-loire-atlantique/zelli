@@ -108,19 +108,31 @@ export class ArticleASEComponent implements OnInit {
     );
   }
 
+  items: Item[] = [];
+
   public getItemForLien(): Item[] {
     let item: Item[] = [];
-    if (this.article && this.article.liensUtiles) {
-      for (let itLien of this.article.liensUtiles) {
-        item.push({
-          lbl: itLien.texteAlternatif ? itLien.texteAlternatif : itLien.title,
-          url: itLien.lienInterne
+    if (this.items.length === 0) {
+      if (this.article && this.article.liensUtiles) {
+        let checkNbLink = 0;
+        for (let itLien of this.article.liensUtiles) {
+          let url = itLien.lienInterne
             ? Util.buildUrlCotent(itLien.lienInterne)
-            : itLien.lienExterne,
-        });
+            : itLien.lienExterne;
+          item.push({
+            lbl: itLien.texteAlternatif ? itLien.texteAlternatif : itLien.title,
+            url: url,
+          });
+          if (url) {
+            checkNbLink += 1;
+          }
+        }
+        if (checkNbLink === item.length) {
+          this.items = item;
+        }
       }
     }
-    return item;
+    return this.items;
   }
 
   public buildUrlCotent(content: Content): string {

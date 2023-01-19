@@ -26,6 +26,8 @@ export class SubThemeComponent implements OnInit {
    */
   subTheme: SubThemeASE | undefined;
 
+  subThemeItems: Item[] = [];
+
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -97,6 +99,13 @@ export class SubThemeComponent implements OnInit {
       // }
       this.subTheme = subTheme;
 
+      for (let itContent of this.subTheme.contenu) {
+        this.subThemeItems.push({
+          lbl: itContent.title,
+          url: Util.buildUrlCotent(itContent),
+        });
+      }
+
       for (let itCat of subTheme.categories) {
         this._catMng.cat(itCat.id).subscribe((cat) => {
           if (cat.parent) {
@@ -115,6 +124,10 @@ export class SubThemeComponent implements OnInit {
           .subscribe((fullContent: any) => {
             if (this.subTheme) {
               this.subTheme.contenu[i] = fullContent;
+              this.subThemeItems[i] = {
+                ...this.subThemeItems[i],
+                img: this.getImgContent(fullContent),
+              };
             }
           });
       }
@@ -137,16 +150,6 @@ export class SubThemeComponent implements OnInit {
   }
 
   public getItemForList(): Item[] {
-    let item: Item[] = [];
-    if (this.subTheme && this.subTheme.contenu) {
-      for (let itContent of this.subTheme.contenu) {
-        item.push({
-          lbl: itContent.title,
-          url: Util.buildUrlCotent(itContent),
-          img: this.getImgContent(itContent),
-        });
-      }
-    }
-    return item;
+    return this.subThemeItems;
   }
 }
