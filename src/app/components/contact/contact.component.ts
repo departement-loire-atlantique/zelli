@@ -57,18 +57,24 @@ export class ContactComponent implements OnInit, OnDestroy {
     this.contactsSubscription$?.unsubscribe();
   }
 
+  items: Item[] = [];
+
   getContactsForListing(): Item[] {
     let item: Item[] = [];
-    if (this.contacts) {
-      // keep contact order
-      for (let pas = 0; pas < this.contacts.length; pas++) {
-        let index = this.contactIds.indexOf(this.contacts[pas].id);
-        item.splice(index, 0, {
-          url: `/contact/details/${this.contacts[pas].id}`,
-          lbl: this.contacts[pas].title,
-        });
+    if (this.items.length === 0) {
+      if (this.contacts) {
+        // keep contact order
+        let checkNbLink = 0;
+        for (let pas = 0; pas < this.contacts.length; pas++) {
+          let index = this.contactIds.indexOf(this.contacts[pas].id);
+          item.splice(index, 0, {
+            url: `/contact/details/${this.contacts[pas].id}`,
+            lbl: this.contacts[pas].title,
+          });
+        }
+        this.items = item;
       }
     }
-    return item;
+    return this.items;
   }
 }
