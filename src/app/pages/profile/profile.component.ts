@@ -17,14 +17,13 @@ import { Item } from '@/app/components/list/list.component';
 import { JcmsPager } from '@/app/core/jcmsPager';
 import { AlerteApi } from '@/app/models/jcms/alerte';
 import { Member } from '@/app/models/jcms/member';
+import { AppConfigService } from '@/app/services/app-config.service';
 import { DesignSystemService } from '@/app/services/design-system.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LoginService } from '@/app/services/login.service';
 import { FormInput } from '@/app/services/utils/form-input.service';
 import { TitlePage } from '@/app/services/utils/title-page.service';
 import { Util } from '@/app/util';
-
-import { environment } from '@/environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -58,8 +57,8 @@ export class ProfileComponent
   @ViewChildren('formEndDisplay')
   formEndDisplay: QueryList<any> | undefined;
 
-  featAlert: boolean = environment.features.customAlerts;
-  featEditPhoto: boolean = environment.features.editPhoto;
+  featAlert: boolean;
+  featEditPhoto: boolean;
 
   constructor(
     public login: LoginService,
@@ -71,8 +70,11 @@ export class ProfileComponent
     private _router: Router,
     private _formInput: FormInput,
     private titleService: Title,
-    titlePage: TitlePage
+    titlePage: TitlePage,
+    private appConfigService: AppConfigService
   ) {
+    this.featAlert = this.appConfigService.config.features.customAlerts;
+    this.featEditPhoto = this.appConfigService.config.features.editPhoto;
     this.titleService.setTitle(titlePage.getTitle('Profil'));
   }
 
@@ -117,7 +119,7 @@ export class ProfileComponent
 
   public getProfileImg(): string {
     if (this.profil && this.profil.photo) {
-      return environment.urlJcms + this.profil.photo;
+      return this.appConfigService.config.urlJcms + this.profil.photo;
     }
     return 'assets/images/svg/icone-profil.svg';
   }

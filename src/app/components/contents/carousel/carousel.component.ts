@@ -9,11 +9,10 @@ import {
 import { Observable, combineLatest } from 'rxjs';
 
 import { Carousel, CarouselElement } from '@/app/models/jcms/carousel';
+import { AppConfigService } from '@/app/services/app-config.service';
 import { DesignSystemService } from '@/app/services/design-system.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { Util } from '@/app/util';
-
-import { environment } from '@/environments/environment';
 
 @Component({
   selector: 'app-carousel',
@@ -43,7 +42,8 @@ export class CarouselComponent implements OnInit, AfterViewInit {
 
   constructor(
     private _jcms: JcmsClientService,
-    private _ds: DesignSystemService
+    private _ds: DesignSystemService,
+    private appConfigService: AppConfigService
   ) {}
 
   ngOnInit(): void {
@@ -81,7 +81,8 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     combineLatest(fullElements).subscribe((reps) => {
       for (let i = 0; i < reps.length; i++) {
         let itRep: CarouselElement = reps[i];
-        itRep.imageMobile = environment.urlJcms + itRep.imageMobile;
+        itRep.imageMobile =
+          this.appConfigService.config.urlJcms + itRep.imageMobile;
         this.elements[i] = itRep;
       }
 

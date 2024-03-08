@@ -11,12 +11,11 @@ import {
   buildForSendApi,
   mapContactFromApi,
 } from '@/app/models/jcms/contact';
+import { AppConfigService } from '@/app/services/app-config.service';
 import { ContactDetailsService } from '@/app/services/contact-details.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LoginService } from '@/app/services/login.service';
 import { TitlePage } from '@/app/services/utils/title-page.service';
-
-import { environment } from '@/environments/environment';
 
 @Component({
   selector: 'app-page-contact-details',
@@ -27,7 +26,7 @@ export class PageContactDetailsComponent implements OnInit, OnDestroy {
   @Input()
   fromContactPage = false;
 
-  featContact: boolean = environment.features.contacts;
+  featContact: boolean;
 
   contactId$ = this.route.paramMap.pipe(
     map((params: ParamMap) => params.get('contactId') ?? undefined)
@@ -53,8 +52,10 @@ export class PageContactDetailsComponent implements OnInit, OnDestroy {
     private _login: LoginService,
     private contactDetailsService: ContactDetailsService,
     private titleService: Title,
-    titlePage: TitlePage
+    titlePage: TitlePage,
+    private appConfigService: AppConfigService
   ) {
+    this.featContact = appConfigService.config.features.contacts;
     this.titleService.setTitle(titlePage.getTitle('Détail contact'));
   }
 

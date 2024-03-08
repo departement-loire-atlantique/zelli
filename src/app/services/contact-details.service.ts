@@ -9,6 +9,7 @@ import {
   LocationFromApi,
   mapContactFromApi,
 } from '@/app/models/jcms/contact';
+import { AppConfigService } from '@/app/services/app-config.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 
 import { FicheContact } from '../models/jcms/ficheContact';
@@ -20,7 +21,8 @@ export class ContactDetailsService {
   constructor(
     private _jcmsClient: JcmsClientService,
     private router: Router,
-    private _location: Location
+    private _location: Location,
+    private appConfigService: AppConfigService
   ) {}
 
   public getContacts(resourceId: string): Observable<Contact> {
@@ -60,7 +62,9 @@ export class ContactDetailsService {
   public createContact(contact: FicheContact) {
     if (contact) {
       let endpoint = 'data/FicheLieu';
-      const options = contact.buildForSendApi();
+      const options = contact.buildForSendApi(
+        this.appConfigService.config.catContact
+      );
       // let urlEncodedData = this._jcmsClient.encodeParamForBody(options);
 
       const params = new HttpParams({

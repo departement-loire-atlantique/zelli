@@ -6,8 +6,8 @@ import { Category } from 'src/app/models/jcms/category';
 import { CatsHomeMngService } from 'src/app/services/cats-home-mng.service';
 import { CatsMngService } from 'src/app/services/cats-mng.service';
 import { LabelMngService } from 'src/app/services/label-mng.service';
-import { environment } from 'src/environments/environment';
 
+import { AppConfigService } from '@/app/services/app-config.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { TitlePage } from '@/app/services/utils/title-page.service';
 
@@ -34,7 +34,8 @@ export class HomeComponent implements OnInit {
     private _catHomeMng: CatsHomeMngService,
     private _lblMng: LabelMngService,
     private titleService: Title,
-    titlePage: TitlePage
+    titlePage: TitlePage,
+    private appConfigService: AppConfigService
   ) {
     this.titleService.setTitle(titlePage.getTitle('Home'));
     this._appInit = JSON.parse(sessionStorage.getItem('_appInit') || 'false');
@@ -60,7 +61,7 @@ export class HomeComponent implements OnInit {
 
       // catsHom
       const catsHom: Observable<Category[]> = this._catMng.catsChildren(
-        environment.catNavMain
+        this.appConfigService.config.catNavMain
       );
       allObs.catsHom = catsHom;
       catsHom.subscribe(); // pre run

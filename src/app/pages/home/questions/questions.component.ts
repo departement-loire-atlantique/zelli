@@ -1,7 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Observable, forkJoin, map } from 'rxjs';
-import { environment } from 'src/environments/environment';
 
 import { Item } from '@/app/components/list/list.component';
 import { JcmsPager } from '@/app/core/jcmsPager';
@@ -10,6 +9,7 @@ import { Category } from '@/app/models/jcms/category';
 import { Content } from '@/app/models/jcms/content';
 import { FaqAccueil } from '@/app/models/jcms/faqAccueil';
 import { ListeDeContenus } from '@/app/models/jcms/listeDeContenus';
+import { AppConfigService } from '@/app/services/app-config.service';
 import { CatsMngService } from '@/app/services/cats-mng.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { TitlePage } from '@/app/services/utils/title-page.service';
@@ -27,16 +27,18 @@ export class QuestionsComponent extends APageHome implements OnInit {
 
   researchRun: boolean = false;
 
-  parentCategory = environment.catThemes; //  cat explorer par thème
+  parentCategory = ''; //  cat explorer par thème
 
   constructor(
     _injector: Injector,
     private _jcms: JcmsClientService,
     private _catsMng: CatsMngService,
     private titleService: Title,
-    titlePage: TitlePage
+    titlePage: TitlePage,
+    private appConfigService: AppConfigService
   ) {
     super(_injector);
+    this.parentCategory = this.appConfigService.config.catThemes;
     this.titleService.setTitle(titlePage.getTitle('Questions'));
   }
 

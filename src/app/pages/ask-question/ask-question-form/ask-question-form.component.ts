@@ -1,11 +1,9 @@
-import { formatDate } from '@angular/common';
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
 
 import { Category } from '@/app/models/jcms/category';
-import { Member } from '@/app/models/jcms/member';
+import { AppConfigService } from '@/app/services/app-config.service';
 import { CatsMngService } from '@/app/services/cats-mng.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { TitlePage } from '@/app/services/utils/title-page.service';
@@ -19,7 +17,7 @@ export class AskQuestionFormComponent {
   curentCat: Category | undefined;
   parentCat: Category | undefined;
 
-  tmp: string = environment.catAskQuestionForm; // cat formulaire
+  tmp: string = '';
   ref: string | null;
 
   /**
@@ -33,8 +31,10 @@ export class AskQuestionFormComponent {
     private _catMng: CatsMngService,
     private _jcms: JcmsClientService,
     private titleService: Title,
-    titlePage: TitlePage
+    titlePage: TitlePage,
+    private appConfigService: AppConfigService
   ) {
+    this.tmp = appConfigService.config.catAskQuestionForm;
     this.titleService.setTitle(titlePage.getTitle('Poser ma question'));
     this.ref = this._route.snapshot.paramMap.get('bool');
 

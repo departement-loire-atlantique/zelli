@@ -2,25 +2,41 @@
 <html lang="fr">
 
 <head>
-  <!-- Google Tag Manager -->
   <script>
+    (function() {
+        let envConfigPath = '/assets/environment/environment.json';
+        if (window.location.href.indexOf('admin-rec-zelli.loire-atlantique.fr') > -1) {
+            envConfigPath = '/assets/environment/environment-recette.json';
+        } else if (window.location.href.indexOf('admin-zelli.loire-atlantique.fr') > -1) {
+            envConfigPath = '/assets/environment/environment-prod.json';
+        }
+
+        // Charger le fichier de configuration environnementale
+        fetch(envConfigPath).then(function(response) {
+            return response.json();
+        }).then(function(envConfig) {
+            window.envConfig = envConfig;
+        });
+    })();
+
+    <!-- Google Tag Manager -->
     (function (w, d, s, l, i) {
-      w[l] = w[l] || []; w[l].push({
-        'gtm.start':
-          new Date().getTime(), event: 'gtm.js'
-      }); var f = d.getElementsByTagName(s)[0],
+    w[l] = w[l] || []; w[l].push({
+    'gtm.start':
+    new Date().getTime(), event: 'gtm.js'
+    }); var f = d.getElementsByTagName(s)[0],
         j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
           'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
     })(window, document, 'script', 'dataLayer', 'GTM-T9KV7ZZ');</script>
-  <!-- End Google Tag Manager -->
+    <!-- End Google Tag Manager -->
 
 
-  <meta charset="utf-8" />
-  <title>Zelli</title>
-  <base href="/" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" type="image/x-icon" href="favicon.ico" />
-  <link rel="manifest" href="manifest.webmanifest" />
+    <meta charset="utf-8"/>
+    <title>Zelli</title>
+    <base href="/"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+    <link rel="manifest" href="manifest.webmanifest" />
   <meta name="theme-color" content="#1976d2" />
 
   <!-- Design System -->

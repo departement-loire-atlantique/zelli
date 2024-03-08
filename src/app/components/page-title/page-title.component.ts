@@ -3,9 +3,8 @@ import { Subscription } from 'rxjs';
 
 import { Category } from '@/app/models/jcms/category';
 import { Member } from '@/app/models/jcms/member';
+import { AppConfigService } from '@/app/services/app-config.service';
 import { LoginService } from '@/app/services/login.service';
-
-import { environment } from '@/environments/environment';
 
 @Component({
   selector: 'app-page-title',
@@ -19,7 +18,10 @@ export class PageTitleComponent implements OnDestroy {
   profil: Member | undefined;
   profilObs: Subscription;
 
-  constructor(public login: LoginService) {
+  constructor(
+    public login: LoginService,
+    private appConfigService: AppConfigService
+  ) {
     this.profilObs = login.profil.subscribe((rep) => {
       this.profil = rep;
     });
@@ -31,7 +33,7 @@ export class PageTitleComponent implements OnDestroy {
 
   public getProfileImg(): string {
     if (this.login.isLogged && this.profil && this.profil.photo) {
-      return environment.urlJcms + this.profil.photo;
+      return this.appConfigService.config.urlJcms + this.profil.photo;
     }
     return 'assets/images/svg/icone-profil.svg';
   }

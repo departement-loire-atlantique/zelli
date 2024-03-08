@@ -5,14 +5,13 @@ import { Observable } from 'rxjs';
 
 import { JcmsPager } from '@/app/core/jcmsPager';
 import { Content } from '@/app/models/jcms/content';
+import { AppConfigService } from '@/app/services/app-config.service';
 import { DesignSystemService } from '@/app/services/design-system.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
 import { SharedService } from '@/app/services/shared-service.service';
 import { TitlePage } from '@/app/services/utils/title-page.service';
 import { Util } from '@/app/util';
-
-import { environment } from '@/environments/environment';
 
 import { Item } from '../../components/list/list.component';
 
@@ -37,7 +36,8 @@ export class ResearchComponent implements AfterViewInit, OnInit, OnDestroy {
     public lblService: LabelMngService,
     private _router: Router,
     private titleService: Title,
-    titlePage: TitlePage
+    titlePage: TitlePage,
+    private appConfigService: AppConfigService
   ) {
     this.titleService.setTitle(titlePage.getTitle('Recherche'));
   }
@@ -79,7 +79,7 @@ export class ResearchComponent implements AfterViewInit, OnInit, OnDestroy {
       this._jcms.getPager<Content>('search', {
         params: {
           text: this.text,
-          cidsOff: environment.catExcludeSearch,
+          cidsOff: this.appConfigService.config.catExcludeSearch,
           types: ['SousthemeASE', 'ArticleASE', 'Contact', 'FicheLieu'],
         },
       })

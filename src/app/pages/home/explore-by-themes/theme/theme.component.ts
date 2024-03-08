@@ -7,13 +7,12 @@ import { Item } from '@/app/components/list/list.component';
 import { Category } from '@/app/models/jcms/category';
 import { Content } from '@/app/models/jcms/content';
 import { Redirection } from '@/app/models/jcms/redirection';
+import { AppConfigService } from '@/app/services/app-config.service';
 import { CatsMngService } from '@/app/services/cats-mng.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
 import { TitlePage } from '@/app/services/utils/title-page.service';
 import { Util } from '@/app/util';
-
-import { environment } from '@/environments/environment';
 
 @Component({
   selector: 'app-theme',
@@ -31,7 +30,8 @@ export class ThemeComponent {
     public lblMng: LabelMngService,
     private _jcms: JcmsClientService,
     private titleService: Title,
-    titlePage: TitlePage
+    titlePage: TitlePage,
+    private appConfigService: AppConfigService
   ) {
     this.titleService.setTitle(titlePage.getTitle('Thème'));
     const id = this._route.snapshot.paramMap.get('id');
@@ -66,7 +66,7 @@ export class ThemeComponent {
           types: ['PortletPortalRedirect', 'ArticleASE', 'SousthemeASE'],
           exactCat: true,
           catMode: 'and',
-          cids: [subTheme.id, environment.catMainContent], //sous la catégorie "Explorer par thèmes" et sous "mise en avant > contenu principal"
+          cids: [subTheme.id, this.appConfigService.config.catMainContent], //sous la catégorie "Explorer par thèmes" et sous "mise en avant > contenu principal"
         },
       })
       .pipe(map((rep: any): Content[] => rep.dataSet))

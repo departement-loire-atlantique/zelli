@@ -5,15 +5,13 @@ import { map } from 'rxjs';
 
 import { Item } from '@/app/components/list/list.component';
 import { ArticleASE } from '@/app/models/jcms/articleASE';
-import { Category } from '@/app/models/jcms/category';
 import { Content } from '@/app/models/jcms/content';
 import { SubThemeASE } from '@/app/models/jcms/sousThemeASE';
+import { AppConfigService } from '@/app/services/app-config.service';
 import { CatsMngService } from '@/app/services/cats-mng.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { TitlePage } from '@/app/services/utils/title-page.service';
 import { Util } from '@/app/util';
-
-import { environment } from '@/environments/environment';
 
 @Component({
   selector: 'app-sub-theme',
@@ -34,7 +32,8 @@ export class SubThemeComponent implements OnInit {
     private _catMng: CatsMngService,
     private _jcms: JcmsClientService,
     private titleService: Title,
-    titlePage: TitlePage
+    titlePage: TitlePage,
+    private appConfigService: AppConfigService
   ) {
     this.titleService.setTitle(titlePage.getTitle('Sous-thème'));
   }
@@ -61,7 +60,7 @@ export class SubThemeComponent implements OnInit {
           types: 'SousthemeASE',
           exactCat: true,
           catMode: 'and',
-          cids: [idCat, environment.catMainContent],
+          cids: [idCat, this.appConfigService.config.catMainContent],
         },
       })
       .pipe(map((rep: any): SubThemeASE[] => rep.dataSet))
@@ -110,7 +109,7 @@ export class SubThemeComponent implements OnInit {
         this._catMng.cat(itCat.id).subscribe((cat) => {
           if (cat.parent) {
             this._catMng.cat(cat.parent).subscribe((catParent) => {
-              if (catParent.parent == environment.catThemes)
+              if (catParent.parent == this.appConfigService.config.catThemes)
                 subTheme.navigation = catParent;
             });
           }
@@ -143,7 +142,7 @@ export class SubThemeComponent implements OnInit {
   public getImgContent(content: Content): string | undefined {
     if (content.class === 'generated.ArticleASE') {
       const picto = (content as ArticleASE).picto;
-      return picto ? environment.urlJcms + picto : undefined;
+      return picto ? this.appConfigService.config.urlJcms + picto : undefined;
     }
     // TODO structures Lot 2
     return undefined;

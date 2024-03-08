@@ -1,5 +1,3 @@
-import { environment } from '@/environments/environment';
-
 export type Contact = {
   id: string;
   title: string;
@@ -138,9 +136,9 @@ export const mapContactFromApi = (contact: ContactFromApi): Contact => {
   };
 };
 
-export const buildForSendApi = (c: LocationFromApi) => {
+export const buildForSendApi = (c: LocationFromApi, catContact: string) => {
   return {
-    categorieDeNavigation: environment.catContact,
+    categorieDeNavigation: catContact,
     title: c.title,
     soustitre: c.soustitre,
     chapo: c.chapo,

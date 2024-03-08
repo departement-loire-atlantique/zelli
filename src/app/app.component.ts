@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
 import packageJson from 'package.json';
-import { environment } from 'src/environments/environment';
+
+import { AppConfigService } from '@/app/services/app-config.service';
+import { FirebaseInitializerService } from '@/app/services/firebase-initializer.service';
 
 import { LoginService } from './services/login.service';
 
@@ -13,10 +15,14 @@ import { LoginService } from './services/login.service';
 export class AppComponent implements OnInit {
   message: any = null;
 
-  constructor(private _login: LoginService) {
-    if (!environment.production) {
+  constructor(
+    private _login: LoginService,
+    private firebaseInitializer: FirebaseInitializerService,
+    private appConfigService: AppConfigService
+  ) {
+    if (!appConfigService.config.production) {
       console.log('===== DEV MODE =====');
-      console.log('Url jcms : ' + environment.urlJcms);
+      console.log('Url jcms : ' + appConfigService.config.urlJcms);
     }
     console.log(packageJson.name + ' V' + packageJson.version);
   }
@@ -30,7 +36,9 @@ export class AppComponent implements OnInit {
 
   requestPermission() {
     const messaging = getMessaging();
-    getToken(messaging, { vapidKey: environment.firebase.vapidKey })
+    getToken(messaging, {
+      vapidKey: this.appConfigService.config.firebase.vapidKey,
+    })
       .then((currentToken) => {
         if (currentToken) {
           console.log(currentToken);

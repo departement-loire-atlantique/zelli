@@ -170,13 +170,7 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.dev.jcms.ts"
-                }
-              ]
+              "namedChunks": true
             },
             "development-jcms-R7": {
               "buildOptimizer": false,
@@ -188,7 +182,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.pre.prod.ts"
+                  "with": "src/environments/environment.prod.ts"
                 }
               ]
             }

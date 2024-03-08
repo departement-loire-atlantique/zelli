@@ -6,7 +6,6 @@ import { Content } from 'src/app/models/jcms/content';
 import { JcmsClientService } from 'src/app/services/jcms-client.service';
 
 import { Item } from '@/app/components/list/list.component';
-import { Category } from '@/app/models/jcms/category';
 import { ContactFromApi } from '@/app/models/jcms/contact';
 import { FaqEntry } from '@/app/models/jcms/faqEntry';
 import { Lien } from '@/app/models/jcms/lien';
@@ -14,8 +13,6 @@ import { CatsMngService } from '@/app/services/cats-mng.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
 import { TitlePage } from '@/app/services/utils/title-page.service';
 import { Util } from '@/app/util';
-
-import { environment } from '@/environments/environment';
 
 @Component({
   selector: 'app-article-ase',

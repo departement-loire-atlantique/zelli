@@ -3,6 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Subscription, map } from 'rxjs';
 
 import { Video, VideoApi, mapVideoToUi } from '@/app/models/jcms/video';
+import { AppConfigService } from '@/app/services/app-config.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 
 @Component({
@@ -32,7 +33,8 @@ export class VideoComponent implements OnInit, OnDestroy {
 
   constructor(
     private _jcms: JcmsClientService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private appConfigService: AppConfigService
   ) {}
 
   ngOnInit(): void {
@@ -41,7 +43,11 @@ export class VideoComponent implements OnInit, OnDestroy {
       this.isLoadingIframe = true;
       this.subscriptions = this._jcms
         .get<VideoApi>(`data/${this.id}`)
-        .pipe(map((videoFromApi) => mapVideoToUi(videoFromApi)))
+        .pipe(
+          map((videoFromApi) =>
+            mapVideoToUi(videoFromApi, this.appConfigService.config.urlJcms)
+          )
+        )
         .subscribe({
           next: (res) => {
             this.video = res;

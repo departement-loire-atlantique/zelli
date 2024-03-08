@@ -1,5 +1,3 @@
-import { environment } from '@/environments/environment';
-
 export class FicheContact {
   nom: string;
   telMobile: string;
@@ -24,12 +22,12 @@ export class FicheContact {
     this.commentaire = commentaire;
   }
 
-  public buildForSendApi() {
+  public buildForSendApi(catContact: any) {
     return {
       title: this.nom,
       chapo: this.commentaire,
       libelleDeVoie: this.adresse,
-      categorieDeNavigation: [environment.catContact],
+      categorieDeNavigation: [catContact],
       telephone: [this.telMobile, this.telFixe, '', '', ''], // "" => for multi lang jcms
       email: [this.email, '', '', ''], // "" => for multi lang jcms
       internalWf: 'workflow_user_zelli',

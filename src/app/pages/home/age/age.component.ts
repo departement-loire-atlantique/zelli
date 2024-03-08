@@ -6,12 +6,11 @@ import { Item } from '@/app/components/list/list.component';
 import { APageHome } from '@/app/models/aPageHome';
 import { Category } from '@/app/models/jcms/category';
 import { Content } from '@/app/models/jcms/content';
+import { AppConfigService } from '@/app/services/app-config.service';
 import { CatsMngService } from '@/app/services/cats-mng.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { TitlePage } from '@/app/services/utils/title-page.service';
 import { Util } from '@/app/util';
-
-import { environment } from '@/environments/environment';
 
 @Component({
   selector: 'app-age',
@@ -32,7 +31,8 @@ export class AgeComponent extends APageHome implements OnInit {
     private _catMng: CatsMngService,
     private _jcms: JcmsClientService,
     private titleService: Title,
-    titlePage: TitlePage
+    titlePage: TitlePage,
+    private appConfigService: AppConfigService
   ) {
     super(_injector);
     this.titleService.setTitle(titlePage.getTitle('A chaque âge'));
@@ -73,7 +73,10 @@ export class AgeComponent extends APageHome implements OnInit {
                       types: 'Content',
                       exactCat: true,
                       catMode: 'and',
-                      cids: [itSubCat.id, environment.catMainContent],
+                      cids: [
+                        itSubCat.id,
+                        this.appConfigService.config.catMainContent,
+                      ],
                       pageSize: 1,
                     },
                   })

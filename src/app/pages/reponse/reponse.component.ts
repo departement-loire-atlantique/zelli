@@ -3,10 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { Category } from '@/app/models/jcms/category';
 import { QuestionZelli } from '@/app/models/jcms/questionZelli';
+import { AppConfigService } from '@/app/services/app-config.service';
 import { CatsMngService } from '@/app/services/cats-mng.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
-
-import { environment } from '@/environments/environment';
 
 @Component({
   selector: 'app-reponse',
@@ -23,13 +22,16 @@ export class ReponseComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router,
     private _catMng: CatsMngService,
-    private _jcms: JcmsClientService
+    private _jcms: JcmsClientService,
+    private appConfigService: AppConfigService
   ) {}
 
   ngOnInit(): void {
-    this._catMng.cat(environment.catQuestions).subscribe((cat) => {
-      this.cat = cat;
-    });
+    this._catMng
+      .cat(this.appConfigService.config.catQuestions)
+      .subscribe((cat) => {
+        this.cat = cat;
+      });
 
     this._route.paramMap.subscribe((params) => {
       const id = params.get('id');

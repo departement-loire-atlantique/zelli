@@ -4,8 +4,8 @@ import { APageHome } from 'src/app/models/aPageHome';
 import { Category } from 'src/app/models/jcms/category';
 import { CatsHomeMngService } from 'src/app/services/cats-home-mng.service';
 import { CatsMngService } from 'src/app/services/cats-mng.service';
-import { environment } from 'src/environments/environment';
 
+import { AppConfigService } from '@/app/services/app-config.service';
 import { DateService } from '@/app/services/utils/date.service';
 import { TitlePage } from '@/app/services/utils/title-page.service';
 
@@ -24,7 +24,8 @@ export class ExploreByThemesComponent extends APageHome implements OnInit {
     private _catHomeMng: CatsHomeMngService,
     private _dateUtil: DateService,
     private titleService: Title,
-    titlePage: TitlePage
+    titlePage: TitlePage,
+    private appConfigService: AppConfigService
   ) {
     super(_injector);
     this.titleService.setTitle(titlePage.getTitle('Explorer par thèmes'));
@@ -60,7 +61,7 @@ export class ExploreByThemesComponent extends APageHome implements OnInit {
 
   private updateHomeCat() {
     this._catMng
-      .catsChildren(environment.catNavMain)
+      .catsChildren(this.appConfigService.config.catNavMain)
       .subscribe((res: Category[]) => {
         this._catHomeMng.setAllCats(res);
       });

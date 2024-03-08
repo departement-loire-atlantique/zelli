@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, combineLatest } from 'rxjs';
-import { environment } from 'src/environments/environment';
 
 import { Item } from '@/app/components/list/list.component';
 import { JcmsPager } from '@/app/core/jcmsPager';
 import { Category } from '@/app/models/jcms/category';
 import { FaqAccueil } from '@/app/models/jcms/faqAccueil';
 import { FaqEntry } from '@/app/models/jcms/faqEntry';
+import { AppConfigService } from '@/app/services/app-config.service';
 import { CatsMngService } from '@/app/services/cats-mng.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 
@@ -25,19 +25,22 @@ export class QuestionsByThemesComponent implements OnInit {
   surtitre: string | undefined;
   icon: string | undefined;
 
-  parentCat = environment.catThemes; //cat explorer par theme
-  questionsCat = environment.catQuestions;
+  parentCat = '';
+  questionsCat = '';
 
   constructor(
     private _route: ActivatedRoute,
     private _catMng: CatsMngService,
-    private _jcms: JcmsClientService
+    private _jcms: JcmsClientService,
+    private appConfigService: AppConfigService
   ) {}
 
   /**
    * Initialise la FAQ de la page et sa catégorie
    */
   ngOnInit(): void {
+    this.parentCat = this.appConfigService.config.catThemes;
+    this.questionsCat = this.appConfigService.config.catQuestions;
     this._route.paramMap.subscribe((params) => {
       const id = params.get('id')!;
       this._jcms
@@ -67,7 +70,7 @@ export class QuestionsByThemesComponent implements OnInit {
         });
 
         this._catMng
-          .cat(environment.catQuestions)
+          .cat(this.appConfigService.config.catQuestions)
           .subscribe((cat: Category) => {
             this.surtitre = cat.title;
           });

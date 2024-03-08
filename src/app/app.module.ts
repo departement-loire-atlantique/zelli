@@ -4,8 +4,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { initializeApp } from 'firebase/app';
-import { environment } from 'src/environments/environment';
 
 import { ErrorInterceptor } from '@/app/Interceptors/error.interceptor';
 import { JcmsBackendInterceptor } from '@/app/Interceptors/jcms-backend.interceptor';
@@ -15,8 +13,6 @@ import { AppComponent } from '@/app/app.component';
 import { SharedModule } from '@/app/components/shared.module';
 
 import { SharedService } from './services/shared-service.service';
-
-initializeApp(environment.firebase);
 
 @NgModule({
   declarations: [AppComponent],

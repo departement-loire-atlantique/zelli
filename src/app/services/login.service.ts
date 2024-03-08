@@ -3,7 +3,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, EMPTY, Observable, catchError, map } from 'rxjs';
 
-import { environment } from '@/environments/environment';
+import { AppConfigService } from '@/app/services/app-config.service';
 
 import { Member, mapApiToMember } from '../models/jcms/member';
 import { JcmsClientService } from './jcms-client.service';
@@ -30,7 +30,8 @@ export class LoginService implements OnDestroy {
   constructor(
     private _router: Router,
     private _jcms: JcmsClientService,
-    private _dateUtil: DateService
+    private _dateUtil: DateService,
+    private appConfigService: AppConfigService
   ) {
     let dateJsonFromStorage = localStorage.getItem('_lastUpdateFirebaseToken');
     if (dateJsonFromStorage) {
@@ -46,7 +47,7 @@ export class LoginService implements OnDestroy {
     if (!this._personalToken || this._personalToken === '') {
       console.debug('Member not logged');
 
-      this._personalToken = environment.apiKey;
+      this._personalToken = this.appConfigService.config.apiKey;
     } else {
       console.debug('Member logged');
       this._isLogged = true;
@@ -61,7 +62,7 @@ export class LoginService implements OnDestroy {
   private clearPersonalToken() {
     this._isLogged = false;
     this.setProfil(undefined);
-    this._personalToken = environment.apiKey;
+    this._personalToken = this.appConfigService.config.apiKey;
     localStorage.removeItem(this._keyPersoToken);
   }
 
@@ -84,7 +85,7 @@ export class LoginService implements OnDestroy {
    * @returns true if is valid personal token (no API token)
    */
   public testToken(): boolean {
-    if (this._personalToken === environment.apiKey) {
+    if (this._personalToken === this.appConfigService.config.apiKey) {
       this.clearPersonalToken();
       return false;
     }

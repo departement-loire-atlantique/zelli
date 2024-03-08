@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { environment } from 'src/environments/environment';
 
 import { Category } from '@/app/models/jcms/category';
+import { AppConfigService } from '@/app/services/app-config.service';
 import { CatsMngService } from '@/app/services/cats-mng.service';
 import { LabelMngService } from '@/app/services/label-mng.service';
 import { LoginService } from '@/app/services/login.service';
@@ -18,7 +18,7 @@ export class AskQuestionComponent {
   parentCat: Category | undefined;
   isLogged: boolean = false;
 
-  tmp: string = environment.catAskQuestionRef; //cat referent
+  tmp: string = '';
 
   /**
    * Initialise la catégorie "référent" et la catégorie "poser une question"
@@ -29,8 +29,10 @@ export class AskQuestionComponent {
     private titleService: Title,
     private _login: LoginService,
     public _lblService: LabelMngService,
-    titlePage: TitlePage
+    titlePage: TitlePage,
+    private appConfigService: AppConfigService
   ) {
+    this.tmp = this.appConfigService.config.catAskQuestionRef;
     this.titleService.setTitle(titlePage.getTitle('Poser une question'));
     this.isLogged = this._login.isLogged;
 

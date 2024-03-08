@@ -4,10 +4,9 @@ import { Router } from '@angular/router';
 import { DateService } from 'src/app/services/utils/date.service';
 
 import { Category } from '@/app/models/jcms/category';
+import { AppConfigService } from '@/app/services/app-config.service';
 import { CatsMngService } from '@/app/services/cats-mng.service';
 import { TitlePage } from '@/app/services/utils/title-page.service';
-
-import { environment } from '@/environments/environment';
 
 @Component({
   selector: 'app-intro',
@@ -26,7 +25,8 @@ export class IntroComponent implements OnInit {
     private _dateUtil: DateService,
     private _catMng: CatsMngService,
     private titleService: Title,
-    titlePage: TitlePage
+    titlePage: TitlePage,
+    private appConfigService: AppConfigService
   ) {
     this.titleService.setTitle(titlePage.getTitle('Intro'));
     const strDate = JSON.parse(localStorage.getItem('_lastAccess') || '{}');
@@ -50,7 +50,7 @@ export class IntroComponent implements OnInit {
     }
 
     this._catMng
-      .catsChildren(environment.catIntro)
+      .catsChildren(this.appConfigService.config.catIntro)
       .subscribe((cats: Category[]) => {
         this.steps = cats;
       });

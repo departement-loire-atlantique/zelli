@@ -6,7 +6,8 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { environment } from 'src/environments/environment';
+
+import { AppConfigService } from '@/app/services/app-config.service';
 
 import { JcmsPager } from '../core/jcmsPager';
 
@@ -16,8 +17,11 @@ import { JcmsPager } from '../core/jcmsPager';
 export class JcmsClientService {
   private _url: string;
 
-  constructor(private http: HttpClient) {
-    this._url = environment.urlJcms + 'rest/';
+  constructor(
+    private http: HttpClient,
+    private appConfigService: AppConfigService
+  ) {
+    this._url = this.appConfigService.config.urlJcms + 'rest/';
   }
 
   get<T>(endpoint: string, option?: OptionHttp): Observable<T> {

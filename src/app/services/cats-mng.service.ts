@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { environment } from 'src/environments/environment';
+
+import { AppConfigService } from '@/app/services/app-config.service';
 
 import { Category } from '../models/jcms/category';
 import { JcmsClientService } from './jcms-client.service';
@@ -9,7 +10,10 @@ import { JcmsClientService } from './jcms-client.service';
   providedIn: 'root',
 })
 export class CatsMngService {
-  constructor(private _jcms: JcmsClientService) {}
+  constructor(
+    private _jcms: JcmsClientService,
+    private appConfigService: AppConfigService
+  ) {}
 
   /**
    *
@@ -60,14 +64,14 @@ export class CatsMngService {
       subTitle: dataRep.description,
       icon:
         dataRep.icon && dataRep.icon.startsWith('upload')
-          ? environment.urlJcms + dataRep.icon
+          ? this.appConfigService.config.urlJcms + dataRep.icon
           : dataRep.icon,
       image:
         dataRep.image && dataRep.image.startsWith('upload')
-          ? environment.urlJcms + dataRep.image
+          ? this.appConfigService.config.urlJcms + dataRep.image
           : dataRep.image,
       blob: dataRep.extraDataMap
-        ? environment.urlJcms +
+        ? this.appConfigService.config.urlJcms +
           dataRep.extraDataMap['extra.Category.jcmsplugin.zelli.blob']
         : '',
       url: dataRep.friendlyURLSet ? dataRep.friendlyURLSet[0] : '',

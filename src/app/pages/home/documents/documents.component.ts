@@ -4,10 +4,9 @@ import { map } from 'rxjs';
 
 import { APageHome } from '@/app/models/aPageHome';
 import { Video, VideoApi, mapVideoToUi } from '@/app/models/jcms/video';
+import { AppConfigService } from '@/app/services/app-config.service';
 import { JcmsClientService } from '@/app/services/jcms-client.service';
 import { TitlePage } from '@/app/services/utils/title-page.service';
-
-import { environment } from '@/environments/environment';
 
 @Component({
   selector: 'app-documents',
@@ -21,7 +20,8 @@ export class DocumentsComponent extends APageHome implements OnInit {
     _injector: Injector,
     private _jcms: JcmsClientService,
     private titleService: Title,
-    titlePage: TitlePage
+    titlePage: TitlePage,
+    private appConfigService: AppConfigService
   ) {
     super(_injector);
     this.titleService.setTitle(titlePage.getTitle('Mes documents'));
@@ -37,7 +37,10 @@ export class DocumentsComponent extends APageHome implements OnInit {
           types: 'Video',
           exactCat: true,
           catMode: 'and',
-          cids: [this.curentCat.id, environment.catMainContent],
+          cids: [
+            this.curentCat.id,
+            this.appConfigService.config.catMainContent,
+          ],
           pageSize: 1,
         },
       })
@@ -49,7 +52,11 @@ export class DocumentsComponent extends APageHome implements OnInit {
           return rep;
         })
       )
-      .pipe(map((videoFromApi) => mapVideoToUi(videoFromApi)))
+      .pipe(
+        map((videoFromApi) =>
+          mapVideoToUi(videoFromApi, this.appConfigService.config.urlJcms)
+        )
+      )
       .subscribe((res) => {
         this.video = res;
       });
